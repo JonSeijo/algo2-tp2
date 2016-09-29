@@ -1,0 +1,5 @@
+TP2 Changelog - Lista de cambios
+*********************************
+
++ 28/09/16 - v1.0
+  - Versión presentada en clase
