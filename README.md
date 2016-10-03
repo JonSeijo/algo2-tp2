@@ -8,7 +8,11 @@ Los .pdf estan el el .gitignore, asi que tienen que usar -f cuando hacen el add 
 ###Pasos para actualizar un .pdf
 
 git pull
+
 git rm archivo_viejo
+
 git add archivo_nuevo_1.x -f
+
 git commit -m "Update a version 1.x"
+
 git push
