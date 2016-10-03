@@ -3,3 +3,14 @@ TP2 Changelog - Lista de cambios
 
 + 28/09/16 - v1.0
   - Versión presentada en clase
+
++ 03/10/2016 - v1.1
+  - Se modificó la función `prodID` ya que no devolvía ids consecutivos (0,
+    1, 2, 3...) sino que se salteaba el 1. Ahora los devuelve correctamente.
+  - En `pokémon` faltaba revisar que `entrenadoresPosibles` no fuese vacío
+    para poder pedir `dameUno` del mismo.
+  - Se modificó la restricción de `agregarPokemon` ya que permitía dos
+    pokémones suficientemente cerca como para que un jugador pudiera estar a
+    distancia de captura de ambos. La distancia territorial de los pokémon 
+    debería ser tal que esto no pueda pasar. La actual especificación 
+    representa esta restricción.
