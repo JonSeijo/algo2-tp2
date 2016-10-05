@@ -1,0 +1,60 @@
+\begin{Interfaz}
+
+
+  \textbf{se explica con}: \tadNombre{Mapa}.
+
+  \textbf{g\'eneros}: \TipoVariable{map}.
+
+  \Title{Operaciones b\'asicas de lista}
+
+
+  \InterfazFuncion{crearMapa}{}{map}%
+  {$res \igobs crearMapa$}%
+  [$\Theta(1)$]
+  [genera una mapa vac\'io.]
+
+
+  \InterfazFuncion{agregarCoor}{ \In{c}{coord}, \Inout{m}{map}}{}
+  [$m_0 \igobs m \land \lnot posExistente(c, m_0) $]  
+  {$m \igobs agregarCoor(c, m_0)$}
+  [$\Theta(1)$]
+  [agrega la coordenada \texttt{c} al mapa \texttt{m}]
+
+
+  \InterfazFuncion{coordenadas}{\In{m}{map}}{$conj(coord)$}%
+  {$res \igobs coordenadas(m)$}%
+  [$\Theta(1)$]
+  [devuelve el conjunto de todas las coordenadas de m.]
+
+
+  \InterfazFuncion{posExistente}{ \In{c}{coord}, \In{m}{map}}{bool}
+  {$res \igobs posExistente(c, m)$}
+  [$\Theta(1)$]
+  [verifica si la coordenada \texttt{c} existe en el mapa \texttt{m}]
+
+
+  \InterfazFuncion{hayCamino}{ \In{c_1}{coord}, \In{c_2}{coord}, \In{m}{map}}{bool}
+  [$posExistente(c_1, m) \land posExistente(c_2, m) $]
+  {$res \igobs hayCamino(c_1, c_2, m)$}
+  [$\Theta(\# coordenadas(m))$]
+  [verifica si existe una forma de llegar desde \texttt{$c_1$} a \texttt{$c_2$}]
+
+
+\end{Interfaz}
+
+\begin{Representacion}
+ 
+  \begin{Estructura}{}[]
+  \end{Estructura}
+
+  \RepFc[]{true}
+
+  
+
+  \AbsFc[]{}
+
+\end{Representacion}
+
+\begin{Algoritmos}
+  
+\end{Algoritmos}
