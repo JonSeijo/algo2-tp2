@@ -1,0 +1,55 @@
+\begin{Interfaz}
+
+
+  \textbf{se explica con}: \tadNombre{Coordenada}.
+
+  \textbf{g\'eneros}: \TipoVariable{coor}.
+
+  \Title{Operaciones b\'asicas de Coordenada}
+
+
+  \InterfazFuncion{crearCoor}{\In{n_1}{nat}, \In{n_2}{nat}}{coor}%
+  {$res \igobs crearCoor$}%
+  [$\Theta(1)$]
+  [genera una coordenada nueva.]
+
+
+  \InterfazFuncion{latitud}{\In{c}{coor}}{nat}
+  {$res \igobs latitud(c)$}
+  [$\Theta(1)$]
+  [devuelve la latitud de la coordenada \texttt{c}.]
+
+  \InterfazFuncion{longitud}{\In{c}{coor}}{nat}
+  {$res \igobs longitud(c)$}
+  [$\Theta(1)$]
+  [devuelve la longitud de la coordenada \texttt{c}.]
+
+
+  \InterfazFuncion{distEuclidea}{\In{c_1}{coor}, \In{c_2}{coor}}{nat}%
+  {$res \igobs distEuclidea(c_1, c_2)$}%
+  [$\Theta(1)$]
+  [devuelve la disntancia entre la coordenadas \texttt{$c_1$} y \texttt{$c_2$}.]
+
+
+\end{Interfaz}
+
+\begin{Representacion}
+ 
+  \begin{Estructura}{coor}[estr]
+      \begin{Tupla}[estr]%
+      \tupItem{latitud}{nat}%
+      \tupItem{longitud}{nat}%
+    \end{Tupla}
+  \end{Estructura}
+
+  \RepFc[estr]{true}
+
+  ~
+
+  \AbsFc[estr]{coor}[e]{ crearCoor($e$.latitud, $e$.longitud)}
+
+\end{Representacion}
+
+\begin{Algoritmos}
+  
+\end{Algoritmos}
