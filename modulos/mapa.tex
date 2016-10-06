@@ -16,7 +16,7 @@
 
   \InterfazFuncion{agregarCoor}{ \In{c}{coord}, \Inout{m}{map}}{}
   [$m_0 \igobs m \land \lnot posExistente(c, m_0) $]  
-  {$m \igobs agregarCoor(c, m_0)$}
+  {$m \igobs agregarCoor(c, m_0)  \land posExistente(c, m)$}
   [$\Theta(1)$]
   [agrega la coordenada \texttt{c} al mapa \texttt{m}]
 

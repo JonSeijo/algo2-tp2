@@ -1,0 +1,49 @@
+\begin{Interfaz}
+
+
+  \textbf{se explica con}: \tadNombre{Juego}.
+
+  \textbf{g\'eneros}: \TipoVariable{juego}.
+
+  \Title{Operaciones b\'asicas de Juego}
+
+
+  \InterfazFuncion{crearJuego}{\In{m}{map}}{juego}%
+  {$res \igobs crearJuego(m)$}%
+  [$\Theta(1)$]
+  [genera una juego con el mapa \texttt{m} y sin jugadores.]
+
+
+  \InterfazFuncion{agregarPok\'emon}{\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego}}{}
+  [$j_0 \igobs j \land posExistente(c, mapa(j)) \land p \not \in pokemones(j) $]  
+  {$j \igobs agregarPokemon(p, c, j_0)  \land p \in pokemones(j)$}
+  [$\Theta(¡¡completar!!)$]
+  [agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
+
+
+  \InterfazFuncion{agregarJugador}{\In{j}{juego}}{nat}%
+  [$ j_0 \igobs j $]
+  {$res \igobs ProxId(j_0) \land j \igobs agregarJugador(j_0)$}%
+  [$\Theta(\# jugadores(j))$]
+  [agrega un jugador al juego \texttt{j} con id igual a ProxId(j).]
+
+
+
+\end{Interfaz}
+
+\begin{Representacion}
+ 
+  \begin{Estructura}{}[]
+  \end{Estructura}
+
+  \RepFc[]{true}
+
+  
+
+  \AbsFc[]{}
+
+\end{Representacion}
+
+\begin{Algoritmos}
+  
+\end{Algoritmos}
