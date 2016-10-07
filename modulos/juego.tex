@@ -33,13 +33,25 @@
 
 
 \InterfazFuncion{conectarse}{\Inout{j}{juego}, \In{c}{coor}, \In{e}{jugador}}{}%
-[$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j) \land posExistente(c, mapa(j)) $]
-{$estaConectado(e, j) $}%
+[$j \igobs j_0 \land e \in jugadores(j) \yluego \neg estaConectado(e, j) \land posExistente(c, mapa(j)) $]
+{$estaConectado(e, j) Y cambian capturables y contadores y sarasa$}%
 [$O(log(EC))$] % Es asi por enunciado
 [Conecta al jugador e en la posicion c]
 
 
-  
+\InterfazFuncion{desconectarse}{\Inout{j}{juego}, \In{e}{jugador}}{}%
+[$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j)$]
+{$\neg estaConectado(e, j) Y cambian capturables y contadores y sarasa$}%
+[$O(log(EC))$] % Es asi por enunciado
+[Desconecta al jugador e del juego]
+
+
+\InterfazFuncion{moverse}{\Inout{j}{juego}, \In{c}{coor}, \In{e}{jugador}}{}%
+[$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j) \land posExistente(c, mapa(j)) $]
+{$cambia posicion y cambian capturables y contadores y sarasa$}%
+[$O((PC + PS) * |P| + EC * log(EC))$] % Es asi por enunciado
+[Mueve al jugador e en la posicion c si es valido, sino sanciona o captura o sarasa]
+
 
 
 \end{Interfaz}
