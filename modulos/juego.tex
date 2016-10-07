@@ -1,32 +1,45 @@
 \begin{Interfaz}
 
 
-  \textbf{se explica con}: \tadNombre{Juego}.
+\textbf{se explica con}: \tadNombre{Juego}.
 
-  \textbf{g\'eneros}: \TipoVariable{juego}.
+\textbf{g\'eneros}: \TipoVariable{juego}.
 
-  \Title{Operaciones b\'asicas de Juego}
-
-
-  \InterfazFuncion{crearJuego}{\In{m}{map}}{juego}%
-  {$res \igobs crearJuego(m)$}%
-  [$\Theta(1)$]
-  [genera una juego con el mapa \texttt{m} y sin jugadores.]
+\Title{Operaciones b\'asicas de Juego}
 
 
-  \InterfazFuncion{agregarPok\'emon}{\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego}}{}
-  [$j_0 \igobs j \land posExistente(c, mapa(j)) \land p \not \in pokemones(j) $]  
-  {$j \igobs agregarPokemon(p, c, j_0)  \land p \in pokemones(j)$}
-  [$\Theta(¡¡completar!!)$]
-  [agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
+
+% GENERADORES %
 
 
-  \InterfazFuncion{agregarJugador}{\In{j}{juego}}{nat}%
-  [$ j_0 \igobs j $]
-  {$res \igobs ProxId(j_0) \land j \igobs agregarJugador(j_0)$}%
-  [$\Theta(\# jugadores(j))$]
-  [agrega un jugador al juego \texttt{j} con id igual a ProxId(j).]
+\InterfazFuncion{crearJuego}{\In{m}{map}}{juego}%
+{$res \igobs crearJuego(m)$}%
+[$\Theta(INFINITO, VER DESPUES)$]
+[genera una juego con el mapa \texttt{m} y sin jugadores.]
 
+
+\InterfazFuncion{agregarPok\'emon}{\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego}}{}
+[$j_0 \igobs j \land posExistente(c, mapa(j)) \land p \not \in pokemones(j) Y PUEDOAGREGARPOKEMON() QUE CHECKEE LAS DISTANCIAS $]  
+{$j \igobs agregarPokemon(p, c, j_0)  \land p \in pokemones(j)$}
+[$\Theta(¡¡completar!!)$]
+[agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
+
+
+\InterfazFuncion{agregarJugador}{\In{j}{juego}}{nat}% REVISAR SI HAY QUE DEVOLVER NAT
+[$ j_0 \igobs j $]
+{$res \igobs ProxId(j_0) \land j \igobs agregarJugador(j_0)$}%
+[$\Theta(\# jugadores(j) REVISAR)$]
+[agrega un jugador al juego \texttt{j} con id igual a ProxId(j).]
+
+
+\InterfazFuncion{conectarse}{\Inout{j}{juego}, \In{c}{coor}, \In{e}{jugador}}{}%
+[$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j) \land posExistente(c, mapa(j)) $]
+{$estaConectado(e, j) $}%
+[$O(log(EC))$] % Es asi por enunciado
+[Conecta al jugador e en la posicion c]
+
+
+  
 
 
 \end{Interfaz}
