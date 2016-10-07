@@ -52,7 +52,27 @@
 [$O((PC + PS) * |P| + EC * log(EC))$] % Es asi por enunciado
 [Mueve al jugador e en la posicion c si es valido, sino sanciona o captura o sarasa]
 
+% OBSERVADORES
 
+%mapa : juego −→ map
+
+%jugadores : juego −→ conj(jugador)
+
+%estaConectado : jugador e × juego j −→ bool  {e ∈ jugadores(j)}
+
+%sanciones : jugador e × juego j −→ nat {e ∈ jugadores(j)}
+
+%posicion : jugador e × juego j −→ coor  {e ∈ jugadores(j) ∧ L estaConectado(e, j)}
+
+%pokémons : jugador e × juego j −→ multiconj(pokémon) {e ∈ jugadores(j)}
+
+%expulsados : juego −→ conj(jugador)
+
+%posConPokémons : juego −→ conj(coor)
+
+%pokémonEnPos : coor c × juego j −→ pokémon {c ∈ posConPokémons(j)}
+
+%cantMovimientosParaCaptura : coor c × juego j −→ nat {c ∈ posConPokémons(j)}
 
 \end{Interfaz}
 
