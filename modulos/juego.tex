@@ -119,12 +119,31 @@
 
 
 %posConPokémons : juego −→ conj(coor)
+\InterfazFuncion{posConPokemons}{\In{j}{juego}}{conj(coor)}%
+[true]
+{$res = posConPokemons(j)$}%
+[$O(1)$] % Devuelve por referencia el conjunto, asi que habria que ir construyendolo
+[Devuelve un conjunto con las posiciones del mapa que tienen pokemons. Aliasing: devuelve el conjunto por referencia]
+% ACA DEVOLVEMOS LAS COORDENADAS DE LOS POKENODOS
 
 
 
 %pokémonEnPos : coor c × juego j −→ pokémon {c ∈ posConPokémons(j)}
+\InterfazFuncion{pokemonEnPos}{\In{j}{juego}, \In{c}{coor}}{pokemon}%
+[$c \in posConPokemons(j)$]
+{$res = pokemonEnPos(c, j)$}%
+[$O(1)$] % Ibamos a guardar el pokemon en la tupla del pokenodo
+[Devuelve el pokemon que se encuentra en la posicion c. Sin aliasing, devuelve por copia]
+
 
 %cantMovimientosParaCaptura : coor c × juego j −→ nat {c ∈ posConPokémons(j)}
+\InterfazFuncion{cantMovimientosParaCaptura}{\In{c}{coor}, \In{j}{juego}}{nat}%
+[$c \in posConPokemons(j)$] %requiere que c sea pos de pokenodo
+{$res = cantMovimientosParaCaptura(c, j)$}%
+[$O(1)$] % Ibamos a guardar el contador en la tupla del pokenodo
+[Devuelve el numero de movimientos que indican cuando se captura un pokemon]
+
+
 
 \end{Interfaz}
 
