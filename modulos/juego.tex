@@ -100,10 +100,27 @@
 
 
 %pokémons : jugador e × juego j −→ multiconj(pokémon) {e ∈ jugadores(j)}
+%VER
+\InterfazFuncion{pokemons}{\In{j}{juego}, \In{e}{jugador}}{multiconj}%
+[$e \in jugadores(j)$]
+{$res = ITERADOR?? VER ENUNCIADO POCO CLARO$}%
+[$O(1)$] % por enunciado. 
+[FRUTA]
+{TENEMOS QUE HACER EL MULTICONJUNTO? ITERADOR A TUPLA POR ENUNCIADO? VER SI ESTA EN MODS BASICOS SINO QUE SEA VECTOR Y CHAU}
+
+
 
 %expulsados : juego −→ conj(jugador)
+\InterfazFuncion{expulsados}{\In{j}{juego}}{conj(jugador)}%
+[true]
+{$res = expulsados(j)$}%
+[$O(INFINITO)$] % VER COMO LA IMPLEMENTAMOS   SOSPECHO O(#jugadores). 
+[Devuelve un conjunto con los jugadores expulsados]
+
 
 %posConPokémons : juego −→ conj(coor)
+
+
 
 %pokémonEnPos : coor c × juego j −→ pokémon {c ∈ posConPokémons(j)}
 
