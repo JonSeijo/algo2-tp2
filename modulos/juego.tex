@@ -55,6 +55,13 @@
 % OBSERVADORES
 
 %mapa : juego −→ map
+\InterfazFuncion{mapa}{\In{j}{juego}}{map}%
+[true]
+{$res = mapa(j)$}%
+[$O(1)$] % HAGAMOS QUE LO DEVUELVA POR REFERENCIA
+[Devuelve el mapa del juego]
+{Es por referencia, produce aliasing}
+
 
 %jugadores : juego −→ conj(jugador)
 
