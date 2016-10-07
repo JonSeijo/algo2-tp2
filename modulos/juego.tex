@@ -75,15 +75,29 @@
 %estaConectado : jugador e × juego j −→ bool  {e ∈ jugadores(j)}
 \InterfazFuncion{estaConectado}{\In{j}{juego}, \In{e}{jugador}}{bool}%
 [$e \in jugadores(j)$]
-{$res = estaConectado(j, e)$}%
+{$res = estaConectado(e, j)$}%
 [$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
 [Devuelve true si el jugador esta conectado]
 
 
 
 %sanciones : jugador e × juego j −→ nat {e ∈ jugadores(j)}
+\InterfazFuncion{sanciones}{\In{j}{juego}, \In{e}{jugador}}{nat}%
+[$e \in jugadores(j)$]
+{$res = sanciones(e, j)$}%
+[$O(1)$] % por enunciado. 
+[Devuelve la cantidad de sanciones de un jugador]
+
+
 
 %posicion : jugador e × juego j −→ coor  {e ∈ jugadores(j) ∧ L estaConectado(e, j)}
+\InterfazFuncion{posicion}{\In{j}{juego}, \In{e}{jugador}}{coor}%
+[$e \in jugadores(j)  \yluego estaConectado(e, j)$]
+{$res = posicion(e, j)$}%
+[$O(1)$] % por enunciado. 
+[Devuelve la posicion actual de un jugador]
+
+
 
 %pokémons : jugador e × juego j −→ multiconj(pokémon) {e ∈ jugadores(j)}
 
