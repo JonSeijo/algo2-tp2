@@ -64,8 +64,22 @@
 
 
 %jugadores : juego −→ conj(jugador)
+\InterfazFuncion{jugadores}{\In{j}{juego}, \In{e}{jugador}}{ITERADOR}%
+[true]
+{$TENGO QUE DEVOLVER ITERADOR VER ENUNCIADO$}%
+[$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
+[Devuelve un iterador al jugador. Puede borrarse]
+
+
 
 %estaConectado : jugador e × juego j −→ bool  {e ∈ jugadores(j)}
+\InterfazFuncion{estaConectado}{\In{j}{juego}, \In{e}{jugador}}{bool}%
+[$e \in jugadores(j)$]
+{$res = estaConectado(j, e)$}%
+[$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
+[Devuelve true si el jugador esta conectado]
+
+
 
 %sanciones : jugador e × juego j −→ nat {e ∈ jugadores(j)}
 
