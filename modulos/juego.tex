@@ -146,8 +146,20 @@
 
 % otras operaciones publicas
 
-% puedoAgregarPokémon, hayPokémonCercano,
-% posPókemonCercano, entrenadoresPosibles, indiceRareza, cantPokémonsTotales, cantMismaEspecie
+% puedoAgregarPokémon : coor c × juego j −→ bool
+
+% hayPokémonCercano : coor c × juego j −→ bool
+
+% posPókemonCercano : coor c × juego j −→ coor {hayPokémonCercano(c,j)}
+
+% entrenadoresPosibles : coor c × conj(jugador) es × juego j −→ conj(jugador)
+% {hayPokémonCercano(c,j) ∧ es ⊆ jugadoresConectados(j)}
+
+% indiceRareza : pokémon p × juego j −→ nat  {p ∈ todosLosPokémons(j)}
+
+% cantPokémonsTotales : juego −→ nat
+
+% cantMismaEspecie : pokémon × multiconj(pokémon) −→ nat
 
 
 \end{Interfaz}
