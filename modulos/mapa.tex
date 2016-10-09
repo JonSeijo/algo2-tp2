@@ -29,7 +29,7 @@
 
 \InterfazFuncion{posExistente}{ \In{c}{coord}, \In{m}{map}}{bool}
 {$res \igobs posExistente(c, m)$}
-[$\O(1)$]
+[$O(1)$]
 [verifica si la coordenada \texttt{c} existe en el mapa \texttt{m}]
 
 
@@ -139,7 +139,7 @@
 % hayCamino
 
 \begin{algorithm}[H]
-{\textbf{iHayCamino}(\In{m}{map}, \In {c1}{coor}, \In{c1}{coor})$\to$ $res$ : bool}
+{\textbf{iHayCamino}(\In{m}{map}, \In {c1}{coor}, \In{c2}{coor})$\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
 \State $res \gets grills[latitud(c1)][longitud(c1)][latitud(c2)][longitud(c1)]$ \Comment $O(1)$
@@ -150,6 +150,35 @@
 
 \end{algorithmic}
 \end{algorithm}
+
+
+% agregaCoor
+
+
+\begin{algorithm}[H]
+{\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c1}{coor}}
+\begin{algorithmic}[1]
+
+\State $maximo \gets max(latitud(c1), longitud(c1)) $ \Comment $O(1)$
+
+% Si hay una coordenada mayor al maximo
+\State \If{maximo $>$ m.tam} \Comment $O(1)$
+
+\State $nGrilla = iCrearGrilla(maximo)$ \Comment $O(maximo^4)$
+\State $iCopiarCoordenadas(nGrilla, m.grilla)$ \Comment $O((maximo^4)$
+\State $m.grilla = nGrilla$ \Comment $O(maximo^4)$
+\State $m.tam = maximo$ \Comment $O(1)$
+
+\EndIf
+
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+
+
+\end{algorithmic}
+\end{algorithm}
+
 
 
 
