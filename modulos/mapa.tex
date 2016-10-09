@@ -121,7 +121,10 @@ FI}
 \Title{Invariante de representacion en castellano}
 
 $ $\newline
+[Comentarios para la parte de explicacion de estructura] $ $\newline
 (decimos que C=(x,y) $"$esta en la grilla$"$ cuando grilla[x][y][x][y] == true) $ $\newline
+(decimos que hay camino entre C=(x,y) y C'=(z,w) cuando grilla[x][y][z][w] == true) $ $\newline
+
 (1) Todos los vectores que forman la grilla son de la misma longitud$ $\newline
 (2) tam es consistente con la longitud de la grilla $ $\newline
 (3) Si vale grilla[x][y][z][w] vale tambien grilla[z][w][x][y] $ $\newline
@@ -159,14 +162,16 @@ VER COMO PUEDO TOMAR LAS CONTIGUAS VALIDAS SIN OCHENTA IFS
 (VER COMO USAR AUXILIARES EN REP)
 
 $ $\newline
-(6)
+(6) y (7)
 (($\forall a, b, c, d, e, f$: nat)$ $\newline
 ((a < m.tam $\land$ b < m.tam $\yluego$ m.grilla[a][b][a][b]) $\land$ $ $\newline
 (c < m.tam $\land$ d < m.tam $\yluego$ m.grilla[c][d][c][d]) $\land$ $ $\newline
 (e < m.tam $\land$ f < m.tam $\yluego$ m.grilla[e][f][e][f]) $\land$ $ $\newline
 (a $\neq$ c $\lor$ b $\neq$ d) $\land$ (c $\neq$ e $\lor$ d $\neq$ f)) $ $\newline
-$\impluego$ ((m.grilla[a][b][c][d] $\land$ m.grilla[c][d][e][f]) $\implies$ m.grilla[a][b][e][f])
-
+$\impluego$ ( $ $\newline
+((m.grilla[a][b][c][d] $\land$ m.grilla[c][d][e][f]) $\implies$ m.grilla[a][b][e][f]) $\land $\newline
+((m.grilla[a][b][c][d] $\land$ $\neg$m.grilla[c][d][e][f]) $\implies$ $\neg$ m.grilla[a][b][e][f])$ $\newline
+)
 
 $ $\newline
 
