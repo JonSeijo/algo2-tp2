@@ -122,17 +122,36 @@ FI}
 
 $ $\newline
 (decimos que C $"$esta en la grilla$"$ cuando grilla[long(c)][latit(c)][long(c)][latit(c)] == true) $ $\newline
+(1) Todos los vectores que forman la grilla son de la misma longitud$ $\newline
+(2) tam es consistente con la longitud de la grilla $ $\newline
+(3) Si vale grilla[x][y][z][w] vale tambien grilla[z][w][x][y] $ $\newline
+(4) Si C no esta en la grilla, entonces no tiene camino con ninguna $ $\newline
+(5) Si C no esta en la grilla, entonces ninguna tiene camino con C $ $\newline
+(6) Si C y C' son contiguas y ambas estan en la grilla, entonces hay camino entre ellas $ $\newline
+(7) Si hay camino entre C y C', y hay camino entre C' y C'' entonces hay camino entre C y C'' $ $\newline
+(8) Si hay camino entre C y C', y NO hay camino entre C' y C'' entonces NO hay camino entre C y C'' $ $\newline
 
-1) Todos los vectores que forman la grilla son del mismo tam $ $\newline
-2) tam es consistente con el tam de la grilla $ $\newline
-3) Si vale grilla[x][y][z][w] vale tambien grilla[z][w][x][y] $ $\newline
-4) Si C no esta en la grilla, entonces no tiene camino con ninguna $ $\newline
-5) Si C no esta en la grilla, entonces ninguna tiene camino con C $ $\newline
-6) Si C y C' son contiguas y ambas estan en la grilla, entonces hay camino entre ellas $ $\newline
-7) Si hay camino entre C y C', y hay camino entre C' y C'' entonces hay camino entre C y C'' $ $\newline
-8) Si hay camino entre C y C', y NO hay camino entre C' y C'' entonces NO hay camino entre C y C'' $ $\newline
+\Title{Invariante de representacion en logica}
 
+(1)
+(($\forall i$: nat)(i $<$ long(m.grilla)) $\impluego$ long(m.grilla[i]) = long(m.grilla)) $\yluego$ $ $\newline
+(($\forall i, j$: nat)(i $<$ long(m.grilla) $\land$ j $<$ long(m.grilla)) $\impluego$ long(m.grilla[i][j]) = long(m.grilla)) $\yluego$ $ $\newline
+(($\forall i, j, k$: nat)(i $<$ long(m.grilla) $\land$ j $<$ long(m.grilla) $\land$ k $<$ long(m.grilla)) $\impluego$ $ $\newline long(m.grilla[i][j][k]) = long(m.grilla))
 
+$ $\newline
+(2)
+m.tam = long(e.grilla)
+
+$ $\newline
+(3) 
+(($\forall x, y, z, w$: nat)(x $<$ m.tam $\land$ y $<$ m.tam $\land$ z $<$ m.tam $\land$ w $<$ m.tam) $\impluego$ (grilla[x][y][z][w] = grilla[z][w][x][y])
+
+$ $\newline
+(4)
+
+$ $\newline
+$ $\newline
+$ $\newline
 
 \RepFc[]{true}
   
