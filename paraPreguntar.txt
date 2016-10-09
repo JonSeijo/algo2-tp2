@@ -1,0 +1,5 @@
+paraPreguntar.txt
+
+- Cual es la complejidad de nuestra "agregarCoordenada" de mapa?
+No estoy seguro de la que le puse ahora, hay que pensarlo bien y tratar de preguntarlo
+
