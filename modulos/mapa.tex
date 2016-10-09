@@ -191,8 +191,22 @@
 \State $aRecorrer \gets Vacio() $ \Comment $O(1)$
 \State $aRecorrer.Encolar(c)$ \Comment $O(1)$
 
-\While{$\neg aRecorrer.EsVacia()$}
+\While{$\neg aRecorrer.EsVacia()$}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
 
+\State $act \gets Proximo(aRecorrer)$ \Comment Obtener el proximo de la cola es O(1) // $O(1)$
+\State $Desencolar(aRecorrer)$ \Comment Eliminar el proximo de la cola es O(1) // $O(1)$
+
+% Reviso la coordenada de la izquierda
+\If{$latitud(act) > 0$}      \Comment $O(1)$
+\State $tmpX = latitud(coordenadaALaIzquierda(act))$   \Comment $O(1)$
+\State $tmpY = longitud(coordenadaALaIzquierda(act))$  \Comment $O(1)$
+\If{$\neg visitados[tmpX][tmpY]$}    \Comment $O(1)$
+\State $visitados[tmpX][tmpY] = true$    \Comment $O(1)$
+	\If{$Existe(coordenadaALaIzquierda(act))$} 	\Comment $O(1)$
+		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
+	\EndIf
+\EndIf
+\EndIf
 
 
 \EndWhile
