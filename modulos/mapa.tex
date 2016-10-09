@@ -17,7 +17,7 @@
 \InterfazFuncion{agregarCoor}{ \In{c}{coord}, \Inout{m}{map}}{}
 [$m_0 \igobs m \land \lnot posExistente(c, m_0) $]  
 {$m \igobs agregarCoor(c, m_0)$}
-[$O(  max(latitud(c), longitud(c))^4  )$]
+[$O(  max(latitud(c), longitud(c), tam(m))^4  )$]
 [agrega la coordenada \texttt{c} al mapa \texttt{m}]
 
 
@@ -40,7 +40,73 @@
 [verifica si existe una forma de llegar desde \texttt{$c_1$} a \texttt{$c_2$}]
 
 
+\Title{Especificacion de auxiliares usadas en la interfaz}
+  
+\begin{tad}{\tadNombre{Mapa Extension}}
+\tadExtiende{\tadNombre{Mapa}}
+
+\tadTitulo{Otras operaciones}{}
+
+\tadOperacion{tam}{mapa/$m$}{nat}{}
+\tadOperacion{max}{nat/$x$, nat/$y$}{nat}{}
+\tadOperacion{maxLatitud}{conj(coor)/$cs$}{nat}{$\neg \emptyset ?(cs)$}
+\tadOperacion{maxLongitud}{conj(coor)/$cs$}{nat}{$\neg \emptyset ?(cs)$}
+
+\tadAxioma{tam(mapa)}
+{
+\IF
+$\#$(coordenadas(mapa)) = 0
+THEN
+0
+ELSE
+max(maxLatitud(coordenadas(mapa)), maxLongitud(coordenadas(mapa)))
+FI
+}
+
+\tadAxioma{max(x ,y)}{\IF x $\geq$ y THEN x ELSE y FI}
+
+\tadAxioma{maxLatitud(cs)}
+{
+\IF
+$\#cs = 1$
+THEN
+latitud(dameUno(cs))
+ELSE
+{
+\IF latitud(dameUno(cs)) $\geq$ maxLatitud(sinUno(cs))
+THEN
+damUno(cs)
+ELSE
+maxLatitud(sinUno(cs))
+FI
+}
+FI}
+
+
+\tadAxioma{maxLongitud(cs)}
+{
+\IF
+$\#cs = 1$
+THEN
+longitud(dameUno(cs))
+ELSE
+{
+\IF longitud(dameUno(cs)) $\geq$ maxLongitud(sinUno(cs))
+THEN
+damUno(cs)
+ELSE
+maxLongitud(sinUno(cs))
+FI
+}
+FI}
+
+
+\end{tad}
+
+
+
 \end{Interfaz}
+
 
 \begin{Representacion}
 
@@ -155,7 +221,7 @@
 % agregaCoor
 
 
-\begin{algorithm}[H]
+%\begin{algorithm}[H]
 {\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c}{coor})}
 \begin{algorithmic}[1]
 
@@ -197,6 +263,9 @@
 
 \State $act \gets Proximo(aRecorrer)$ \Comment Obtener el proximo de la cola es O(1) // $O(1)$
 \State $Desencolar(aRecorrer)$ \Comment Eliminar el proximo de la cola es O(1) // $O(1)$
+
+\State $ $
+
 
 % Reviso la coordenada de la izquierda
 \If{$latitud(act) > 0$}      \Comment $O(1)$
@@ -254,14 +323,27 @@
 \EndWhile
 
 \medskip
-\Statex \underline{Complejidad:} $O((max(maximo, m.tam))^4)$
-\Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos
+\Statex \underline{Complejidad:} $O((max(latitud(c), longitud(c), m.tam))^4)$
+\Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos. VER COMO JUSTIFICAR MEJOR
 
 
 \end{algorithmic}
+%\end{algorithm}
+
+
+% tam
+
+\begin{algorithm}[H]
+{\textbf{iTam}(\In{m}{map})$\to$ $res$ : nat}
+\begin{algorithmic}[1]
+
+\State $res \gets m.tam$ \Comment $O(1)$
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+
+\end{algorithmic}
 \end{algorithm}
-
-
 
 
   
