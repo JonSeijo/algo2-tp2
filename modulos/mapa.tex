@@ -135,6 +135,9 @@ Y Si hay camino entre C y C', y NO hay camino entre C' y C'' entonces NO hay cam
 
 \Title{Invariante de representacion en logica}
 
+$ $\newline
+$ $\newline
+
 (1)
 (($\forall i$: nat)(i $<$ long(m.grilla)) $\impluego$ long(m.grilla[i]) = long(m.grilla)) $\yluego$ $ $\newline
 (($\forall i, j$: nat)(i $<$ long(m.grilla) $\land$ j $<$ long(m.grilla)) $\impluego$ long(m.grilla[i][j]) = long(m.grilla)) $\yluego$ $ $\newline
@@ -146,32 +149,51 @@ m.tam = long(e.grilla)
 
 $ $\newline
 (3) 
-(($\forall x, y, z, w$: nat)(x $<$ m.tam $\land$ y $<$ m.tam $\land$ z $<$ m.tam $\land$ w $<$ m.tam) $\impluego$ (grilla[x][y][z][w] = grilla[z][w][x][y])
+(($\forall x, y, z, w$: nat)(enRango(m, x, y) $\land$ enRango(m, z, w)) $\impluego$ (grilla[x][y][z][w] = grilla[z][w][x][y])
 
 $ $\newline
 (4)
-(($\forall x, y$: nat)(x $<$ m.tam $\land$ y $<$ m.tam) $\impluego$ $ $\newline 
+(($\forall x, y$: nat)(enRango(m, x, y)) $\impluego$ $ $\newline 
 ($\neg$ grilla[x][y][x][y] $\implies$
-($\forall z, w$: nat)(z $<$ m.tam $\land$ w $<$ m.tam) $\impluego$
+($\forall z, w$: nat)(enRango(m, z, w)) $\impluego$
 $\neg$ grilla[x][y][z][w] ))) 
 
 $ $\newline
 (5)
-HACER
-VER COMO PUEDO TOMAR LAS CONTIGUAS VALIDAS SIN OCHENTA IFS
-(VER COMO USAR AUXILIARES EN REP)
+(($\forall x, y, z, w$: nat)$ $\newline
+((enRango(m, x, y) $\yluego$ m.grilla[x][y][x][y]) $\land$ $ $\newline
+(enRango(m, z, w) $\yluego$ m.grilla[z][w][z][w]) $\yluego$ $ $\newline
+esContigua(x,y,z,w) $\impluego$ m.grilla[x][y][z][w]))
+
 
 $ $\newline
 (6)
 (($\forall a, b, c, d, e, f$: nat)$ $\newline
-((a < m.tam $\land$ b < m.tam $\yluego$ m.grilla[a][b][a][b]) $\land$ $ $\newline
-(c < m.tam $\land$ d < m.tam $\yluego$ m.grilla[c][d][c][d]) $\land$ $ $\newline
-(e < m.tam $\land$ f < m.tam $\yluego$ m.grilla[e][f][e][f]) $\land$ $ $\newline
+(enRango(m, a, b) $\yluego$ m.grilla[a][b][a][b]) $\land$ $ $\newline
+(enRango(m, c, d) $\yluego$ m.grilla[c][d][c][d]) $\land$ $ $\newline
+(enRango(m, e, f) $\yluego$ m.grilla[e][f][e][f]) $\land$ $ $\newline
 (a $\neq$ c $\lor$ b $\neq$ d) $\land$ (c $\neq$ e $\lor$ d $\neq$ f)) $ $\newline
 $\impluego$ ( $ $\newline
 ((m.grilla[a][b][c][d] $\land$ m.grilla[c][d][e][f]) $\implies$ m.grilla[a][b][e][f]) $\land $\newline
 ((m.grilla[a][b][c][d] $\land$ $\neg$m.grilla[c][d][e][f]) $\implies$ $\neg$ m.grilla[a][b][e][f])$ $\newline
 )
+
+% Auxiliar EN RANGO
+$ $\newline
+\tadOperacion{enRango}{estr$/m$, nat$/x$, nat$/y$}{bool}{}%
+\tadAxioma{enRango($m, x, y$)}{(x $<$ m.tam $\land$ y $<$ m.tam)} 
+
+% Auxiliar ES CONTIGUA
+$ $\newline
+\tadOperacion{esContigua}{nat$/x$, nat$/y$, nat$/z$, nat$/w$}{bool}{}%
+\tadAxioma{esContigua($x, y, z, w$)}
+{
+(x = z $\land$ y = w+1) $\lor$ \\
+(x = z+1 $\land$ y = w) $\lor$ \\
+(\IF z > 0 THEN (x = z-1 $\land$ y = w) ELSE false FI) $\lor$ \\
+(\IF w > 0 THEN (x = z $\land$ y = w-1) ELSE false FI)
+} 
+
 
 $ $\newline
 
