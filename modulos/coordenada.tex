@@ -42,11 +42,11 @@
     \end{Tupla}
   \end{Estructura}
 
-  \RepFc[estr]{true}
+  \RepFc[estr$/e$]{true}
 
   ~
 
-  \AbsFc[estr]{coor}[e]{ crearCoor($e$.latitud, $e$.longitud)}
+  \AbsFc[estr]{coor}[e]{c : coor / e.latitud = latitud(c) $\land$ e.longitud = longitud(c)}
 
 \end{Representacion}
 
