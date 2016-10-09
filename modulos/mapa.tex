@@ -156,10 +156,10 @@
 
 
 \begin{algorithm}[H]
-{\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c1}{coor}}
+{\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c}{coor})}
 \begin{algorithmic}[1]
 
-\State $maximo \gets max(latitud(c1), longitud(c1)) $ \Comment $O(1)$
+\State $maximo \gets max(latitud(c), longitud(c)) $ \Comment $O(1)$
 
 % Si hay una coordenada mayor al maximo
 \State \If{maximo $>$ m.tam} \Comment $O(1)$
@@ -171,9 +171,35 @@
 
 \EndIf
 
+% La marco consigo misma para decir que la cooordenada existe
+\State $m.grilla[latitud(c)][longitud(c)][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
+\State $ $
+
+% Creo una grilla de visitadas, todas false
+%Vector vacio ver como escribirlo bien
+\State $visitados \gets Vacio() $ \Comment $O(1)$
+\For{$i = 0$ to $m.tam$}	    \Comment $O(infinito)$
+\State $visitadosAux \gets Vacio() $ \Comment $O(1)$	
+\For{$j = 0$ to $m.tam$}      \Comment $O(Inifinito)$
+\State $visitadosAux.AgregarAtras(false)$ \Comment $O(1)$
+\EndFor
+\State $visitados.AgregarAtras(visitadosAux)$ \Comment $O(1)$
+\EndFor
+
+
+% aRecorrer es una cola..
+\State $aRecorrer \gets Vacio() $ \Comment $O(1)$
+\State $aRecorrer.Encolar(c)$ \Comment $O(1)$
+
+\While{$\neg aRecorrer.EsVacia()$}
+
+
+
+\EndWhile
 
 \medskip
-\Statex \underline{Complejidad:} $O(1)$
+\Statex \underline{Complejidad:} $O((max(maximo, m.tam))^4)$
+\Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos
 
 
 \end{algorithmic}
