@@ -184,9 +184,18 @@ $ $\newline
 $ $\newline
 $ $\newline
 
-\AbsFc[]{}
+
+% ABS
+
+\tadOperacion{Abs}{estr$/m$}{Mapa}{Rep($m$)}%
+\tadAxioma{Abs($m$)}
+{map : Mapa / ($\forall c$: coord)(c $\in$ coordenadas(map)) $\impluego$ \\
+(m.grilla[latitud(c)][longitud(c)][latitud(c)][longitud(c)] = true )}%
 
 \end{Representacion}
+
+$ $\newline
+$ $\newline
 
 \begin{Algoritmos}
 
