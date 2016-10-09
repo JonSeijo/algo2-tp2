@@ -350,7 +350,7 @@ $ $\newline
 
 \State $ $
 
-\While{$\neg aRecorrer.EsVacia()$}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
+\While{$\neg EsVacia(aRecorrer)$}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
 
 \State $act \gets Proximo(aRecorrer)$ \Comment Obtener el proximo de la cola es O(1) // $O(1)$
 \State $Desencolar(aRecorrer)$ \Comment Eliminar el proximo de la cola es O(1) // $O(1)$
@@ -367,6 +367,7 @@ $ $\newline
 	\If{$Existe(coordenadaALaIzquierda(act))$} 	\Comment $O(1)$
 		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
 		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
+		\State $Encolar(coordenadaALaIzquierda(act), aRecorrer)$ \Comment $O(1)$	
 	\EndIf
 \EndIf
 \EndIf
@@ -381,6 +382,7 @@ $ $\newline
 	\If{$Existe(coordenadaAbajo(act))$} 	\Comment $O(1)$
 		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
 		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
+		\State $Encolar(coordenadaAbajo(act), aRecorrer)$ \Comment $O(1)$		
 	\EndIf
 \EndIf
 \EndIf
@@ -396,6 +398,7 @@ $ $\newline
 	\If{$Existe(coordenadaALaDerecha(act))$} 	\Comment $O(1)$
 		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
 		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
+		\State $Encolar(coordenadaALaDerecha(act), aRecorrer)$ \Comment $O(1)$		
 	\EndIf
 \EndIf
 \EndIf
@@ -410,6 +413,7 @@ $ $\newline
 	\If{$Existe(coordenadaArriba(act))$} 	\Comment $O(1)$
 		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
 		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
+		\State $Encolar(coordenadaArriba(act), aRecorrer)$ \Comment $O(1)$		
 	\EndIf
 \EndIf
 \EndIf
