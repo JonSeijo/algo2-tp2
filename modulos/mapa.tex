@@ -131,7 +131,7 @@ $ $\newline
 (4) Si C no esta en la grilla, entonces no tiene camino con ninguna $ $\newline
 (5) Si C y C' son contiguas y ambas estan en la grilla, entonces hay camino entre ellas $ $\newline
 (6) Si hay camino entre C y C', y hay camino entre C' y C'' entonces hay camino entre C y C'' $ $\newline
-(7) Si hay camino entre C y C', y NO hay camino entre C' y C'' entonces NO hay camino entre C y C'' $ $\newline
+Y Si hay camino entre C y C', y NO hay camino entre C' y C'' entonces NO hay camino entre C y C'' $ $\newline
 
 \Title{Invariante de representacion en logica}
 
@@ -162,7 +162,7 @@ VER COMO PUEDO TOMAR LAS CONTIGUAS VALIDAS SIN OCHENTA IFS
 (VER COMO USAR AUXILIARES EN REP)
 
 $ $\newline
-(6) y (7)
+(6)
 (($\forall a, b, c, d, e, f$: nat)$ $\newline
 ((a < m.tam $\land$ b < m.tam $\yluego$ m.grilla[a][b][a][b]) $\land$ $ $\newline
 (c < m.tam $\land$ d < m.tam $\yluego$ m.grilla[c][d][c][d]) $\land$ $ $\newline
@@ -175,8 +175,14 @@ $\impluego$ ( $ $\newline
 
 $ $\newline
 
-\RepFc[]{true}
-  
+% REP  
+% REVISAR LOS YLUEGOS
+\tadOperacion{Rep}{estr$/m$}{bool}{}%
+\tadAxioma{Rep($m$)}
+{{(1) $\yluego$ (2) $\yluego$ (3) $\land$ (4) $\land$ (5) $\land$ (6)}} 
+
+$ $\newline
+$ $\newline
 
 \AbsFc[]{}
 
