@@ -81,7 +81,7 @@
 
 % coordenadas
 \begin{algorithm}[H]
-{\textbf{iCoordenadas}(\In m : map)$\to$ $res$ : conj(coor)}
+{\textbf{iCoordenadas}(\In{m}{map})$\to$ $res$ : conj(coor)}
 \begin{algorithmic}[1]
    
  
@@ -116,11 +116,11 @@
 % EXPLICACION:
 % CUANDO AGREGO UNA COORDENADA, LA CONECTO EN LA GRILLA CONSIGO MISMA, SIGNIFICANDO QUE EXISTE 
 \begin{algorithm}[H]
-{\textbf{iPosExistente}(\In m : map, \In c : coor)$\to$ $res$ : bool}
+{\textbf{iPosExistente}(\In{m}{map}, \In{c}{coor})$\to$ $res$ : bool}
 \begin{algorithmic}[1]
    
 
-\If{latitud(c) $>=$ tam(m) O longitud(c) $>=$ tam(m)}
+\If{latitud(c) $>=$ tam(m) OR longitud(c) $>=$ tam(m)}
 	\State $res \gets false$ \Comment $O(1)$
 \Else
 	\State $x \gets latitud(c)$ \Comment $O(1)$
@@ -128,6 +128,21 @@
 	\State $res \gets m.grilla[x][y][x][y]$ \Comment $O(1)$
 \EndIf
 
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+
+
+\end{algorithmic}
+\end{algorithm}
+
+% hayCamino
+
+\begin{algorithm}[H]
+{\textbf{iHayCamino}(\In{m}{map}, \In {c1}{coor}, \In{c1}{coor})$\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+\State $res \gets grills[latitud(c1)][longitud(c1)][latitud(c2)][longitud(c1)]$ \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
