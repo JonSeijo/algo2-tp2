@@ -63,10 +63,10 @@
 \end{Representacion}
 
 \begin{Algoritmos}
-\begin{algorithm}[H]
+
 
 % crearMapa
-
+\begin{algorithm}[H]
 {\textbf{iCrearMapa}()$\to$ $res$ : map}
 \begin{algorithmic}[1]
    
@@ -77,9 +77,10 @@
 \Statex \underline{Complejidad:} $O(1)$
 
 \end{algorithmic}
+\end{algorithm}
 
-
-
+% coordenadas
+\begin{algorithm}[H]
 {\textbf{iCoordenadas}(\In m : map)$\to$ $res$ : conj(coor)}
 \begin{algorithmic}[1]
    
@@ -90,7 +91,7 @@
 	
 	\For{$j=0$ to $tam(m)$}
 		
-		\If{iEsta(i, j)}  \Comment $O(1)$
+		\If{iPosExistente(i, j)}  \Comment $O(1)$
 			
 			\State $c \gets NuevaCoor(i, j) $  \Comment $O(1)$			
 			\State $Agregar(res, c) $  \Comment $O(log(\#res))$			
@@ -108,11 +109,31 @@
 \Statex \underline{Justificacion:} Son dos for anidados, por cada iteracion externa, se ejecutan $tam(m)$ iteraciones internas. En total son $(tam(m))^2$ iteraciones. En cada una de ellas, puede ejecutarse el $Agregar(rec, c)$ con complejidad $O(log(\#res))$. $res$ solo contiene coordenadas recorridas por la iteracion, por lo que $\#res <= tam(m)$, es decir $O(log(\#res)) = O(log(tam(m)))$, por lo que la complejidad final es $O(log(tam(m))*(tam(m))^2)$.
 
 \end{algorithmic}
+\end{algorithm}
+
+% posExistente
+
+% EXPLICACION:
+% CUANDO AGREGO UNA COORDENADA, LA CONECTO EN LA GRILLA CONSIGO MISMA, SIGNIFICANDO QUE EXISTE 
+\begin{algorithm}[H]
+{\textbf{iPosExistente}(\In m : map, \In c : coor)$\to$ $res$ : bool}
+\begin{algorithmic}[1]
+   
+
+\If{latitud(c) $>=$ tam(m) O longitud(c) $>=$ tam(m)}
+	\State $res \gets false$ \Comment $O(1)$
+\Else
+	\State $x \gets latitud(c)$ \Comment $O(1)$
+	\State $y \gets longitud(c)$ \Comment $O(1)$
+	\State $res \gets m.grilla[x][y][x][y]$ \Comment $O(1)$
+\EndIf
 
 
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
 
 
-
+\end{algorithmic}
 \end{algorithm}
 
 
