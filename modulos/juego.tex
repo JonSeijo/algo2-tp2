@@ -209,21 +209,41 @@ HAY DIFERENCIA ENTRE LA ESPECIFICACION Y SU SIGNATURA \\
 
 \end{Interfaz}
 
+~ 
+
 \begin{Representacion}
 
 % se representa con una tupla(variable, variable, pokenodos, )
+
+
+NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
  
-\begin{Estructura}{}[]
+\begin{Estructura}{Mapa}[map]
 
 \begin{Tupla}[map]  
-	\tupItem{v1}{sarasa}
-	\tupItem{\\ v2}{sarasa}
-	\tupItem{\\ v3}{sarasa}
-	\tupItem{\\ v4}{sarasa}
-	\tupItem{\\ v5}{sarasa}  
+	\tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
+	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
+	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
+	\tupItem{\\ grillaJugs}{vector(vector(vector(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
+	\tupItem{\\ pokenodos}{vector(vector(pokeStruc))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
 \end{Tupla}
-
 \end{Estructura}
+
+    \begin{Tupla}[pokeStruc]
+      \tupItem{poke}{pokemon}
+      \tupItem{\\ contador}{nat}%
+	  \tupItem{\\ entrenadores}{HEAP(JUGADOR)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
+    \end{Tupla}
+    
+    
+    \begin{Tupla}[jugStruc]
+      \tupItem{id}{nat}
+      \tupItem{\\ sanciones}{nat}%
+	  \tupItem{\\ conectado}{bool}
+	  \tupItem{\\ pos}{coor}
+	  \tupItem{\\ pokemons}{VECTOR(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
+    \end{Tupla}
+
 
 \RepFc[]{true}
 
