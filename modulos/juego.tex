@@ -224,7 +224,7 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 	\tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
 	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
 	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
-	\tupItem{\\ grillaJugs}{vector(vector(vector(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
+	\tupItem{\\ grillaJugs}{vector(vector(lista(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
 	\tupItem{\\ pokenodos}{vector(vector(pokeStruc))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
 \end{Tupla}
 \end{Estructura}
@@ -270,5 +270,24 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 \end{algorithm}
 
 
+
+% crearJuego
+Tendriamos que ver como decimo que el mapa lo guardamos por referencia
+\begin{algorithm}[H]
+{\textbf{iCrearJuego}(\In{map}{mapa}) $\to$ $res$ : juego}
+\begin{algorithmic}[1]
+
+\State $vector(jugStruc)$   $jugs \gets Vacio()$     \Comment $O(1)$
+\State $vector(vector(lista(jugador)))$   $grillaJugs \gets Vacio()$ \Comment $O(1)$
+\State $vector(vector(pokeStruc))$   $pokenodos \gets Vacio()$  \Comment $O(1)$
+
+\State $res \gets \langle map, jugs, grillaJugs, pokenodos \rangle      $ \Comment $O(1)$
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+\Statex \underline{Justificaion:} Crear vectores vacios cuesta O(1), y el mapa lo pasamos por referencia.
+
+\end{algorithmic}
+\end{algorithm}
   
 \end{Algoritmos}
