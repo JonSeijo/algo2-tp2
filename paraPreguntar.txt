@@ -3,3 +3,7 @@ paraPreguntar.txt
 - Cual es la complejidad de nuestra "agregarCoordenada" de mapa?
 No estoy seguro de la que le puse ahora, hay que pensarlo bien y tratar de preguntarlo
 
+- Si declaro un iterador y lo meto en una tupla, es necesario inicializarlo antes? Si es asi, puedo inicializarlo en una lista vacia y cambiarlo cuando lo necesite de verdad?
+
+- Puedo poner en una tupla "Vacio()" directamente, sin decir que tipo de vector es? O necesito inicializarlo antes?
+

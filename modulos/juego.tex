@@ -224,7 +224,7 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 	\tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
 	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
 	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
-	\tupItem{\\ grillaJugs}{vector(vector(lista(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
+	\tupItem{\\ grillaJugs}{vector(vector(lista(jugStruc)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
 	\tupItem{\\ pokenodos}{vector(vector(pokeStruc))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
 \end{Tupla}
 \end{Estructura}
@@ -241,7 +241,10 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
       \tupItem{\\ sanciones}{nat}%
 	  \tupItem{\\ conectado}{bool}
 	  \tupItem{\\ pos}{coor}
-	  \tupItem{\\ pokemons}{VECTOR(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
+ 	  \tupItem{\\ pokemons}{VECTOR(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
+	  \tupItem{\\ indiceEnPokenodo}{nat} % Solo me interesa el indice, un puntero es al pedo
+	  \tupItem{\\ iteradorAPos}{itLista(nat)}   
+
     \end{Tupla}
 
 
@@ -289,5 +292,40 @@ Tendriamos que ver como decimo que el mapa lo guardamos por referencia
 
 \end{algorithmic}
 \end{algorithm}
+
+
+\begin{algorithm}[H]
+{\textbf{iAgregarJugador}(\In{j}{juego}) $\to$ $res$ : nat}
+\begin{algorithmic}[1]
+
+\State nat $proxId$ $\gets$ Longitud($j$.jugadores) 
+
+%\State $nat sanciones \gets 0$ 
+%\State $bool conectado \gets false$
+
+% Le pongo (0,0) pero en realidad no importa porque no tenemos que chequear la posicion si esta desconectado)
+\State coor $pos$ $\gets$ CrearCoor(0,0) 
+
+\State vector($<$pokemon, nat$>$) $pokes$ $\gets$ Vacio()
+
+% Le pongo 0 pero en realidad no nos importa porque no hay que usarlo si no tiene pokemon cerca
+\State nat $indiceEnPokenodo$ $\gets$ 0 
+
+% Creo el iterador de una lista vacia para poder crearlo
+\State lista(nat) $listaDummy$ $\gets$ Vacia()
+\State itLista(nat) $iteradorAPos$ $\gets$ CrearIt($listaDummy$)
+
+\State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos>$)
+
+\Statex $res \gets proxId$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificaion:} Todo cte
+
+\end{algorithmic}
+\end{algorithm}
+
+
   
 \end{Algoritmos}
