@@ -244,7 +244,8 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
  	  \tupItem{\\ pokemons}{VECTOR(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
 	  \tupItem{\\ indiceEnPokenodo}{nat} % Solo me interesa el indice, un puntero es al pedo
 	  \tupItem{\\ iteradorAPos}{itLista(nat)}   
-
+	  \tupItem{\\ cantCapt}{nat}
+		
     \end{Tupla}
 
 
@@ -341,26 +342,47 @@ $ $\newline
 {\textbf{iConectarse}(\Inout{p}{juego}, \In{c}{coordenada}, \In{j}{jugador})}
 \begin{algorithmic}[1]
 
-\State $p$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ true 
-\State it $itLista(nat)$ $\gets$ AgregarAtras($p$.grillaJugs[latitud(c)][longitud(c)], $j$)
-\State $p$.jugadores[j].iteradorAPos $\gets$ it
-\If {$HayPokemonCercano(c, p) y HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$}
-	\State $p$.pokenodos[latitud(PosPokemonCercano($c$, $p$))][longitud(PosPokemonCercano($c$, $p$))].contador $\gets$ 0
-	\State nat $i$ $\gets$ Longitud($p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores)
-	\State AgregarAtras($p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))]
-	\State [longitud(PosPokemonCercano($c$,$p$))].entrenadores, $j$)
-	\While{i > 0 y 
-	$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i] < 
-	$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[(i-1)/2]}
-		\State jugStruc $aux$ $\gets$ $p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i]
-		\State $p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i] $\gets$
-		$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[(i-1)/2]
-		\State $p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[(i-1)/2] $\gets$ $aux$
-		\State $p$.jugadores[$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i].id] $\gets$ i
-		\State $i$ $\gets$ (i-1)/2
+\State $p$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ true \Comment $O(1)$
+\State itLista(nat) $it$ $\gets$ AgregarAtras($p$.grillaJugs[latitud(c)][longitud(c)], $j$) \Comment $O(1)$
+\State $p$.jugadores[j].iteradorAPos $\gets$ $it$ \Comment $O(1)$
+\If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
+	\State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+	\State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+	\State $p$.pokenodos[$latPok$][$lonPok$].contador $\gets$ 0 \Comment $O(1)$
+	\State nat $i$ $\gets$ Longitud($p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores) \Comment $O(1)$
+	\State AgregarAtras($p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores, $j$) \Comment $O(1)$ Amortizado
+	\While{$(i>0) \land \newline
+	(($p$.pokenodos[$latPok$][$lonPok$] \to entrenadores[i].cantCapt < \newline 
+	$p$.pokenodos[$latPok$][$lonPok$] \to entrenadores[(i-1)/2].cantCapt) \vee \newline
+	(($p$.pokenodos[$latPok$][$lonPok$] \to entrenadores[i].cantCapt = \newline 
+	$p$.pokenodos[$latPok$][$lonPok$] \to entrenadores[(i-1)/2].cantCapt) \Rightarrow \newline
+	($p$.pokenodos[$latPok$][$lonPok$] \to entrenadores[i].id < \newline
+	$p$.pokenodos[$latPok$][$lonPok$] \to entrenadores[(i-1)/2].id)))$} \Comment $O(log(EC))$
+		\State jugStruc $aux$ $\gets$ ($p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores[i]) \Comment $O(1)$
+		\State ($p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores[i]) $\gets$ \newline
+		($p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores[(i-1)/2]) \Comment $O(1)$
+		\State ($p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores[(i-1)/2]) $\gets$ $aux$ \Comment $O(1)$
+		\State ($p$.jugadores[$p$.pokenodos[$latPok$][$lonPok$] $\to$ entrenadores[i].id]) $\gets$ $i$ \Comment $O(1)$
+		\State $i$ $\gets$ (i-1)/2 \Comment $O(1)$
 	\EndWhile
-	\State $p$.jugadores[j].indiceEnPokenodo $\gets$ $i$
+	\State $p$.jugadores[j].indiceEnPokenodo $\gets$ $i$ \Comment $O(1)$
 \EndIf
+
+\medskip
+\State \underline{Complejidad:} $O(log(EC))$ Amortizado por uso de vector
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano" y "Mapa" son O(1). La funci\'on AgregarAtras de lista enlazada es O(1) y AgregarAtras de vector es O(1) amortizado. Suma y divisi\'on entera de nats es O(1).
+En el peor caso, el ciclo realiza O(log(EC)) iteraciones:
+Sea $n$ la cantidad de elementos del vector de entrenadores (en el peor caso n sería EC), $i$ inicia el ciclo con el valor $n-1$. En el peor de los casos tiene que llegar a 0 para alcanzar la cota y terminar el ciclo. 
+Por invariante del ciclo, despu\'es de la k-\'esima iteraci\'on \newline
+\newline
+$i = \tfrac{n-1}{2^{k}} - \sum_{j=0}^{k-1}\tfrac{1}{2^{k-j}}= \tfrac{n-1}{2^{k}} - \tfrac{2^{k}-1}{2^{k}} = \tfrac{n-2^{k}}{2^{k}}$ \newline
+\newline
+Calculando el valor de $k$ para que $i$ = 0 y se deje de cumplir la guarda se tiene que: \newline
+0 = $\tfrac{n-2^{k}}{2^{k}}$ \newline
+0 = $n-2^{k}$ \newline
+$2^{k}$ = $n$ \newline
+$k$ = $\log_{2}(n)$ \newline
+Por lo tanto la cantidad de iteraciones que se necesitan para terminar el ciclo en el peor de los casos es $\log_{2}(EC)$
 
 
 \end{algorithmic}
