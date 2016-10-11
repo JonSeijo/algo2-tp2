@@ -218,9 +218,9 @@ HAY DIFERENCIA ENTRE LA ESPECIFICACION Y SU SIGNATURA \\
 
 NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
  
-\begin{Estructura}{Mapa}[map]
+\begin{Estructura}{Juego}[pokgo]
 
-\begin{Tupla}[map]  
+\begin{Tupla}[pokgo]  
 	\tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
 	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
 	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
@@ -337,6 +337,34 @@ $ $\newline
 \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}[H]
+{\textbf{iConectarse}(\Inout{p}{juego}, \In{c}{coordenada}, \In{j}{jugador})}
+\begin{algorithmic}[1]
+
+\State $p$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ true 
+\State it $itLista(nat)$ $\gets$ AgregarAtras($p$.grillaJugs[latitud(c)][longitud(c)], $j$)
+\State $p$.jugadores[j].iteradorAPos $\gets$ it
+\If {$HayPokemonCercano(c, p) y HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$}
+	\State $p$.pokenodos[latitud(PosPokemonCercano($c$, $p$))][longitud(PosPokemonCercano($c$, $p$))].contador $\gets$ 0
+	\State nat $i$ $\gets$ Longitud($p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores)
+	\State AgregarAtras($p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))]
+	\State [longitud(PosPokemonCercano($c$,$p$))].entrenadores, $j$)
+	\While{i > 0 y 
+	$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i] < 
+	$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[(i-1)/2]}
+		\State jugStruc $aux$ $\gets$ $p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i]
+		\State $p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i] $\gets$
+		$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[(i-1)/2]
+		\State $p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[(i-1)/2] $\gets$ $aux$
+		\State $p$.jugadores[$p$.pokenodos[latitud(PosPokemonCercano($c$,$p$))][longitud(PosPokemonCercano($c$,$p$))].entrenadores[i].id] $\gets$ i
+		\State $i$ $\gets$ (i-1)/2
+	\EndWhile
+	\State $p$.jugadores[j].indiceEnPokenodo $\gets$ $i$
+\EndIf
+
+
+\end{algorithmic}
+\end{algorithm}
 
   
 \end{Algoritmos}
