@@ -14,8 +14,8 @@
 
 \InterfazFuncion{crearJuego}{\In{m}{map}}{juego}%
 {$res \igobs crearJuego(m)$}%
-[$\Theta(INFINITO, VER DESPUES)$]
-[genera una juego con el mapa \texttt{m} y sin jugadores.]
+[$O((Tam(m))^2)$]
+[Genera una juego con el mapa \texttt{m} y sin jugadores.]
 
 
 \InterfazFuncion{agregarPok\'emon}{\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego}}{}
@@ -28,7 +28,7 @@
 \InterfazFuncion{agregarJugador}{\In{j}{juego}}{nat}% REVISAR SI HAY QUE DEVOLVER NAT
 [$ j_0 \igobs j $]
 {$res \igobs ProxId(j_0) \land j \igobs agregarJugador(j_0)$}%
-[$\Theta(\# jugadores(j) REVISAR)$]
+[$O(1)$]
 [agrega un jugador al juego \texttt{j} con id igual a ProxId(j).]
 
 
@@ -258,24 +258,8 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 
 \begin{Algoritmos}
 
-% EJEMPLO
-\begin{algorithm}[H]
-{\textbf{iEJEMPLO}(\In{j}{juego})$\to$ $res$ : nat}
-\begin{algorithmic}[1]
-
-\State $res \gets j.mapa$ \Comment $O(1)$
-
-\medskip
-\Statex \underline{Complejidad:} $O(1)$
-\Statex \underline{Justificaion:} $O(1)$
-
-\end{algorithmic}
-\end{algorithm}
-
-
 
 % crearJuego
-Tendriamos que ver como decimo que el mapa lo guardamos por referencia
 \begin{algorithm}[H]
 {\textbf{iCrearJuego}(\In{map}{mapa}) $\to$ $res$ : juego}
 \begin{algorithmic}[1]
@@ -285,16 +269,16 @@ Tendriamos que ver como decimo que el mapa lo guardamos por referencia
 % Creo la grilla de listas de posiciones (con las listas vacias)
 \State vector(vector(lista(jugador)))   $grillaJugs$
 $ $\newline
-\For{$i \gets 0$ to Tam($map$) $-$ 1}
+\For{$i \gets 0$ to Tam($map$) $-$ 1} \Comment Se repite Tam(map) veces $O(1)$
 	
-	\State vector(lista(jugador)) $vectorInterno \gets$ Vacio()
+	\State vector(lista(jugador)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
 	
-	\For{$j \gets 0$ to Tam($map$) $-$ 1}
-		\State lista(jugador) $jugsVacia \gets$ Vacia()
-		\State AgregarAtras($vectorInterno$, $jugsVacia$)	
+	\For{$j \gets 0$ to Tam($map$) $-$ 1}  \Comment Se repite Tam(map) veces $O(1)$
+		\State lista(jugador) $jugsVacia \gets$ Vacia()   \Comment $O(1)$
+		\State AgregarAtras($vectorInterno$, $jugsVacia$) \Comment $O(1)$	 
 	\EndFor
 	
-	AgregarAtras($jugs$, $vectorInterno$)
+	AgregarAtras($jugs$, $vectorInterno$)   \Comment $O(1)$
 
 \EndFor
 
@@ -302,20 +286,20 @@ $ $\newline
 
 \State vector(vector(pokeStruc))  $pokenodos \gets$ Vacio()  \Comment $O(1)$
 
-\For{$i \gets 0$ to Tam($map$) $-$ 1}		
-	\State vector(puntero(pokeStruc)) $vectorInterno \gets$ Vacio()
-	\For{$j \gets 0$ to Tam($map$) $-$ 1}
-		\State puntero(pokeStruc) $pokePuntero \gets$ NULL
-		\State AgregarAtras($vectorInterno$, $pokePuntero$)	
+\For{$i \gets 0$ to Tam($map$) $-$ 1}		\Comment Se repite Tam(map) veces $O(1)$
+	\State vector(puntero(pokeStruc)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
+	\For{$j \gets 0$ to Tam($map$) $-$ 1}    \Comment Se repite Tam(map) veces $O(1)$
+		\State puntero(pokeStruc) $pokePuntero \gets$ NULL   \Comment $O(1)$
+		\State AgregarAtras($vectorInterno$, $pokePuntero$)	\Comment $O(1)$
 	\EndFor
-	AgregarAtras($pokenodos$, $vectorInterno$)
+	AgregarAtras($pokenodos$, $vectorInterno$)   \Comment $O(1)$
 \EndFor
 
 \State $res \gets \langle map$, $jugs$, $grillaJugs$, $pokenodos \rangle$   \Comment $O(1)$
 
 \medskip
-\Statex \underline{Complejidad:} $O(1)$
-\Statex \underline{Justificaion:} Crear vectores vacios cuesta O(1), y el mapa lo pasamos por referencia.
+\Statex \underline{Complejidad:} $O((Tam(map))^2)$
+\Statex \underline{Justificaion:} Se crean 2 vectores de vectores, de Tam(map) elementos tanto el vector interno como el externo $O((Tam(map))^2) + O((Tam(map))^2) = O((Tam(map))^2)$. Crear vectores vacios cuesta O(1) y el mapa lo pasamos por referencia, $O(1) + O((Tam(map))^2) = O((Tam(map))^2)$
 
 \end{algorithmic}
 \end{algorithm}
@@ -325,30 +309,30 @@ $ $\newline
 {\textbf{iAgregarJugador}(\In{j}{juego}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
 
-\State nat $proxId$ $\gets$ Longitud($j$.jugadores) 
+\State nat $proxId$ $\gets$ Longitud($j$.jugadores)   \Comment $O(1)$
 
 %\State $nat sanciones \gets 0$ 
 %\State $bool conectado \gets false$
 
 % Le pongo (0,0) pero en realidad no importa porque no tenemos que chequear la posicion si esta desconectado)
-\State coor $pos$ $\gets$ CrearCoor(0,0) 
+\State coor $pos$ $\gets$ CrearCoor(0,0) \Comment $O(1)$
 
-\State vector($<$pokemon, nat$>$) $pokes$ $\gets$ Vacio()
-
+\State vector($<$pokemon, nat$>$) $pokes$ $\gets$ Vacio() \Comment $O(1)$
+ 
 % Le pongo 0 pero en realidad no nos importa porque no hay que usarlo si no tiene pokemon cerca
-\State nat $indiceEnPokenodo$ $\gets$ 0 
+\State nat $indiceEnPokenodo$ $\gets$ 0  \Comment $O(1)$
 
 % Creo el iterador de una lista vacia para poder crearlo
-\State lista(nat) $listaDummy$ $\gets$ Vacia()
-\State itLista(nat) $iteradorAPos$ $\gets$ CrearIt($listaDummy$)
+\State lista(nat) $listaDummy$ $\gets$ Vacia() \Comment $O(1)$
+\State itLista(nat) $iteradorAPos$ $\gets$ CrearIt($listaDummy$) \Comment $O(1)$
 
-\State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos>$)
+\State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos>$) \Comment $O(1)$
 
-\State $res \gets proxId$
+\State $res \gets proxId$ \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
-\State \underline{Justificaion:} Todo cte
+\State \underline{Justificaion:} Todas las operaciones son O(1)
 
 \end{algorithmic}
 \end{algorithm}
