@@ -370,9 +370,9 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ Amortizado por uso de vector
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano" y "Mapa" son O(1). La funci\'on AgregarAtras de lista enlazada es O(1) y AgregarAtras de vector es O(1) amortizado. Suma y divisi\'on entera de nats es O(1).
-En el peor caso, el ciclo realiza O(log(EC)) iteraciones:
-Sea $n$ la cantidad de elementos del vector de entrenadores (en el peor caso n sería EC), $i$ inicia el ciclo con el valor $n-1$. En el peor de los casos tiene que llegar a 0 para alcanzar la cota y terminar el ciclo. 
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1) y AgregarAtras de vector es O(1) amortizado. Suma y divisi\'on entera de nats es O(1).
+En el peor caso, el ciclo realiza O(log(EC)) iteraciones: \newline
+Sea $n$ la cantidad de elementos del vector de entrenadores (en el peor caso n ser\'a EC), $i$ inicia el ciclo con el valor $n-1$. En el peor de los casos tiene que llegar a 0 para alcanzar la cota y terminar el ciclo. 
 Por invariante del ciclo, despu\'es de la k-\'esima iteraci\'on \newline
 \newline
 $i = \tfrac{n-1}{2^{k}} - \sum_{j=0}^{k-1}\tfrac{1}{2^{k-j}}= \tfrac{n-1}{2^{k}} - \tfrac{2^{k}-1}{2^{k}} = \tfrac{n-2^{k}}{2^{k}}$ \newline
@@ -382,7 +382,9 @@ Calculando el valor de $k$ para que $i$ = 0 y se deje de cumplir la guarda se ti
 0 = $n-2^{k}$ \newline
 $2^{k}$ = $n$ \newline
 $k$ = $\log_{2}(n)$ \newline
-Por lo tanto la cantidad de iteraciones que se necesitan para terminar el ciclo en el peor de los casos es $\log_{2}(EC)$
+Por lo tanto la cantidad de iteraciones que se necesitan para terminar el ciclo en el peor de los casos es $\log_{2}(EC)$ \newline
+\newline
+Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, queda que la complejidad del algoritmo es $O(log(EC))$ amortizado.
 
 
 \end{algorithmic}
