@@ -225,7 +225,7 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
 	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
 	\tupItem{\\ grillaJugs}{vector(vector(lista(jugStruc)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
-	\tupItem{\\ pokenodos}{vector(vector(pokeStruc))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
+	\tupItem{\\ pokenodos}{vector(vector(puntero(pokeStruc)))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
 \end{Tupla}
 \end{Estructura}
 
@@ -280,11 +280,38 @@ Tendriamos que ver como decimo que el mapa lo guardamos por referencia
 {\textbf{iCrearJuego}(\In{map}{mapa}) $\to$ $res$ : juego}
 \begin{algorithmic}[1]
 
-\State $vector(jugStruc)$   $jugs \gets Vacio()$     \Comment $O(1)$
-\State $vector(vector(lista(jugador)))$   $grillaJugs \gets Vacio()$ \Comment $O(1)$
-\State $vector(vector(pokeStruc))$   $pokenodos \gets Vacio()$  \Comment $O(1)$
+\State vector(jugStruc)  $jugs \gets$ Vacio()     \Comment $O(1)$
 
-\State $res \gets \langle map, jugs, grillaJugs, pokenodos \rangle      $ \Comment $O(1)$
+% Creo la grilla de listas de posiciones (con las listas vacias)
+\State vector(vector(lista(jugador)))   $grillaJugs$
+$ $\newline
+\For{$i \gets 0$ to Tam($map$) $-$ 1}
+	
+	\State vector(lista(jugador)) $vectorInterno \gets$ Vacio()
+	
+	\For{$j \gets 0$ to Tam($map$) $-$ 1}
+		\State lista(jugador) $jugsVacia \gets$ Vacia()
+		\State AgregarAtras($vectorInterno$, $jugsVacia$)	
+	\EndFor
+	
+	AgregarAtras($jugs$, $vectorInterno$)
+
+\EndFor
+
+$ $\newline
+
+\State vector(vector(pokeStruc))  $pokenodos \gets$ Vacio()  \Comment $O(1)$
+
+\For{$i \gets 0$ to Tam($map$) $-$ 1}		
+	\State vector(puntero(pokeStruc)) $vectorInterno \gets$ Vacio()
+	\For{$j \gets 0$ to Tam($map$) $-$ 1}
+		\State puntero(pokeStruc) $pokePuntero \gets$ NULL
+		\State AgregarAtras($vectorInterno$, $pokePuntero$)	
+	\EndFor
+	AgregarAtras($pokenodos$, $vectorInterno$)
+\EndFor
+
+\State $res \gets \langle map$, $jugs$, $grillaJugs$, $pokenodos \rangle$   \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
@@ -317,7 +344,7 @@ Tendriamos que ver como decimo que el mapa lo guardamos por referencia
 
 \State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos>$)
 
-\Statex $res \gets proxId$
+\State $res \gets proxId$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
