@@ -5,42 +5,42 @@
   \parbox{1.7cm}{\textbf{géneros}} $\alpha$\\
  
  
-  \textbf{se explica con}: \tadNombre{dicc$(string, \alpha)$}, \tadNombre{conj$(string)$}.
+  \textbf{se explica con}: \tadNombre{Diccionario$(string, \alpha)$}, \tadNombre{conj$(string)$}.
 
-  \textbf{géneros}: \TipoVariable{dicc$(\alpha)$}.
+  \textbf{géneros}: \TipoVariable{diccTrie$(\alpha)$}.
 
-  \InterfazFuncion{Vacio}{}{dicc$(\alpha)$}%
+  \InterfazFuncion{Vacio}{}{diccTrie$(\alpha)$}%
   []%
   {$res$ $\igobs$ vac\'io}%
   [$\Theta(1)$]
   [genera un diccionario vac\'io.]
 
-  \InterfazFuncion{Definir}{\Inout{d}{dicc($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$}}{}
+  \InterfazFuncion{Definir}{\Inout{d}{diccTrie($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$}}{}
   [$d \igobs d_0$]
   {$d$ \igobs definir($s, a, p$)}
   [$\Theta(copy(a))$]
   [defini $a$ en $d$ con la clave $s$.]
   [el elemento $a$ se define por copia.]
 
-  \InterfazFuncion{Def?}{\In{s}{string}, \In{d}{dicc($\alpha$)}}{bool}
+  \InterfazFuncion{Def?}{\In{s}{string}, \In{d}{diccTrie($\alpha$)}}{bool}
   {$res$ \igobs def?($s$, $p$)}
   [$\Theta(1)$]
   [devuelve \texttt{true} si y sólo si la $s$ tiene una definicion en $d$.]
 
-  \InterfazFuncion{Obtener}{\In{s}{string}, \In{d}{dicc($\alpha$)}}{$\alpha$}
+  \InterfazFuncion{Obtener}{\In{s}{string}, \In{d}{diccTrie($\alpha$)}}{$\alpha$}
   [def?($s$, $d$)]
   {alias($res$ \igobs obtener($s$, $d$))}
   [$\Theta(1)$]
   [devuelve el significado de la la clave $s$ en $d$.]
   [$res$ es modificable si y sólo si $d$ es modificable.]
 
-  \InterfazFuncion{Borrar}{\In{s}{string}, \Inout{d}{dicc($\alpha$)}}{}
+  \InterfazFuncion{Borrar}{\In{s}{string}, \Inout{d}{diccTrie($\alpha$)}}{}
   [$d \igobs d_0$ $\land$ def?($s$, $d$)]
   {$d$ \igobs borrar($s$, $d_0$)}
   [$\Theta(1)$]
   [borra la clave $s$ y su significado.]
 
-  \InterfazFuncion{Claves}{\In{d}{dicc($\alpha$)}}{conj($string$)}
+  \InterfazFuncion{Claves}{\In{d}{diccTrie($\alpha$)}}{conj($string$)}
   {$res$ \igobs claves($d$)}
   [$\Theta(1)$]
   [devuelve del conjjunto de claves de $d$.]
@@ -50,9 +50,20 @@
 
 \begin{Representacion}
   
+  \begin{Estructura}{diccTrie$(\alpha)$}[estr]
+    \begin{Tupla}[estr]
+      \tupItem{raiz}{puntero(nodo)}%
+      \tupItem{claves}{conj(string)}%
+    \end{Tupla}
 
-  \begin{Estructura}{}[]
+    \begin{Tupla}[nodo]
+      \tupItem{dato}{puntero($\alpha$)}%
+      \tupItem{siguientes}{arreglo[256](puntero(nodo))}%
+      \tupItem{itClave}{puntero(itConj(string))}%
+    \end{Tupla}
   \end{Estructura}
+
+
 
   \RepFc[][]{true}
 
