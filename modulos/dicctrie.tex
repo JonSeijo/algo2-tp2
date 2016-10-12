@@ -1,17 +1,16 @@
 
 \begin{Interfaz}
 
-  \textbf{parámetros formales}\hangindent=2\parindent\\
-  \parbox{1.7cm}{\textbf{géneros}} $\alpha$\\
+  \textbf{par\'ametros formales}\hangindent=2\parindent\\
+  \parbox{1.7cm}{\textbf{g\'eneros}} $\alpha$
  
  
   \textbf{se explica con}: \tadNombre{Diccionario$(string, \alpha)$}, \tadNombre{conj$(string)$}.
 
-  \textbf{géneros}: \TipoVariable{diccTrie$(\alpha)$}.
+  \textbf{g\'eneros}: \TipoVariable{diccTrie$(\alpha)$}.
 
-  \InterfazFuncion{Vacio}{}{diccTrie$(\alpha)$}%
-  []%
-  {$res$ $\igobs$ vac\'io}%
+  \InterfazFuncion{Vacio}{}{diccTrie$(\alpha)$}
+  {$res$ $\igobs$ vac\'io}
   [$\Theta(1)$]
   [genera un diccionario vac\'io.]
 
@@ -19,20 +18,20 @@
   [$d \igobs d_0$]
   {$d$ \igobs definir($s, a, p$)}
   [$\Theta(copy(a))$]
-  [defini $a$ en $d$ con la clave $s$.]
+  [define $a$ en $d$ con la clave $s$.]
   [el elemento $a$ se define por copia.]
 
   \InterfazFuncion{Def?}{\In{s}{string}, \In{d}{diccTrie($\alpha$)}}{bool}
   {$res$ \igobs def?($s$, $p$)}
   [$\Theta(1)$]
-  [devuelve \texttt{true} si y sólo si la $s$ tiene una definicion en $d$.]
+  [devuelve \texttt{true} si y s\'olo si la $s$ tiene una definicion en $d$.]
 
   \InterfazFuncion{Obtener}{\In{s}{string}, \In{d}{diccTrie($\alpha$)}}{$\alpha$}
   [def?($s$, $d$)]
   {alias($res$ \igobs obtener($s$, $d$))}
   [$\Theta(1)$]
   [devuelve el significado de la la clave $s$ en $d$.]
-  [$res$ es modificable si y sólo si $d$ es modificable.]
+  [$res$ es modificable si y s\'olo si $d$ es modificable.]
 
   \InterfazFuncion{Borrar}{\In{s}{string}, \Inout{d}{diccTrie($\alpha$)}}{}
   [$d \igobs d_0$ $\land$ def?($s$, $d$)]
@@ -43,7 +42,7 @@
   \InterfazFuncion{Claves}{\In{d}{diccTrie($\alpha$)}}{conj($string$)}
   {$res$ \igobs claves($d$)}
   [$\Theta(1)$]
-  [devuelve del conjjunto de claves de $d$.]
+  [devuelve del conjunto de claves de $d$.]
 
 
 \end{Interfaz}
@@ -57,7 +56,7 @@
     \end{Tupla}
 
     \begin{Tupla}[nodo]
-      \tupItem{dato}{puntero($\alpha$)}%
+      \tupItem{definicion}{puntero($\alpha$)}%
       \tupItem{siguientes}{arreglo[256](puntero(nodo))}%
       \tupItem{itClave}{puntero(itConj(string))}%
     \end{Tupla}
@@ -65,11 +64,11 @@
 
 
 
-  \RepFc[][]{true}
+  \RepFc[]{true}
 
   ~
 
-  \AbsFc[]{}[]{}
+  \AbsFc[]{}
 
 \end{Representacion}
 
@@ -81,9 +80,9 @@
 {\textbf{Vacio}() $\to$ $res$ : diccTrie$(\alpha)$}
 \begin{algorithmic}[1]
 
-\State $iRiaz$ $\gets $ $null$  \Comment $O(1)$
+\State $nodo iRiaz$ $\gets $ $null$  \Comment $O(1)$
  
-\State $iClaves$ $\gets$ Vacio() \Comment $O(1)$
+\State $conj(string) iClaves$ $\gets$ Vacio() \Comment $O(1)$
 
 \State $res$ $\gets$ $<iRaiz, iClaves>$ \Comment $O(1)$
 
@@ -103,17 +102,28 @@
 
 \State $Nat i$ $\gets$ $0$ \Comment $O(1)$
 
+\State $bool esNueva$ $\gets$ $true$ \Comment $O(1)$
+
 \While{$i < Longitud(s)$}   \Comment $O()$
 	
-	\If{$actual.siguientes[ord(s[i])] \eq null$} \Comment $O()$
+	
+	
+	\If{$actual.siguientes[ord(s[i])]$ $==$ $null$} \Comment $O(1)$
+		\State $nodo n$ $\gets$ $<null, arreglo[256](null), null>$ \Comment $O(1)$
+		\State $actual.siguientes[ord(s[i])]$ $\gets$		 $puntero(n)$ \Comment $O(1)$
 		
-		
+		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
 	
 	\EndIf
+	
+	\State $actual$ $\gets$ $actual.siguientes[ord(s[i])]$ \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
+\If{$esNueva$} \Comment $O(1)$
+	\State $claves.Agregar(s)$ \Comment $O(1)$
+\EndIf
 
 \medskip
 \State \underline{Complejidad:} $O(yoque)$
