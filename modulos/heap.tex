@@ -1,0 +1,208 @@
+\begin{Interfaz}
+
+  \textbf{se explica con}: \tadNombre{Cola de Prioridad(jugStruct)}.
+
+  \textbf{g\'eneros}: \TipoVariable{heap(jugStruct)}, \TipoVariable{itheap(jugStruct)}.
+
+  \Title{Operaciones b\'asicas de Heap}
+
+
+  \InterfazFuncion{Vacia}{}{heap(jugStruct)}%
+  {$res \igobs vacia$}%
+  [$\Theta(1)$]
+  [genera un nuevo heap]
+
+
+  \InterfazFuncion{Encolar}{\Inout{h}{heap(jugStruct)}, \In{j}{jugStruct}}{itHeap(jugStruct)}
+  [$h \igobs h_{0}$]
+  {$h \igobs encolar(h_{0}, j)$}
+  [$\Theta(1)$]
+  [encola $j$ a $h$]
+  [el elemento $j$ se encola por copia, REVISAR PRE Y POS]
+
+  \InterfazFuncion{EsVacia?}{\In{h}{heap(jugStruct)}}{bool}
+  {$res \igobs vacia?(h)$}
+  [$\Theta(1)$]
+  [devuelve true si la cola es vacia]
+
+
+  \InterfazFuncion{Proximo}{\In{h}{heap(jugStruct)}}{jugStruct}
+  [$\neg$ vacia?(h)]  
+  {$alias(res \igobs proximo(h))$} 
+  [$\Theta(1)$]
+  [devuelve el pr\'oximo de la cola]
+  [PREGUNTAR ALIASING Y ALIAS]
+  
+  
+  \InterfazFuncion{Desencolar}{\Inout{h}{heap(jugStruct)}}{}
+  [$h \igobs h_{0} \land \neg vacia(h)$ ]  
+  {$h \igobs desencolar(h_{0})$} 
+  [$\Theta(1)$]
+  [desencola el pr\'oximo de h]
+
+
+  \Title{Operaciones del iterador}
+  
+   \InterfazFuncion{CrearIt}{\In {h}{heap(jugStruct)}}{itHeap(jugStruct)}%
+  {$HCER ESTO$}%
+  [$\Theta(1)$]
+  [crea un iterador unidireccional modificable a la \'ultima posici\'on]
+  [el iterador se invalida si se elimina el siguiente sin usar la funcion BORRARSIGUIENTE]
+ 
+ 
+ \InterfazFuncion{HayPadre?}{\In {it}{itHeap(jugStruct)}}{bool}%
+  {$HCER ESTO$}
+  [$\Theta(1)$]
+  [devuelve true si hay padre del elemento]
+  
+  \InterfazFuncion{HayHijoIzq?}{\In {it}{itHeap(jugStruct)}}{bool}%
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve true si hay hijo izquierdo del elemento]
+  
+  \InterfazFuncion{HayHijoDer?}{\In {it}{itHeap(jugStruct)}}{bool}%
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve true si hay hijo derecho del elemento]
+  
+  \InterfazFuncion{HayNodo?}{\In {it}{itHeap(jugStruct)}}{bool}%
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve true si hay elementos por recorrer]
+  
+  \InterfazFuncion{Elemento}{\In {it}{itHeap(jugStruct)}}{jugStruct}%
+  [HayNodo?(it)]
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve el elemento del nodo]
+  
+  \InterfazFuncion{Elementohijoizq}{\In {it}{itHeap(jugStruct)}}{jugStruct}%
+  [HayHijoIzq?(it)]
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve el elemento del hijo izquierdo del nodo]
+  
+  \InterfazFuncion{Elementohijoder}{\In {it}{itHeap(jugStruct)}}{jugStruct}%
+  [HayHijoDer?(it)]
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve el elemento del hijo derecho del nodo]
+  
+  \InterfazFuncion{Elementopadre}{\In {it}{itHeap(jugStruct)}}{jugStruct}%
+  [HayPadre?(it)]
+  {$HACER ESTO$}
+  [$\Theta(1)$]
+  [devuelve el elemento del padre del nodo]
+  
+  \InterfazFuncion{Borrar}{\In {it}{itHeap(jugStruct)}}{}%
+  [ITERADOR VALIDO]
+  {$HACER ESTO$}
+  [$O(log(EC))$]
+  [Borra el elemento dado]
+  
+   \InterfazFuncion{EncolarElem}{\In {it}{itHeap(jugStruct)}, \Inout {h}{heap(jugStruct)}}{itHeap}%
+  [ITERADOR VALIDO,]
+  {$DEVUELVE ITERADOR VALIDO$}
+  [$O(log(EC))$]
+  [Encola el elemento dado]
+
+
+\end{Interfaz}
+
+\begin{Representacion}
+ 
+  \begin{Estructura}{heap(jugStruct)}[estr]
+      \begin{Tupla}[estr]%
+      \tupItem{raiz}{puntero(Nodoheap)}%
+      \tupItem{ultimo}{puntero(Nodoheap)}%
+    \end{Tupla}
+  \end{Estructura}
+
+	\begin{Tupla}[Nodoheap]
+	\tupItem{elemento}{jugStruct}%
+	\tupItem{padre}{puntero(Nodoheap)}%
+	\tupItem{izq}{puntero(Nodoheap)}%
+	\tupItem{der}{puntero(Nodoheap)}%
+	\end{Tupla}
+
+  \RepFc[estr$/e$]{true}
+
+  ~
+
+  \AbsFc[estr]{coor}[e]{}
+
+\end{Representacion}
+
+\begin{Representacion}
+ 
+  \begin{Estructura}{itHeap(jugStruct)}[estr]
+      \begin{Tupla}[estr]%
+      \tupItem{siguiente}{puntero(Nodoheap)}%
+      \tupItem{estructura}{puntero(Heap)}%
+    \end{Tupla}
+  \end{Estructura}
+
+  \RepFc[estr$/e$]{true}
+
+  ~
+
+  \AbsFc[estr]{coor}[e]{}
+
+\end{Representacion}
+
+
+
+\begin{Algoritmos}
+   
+\begin{algorithm}[H]{\textbf{Vacio}() $\to$ $res$ : heap(jugStruct)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  <NULL, NULL> $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+   
+\begin{algorithm}[H]{\textbf{Encolar}(\Inout{h}{heap(jugStrict)}, \In{j}{jugStruct}) $\to$ $res$ : itHeap(jugStruct)}
+    	\begin{algorithmic}[1]
+			 \State $it \gets  CrearIt(h) $ \Comment $O(1)$
+			 \State $res \gets EncolarElem(it, h) $ \Comment $O(log(EC))$
+			 
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+    	\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}[H]{\textbf{EsVacia?}(\In{h}{heap(jugStruct)}) $\to$ $res$ : bool}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  h.raiz \not=$ NULL \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Proximo}(\In{h}{heap(jugStruct)}) $\to$ $res$ : jugStruct}
+    	\begin{algorithmic}[1]
+    		 \State $res \gets h.raiz \rightarrow elemento$ \Comment $O(1)$
+    		 \medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Desencolar}(\In{h}{heap(jugStruct)}) $\to$ $res$ : jugStruct}
+    	\begin{algorithmic}[1]
+    		 \State $it \gets CrearIt(h)$ \Comment $O(1)$
+    		 \State $Borrar(it)$ \Comment $O(log(EC))$
+    		 \medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+    	\end{algorithmic}
+\end{algorithm}
+
+\end{Algoritmos}
+
+\begin{Algoritmos}
+
+\end{Algoritmos}
