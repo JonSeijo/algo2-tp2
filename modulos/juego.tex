@@ -506,32 +506,38 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 	
 \EndIf
 
-if (y > 0)
+\If{$y > 0$}
 	(x, y-1)
 	
 	if (y-1 > 0)
 		(x, y-2)
 
-if (y < tam(m) - 1)
+\EndIf
+
+\If{$y < tam(m) - 1$}
 	(x, y+1)
 	
-	if (tam(m) > 1 && y < tam(m) - 2)
+	\If{$tam(m) > 1 \land y < tam(m) - 2$}
 		(x, y+2)
+	\EndIf
 
+\EndIf
 
-if (x < tam(m) - 1)
+\If{$x < tam(m) - 1$}
 	(x+1, y)
 
-	if (y > 0)
+	\If{$y > 0$}
 		(x+1, y-1)
-
-	if (y < tam(m)-1)
+	\EndIf	
+	
+	\If{$y < tam(m)-1$}
 		(x+1, y+1)
+	\EndIf
+\EndIf
 
-
-if (tam(m) > 1 && x < tam(m) - 2)
+\If{$tam(m) > 1 \land x < tam(m) - 2$}
 	(x+2, y)
-
+\EndIf
 
 \medskip
 \State \underline{Complejidad:} $O(1)$ % por enunciado
