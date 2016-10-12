@@ -469,6 +469,48 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 \end{algorithm}
 
 
+% posPokemonCercano
+
+\begin{algorithm}[H]
+{\textbf{iPosPokemonCercano}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : coor}
+\begin{algorithmic}[1]
+
+NO TOCAR PLZ -- JONATHAN
+
+x = lat(c)
+y = lon(c)
+
+puntero en x,y != null => esa posicion es la del pokemon
+
+(x,y)
+
+(x-1, y)
+(x-1, y-1)
+(x-1, y+1)
+
+(x-2, y)
+
+(x, y-1)
+(x, y+1)
+
+(x, y-2)
+(x, y+2)
+
+(x+1, y)
+(x+1, y-1)
+(x+1, y+1)
+
+(x+2, y)
+
+
+\medskip
+\State \underline{Complejidad:} $O(1)$ % por enunciado
+\State \underline{Justificacion:} las posiciones que chequeo son < 15, es O(1)
+
+\end{algorithmic}
+\end{algorithm}
+
+
 
   
 \end{Algoritmos}
