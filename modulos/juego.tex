@@ -475,14 +475,18 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 {\textbf{iPosPokemonCercano}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 
-NO TOCAR PLZ -- JONATHAN
+% NO TOCAR PLZ -- JONATHAN
 
-x = lat(c)
-y = lon(c)
+\State nat $x \gets$ latitud(c)
+\State nat $y \gets$ longitud(c)
 
-puntero en x,y != null => esa posicion es la del pokemon
+% j.pokenodos[x][y] != NULL   =>  pos con pokemon
 
-(x,y)
+\State coor $coorConPokemon$
+
+\If{j.pokenodos[x][y] $\not eq$ NULL}
+	\State $coorConPokemon \gets CrearCoor(x, y)$
+\EndIf
 
 if (x > 0)
 	(x-1, y)
