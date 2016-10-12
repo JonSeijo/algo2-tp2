@@ -471,7 +471,7 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 
 % posPokemonCercano
 
-\begin{algorithm}[H]
+%\begin{algorithm}[H]
 {\textbf{iPosPokemonCercano}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 
@@ -484,68 +484,104 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 
 \State coor $coorConPokemon$    \Comment $O(1)$
 
-\If{j.pokenodos[x][y] $\not eq$ NULL}     \Comment $O(1)$
-	\State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+\If{j.pokenodos[$x$][$y$] $\neq$ NULL}     \Comment $O(1)$
+    \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
 \EndIf
 
 \If{$x > 0$}
-	(x-1, y)
-		
-	\If{$y > 0$}
-		(x-1, y-1)
-	\EndIf
+    \If{j.pokenodos[$x-1$][$y$] $\neq$ NULL}     \Comment $O(1)$
+        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+    \EndIf
 
-	% tam(m) no puede ser 0 porque existe una coordenada al menos (x,y)
-	\If{$y < tam(m) - 1$}	
-		(x-1, y+1)
-	\EndIf
+    \If{$y > 0$}
 
-	\If{$x-1 > 0$}
-		(x-2, y)
-	\EndIf
-	
+        \If{j.pokenodos[$x-1$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+
+    \EndIf
+
+    % tam(m) no puede ser 0 porque existe una coordenada al menos (x,y)
+    \If{$y < tam(m) - 1$}
+        \If{j.pokenodos[$x-1$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+    \EndIf
+
+    \If{$x-1 > 0$}
+        \If{j.pokenodos[$x-2$][$y$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+    \EndIf
+
 \EndIf
 
 \If{$y > 0$}
-	(x, y-1)
-	
-	if (y-1 > 0)
-		(x, y-2)
+
+    \If{j.pokenodos[$x$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
+        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+    \EndIf
+
+    \If{$y-1 > 0$}
+
+        \If{j.pokenodos[$x$][$y-2$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+
+    \EndIf
 
 \EndIf
 
 \If{$y < tam(m) - 1$}
-	(x, y+1)
-	
-	\If{$tam(m) > 1 \land y < tam(m) - 2$}
-		(x, y+2)
-	\EndIf
+
+    \If{j.pokenodos[$x$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
+        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+    \EndIf
+
+
+    \If{$tam(m) > 1 \land y < tam(m) - 2$}
+        \If{j.pokenodos[$x$][$y+2$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+
+
+    \EndIf
 
 \EndIf
 
 \If{$x < tam(m) - 1$}
-	(x+1, y)
+    \If{j.pokenodos[$x+1$][$y$] $\neq$ NULL}     \Comment $O(1)$
+        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
 
-	\If{$y > 0$}
-		(x+1, y-1)
-	\EndIf	
-	
-	\If{$y < tam(m)-1$}
-		(x+1, y+1)
-	\EndIf
+    \If{$y > 0$}
+        \If{j.pokenodos[$x+1$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+    \EndIf
+
+    \If{$y < tam(m)-1$}
+        \If{j.pokenodos[$x+1$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
+            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \EndIf
+
+    \EndIf
 \EndIf
 
 \If{$tam(m) > 1 \land x < tam(m) - 2$}
-	(x+2, y)
+    \If{j.pokenodos[$x+2$][$y$] $\neq$ NULL}     \Comment $O(1)$
+        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+    \EndIf
 \EndIf
+
+\State $res \gets coorConPokemon$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$ % por enunciado
-\State \underline{Justificacion:} las posiciones que chequeo son < 15, es O(1)
+\State \underline{Justificacion:} Reviso 13 posiciones O(1)
 
 \end{algorithmic}
-\end{algorithm}
-
+%\end{algorithm}
 
 
   
