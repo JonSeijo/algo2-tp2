@@ -75,5 +75,52 @@
 
 \begin{Algoritmos}
   
+  
+%crear diccTrie
+\begin{algorithm}[H]
+{\textbf{Vacio}() $\to$ $res$ : diccTrie$(\alpha)$}
+\begin{algorithmic}[1]
+
+\State $iRiaz$ $\gets $ $null$  \Comment $O(1)$
+ 
+\State $iClaves$ $\gets$ Vacio() \Comment $O(1)$
+
+\State $res$ $\gets$ $<iRaiz, iClaves>$ \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+
+\end{algorithmic}
+\end{algorithm}
+  
+
+
+\begin{algorithm}[H]
+{\textbf{Definir}(\Inout{d}{diccTrie($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$})}
+\begin{algorithmic}[1]
+
+\State $Puntero(nodo) actual$ $\gets$ $raiz$ \Comment $O(1)$
+
+\State $Nat i$ $\gets$ $0$ \Comment $O(1)$
+
+\While{$i < Longitud(s)$}   \Comment $O()$
+	
+	\If{$actual.siguientes[ord(s[i])] \eq null$} \Comment $O()$
+		
+		
+	
+	\EndIf
+
+	\State $i$ $\gets$ $i + 1$
+\EndWhile 
+
+
+\medskip
+\State \underline{Complejidad:} $O(yoque)$
+
+\end{algorithmic}
+\end{algorithm}  
+  
+  
 \end{Algoritmos}
 
