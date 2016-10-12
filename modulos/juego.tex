@@ -222,6 +222,7 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 
 \begin{Tupla}[pokgo]  
 	\tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
+	\tupItem{\\ cantPokemonTotal}{nat} % Para acceso O(1) al total
 	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
 	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
 	\tupItem{\\ grillaJugs}{vector(vector(lista(jugStruc)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
@@ -265,6 +266,9 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
 {\textbf{iCrearJuego}(\In{map}{mapa}) $\to$ $res$ : juego}
 \begin{algorithmic}[1]
 
+\State dictTrie $cantPokemon \gets $ Vacio()  \Comment $O(1)$
+\State nat $cantPokemonTotal \gets $ 0  \Comment $O(1)$
+$ $\newline
 \State vector(jugStruc)  $jugs \gets$ Vacio()     \Comment $O(1)$
 
 % Creo la grilla de listas de posiciones (con las listas vacias)
@@ -282,9 +286,7 @@ $ $\newline
 	AgregarAtras($jugs$, $vectorInterno$)   \Comment $O(1)$
 
 \EndFor
-
 $ $\newline
-
 \State vector(vector(pokeStruc))  $pokenodos \gets$ Vacio()  \Comment $O(1)$
 
 \For{$i \gets 0$ to Tam($map$) $-$ 1}		\Comment Se repite Tam(map) veces $O(1)$
@@ -296,7 +298,7 @@ $ $\newline
 	AgregarAtras($pokenodos$, $vectorInterno$)   \Comment $O(1)$
 \EndFor
 
-\State $res \gets \langle map$, $jugs$, $grillaJugs$, $pokenodos \rangle$   \Comment $O(1)$
+\State $res \gets \langle cantPokemon$, $cantPokemonTotal$, $map$, $jugs$, $grillaJugs$, $pokenodos \rangle$   \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O((Tam(map))^2)$
