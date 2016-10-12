@@ -407,6 +407,22 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 \end{algorithmic}
 \end{algorithm}
 
+% indiceRareza
+
+\begin{algorithm}[H]
+{\textbf{iIndiceRareza}(\In{p}{pokemon}, \In{j}{juego}) $\to$ $res$ : nat}
+\begin{algorithmic}[1]
+
+\State nat $pokecant \gets$ Obtener(j.cantPokemon, $p$) \Comment $O(|P|)$
+
+\State $res \gets$ 100 $-$ (100 $*$ $pokecant$ $/$ j.cantPokemonsTotales) \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(|P|)$
+\State \underline{Justificacion:} j.cantPokemon es un diccionario sobre trie. La complejidad de buscar (y obtener el significado) en peor caso es la longitud de la string mas larga entre sus claves, eso es O($|P|$). j.cantPokemonsTotales es un dato guardado en la estructura del juego, y se accede en O(1). El resto son una resta, multiplicacion y division, que tambien son O(1). O($|P|$) $+$ O(1) $=$ O($|P|$)
+
+\end{algorithmic}
+\end{algorithm}
 
   
 \end{Algoritmos}
