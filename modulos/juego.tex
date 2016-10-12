@@ -477,30 +477,34 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 
 % NO TOCAR PLZ -- JONATHAN
 
-\State nat $x \gets$ latitud(c)
-\State nat $y \gets$ longitud(c)
+\State nat $x \gets$ latitud(c)    \Comment $O(1)$
+\State nat $y \gets$ longitud(c)   \Comment $O(1)$
 
 % j.pokenodos[x][y] != NULL   =>  pos con pokemon
 
-\State coor $coorConPokemon$
+\State coor $coorConPokemon$    \Comment $O(1)$
 
-\If{j.pokenodos[x][y] $\not eq$ NULL}
-	\State $coorConPokemon \gets CrearCoor(x, y)$
+\If{j.pokenodos[x][y] $\not eq$ NULL}     \Comment $O(1)$
+	\State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
 \EndIf
 
-if (x > 0)
+\If{$x > 0$}
 	(x-1, y)
-	
-	if (y > 0)
+		
+	\If{$y > 0$}
 		(x-1, y-1)
-	
+	\EndIf
+
 	% tam(m) no puede ser 0 porque existe una coordenada al menos (x,y)
-	if (y < tam(m) - 1)	
+	\If{$y < tam(m) - 1$}	
 		(x-1, y+1)
+	\EndIf
 
-	if (x-1 > 0)
+	\If{$x-1 > 0$}
 		(x-2, y)
-
+	\EndIf
+	
+\EndIf
 
 if (y > 0)
 	(x, y-1)
