@@ -114,7 +114,7 @@
 \InterfazFuncion{Expulsados}{\In{j}{juego}}{conj(jugador)}%
 [true]
 {$res = expulsados(j)$}%
-[$O(\#jugadores(j))$] % VER COMO LA IMPLEMENTAMOS   SOSPECHO O(#jugadores). 
+[$O(J)$]  
 [Devuelve un conjunto con los jugadores expulsados]
 
 
@@ -702,7 +702,65 @@ $ $\newline
 
 
 
+% puedoAgregarPokemon
 
+\begin{algorithm}[H]
+{\textbf{iPuedoAgregarPokemon}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+\State bool $puedo \gets$ false  \Comment $O(1)$
+
+\If{PosExistente(c, j.mapa)}   \Comment $O(1)$
+	\If{$\neg$ HayPokemonCercano(c, j)}   \Comment $O(1)$
+		\State $puedo \gets$ true        \Comment $O(1)$
+	\EndIf
+\EndIf
+
+\State $res \gets puedo$  \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificacion:} Todas las operaciones son O(1)
+
+\end{algorithmic}
+\end{algorithm}
+
+
+% cantMovimientosParaCaptura
+
+\begin{algorithm}[H]
+{\textbf{iCantMovimientosParaCaptura}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : 	nat}
+\begin{algorithmic}[1]
+
+\State puntero(pokeStruc) $pokenodo \gets$ j.pokenodos[latitud($c$)][longitud($c$)] \Comment $O(1)$
+\State $res \gets$ (*pokenodo).contador  \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificacion:} Todas las operaciones son O(1)
+
+\end{algorithmic}
+\end{algorithm}
+
+
+% expulsados
+
+\begin{algorithm}[H]
+{\textbf{iExpulsados}(\In{j}{juego}) $\to$ $res$ : conj(jugador)}
+\begin{algorithmic}[1]
+
+\For{$nat i \gets$ 0 to Longitud(j.jugadores) $-$ 1}   \Comment $O(J)$
+	\If{j.jugadores[$i$].sanciones $geq$ 5}   \Comment $O(1)$
+		AgregarRapido(res, j.jugadores[$i$].id)  \Comment $O(1)$		
+	\EndIf
+\EndFor
+
+\medskip
+\State \underline{Complejidad:} $O(J)$
+\State \underline{Justificacion:} Aplico operaciones que son O(1) la cantidad de veces que ejecuto el ciclo. El ciclo se ejecuta J veces (porque j.jugadores tiene todos los jugadores que fueron agregados) Entonces es O(J), siendo J la cantidad de jugadores que fueron agregados.
+
+\end{algorithmic}
+\end{algorithm}
 
   
 \end{Algoritmos}
