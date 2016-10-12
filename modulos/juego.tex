@@ -484,23 +484,45 @@ puntero en x,y != null => esa posicion es la del pokemon
 
 (x,y)
 
-(x-1, y)
-(x-1, y-1)
-(x-1, y+1)
+if (x > 0)
+	(x-1, y)
+	
+	if (y > 0)
+		(x-1, y-1)
+	
+	% tam(m) no puede ser 0 porque existe una coordenada al menos (x,y)
+	if (y < tam(m) - 1)	
+		(x-1, y+1)
 
-(x-2, y)
+	if (x-1 > 0)
+		(x-2, y)
 
-(x, y-1)
-(x, y+1)
 
-(x, y-2)
-(x, y+2)
+if (y > 0)
+	(x, y-1)
+	
+	if (y-1 > 0)
+		(x, y-2)
 
-(x+1, y)
-(x+1, y-1)
-(x+1, y+1)
+if (y < tam(m) - 1)
+	(x, y+1)
+	
+	if (tam(m) > 1 && y < tam(m) - 2)
+		(x, y+2)
 
-(x+2, y)
+
+if (x < tam(m) - 1)
+	(x+1, y)
+
+	if (y > 0)
+		(x+1, y-1)
+
+	if (y < tam(m)-1)
+		(x+1, y+1)
+
+
+if (tam(m) > 1 && x < tam(m) - 2)
+	(x+2, y)
 
 
 \medskip
