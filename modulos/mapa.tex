@@ -360,38 +360,42 @@ $ $\newline
 
 \While{$\neg$ EsVacia($aRecorrer$)}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
 
-\State coor $act \gets$ Proximo($aRecorrer$) \Comment Obtener el proximo de la cola es O(1) // $O(1)$
-\State Desencolar($aRecorrer$) \Comment Eliminar el proximo de la cola es O(1) // $O(1)$
+\State coor $act \gets$ Proximo($aRecorrer$) \Comment  $O(1)$
+\State Desencolar($aRecorrer$) \Comment $O(1)$
 
 \State $ $
 
 
 % Reviso la coordenada de la izquierda
+
+
+% Reviso la coordenada de la izquierda
 \If{Latitud($act$) $>$ 0}      \Comment $O(1)$
 
-\State $tmpX = latitud(coordenadaALaIzquierda(act))$   \Comment $O(1)$
-\State $tmpY = longitud(coordenadaALaIzquierda(act))$  \Comment $O(1)$
-\If{$\neg visitados[tmpX][tmpY]$}    \Comment $O(1)$
-\State $visitados[tmpX][tmpY] = true$    \Comment $O(1)$
-	\If{$Existe(coordenadaALaIzquierda(act))$} 	\Comment $O(1)$
-		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
-		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
-		\State $Encolar(coordenadaALaIzquierda(act), aRecorrer)$ \Comment $O(1)$	
+\State nat $x \gets$ Latitud(CoordenadaALaIzquierda($act$))   \Comment $O(1)$
+\State nat $y \gets$ Longitud(CoordenadaALaIzquierda($act$))  \Comment $O(1)$
+\If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
+\State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
+	\If{Existe(coordenadaALaIzquierda($act$))} 	\Comment $O(1)$
+		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State Encolar(coordenadaALaIzquierda($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
 \EndIf
 
 \State $ $
 
-\If{$longitud(act) > 0$}      \Comment $O(1)$
-\State $tmpX = latitud(coordenadaAbajo(act))$   \Comment $O(1)$
-\State $tmpY = longitud(coordenadaAbajo(act))$  \Comment $O(1)$
-\If{$\neg visitados[tmpX][tmpY]$}    \Comment $O(1)$
-\State $visitados[tmpX][tmpY] = true$    \Comment $O(1)$
-	\If{$Existe(coordenadaAbajo(act))$} 	\Comment $O(1)$
-		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
-		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
-		\State $Encolar(coordenadaAbajo(act), aRecorrer)$ \Comment $O(1)$		
+\If{Longitud($act$) $>$ 0}      \Comment $O(1)$
+
+\State nat $x \gets$ Latitud(CoordenadaAbajo($act$))   \Comment $O(1)$
+\State nat $y \gets$ Longitud(CoordenadaAbajo($act$))  \Comment $O(1)$
+\If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
+\State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
+	\If{Existe(CoordenadaAbajo($act$))} 	\Comment $O(1)$
+		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State Encolar(CoordenadaAbajo($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
 \EndIf
@@ -399,39 +403,39 @@ $ $\newline
 \State $ $
 
 
-\If{$latitud(act) < m.Tam-1$}      \Comment $O(1)$
-\State $tmpX = latitud(coordenadaALaDerecha(act))$   \Comment $O(1)$
-\State $tmpY = longitud(coordenadaALaDerecha(act))$  \Comment $O(1)$
-\If{$\neg visitados[tmpX][tmpY]$}    \Comment $O(1)$
-\State $visitados[tmpX][tmpY] = true$    \Comment $O(1)$
-	\If{$Existe(coordenadaALaDerecha(act))$} 	\Comment $O(1)$
-		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
-		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
-		\State $Encolar(coordenadaALaDerecha(act), aRecorrer)$ \Comment $O(1)$		
+\If{Latitud($act$) $<$ m.Tam$-$1}      \Comment $O(1)$
+
+\State nat $x \gets$ Latitud(CoordenadaALaDerecha($act$))   \Comment $O(1)$
+\State nat $y \gets$ Longitud(CoordenadaALaDerecha($act$))  \Comment $O(1)$
+\If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
+\State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
+	\If{Existe(CoordenadaALaDerecha($act$))} 	\Comment $O(1)$
+		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State Encolar(CoordenadaALaDerecha($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
 \EndIf
-
 \State $ $
 
-\If{$longitud(act) < m.Tam-1$}      \Comment $O(1)$
-\State $tmpX = latitud(coordenadaArriba(act))$   \Comment $O(1)$
-\State $tmpY = longitud(coordenadaArriba(act))$  \Comment $O(1)$
-\If{$\neg visitados[tmpX][tmpY]$}    \Comment $O(1)$
-\State $visitados[tmpX][tmpY] = true$    \Comment $O(1)$
-	\If{$Existe(coordenadaArriba(act))$} 	\Comment $O(1)$
-		\State $m.Grilla[latitud(c)][longitud(c)][tmpX][tmpY] = true$ \Comment $O(1)$
-		\State $m.Grilla[tmpX][tmpY][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
-		\State $Encolar(coordenadaArriba(act), aRecorrer)$ \Comment $O(1)$		
+\If{Longitud($act$) $<$ m.Tam$-$1}      \Comment $O(1)$
+
+\State nat $x \gets$ Latitud(CoordenadaArriba($act$))   \Comment $O(1)$
+\State nat $y \gets$ Longitud(CoordenadaArriba($act$))  \Comment $O(1)$
+\If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
+\State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
+	\If{Existe(CoordenadaArriba($act$))} 	\Comment $O(1)$
+		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State Encolar(CoordenadaArriba($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
 \EndIf
-
 
 \EndWhile
 
 \medskip
-\Statex \underline{Complejidad:} $O((max(latitud(c), longitud(c), m.tam))^4)$
+\Statex \underline{Complejidad:} INFINITO VER$O((max(latitud(c), longitud(c), m.tam))^4)$
 \Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos. VER COMO JUSTIFICAR MEJOR
 
 
