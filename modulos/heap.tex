@@ -70,7 +70,7 @@
   [$O(1)$]
   [devuelve true si hay elementos por recorrer]
   
-  \InterfazFuncion{Elemento}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla$<$id: nat, cantCapt: nat$>$)}%
+  \InterfazFuncion{Elemento}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla$<$id: nat, cantCapt: nat$>$}%
   [HayNodo?(it)]
   {$HACER ESTO$}
   [$O(1)$]
@@ -100,7 +100,7 @@
   [$O(log(EC))$]
   [Borra el elemento dado]
   
-   \InterfazFuncion{EncolarElem}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}, \Inout {h}{heap(tupla<id: nat, cantCapt: nat>)}}{itHeap}%
+   \InterfazFuncion{EncolarElem}{\Inout {h}{heap(tupla<id: nat, cantCapt: nat>)}, \In {j}{tupla<id: nat, cantCapt: nat>}}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}%
   [ITERADOR VALIDO,]
   {$DEVUELVE ITERADOR VALIDO$}
   [$O(log(EC))$]
@@ -165,8 +165,7 @@
    
 \begin{algorithm}[H]{\textbf{Encolar}(\Inout{h}{heap(tupla<id: nat, cantCapt: nat>)}, \In{j}{tupla<id: nat, cantCapt: nat>}) $\to$ $res$ : itHeap(tupla<id: nat, cantCapt: nat>)}
     	\begin{algorithmic}[1]
-			 \State $it \gets  CrearIt(h) $ \Comment $O(1)$
-			 \State $res \gets EncolarElem(it, h) $ \Comment $O(log(EC))$
+			 \State $res \gets EncolarElem(h, j) $ \Comment $O(log(EC))$
 			 
 
 			\medskip
@@ -192,7 +191,7 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Desencolar}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : id: nat}
+\begin{algorithm}[H]{\textbf{Desencolar}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
     	\begin{algorithmic}[1]
     		 \State $it \gets CrearIt(h)$ \Comment $O(1)$
 		     \State $res \gets Proximo(h)$    		 
@@ -207,7 +206,7 @@
 \begin{Algoritmos}
 
 
-\begin{algorithm}[H]{\textbf{CrearIt}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : heap(tupla$<$id: nat, cantCapt: nat$>$)}
+\begin{algorithm}[H]{\textbf{CrearIt}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : itHeap(tupla$<$id: nat, cantCapt: nat$>$)}
     	\begin{algorithmic}[1]
 			 \State $res \gets  <h.ultimo, h> $ \Comment $O(1)$
 
@@ -252,7 +251,7 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Elemento}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+\begin{algorithm}[H]{\textbf{Elemento}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
     	\begin{algorithmic}[1]
 			 \State $res \gets  (it.siguiente \rightarrow elemento) $ \Comment $O(1)$
 
@@ -261,7 +260,7 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Elementohijoizq}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+\begin{algorithm}[H]{\textbf{Elementohijoizq}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
     	\begin{algorithmic}[1]
 			 \State $res \gets  (it.siguiente  \rightarrow izq \rightarrow elemento) $ \Comment $O(1)$
 
@@ -270,7 +269,7 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Elementohijoder}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+\begin{algorithm}[H]{\textbf{Elementohijoder}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
     	\begin{algorithmic}[1]
 			 \State $res \gets  (it.siguiente  \rightarrow der \rightarrow elemento) $ \Comment $O(1)$
 
@@ -279,16 +278,134 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Elementopadre}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+\begin{algorithm}[H]{\textbf{Elementopadre}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
     	\begin{algorithmic}[1]
 			 \State $res \gets  (it.siguiente  \rightarrow padre \rightarrow elemento) $ \Comment $O(1)$
 
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-    	
-    	
-    	
+    	\end{algorithmic}   	
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{EncolarElem}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{j}{tupla$<$id: nat, cantCapt: nat$>$}) $\to$ $res$ : itHeap(tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+    	\State $Nodoheap$ n $\gets <j, NULL, NULL, NULL>$
+    	\State $puntero(Nodoheap)$ p $\gets n$    	
+		\State $InsertarAlFinal(h, p)$
+		\State $it \gets CrearIt(h)$
+		\newpage		
+		
+		\If{$h.raiz \not= h.ultimo$}
+			\State $puntero(Nodo)$ nuevoNodo $\gets h.ultimo$			
+			\While{$(nuevoNodo \rightarrow padre) \not=$ NULL}
+				\If{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \implies ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$}
+					\State $SwapConPadre(h, nuevoNodo)$
+				\EndIf
+			\EndWhile
+		\EndIf
+		\State $res \gets it$
+			\medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+    	\end{algorithmic}   	
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{InsertarAlFinal}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{p}{puntero(Nodoheap)})}
+    	\begin{algorithmic}[1]
+			\If{$EsVacia?(h)$}
+    		\State $h.raiz \gets p$
+    		\State $h.ultimo \gets p$
+    	\Else
+    		\If{$h.raiz = h.ultimo$}
+    			\State $n.padre \gets h.raiz$
+    			\State $(h.raiz \rightarrow izq) \gets p$
+    			\State $h.ultimo \gets p$   
+    		\Else
+    			\If{$(h.raiz \rightarrow izq) = h.ultimo$}
+    				\State $n.padre \gets h.raiz$
+    				\State $(h.raiz \rightarrow der) \gets p$
+    				\State $h.ultimo \gets p$
+    			\Else
+    				\If{$EsHijoIzquierdo?(h.ultimo)$}
+    					\State $n.padre \gets (h.ultimo \rightarrow padre)$
+    					\State $(h.ultimo \rightarrow padre \rightarrow der) \gets p$
+    					\State $h.ultimo \gets p$
+    				\Else
+						\State $puntero(Nodoheap)$ i $\gets h.ultimo$    					
+    					\While {$i \not= NULL \land \neg EsHijoIzquierdo?(j)$}
+    						\State $i \gets (i \rightarrow padre)$
+    					
+    					\EndWhile
+    					\If{$i = NULL$}
+    						\State $puntero(Nodoheap)$ ultimoizq $\gets h.raiz$
+    						\While {$(ultimoizq \rightarrow izq) \not= NULL$}
+    							\State $ultimoizq \gets (ultimoizq \rightarrow izq)$
+    						\EndWhile
+    						\State $n.padre \gets ultimoizqu$
+    						\State $(ultimoizq \rightarrow izq) \gets p$
+    						\State $h.ultimo \gets p$
+    					\Else
+    						\State $i \gets (i \rightarrow padre \rightarrow der)$
+    						\While{$(i \rightarrow izq) \not= NULL$}
+    							\State $i \gets (i \rightarrow izq)$
+    						\EndWhile
+    						\State $n.padre \gets i$
+    						\State $(j \rightarrow izq) \gets p$
+    						\State $h.ultimo \gets p$
+    					\EndIf
+    				\EndIf		
+    			\EndIf	    	
+	    	\EndIf
+		\EndIf
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+    	\end{algorithmic}   	
+\end{algorithm}
+
+
+
+
+
+\begin{algorithm}[H]{\textbf{SwapConPadre}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$), \In{nuevoNodo}{puntero(Nodoheap)}})}
+    	\begin{algorithmic}[1]
+			 \If{$EsHijoIzquierdo?(nuevoNodo)$}
+						\If{$(nuevoNodo \rightarrow padre) = h.raiz$}
+						\State $nuevoNodo (\rightarrow padre) \gets NULL$
+							\If{$(nuevoNodo \rightarrow izq) = NULL$}
+								\State $(h.raiz \rightarrow izq) \gets NULL$
+							\Else
+								\State $(h.raiz \rightarrow izq) \gets nuevoNodo \rightarrow izq$
+								\State $(nuevoNodo \rightarrow izq \rightarrow padre) \gets h.raiz$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow der) = NULL$}
+								\State $(nuevoNodo \rightarrow der) \gets h.raiz \rightarrow der$
+								\If{$(h.raiz \rightarrow der) \not= NULL$}
+									\State $(h.raiz \rightarrow der \rightarrow padre) \gets nuevoNodo$							
+								\EndIf
+								\State $(h.raiz \rightarrow der) \gets NULL$
+							\Else
+								\If{$(h.raiz \rightarrow der) = NULL$}
+									\State $(h.raiz \rightarrow der) \gets (nodoNuevo \rightarrow der)$
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets h.raiz$
+									\State $(nodoNuevo \rightarrow der) \gets NULL$
+								\Else
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets h.raiz$
+									\State $(h.raiz \rightarrow der \rightarrow padre) \gets nuevoNodo$
+									\State $puntero(Nodoheap) auxiliar \gets (nuevoNodo \rightarrow der)$
+									\State $(nuevoNodo \rightarrow der) \gets (h.raiz \rightarrow der)$
+									\State $(h.raiz \rightarrow der) \gets (auxiliar)$
+								\EndIf
+							\EndIf
+						\State $(h.raiz \rightarrow padre \gets nuevoNodo)$
+						\State $(nuevoNodo \rightarrow izq) \gets h.raiz$
+						\State $h.raiz \gets nuevoNodo$						
+						
+						\EndIf
+					\Else	
+					\EndIf					
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}   	
 \end{algorithm}
 
 \end{Algoritmos}
