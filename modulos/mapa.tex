@@ -320,50 +320,55 @@ $ $\newline
 {\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c}{coor})}
 \begin{algorithmic}[1]
 
-\State $maximo \gets max(latitud(c), longitud(c)) $ \Comment $O(1)$
+\State nat $maximo \gets$ max(Latitud($c$), Longitud($c$))  \Comment $O(1)$
 
 % Si hay una coordenada mayor al maximo
-\State \If{maximo $>$ m.tam} \Comment $O(1)$
+\State \If{$maximo$ $>$ m.tam} \Comment $O(1)$
 
-\State $nGrilla = iCrearGrilla(maximo)$ \Comment $O(maximo^4)$
-\State $iCopiarCoordenadas(nGrilla, m.grilla)$ \Comment $O((maximo^4)$
-\State $m.grilla = nGrilla$ \Comment $O(maximo^4)$
-\State $m.tam = maximo$ \Comment $O(1)$
+\State vector(vector(vector(vector(bool))))) $nGrilla$
+
+\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment $O(maximo^4)$
+\State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment $O((maximo^4)$
+\State m.grilla $\gets nGrilla$ \Comment $O(maximo^4)$
+\State m.tam $\gets maximo$ \Comment $O(1)$
 
 \EndIf
 
 % La marco consigo misma para decir que la cooordenada existe
-\State $m.grilla[latitud(c)][longitud(c)][latitud(c)][longitud(c)] = true$ \Comment $O(1)$
+\State m.grilla[Latitud($c$)][Longitud($c$)][Latitud($c$)][Longitud($c$)] $\gets$ true \Comment $O(1)$
 \State $ $
 
 % Creo una grilla de visitadas, todas false
 %Vector vacio ver como escribirlo bien
-\State $visitados \gets Vacio() $ \Comment $O(1)$
-\For{$i = 0$ to $m.tam$}	    \Comment $O(infinito)$
-\State $visitadosAux \gets Vacio() $ \Comment $O(1)$	
-\For{$j = 0$ to $m.tam$}      \Comment $O(Inifinito)$
-\State $visitadosAux.AgregarAtras(false)$ \Comment $O(1)$
-\EndFor
-\State $visitados.AgregarAtras(visitadosAux)$ \Comment $O(1)$
+
+\State vector(vector(coor))$visitados \gets$ Vacio() \Comment $O(1)$
+
+\For{$i = 0$ to $m.tam$}	    \Comment Fors anidados. Cada uno m.tam iteraciones // $O((m.tam)^2)$
+	\State vector(coor) $visitadosAux \gets$ Vacio()  \Comment $O(1)$	
+	\For{$j = 0$ to $m.tam$}      \Comment Realiza m.tam iteraciones $O(m.tam)$
+		\State $visitadosAux$.AgregarAtras(false) \Comment $O(1)$
+	\EndFor
+	\State $visitados$.AgregarAtras($visitadosAux$) \Comment $O(1)$
 \EndFor
 
 
 % aRecorrer es una cola..
-\State $aRecorrer \gets Vacio() $ \Comment $O(1)$
-\State $aRecorrer.Encolar(c)$ \Comment $O(1)$
+\State cola(coor) $aRecorrer \gets Vacio() $ \Comment $O(1)$
+\State $aRecorrer$.Encolar($c$) \Comment $O(1)$
 
 \State $ $
 
-\While{$\neg EsVacia(aRecorrer)$}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
+\While{$\neg$ EsVacia($aRecorrer$)}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
 
-\State $act \gets Proximo(aRecorrer)$ \Comment Obtener el proximo de la cola es O(1) // $O(1)$
-\State $Desencolar(aRecorrer)$ \Comment Eliminar el proximo de la cola es O(1) // $O(1)$
+\State coor $act \gets$ Proximo($aRecorrer$) \Comment Obtener el proximo de la cola es O(1) // $O(1)$
+\State Desencolar($aRecorrer$) \Comment Eliminar el proximo de la cola es O(1) // $O(1)$
 
 \State $ $
 
 
 % Reviso la coordenada de la izquierda
-\If{$latitud(act) > 0$}      \Comment $O(1)$
+\If{Latitud($act$) $>$ 0}      \Comment $O(1)$
+
 \State $tmpX = latitud(coordenadaALaIzquierda(act))$   \Comment $O(1)$
 \State $tmpY = longitud(coordenadaALaIzquierda(act))$  \Comment $O(1)$
 \If{$\neg visitados[tmpX][tmpY]$}    \Comment $O(1)$
