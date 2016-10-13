@@ -10,24 +10,24 @@
 
   \InterfazFuncion{crearCoor}{\In{n_1}{nat}, \In{n_2}{nat}}{coor}%
   {$res \igobs crearCoor$}%
-  [$\Theta(1)$]
+  [$O(1)$]
   [genera una coordenada nueva.]
 
 
   \InterfazFuncion{latitud}{\In{c}{coor}}{nat}
   {$res \igobs latitud(c)$}
-  [$\Theta(1)$]
+  [$O(1)$]
   [devuelve la latitud de la coordenada \texttt{c}.]
 
   \InterfazFuncion{longitud}{\In{c}{coor}}{nat}
   {$res \igobs longitud(c)$}
-  [$\Theta(1)$]
+  [$O(1)$]
   [devuelve la longitud de la coordenada \texttt{c}.]
 
 
   \InterfazFuncion{distEuclidea}{\In{c_1}{coor}, \In{c_2}{coor}}{nat}%
   {$res \igobs distEuclidea(c_1, c_2)$}%
-  [$\Theta(1)$]
+  [$O(1)$]
   [devuelve la disntancia entre la coordenadas \texttt{$c_1$} y \texttt{$c_2$}.]
 
 
@@ -54,51 +54,51 @@
    
 \begin{algorithm}[H]{\textbf{crearCoor}(\In{n_1}{nat}, \In{n_2}{nat}) $\to$ $res$ : coor}
     	\begin{algorithmic}[1]
-			 \State $res \gets  \langle n_1 , n_2 \rangle $ \Comment $\Theta(1)$
+			 \State $res \gets  \langle n_1 , n_2 \rangle $ \Comment $O(1)$
 
 			\medskip
-			\Statex \underline{Complejidad:} $\Theta(1)$
+			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}
 \end{algorithm}
    
 \begin{algorithm}[H]{\textbf{latitud}(\In{c}{coor}) $\to$ $res$ : nat}
     	\begin{algorithmic}[1]
-			 \State $res \gets  c.latitud $ \Comment $\Theta(1)$
+			 \State $res \gets  c.latitud $ \Comment $O(1)$
 
 			\medskip
-			\Statex \underline{Complejidad:} $\Theta(1)$
+			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}
 \end{algorithm}
 
 
 \begin{algorithm}[H]{\textbf{longitud}(\In{c}{coor}) $\to$ $res$ : nat}
     	\begin{algorithmic}[1]
-			 \State $res \gets  c.longitud $ \Comment $\Theta(1)$
+			 \State $res \gets  c.longitud $ \Comment $O(1)$
 
 			\medskip
-			\Statex \underline{Complejidad:} $\Theta(1)$
+			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}[H]{\textbf{distEuclidea}(\In{c_1}{coor}, \In{c_2}{coor}) $\to$ $res$ : nat}
     	\begin{algorithmic}[1]
-    		 \State $a \gets 0$ \Comment $\Theta(1)$
-    		 \If{ $c_1.latitud < c_2.latitud $ }	\Comment $\Theta(1)$
-				\State $a \gets (c_1.latitud - c_2.latitud) \times (c_1.latitud - c_2.latitud)$ \Comment $\Theta(1)$	
+    		 \State $a \gets 0$ \Comment $O(1)$
+    		 \If{ $c_1.latitud < c_2.latitud $ }	\Comment $O(1)$
+				\State $a \gets (c_1.latitud - c_2.latitud) \times (c_1.latitud - c_2.latitud)$ \Comment $O(1)$	
 			\Else 
-				\State $a \gets (c_2.latitud - c_1.latitud) \times (c_2.latitud - c_1.latitud)$ \Comment $\Theta(1)$	
+				\State $a \gets (c_2.latitud - c_1.latitud) \times (c_2.latitud - c_1.latitud)$ \Comment $O(1)$	
 			\EndIf
-			\State $b \gets 0$ \Comment $\Theta(1)$
+			\State $b \gets 0$ \Comment $O(1)$
 
-			\If{ $c_1.longitud < c_2.longitud $ }	\Comment $\Theta(1)$
-				\State $b \gets (c_1.longitud - c_2.longitud) \times (c_1.longitud - c_2.longitud)$ \Comment $\Theta(1)$	
+			\If{ $c_1.longitud < c_2.longitud $ }	\Comment $O(1)$
+				\State $b \gets (c_1.longitud - c_2.longitud) \times (c_1.longitud - c_2.longitud)$ \Comment $O(1)$	
 			\Else 
-				\State $b \gets (c_2.longitud - c_1.longitud) \times (c_2.longitud - c_1.longitud)$ \Comment $\Theta(1)$	
+				\State $b \gets (c_2.longitud - c_1.longitud) \times (c_2.longitud - c_1.longitud)$ \Comment $O(1)$	
 			\EndIf
-			\State $res \gets  a + b$ \Comment $\Theta(1)$
+			\State $res \gets  a + b$ \Comment $O(1)$
 
 			\medskip
-			\Statex \underline{Complejidad:} $\Theta(1)$
+			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}
 \end{algorithm}
 
