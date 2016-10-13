@@ -241,17 +241,17 @@ $ $\newline
 {\textbf{iCoordenadas}(\In{m}{map})$\to$ $res$ : conj(coor)}
 \begin{algorithmic}[1]
    
- 
-\State $res \gets Vacio() $     COMO SABER QUE VACIO ES UN CTO?  \Comment Crear conjunto vacio es O(1) // $O(1)$
 
-\For{$i=0$ to $tam(m)$}
+\State conj(coor) $coors \gets$ Vacio()      \Comment Crear conjunto vacio es O(1) // $O(1)$
+
+\For{$i=0$ to tam($m$)}
 	
-	\For{$j=0$ to $tam(m)$}
+	\For{$j=0$ to tam($m$)}
 		
 		\If{iPosExistente(i, j)}  \Comment $O(1)$
 			
-			\State $c \gets NuevaCoor(i, j) $  \Comment $O(1)$			
-			\State $Agregar(res, c) $  \Comment $O(log(\#res))$			
+			\State $c \gets$ NuevaCoor($i$, $j$)   \Comment $O(1)$			
+			\State AgregarRapido($coors$, $c$)   \Comment $O(1)$			
 			
 		\EndIf
 		
@@ -259,11 +259,13 @@ $ $\newline
 
 \EndFor
 
+\State $res \gets coors$
+
 
 \medskip
-\Statex \underline{Complejidad:} $O(log(tam(m))*(tam(m))^2)$
+\Statex \underline{Complejidad:} $O((tam(m))^2)$
 
-\Statex \underline{Justificacion:} Son dos for anidados, por cada iteracion externa, se ejecutan $tam(m)$ iteraciones internas. En total son $(tam(m))^2$ iteraciones. En cada una de ellas, puede ejecutarse el $Agregar(rec, c)$ con complejidad $O(log(\#res))$. $res$ solo contiene coordenadas recorridas por la iteracion, por lo que $\#res <= tam(m)$, es decir $O(log(\#res)) = O(log(tam(m)))$, por lo que la complejidad final es $O(log(tam(m))*(tam(m))^2)$.
+\Statex \underline{Justificacion:} Las operaciones interiores son O(1). Hay dos for anidados, donde cada uno se ejecuta $tam(m)$ veces. En total son $(tam(m))^2$ iteraciones. 
 
 \end{algorithmic}
 \end{algorithm}
