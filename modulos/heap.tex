@@ -184,17 +184,18 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Proximo}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : jugStruct}
+\begin{algorithm}[H]{\textbf{Proximo}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
     	\begin{algorithmic}[1]
-    		 \State $res \gets h.raiz \rightarrow elemento$ \Comment $O(1)$
+    		 \State $res \gets (h.raiz \rightarrow elemento)$ \Comment $O(1)$
     		 \medskip
 			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{Desencolar}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
+\begin{algorithm}[H]{\textbf{Desencolar}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : id: nat}
     	\begin{algorithmic}[1]
     		 \State $it \gets CrearIt(h)$ \Comment $O(1)$
+		     \State $res \gets Proximo(h)$    		 
     		 \State $Borrar(it)$ \Comment $O(log(EC))$
     		 \medskip
 			\Statex \underline{Complejidad:} $O(log(EC))$
@@ -204,5 +205,24 @@
 \end{Algoritmos}
 
 \begin{Algoritmos}
+
+
+\begin{algorithm}[H]{\textbf{CrearIt}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : heap(tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  <h.ultimo, h> $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{HayPadre?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : heap(tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente \rightarrow padre \not= NULL) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
 
 \end{Algoritmos}
