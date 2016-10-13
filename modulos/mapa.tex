@@ -227,11 +227,12 @@ $ $\newline
 {\textbf{iCrearMapa}()$\to$ $res$ : map}
 \begin{algorithmic}[1]
    
-\State vector(vector(vector(vector(bool)) $mapa \gets$ Vacio()    \Comment Crear vector vacio es O(1) // $O(1)$
-\State $res \gets  \langle$ 0 , $mapa \rangle $   \Comment $O(1)$
+\State vector(vector(vector(vector(bool)) $mapa$ $\gets$ Vacio()    \Comment Crear vector vacio es O(1) // $O(1)$
+\State $res$ $\gets$  $\langle$ 0 , $mapa$ $\rangle$   \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
+\State \underline{Justificaion:} $O(1)$ $+$ $O(1)$
 
 \end{algorithmic}
 \end{algorithm}
@@ -242,7 +243,7 @@ $ $\newline
 \begin{algorithmic}[1]
    
 
-\State conj(coor) $coors \gets$ Vacio()      \Comment Crear conjunto vacio es O(1) // $O(1)$
+\State conj(coor) $coors$ $\gets$ Vacio()      \Comment Crear conjunto vacio es O(1) // $O(1)$
 
 \For{$i=0$ to m.tam}
 	
@@ -250,7 +251,7 @@ $ $\newline
 		
 		\If{iPosExistente(i, j)}  \Comment $O(1)$
 			
-			\State $c \gets$ NuevaCoor($i$, $j$)   \Comment $O(1)$			
+			\State $c$ $\gets$ NuevaCoor($i$, $j$)   \Comment $O(1)$			
 			\State AgregarRapido($coors$, $c$)   \Comment $O(1)$			
 			
 		\EndIf
@@ -259,7 +260,7 @@ $ $\newline
 
 \EndFor
 
-\State $res \gets coors$
+\State $res$ $\gets$ $coors$
 
 
 \medskip
@@ -280,15 +281,15 @@ $ $\newline
    
 \State bool $existe$
 
-\If{latitud($c$) $>=$ m.tam $\lor$ longitud($c$) $>=$ m.tam} \Comment $O(1)$
+\If{latitud($c$) $\geq$ $m$.tam $\lor$ longitud($c$) $\geq$ $m$.tam} \Comment $O(1)$
 	\State $existe \gets$ false \Comment $O(1)$
 \Else
 	\State nat $x \gets$ Latitud($c$) \Comment $O(1)$
 	\State nat $y \gets$ Longitud($c$) \Comment $O(1)$
-	\State $existe \gets$ m.grilla[$x$][$y$][$x$][$y$] \Comment $O(1)$
+	\State $existe \gets$ $m$.grilla[$x$][$y$][$x$][$y$] \Comment $O(1)$
 \EndIf
 
-\State $res \gets existe$ \Comment $O(1)$
+\State $res$ $\gets$ $existe$ \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
@@ -303,7 +304,7 @@ $ $\newline
 {\textbf{iHayCamino}(\In{m}{map}, \In {c_1}{coor}, \In{c_2}{coor})$\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
-\State $res \gets$ m.grilla[Latitud($c_1$)][Longitud($c_1$)][Latitud($c_2$)][Longitud($c_2$)] \Comment $O(1)$
+\State $res$ $\gets$ $m$.grilla[Latitud($c_1$)][Longitud($c_1$)][Latitud($c_2$)][Longitud($c_2$)] \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
@@ -320,28 +321,35 @@ $ $\newline
 {\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c}{coor})}
 \begin{algorithmic}[1]
 
-\State nat $maximo \gets$ max(Latitud($c$), Longitud($c$))  \Comment $O(1)$
+\State nat $maximo$ $\gets$ max(Latitud($c$), Longitud($c$))  \Comment $O(1)$
 
 % Si hay una coordenada mayor al maximo
-\State \If{$maximo$ $>$ m.tam} \Comment $O(1)$
+\State \If{$maximo$ $>$ $m$.tam} \Comment $O(1)$
 
 \State vector(vector(vector(vector(bool))))) $nGrilla$
 
+<<<<<<< HEAD
 \State $nGrilla \gets iCrearGrilla(maximo)$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
 \State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
 \State m.grilla $\gets nGrilla$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
 \State m.tam $\gets maximo$ \Comment $O(1)$
+=======
+\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment $O(maximo^4)$
+\State iCopiarCoordenadas($nGrilla$, $m$.grilla) \Comment $O((maximo^4)$
+\State $m$.grilla $\gets nGrilla$ \Comment $O(maximo^4)$
+\State $m$.tam $\gets maximo$ \Comment $O(1)$
+>>>>>>> d2615ecdabd9266dcb4b048d4188072441e17647
 
 \EndIf
 
 % La marco consigo misma para decir que la cooordenada existe
-\State m.grilla[Latitud($c$)][Longitud($c$)][Latitud($c$)][Longitud($c$)] $\gets$ true \Comment $O(1)$
+\State $m$.grilla[Latitud($c$)][Longitud($c$)][Latitud($c$)][Longitud($c$)] $\gets$ true \Comment $O(1)$
 \State $ $
 
 % Creo una grilla de visitadas, todas false
 %Vector vacio ver como escribirlo bien
 
-\State vector(vector(coor))$visitados \gets$ Vacio() \Comment $O(1)$
+\State vector(vector(coor))$visitados$ $\gets$ Vacio() \Comment $O(1)$
 
 \For{$i = 0$ to m.tam $-$ 1}	    \Comment Fors anidados. Cada uno m.tam iteraciones // $O((m.tam)^2)$
 	\State vector(coor) $visitadosAux \gets$ Vacio()  \Comment $O(1)$	
@@ -353,14 +361,14 @@ $ $\newline
 
 
 % aRecorrer es una cola..
-\State cola(coor) $aRecorrer \gets Vacio() $ \Comment $O(1)$
+\State cola(coor) $aRecorrer$ $\gets$ Vacio() \Comment $O(1)$
 \State $aRecorrer$.Encolar($c$) \Comment $O(1)$
 
 \State $ $
 
 \While{$\neg$ EsVacia($aRecorrer$)}    \Comment Como maximo se recorren todas las coordenadas del mapa // O(max(Latitud($c$), Longitud($c$), m.tam))$^$2)
 
-\State coor $act \gets$ Proximo($aRecorrer$) \Comment  $O(1)$
+\State coor $act$ $\gets$ Proximo($aRecorrer$) \Comment  $O(1)$
 \State Desencolar($aRecorrer$) \Comment $O(1)$
 
 \State $ $
@@ -372,13 +380,13 @@ $ $\newline
 % Reviso la coordenada de la izquierda
 \If{Latitud($act$) $>$ 0}      \Comment $O(1)$
 
-\State nat $x \gets$ Latitud(CoordenadaALaIzquierda($act$))   \Comment $O(1)$
-\State nat $y \gets$ Longitud(CoordenadaALaIzquierda($act$))  \Comment $O(1)$
+\State nat $x$ $\gets$ Latitud(CoordenadaALaIzquierda($act$))   \Comment $O(1)$
+\State nat $y$ $\gets$ Longitud(CoordenadaALaIzquierda($act$))  \Comment $O(1)$
 \If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
 \State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
 	\If{Existe(coordenadaALaIzquierda($act$))} 	\Comment $O(1)$
-		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
-		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
 		\State Encolar(coordenadaALaIzquierda($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
@@ -388,13 +396,13 @@ $ $\newline
 
 \If{Longitud($act$) $>$ 0}      \Comment $O(1)$
 
-\State nat $x \gets$ Latitud(CoordenadaAbajo($act$))   \Comment $O(1)$
-\State nat $y \gets$ Longitud(CoordenadaAbajo($act$))  \Comment $O(1)$
+\State nat $x$ $\gets$ Latitud(CoordenadaAbajo($act$))   \Comment $O(1)$
+\State nat $y$ $\gets$ Longitud(CoordenadaAbajo($act$))  \Comment $O(1)$
 \If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
 \State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
 	\If{Existe(CoordenadaAbajo($act$))} 	\Comment $O(1)$
-		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
-		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
 		\State Encolar(CoordenadaAbajo($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
@@ -403,15 +411,15 @@ $ $\newline
 \State $ $
 
 
-\If{Latitud($act$) $<$ m.Tam$-$1}      \Comment $O(1)$
+\If{Latitud($act$) $<$ $m$.$Tam$ $-$ 1}      \Comment $O(1)$
 
-\State nat $x \gets$ Latitud(CoordenadaALaDerecha($act$))   \Comment $O(1)$
-\State nat $y \gets$ Longitud(CoordenadaALaDerecha($act$))  \Comment $O(1)$
+\State nat $x$ $\gets$ Latitud(CoordenadaALaDerecha($act$))   \Comment $O(1)$
+\State nat $y$ $\gets$ Longitud(CoordenadaALaDerecha($act$))  \Comment $O(1)$
 \If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
 \State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
 	\If{Existe(CoordenadaALaDerecha($act$))} 	\Comment $O(1)$
-		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
-		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
 		\State Encolar(CoordenadaALaDerecha($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
@@ -425,8 +433,8 @@ $ $\newline
 \If{$\neg$ visitados[$x$][$y$]}    \Comment $O(1)$
 \State visitados[$x$][$y$]$ \gets$ true    \Comment $O(1)$
 	\If{Existe(CoordenadaArriba($act$))} 	\Comment $O(1)$
-		\State m.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
-		\State m.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[Latitud($c$)][Longitud($c$)][$x$][$y$] $ \gets $ true \Comment $O(1)$
+		\State $m$.Grilla[$x$][$y$][Latitud($c$)][Longitud($c$)] $ \gets $ true \Comment $O(1)$
 		\State Encolar(CoordenadaArriba($act$), aRecorrer) \Comment $O(1)$	
 	\EndIf
 \EndIf
@@ -449,7 +457,7 @@ $ $\newline
 {\textbf{iTam}(\In{m}{map})$\to$ $res$ : nat}
 \begin{algorithmic}[1]
 
-\State $res \gets m.tam$ \Comment $O(1)$
+\State $res$ $\gets$ $m$.$tam$ \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
