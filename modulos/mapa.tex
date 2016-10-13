@@ -303,11 +303,11 @@ $ $\newline
 {\textbf{iHayCamino}(\In{m}{map}, \In {c1}{coor}, \In{c2}{coor})$\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
-\State $res \gets grills[latitud(c1)][longitud(c1)][latitud(c2)][longitud(c1)]$ \Comment $O(1)$
+\State $res \gets m.grilla[Latitud(c1)][Longitud(c1)][Latitud(c2)][Longitud(c1)]$ \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
-
+\Statex \underline{Justificacion:} Latitud() y Longitud() son O(1). Accesos directos a vectores es O(1)
 
 \end{algorithmic}
 \end{algorithm}
