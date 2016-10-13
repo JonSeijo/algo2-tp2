@@ -11,37 +11,37 @@
 
   \InterfazFuncion{Vacio}{}{diccTrie$(\alpha)$}
   {$res$ $\igobs$ vac\'io}
-  [$\Theta(1)$]
+  [$O(1)$]
   [genera un diccionario vac\'io.]
 
   \InterfazFuncion{Definir}{\Inout{d}{diccTrie($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$}}{}
   [$d \igobs d_0$]
-  {$d$ \igobs definir($s, a, p$)}
-  [$\Theta(copy(a))$]
+  {$d$ \igobs definir($p$, $a$, $d$)}
+  [$O(|P|)$ siendo P la clave mas larga.]
   [define $a$ en $d$ con la clave $s$.]
   [el elemento $a$ se define por copia.]
 
-  \InterfazFuncion{Def?}{\In{s}{string}, \In{d}{diccTrie($\alpha$)}}{bool}
-  {$res$ \igobs def?($s$, $p$)}
-  [$\Theta(1)$]
-  [devuelve \texttt{true} si y s\'olo si la $s$ tiene una definicion en $d$.]
+  \InterfazFuncion{Def?}{\In{p}{string}, \In{d}{diccTrie($\alpha$)}}{bool}
+  {$res$ \igobs def?($p$, $d$)}
+  [$O(|P|)$ siendo P la clave mas larga.]
+  [devuelve \texttt{true} si y s\'olo si la $p$ tiene una definicion en $d$.]
 
-  \InterfazFuncion{Obtener}{\In{s}{string}, \In{d}{diccTrie($\alpha$)}}{$\alpha$}
+  \InterfazFuncion{Obtener}{\In{p}{string}, \In{d}{diccTrie($\alpha$)}}{$\alpha$}
   [def?($s$, $d$)]
-  {alias($res$ \igobs obtener($s$, $d$))}
-  [$\Theta(1)$]
-  [devuelve el significado de la la clave $s$ en $d$.]
+  {alias($res$ \igobs obtener($p$, $d$))}
+  [$O(|P|)$ siendo P la clave mas larga.]
+  [devuelve el significado de la la clave $p$ en $d$.]
   [$res$ es modificable si y s\'olo si $d$ es modificable.]
 
-  \InterfazFuncion{Borrar}{\In{s}{string}, \Inout{d}{diccTrie($\alpha$)}}{}
+  \InterfazFuncion{Borrar}{\In{p}{string}, \Inout{d}{diccTrie($\alpha$)}}{}
   [$d \igobs d_0$ $\land$ def?($s$, $d$)]
-  {$d$ \igobs borrar($s$, $d_0$)}
-  [$\Theta(1)$]
-  [borra la clave $s$ y su significado.]
+  {$d$ \igobs borrar($p$, $d_0$)}
+  [$O(|P|)$ siendo P la clave mas larga.]
+  [borra la clave $p$ y su significado.]
 
   \InterfazFuncion{Claves}{\In{d}{diccTrie($\alpha$)}}{conj($string$)}
   {$res$ \igobs claves($d$)}
-  [$\Theta(1)$]
+  [$O(1)$]
   [devuelve del conjunto de claves de $d$.]
 
 
@@ -80,37 +80,37 @@
 {\textbf{Vacio}() $\to$ $res$ : diccTrie$(\alpha)$}
 \begin{algorithmic}[1]
 
-\State $nodo iRiaz$ $\gets $ $null$  \Comment $O(1)$
+\State nodo $iRiaz$ $\gets $ $NULL$  \Comment $O(1)$
  
-\State $conj(string) iClaves$ $\gets$ Vacio() \Comment $O(1)$
+\State conj($string$) $iClaves$ $\gets$ Vacio() \Comment $O(1)$
 
-\State $res$ $\gets$ $<iRaiz, iClaves>$ \Comment $O(1)$
+\State $res$ $\gets$ <$iRaiz$, $iClaves$> \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
+\State \underline{Justificaion:} $O(1)$ $+$ $O(1)$ $+$ $O(1)$
 
 \end{algorithmic}
 \end{algorithm}
   
 
-
+%DEFINIR
 \begin{algorithm}[H]
-{\textbf{Definir}(\Inout{d}{diccTrie($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$})}
+{\textbf{Definir}(\Inout{d}{diccTrie($\alpha$)}, \In{p}{string}, \In{a}{$\alpha$})}
 \begin{algorithmic}[1]
 
 \State $Puntero(nodo) actual$ $\gets$ $raiz$ \Comment $O(1)$
 
-\State $Nat i$ $\gets$ $0$ \Comment $O(1)$
+\State Nat $i$ $\gets$ $0$ \Comment $O(1)$
 
-\State $bool esNueva$ $\gets$ $true$ \Comment $O(1)$
+\State bool $esNueva$ $\gets$ $true$ \Comment $O(1)$
 
-\While{$i < Longitud(s)$}   \Comment $O()$
+\While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
 	
 	
-	
-	\If{$actual.siguientes[ord(s[i])]$ $==$ $null$} \Comment $O(1)$
-		\State $nodo n$ $\gets$ $<null, arreglo[256](null), null>$ \Comment $O(1)$
-		\State $actual.siguientes[ord(s[i])]$ $\gets$		 $puntero(n)$ \Comment $O(1)$
+	\If{$actual.siguientes[ord(p[i])]$ $==$ $NULL$} \Comment $O(1)$
+		\State $nodo n$ $\gets$ <$NULL$, $arreglo[256](NULL)$, $NULL$> \Comment $O(1)$
+		\State $actual.siguientes[ord(p[i])]$ $\gets$		 $puntero(n)$ \Comment $O(1)$
 		
 		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
 	
@@ -121,15 +121,83 @@
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
+\If{$\lnot$ ($actual$.definicion $==$ $NULL$)} \Comment $O(1)$
+	\State $actual$.definicion $\gets$ $NULL$ \Comment se livera la memoria acupada por definicion $O(1)$
+\EndIf
+\State $actual$.$definicion$ $\gets$ puntero($a$) \Comment $O(1)$
+
 \If{$esNueva$} \Comment $O(1)$
-	\State $claves.Agregar(s)$ \Comment $O(1)$
+	\State $claves.AgregarRapido(s)$ \Comment $O(1)$
 \EndIf
 
 \medskip
-\State \underline{Complejidad:} $O(yoque)$
+\State \underline{Complejidad:} $O(|P|)$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+
 
 \end{algorithmic}
 \end{algorithm}  
+  
+  
+%DEFINIDO
+\begin{algorithm}[H]
+{\textbf{Def?}(\In{p}{string}) $\to$ $res$ : $bool$}
+\begin{algorithmic}[1]
+
+\State Nat $i$ $\gets$ $0$ \Comment $O(1)$
+
+\State bool $pertenece$ $\gets$ $false$ \Comment $O(1)$
+
+\While{$i$ $<$ Longitud($p$) $\land$ $\lnot$ $pertenece$}   \Comment Se repite $|p|$ $O(1)$
+		
+	
+	\If{$actual$.siguientes[$ord(p[i])$] $==$ $NULL$} \Comment $O(1)$
+
+		\State $pertenece$ $\gets$ $true$ \Comment $O(1)$	 
+	
+	\EndIf
+	
+	\State $actual$ $\gets$ $actual$.siguientes[$ord(p[i])$] \Comment $O(1)$
+
+	\State $i$ $\gets$ $i + 1$
+\EndWhile 
+
+\State $res$ $\gets$ $pertenece$ \Comment $O()$ 
+
+\medskip
+\State \underline{Complejidad:} $O(|P|)$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}
+  
+
+\begin{algorithm}[H]
+{\textbf{Obtener}(\In{p}{string}, \In{d}{diccTrie($\alpha$)}}) $\to$ $res$ : $\alpha$
+\begin{algorithmic}[1]
+
+\State puntero(nodo) $n$ $\gets$ $raiz$ \Comment $O(1)$
+
+\State nat $i$ $\gets$ $0$ \Comment $O(1)$
+
+
+\While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
+		
+
+	\State $actual$ $\gets$ $actual$.siguientes[$ord(p[i])$] \Comment $O(1)$
+
+	\State $i$ $\gets$ $i + 1$ \Comment $O(1)$
+\EndWhile 
+
+
+\State $res$ $\gets$ $actual$.$definicion$ \Comment $O(1)$ 
+
+\medskip
+\State \underline{Complejidad:} $O(|P|)$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}
   
   
 \end{Algoritmos}
