@@ -425,6 +425,22 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 \end{algorithm}
 
 
+% Sanciones
+
+\begin{algorithm}[H]
+{\textbf{iSanciones}(\In{j}{juego}, \In{e}{jugador}) $\to$ $res$ : nat}
+\begin{algorithmic}[1]
+
+\State $res \gets$ $j$.jugadores[$e$].sanciones \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificacion:} Todas las operaciones son $O(1)$
+
+
+\end{algorithmic}
+\end{algorithm}
+
 % entrenadoresPosibles
 % por precondicion estan conectados
 
