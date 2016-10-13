@@ -83,7 +83,7 @@ $ $\newline
  
 \State conj($string$) $iClaves$ $\gets$ Vacio() \Comment $O(1)$
 
-\State $res$ $\gets$ <$iRaiz$, $iClaves$> \Comment $O(1)$
+\State $res$ $\gets$  $\langle$ $iRaiz$, $iClaves$ $\rangle$\Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
@@ -98,7 +98,7 @@ $ $\newline
 {\textbf{Definir}(\Inout{d}{diccTrie($\alpha$)}, \In{p}{string}, \In{a}{$\alpha$})}
 \begin{algorithmic}[1]
 
-\State $Puntero(nodo) actual$ $\gets$ $raiz$ \Comment $O(1)$
+\State Puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$
 
 \State Nat $i$ $\gets$ $0$ \Comment $O(1)$
 
@@ -108,7 +108,7 @@ $ $\newline
 	
 	
 	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
-		\State nodo $n$ $\gets$ <$NULL$, arreglo[$256$]($NULL$), $NULL$> \Comment $O(1)$
+		\State nodo $n$ $\gets$ $\langle$ $NULL$, arreglo[$256$]($NULL$), $NULL$ $\rangle$ \Comment $O(1)$
 		\State $actual$.$siguientes$[ord($p$[$i$])] $\gets$	 $puntero(n)$ \Comment $O(1)$
 		
 		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
@@ -147,14 +147,16 @@ $ $\newline
 
 \State Nat $i$ $\gets$ $0$ \Comment $O(1)$
 
-\State bool $pertenece$ $\gets$ $false$ \Comment $O(1)$
+\State bool $pertenece$ $\gets$ $true$ \Comment $O(1)$
 
-\While{$i$ $<$ Longitud($p$) $\land$ $\lnot$ $pertenece$}   \Comment Se repite $|p|$ $O(1)$
+\State puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$ 
+
+\While{$i$ $<$ Longitud($p$) $\land$  $pertenece$}   \Comment Se repite $|p|$ $O(1)$
 		
 	
 	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
 
-		\State $pertenece$ $\gets$ $true$ \Comment $O(1)$	 
+		\State $pertenece$ $\gets$ $false$ \Comment $O(1)$	 
 	
 	\EndIf
 	
@@ -162,6 +164,10 @@ $ $\newline
 
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
+
+\If {$actual$.$significado$ $=$ $NULL$} \Comment $O(1)$ 
+	\State $pertenece$ $\gets$ $false$ \Comment $O(1)$
+\EndIf
 
 \State $res$ $\gets$ $pertenece$ \Comment $O(1)$ 
 
@@ -205,7 +211,7 @@ $ $\newline
 {\textbf{Claves}(\In{d}{diccTrie($\alpha$)}}) $\to$ $res$ : $conj(\alpha)$
 \begin{algorithmic}[1]
 
-\State $res$ $\gets$ $d.claves$ \Comment $O(1)$
+\State $res$ $\gets$ $d$.$claves$ \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
