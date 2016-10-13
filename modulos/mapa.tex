@@ -283,8 +283,8 @@ $ $\newline
 \If{latitud($c$) $>=$ m.tam $\lor$ longitud($c$) $>=$ m.tam} \Comment $O(1)$
 	\State $existe \gets$ false \Comment $O(1)$
 \Else
-	\State nat $x \gets$ latitud($c$) \Comment $O(1)$
-	\State nat $y \gets$ longitud($c$) \Comment $O(1)$
+	\State nat $x \gets$ Latitud($c$) \Comment $O(1)$
+	\State nat $y \gets$ Longitud($c$) \Comment $O(1)$
 	\State $existe \gets$ m.grilla[$x$][$y$][$x$][$y$] \Comment $O(1)$
 \EndIf
 
@@ -292,7 +292,7 @@ $ $\newline
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
-\Statex \underline{Justificacion:} Evaluar la guarda del if es O(1) por que son comparaciones de nats. Si es verdadera se produce una asigacion O(1). Si es falsa se ejecutan asignaciones O(1) y acceso directo a vector O(1). O(1) + O(1) + O(1) + O(1) = O(1). Es constante en cualquier caso.
+\Statex \underline{Justificacion:} Evaluar la guarda del if es O(1) por que son comparaciones de nats. Si es verdadera se produce una asignacion O(1). Si es falsa se ejecutan asignaciones O(1) y acceso directo a vector O(1). O(1) + O(1) + O(1) + O(1) = O(1). Es constante en cualquier caso.
 
 \end{algorithmic}
 \end{algorithm}
@@ -300,10 +300,10 @@ $ $\newline
 % hayCamino
 
 \begin{algorithm}[H]
-{\textbf{iHayCamino}(\In{m}{map}, \In {c1}{coor}, \In{c2}{coor})$\to$ $res$ : bool}
+{\textbf{iHayCamino}(\In{m}{map}, \In {c_1}{coor}, \In{c_2}{coor})$\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
-\State $res \gets m.grilla[Latitud(c1)][Longitud(c1)][Latitud(c2)][Longitud(c1)]$ \Comment $O(1)$
+\State $res \gets$ m.grilla[Latitud($c_1$)][Longitud($c_1$)][Latitud($c_2$)][Longitud($c_2$)] \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
