@@ -33,6 +33,20 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Algoritmos de Heap
 
+[ ] Los demas algoritmos de Juego
+
+[ ] Interfaz de las funciones que exporta coordenada (derecha, izquierda ..)
+
+[ ] Algoritmos de las funciones que exporta coordenada (derecha, izquierda ..)
+
+[ ] Explicacion de estructura para Juego
+
+[ ] Explicacion de estructura para Mapa
+
+[ ] Explicacion de estructura para Trie
+
+[ ] Explicacion de estructura para Heap
+
 [ ] Buscar algun checklist de diseño y ver que falta
 
 [ ] Revisar justificaciones de complejidades
