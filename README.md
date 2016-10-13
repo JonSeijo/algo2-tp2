@@ -23,7 +23,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Preguntar lo de MultiConjunto. Es necesario hacer el modulo? ver .txt de preguntas para mas info
 
-[ ] Rep de Trie
+[X] Rep de Trie
 
 [ ] Abs de Trie
 
@@ -43,7 +43,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Explicacion de estructura para Mapa
 
-[ ] Explicacion de estructura para Trie
+[X] Explicacion de estructura para Trie
 
 [ ] Explicacion de estructura para Heap
 
