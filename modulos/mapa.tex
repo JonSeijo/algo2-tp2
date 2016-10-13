@@ -327,9 +327,9 @@ $ $\newline
 
 \State vector(vector(vector(vector(bool))))) $nGrilla$
 
-\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment $O(maximo^4)$
-\State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment $O((maximo^4)$
-\State m.grilla $\gets nGrilla$ \Comment $O(maximo^4)$
+\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+\State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+\State m.grilla $\gets nGrilla$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
 \State m.tam $\gets maximo$ \Comment $O(1)$
 
 \EndIf
@@ -343,9 +343,9 @@ $ $\newline
 
 \State vector(vector(coor))$visitados \gets$ Vacio() \Comment $O(1)$
 
-\For{$i = 0$ to $m.tam$}	    \Comment Fors anidados. Cada uno m.tam iteraciones // $O((m.tam)^2)$
+\For{$i = 0$ to m.tam $-$ 1}	    \Comment Fors anidados. Cada uno m.tam iteraciones // $O((m.tam)^2)$
 	\State vector(coor) $visitadosAux \gets$ Vacio()  \Comment $O(1)$	
-	\For{$j = 0$ to $m.tam$}      \Comment Realiza m.tam iteraciones $O(m.tam)$
+	\For{$j = 0$ to m.tam $-$ 1}      \Comment Realiza m.tam iteraciones $O(m.tam)$
 		\State $visitadosAux$.AgregarAtras(false) \Comment $O(1)$
 	\EndFor
 	\State $visitados$.AgregarAtras($visitadosAux$) \Comment $O(1)$
@@ -358,7 +358,7 @@ $ $\newline
 
 \State $ $
 
-\While{$\neg$ EsVacia($aRecorrer$)}    \Comment Como maximo se recorren todas las coordenadas del mapa // $O((m.tam)^2)$
+\While{$\neg$ EsVacia($aRecorrer$)}    \Comment Como maximo se recorren todas las coordenadas del mapa // O(max(Latitud($c$), Longitud($c$), m.tam))$^$2)
 
 \State coor $act \gets$ Proximo($aRecorrer$) \Comment  $O(1)$
 \State Desencolar($aRecorrer$) \Comment $O(1)$
@@ -435,7 +435,7 @@ $ $\newline
 \EndWhile
 
 \medskip
-\Statex \underline{Complejidad:} INFINITO VER$O((max(latitud(c), longitud(c), m.tam))^4)$
+\Statex \underline{Complejidad:} O(max(Latitud($c$), Longitud($c$), m.tam))$^$4)
 \Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos. VER COMO JUSTIFICAR MEJOR
 
 

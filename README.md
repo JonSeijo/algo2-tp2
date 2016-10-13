@@ -13,7 +13,7 @@ Algoritmos 2 - TP2
 
 [ ] Abs de Juego
 
-[ ] Agregar Copiar() en mapa
+[x] Agregar Copiar() en mapa  (No hacia falta)
 
 [ ] Ver complejidad de AgregarCoordenada en mapa
 
