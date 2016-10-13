@@ -62,13 +62,12 @@
     \end{Tupla}
   \end{Estructura}
 
+\pagebreak
 
+\Title{Invariante de representacion en castellano}
 
-  \RepFc[]{true}
+$ $\newline
 
-  ~
-
-  \AbsFc[]{}
 
 \end{Representacion}
 
@@ -108,20 +107,20 @@
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
 	
 	
-	\If{$actual.siguientes[ord(p[i])]$ $==$ $NULL$} \Comment $O(1)$
-		\State $nodo n$ $\gets$ <$NULL$, $arreglo[256](NULL)$, $NULL$> \Comment $O(1)$
-		\State $actual.siguientes[ord(p[i])]$ $\gets$		 $puntero(n)$ \Comment $O(1)$
+	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
+		\State nodo $n$ $\gets$ <$NULL$, arreglo[$256$]($NULL$), $NULL$> \Comment $O(1)$
+		\State $actual$.$siguientes$[ord($p$[$i$])] $\gets$	 $puntero(n)$ \Comment $O(1)$
 		
 		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
 	
 	\EndIf
 	
-	\State $actual$ $\gets$ $actual.siguientes[ord(s[i])]$ \Comment $O(1)$
+	\State $actual$ $\gets$ $actual$.$siguientes$[ord($p$[$i$])] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
-\If{$\lnot$ ($actual$.definicion $==$ $NULL$)} \Comment $O(1)$
+\If{$actual$.definicion  $\neq$  $NULL$} \Comment $O(1)$
 	\State $actual$.definicion $\gets$ $NULL$ \Comment se livera la memoria acupada por definicion $O(1)$
 \EndIf
 \State $actual$.$definicion$ $\gets$ puntero($a$) \Comment $O(1)$
@@ -153,7 +152,7 @@
 \While{$i$ $<$ Longitud($p$) $\land$ $\lnot$ $pertenece$}   \Comment Se repite $|p|$ $O(1)$
 		
 	
-	\If{$actual$.siguientes[$ord(p[i])$] $==$ $NULL$} \Comment $O(1)$
+	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
 
 		\State $pertenece$ $\gets$ $true$ \Comment $O(1)$	 
 	
@@ -164,7 +163,7 @@
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
-\State $res$ $\gets$ $pertenece$ \Comment $O()$ 
+\State $res$ $\gets$ $pertenece$ \Comment $O(1)$ 
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
@@ -186,7 +185,7 @@
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
 		
 
-	\State $actual$ $\gets$ $actual$.siguientes[$ord(p[i])$] \Comment $O(1)$
+	\State $actual$ $\gets$ $actual$.$siguientes$[ord($p$[$i$])] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$ \Comment $O(1)$
 \EndWhile 
