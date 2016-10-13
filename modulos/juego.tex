@@ -82,7 +82,7 @@
 
 
 %sanciones : jugador e × juego j −→ nat {e ∈ jugadores(j)}
-\InterfazFuncion{Sanciones}{\In{j}{juego}, \In{e}{jugador}}{nat}%
+\InterfazFuncion{Sanciones}{\In{e}{jugador}, \In{j}{juego}}{nat}%
 [$e \in jugadores(j)$]
 {$res = sanciones(e, j)$}%
 [$O(1)$] % por enunciado. 
@@ -428,7 +428,7 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 % Sanciones
 
 \begin{algorithm}[H]
-{\textbf{iSanciones}(\In{j}{juego}, \In{e}{jugador}) $\to$ $res$ : nat}
+{\textbf{iSanciones}(\In{e}{jugador}, \In{j}{juego}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
 
 \State $res \gets$ $j$.jugadores[$e$].sanciones \Comment $O(1)$
@@ -766,7 +766,7 @@ $ $\newline
 \begin{algorithmic}[1]
 
 \For{$nat i \gets$ 0 to Longitud(j.jugadores) $-$ 1}   \Comment $O(J)$
-	\If{j.jugadores[$i$].sanciones $geq$ 5}   \Comment $O(1)$
+	\If{j.jugadores[$i$].sanciones $\geq$ 5}   \Comment $O(1)$
 		AgregarRapido(res, j.jugadores[$i$].id)  \Comment $O(1)$		
 	\EndIf
 \EndFor
