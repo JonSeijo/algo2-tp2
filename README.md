@@ -49,6 +49,8 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Buscar algun checklist de diseño y ver que falta
 
+[ ] Funcion CrearGrilla(tam) en Mapa. Tiene que ser privada, no aparece en la interfaz pero falta el algoritmo
+
 [ ] Revisar justificaciones de complejidades
 
 [ ] Informe
