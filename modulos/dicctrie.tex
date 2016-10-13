@@ -5,42 +5,42 @@
   \parbox{1.7cm}{\textbf{g\'eneros}} $\alpha$
  
  
-  \textbf{se explica con}: \tadNombre{Diccionario$(string, \alpha)$}, \tadNombre{conj$(string)$}.
+  \textbf{se explica con}: \tadNombre{dicc(string, $\alpha$)}, \tadNombre{conj(string)}.
 
-  \textbf{g\'eneros}: \TipoVariable{diccTrie$(\alpha)$}.
+  \textbf{g\'eneros}: \TipoVariable{diccTrie($\alpha$)}.
 
-  \InterfazFuncion{Vacio}{}{diccTrie$(\alpha)$}
+  \InterfazFuncion{Vacio}{}{diccTrie($\alpha$)}
   {$res$ $\igobs$ vac\'io}
   [$O(1)$]
   [genera un diccionario vac\'io.]
 
   \InterfazFuncion{Definir}{\Inout{d}{diccTrie($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$}}{}
-  [$d \igobs d_0$]
-  {$d$ \igobs definir($p$, $a$, $d$)}
+  [$d$ $\igobs$ $d_0$]
+  {$d$ $\igobs$ definir($p$, $a$, $d$)}
   [$O(|P|)$ siendo P la clave mas larga.]
   [define $a$ en $d$ con la clave $s$.]
   [el elemento $a$ se define por copia.]
 
   \InterfazFuncion{Def?}{\In{p}{string}, \In{d}{diccTrie($\alpha$)}}{bool}
-  {$res$ \igobs def?($p$, $d$)}
+  {$res$ $\igobs$ def?($p$, $d$)}
   [$O(|P|)$ siendo P la clave mas larga.]
   [devuelve \texttt{true} si y s\'olo si la $p$ tiene una definicion en $d$.]
 
   \InterfazFuncion{Obtener}{\In{p}{string}, \In{d}{diccTrie($\alpha$)}}{$\alpha$}
   [def?($s$, $d$)]
-  {alias($res$ \igobs obtener($p$, $d$))}
+  {alias($res$ $\igobs$ obtener($p$, $d$))}
   [$O(|P|)$ siendo P la clave mas larga.]
   [devuelve el significado de la la clave $p$ en $d$.]
   [$res$ es modificable si y s\'olo si $d$ es modificable.]
 
   \InterfazFuncion{Borrar}{\In{p}{string}, \Inout{d}{diccTrie($\alpha$)}}{}
-  [$d \igobs d_0$ $\land$ def?($s$, $d$)]
-  {$d$ \igobs borrar($p$, $d_0$)}
+  [$d$ $\igobs$ $d_0$ $\land$ def?($s$, $d$)]
+  {$d$ $\igobs$ borrar($p$, $d_0$)}
   [$O(|P|)$ siendo P la clave mas larga.]
   [borra la clave $p$ y su significado.]
 
-  \InterfazFuncion{Claves}{\In{d}{diccTrie($\alpha$)}}{conj($string$)}
-  {$res$ \igobs claves($d$)}
+  \InterfazFuncion{Claves}{\In{d}{diccTrie($\alpha$)}}{conj(string)}
+  {$res$ $\igobs$ claves($d$)}
   [$O(1)$]
   [devuelve del conjunto de claves de $d$.]
 
@@ -49,7 +49,12 @@
 
 \begin{Representacion}
   
-  \begin{Estructura}{diccTrie$(\alpha)$}[estr]
+  \Title{Representaci\'on del diccTrie}  
+  
+	En este m\'odulo usamos un trie para definir un diccionario cuyas claves son string.
+$ $\newline La idea es que la complejidad de definir y obtener no dependa de la cantidad de claves, si no de la longitud de la clave. Bajando asi la complejidad en peor caso.  
+  
+  \begin{Estructura}{diccTrie($\alpha$)}[estr]
     \begin{Tupla}[estr]
       \tupItem{raiz}{puntero(nodo)}%
       \tupItem{claves}{conj(string)}%
@@ -65,8 +70,14 @@
 \pagebreak
 
 \Title{Invariante de representacion en castellano}
-
+Si raiz es $NULL$ entonces el conjunto de claves es vac\'io. $ $\newline
+Si la raiz no es $NULL$ entoncesw el conjunto de claves es no vac\'io. $ $\newline
+Todos los elementos del conjunto de claves estan definidios en el diccTrie.
 $ $\newline
+ 
+  ~
+ 
+  \AbsFc[]{}[d]{}
 
 
 \end{Representacion}

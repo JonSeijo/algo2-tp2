@@ -315,8 +315,6 @@ $ $\newline
 
 
 % agregaCoor
-
-
 %\begin{algorithm}[H]
 {\textbf{iAgregaCoor}(\Inout{m}{map}, \In {c}{coor})}
 \begin{algorithmic}[1]
@@ -328,17 +326,17 @@ $ $\newline
 
 \State vector(vector(vector(vector(bool))))) $nGrilla$
 
-<<<<<<< HEAD
-\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
-\State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
-\State m.grilla $\gets nGrilla$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
-\State m.tam $\gets maximo$ \Comment $O(1)$
-=======
-\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment $O(maximo^4)$
+%<<<<<<< HEAD
+%\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+%\State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+%\State m.grilla $\gets nGrilla$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+%\State m.tam $\gets maximo$ \Comment $O(1)$
+%=======
+\State $nGrilla$ $\gets$ iCrearGrilla($maximo$) \Comment $O(maximo^4)$
 \State iCopiarCoordenadas($nGrilla$, $m$.grilla) \Comment $O((maximo^4)$
 \State $m$.grilla $\gets nGrilla$ \Comment $O(maximo^4)$
 \State $m$.tam $\gets maximo$ \Comment $O(1)$
->>>>>>> d2615ecdabd9266dcb4b048d4188072441e17647
+%>>>>>>> d2615ecdabd9266dcb4b048d4188072441e17647
 
 \EndIf
 
@@ -366,7 +364,7 @@ $ $\newline
 
 \State $ $
 
-\While{$\neg$ EsVacia($aRecorrer$)}    \Comment Como maximo se recorren todas las coordenadas del mapa // O(max(Latitud($c$), Longitud($c$), m.tam))$^$2)
+\While{$\neg$ EsVacia($aRecorrer$)} \Comment Como maximo se recorren todas las coordenadas del mapa // O(max(Latitud($c$), Longitud($c$), m.tam))$^2$)
 
 \State coor $act$ $\gets$ Proximo($aRecorrer$) \Comment  $O(1)$
 \State Desencolar($aRecorrer$) \Comment $O(1)$
@@ -443,7 +441,7 @@ $ $\newline
 \EndWhile
 
 \medskip
-\Statex \underline{Complejidad:} O(max(Latitud($c$), Longitud($c$), m.tam))$^$4)
+\Statex \underline{Complejidad:} O(max(Latitud($c$), Longitud($c$), m.tam))$^4$)
 \Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos. VER COMO JUSTIFICAR MEJOR
 
 
