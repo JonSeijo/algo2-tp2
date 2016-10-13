@@ -424,6 +424,22 @@ Por \'algebra de \'ordenes, sumando los costos de cada una de las operaciones, q
 \end{algorithmic}
 \end{algorithm}
 
+% Posicion
+
+\begin{algorithm}[H]
+{\textbf{iPosicion}(\In{j}{juego}, \In{e}{jugador}) $\to$ $res$ : coor}
+\begin{algorithmic}[1]
+
+\State $res \gets$ $j$.jugadores[$e$].pos \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificacion:} Todas las operaciones son $O(1)$
+
+
+\end{algorithmic}
+\end{algorithm}
+
 
 % Sanciones
 
