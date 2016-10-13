@@ -278,19 +278,21 @@ $ $\newline
 {\textbf{iPosExistente}(\In{m}{map}, \In{c}{coor})$\to$ $res$ : bool}
 \begin{algorithmic}[1]
    
+\State bool $existe$
 
-\If{latitud(c) $>=$ tam(m) OR longitud(c) $>=$ tam(m)}
-	\State $res \gets false$ \Comment $O(1)$
+\If{latitud($c$) $>=$ tam($m$) $\lor$ longitud($c$) $>=$ tam($m$)} \Comment $O(1)$
+	\State $existe \gets$ false \Comment $O(1)$
 \Else
-	\State $x \gets latitud(c)$ \Comment $O(1)$
-	\State $y \gets longitud(c)$ \Comment $O(1)$
-	\State $res \gets m.grilla[x][y][x][y]$ \Comment $O(1)$
+	\State nat $x \gets$ latitud($c$) \Comment $O(1)$
+	\State nat $y \gets$ longitud($c$) \Comment $O(1)$
+	\State $existe \gets$ m.grilla[$x$][$y$][$x$][$y$] \Comment $O(1)$
 \EndIf
 
+\State $res \gets existe$ \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
-
+\Statex \underline{Justificacion:} Evaluar la guarda del if es O(1) por que son comparaciones de nats. Si es verdadera se produce una asigacion O(1). Si es falsa se ejecutan asignaciones O(1) y acceso directo a vector O(1). O(1) + O(1) + O(1) + O(1) = O(1). Es constante en cualquier caso.
 
 \end{algorithmic}
 \end{algorithm}
