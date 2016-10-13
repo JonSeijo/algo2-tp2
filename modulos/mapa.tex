@@ -244,9 +244,9 @@ $ $\newline
 
 \State conj(coor) $coors \gets$ Vacio()      \Comment Crear conjunto vacio es O(1) // $O(1)$
 
-\For{$i=0$ to tam($m$)}
+\For{$i=0$ to m.tam}
 	
-	\For{$j=0$ to tam($m$)}
+	\For{$j=0$ to m.tam}
 		
 		\If{iPosExistente(i, j)}  \Comment $O(1)$
 			
@@ -280,7 +280,7 @@ $ $\newline
    
 \State bool $existe$
 
-\If{latitud($c$) $>=$ tam($m$) $\lor$ longitud($c$) $>=$ tam($m$)} \Comment $O(1)$
+\If{latitud($c$) $>=$ m.tam $\lor$ longitud($c$) $>=$ m.tam} \Comment $O(1)$
 	\State $existe \gets$ false \Comment $O(1)$
 \Else
 	\State nat $x \gets$ latitud($c$) \Comment $O(1)$
