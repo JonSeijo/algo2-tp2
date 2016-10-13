@@ -25,7 +25,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [X] Rep de Trie
 
-[ ] Abs de Trie
+[X] Abs de Trie
 
 [ ] Rep Heap
 
