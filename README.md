@@ -1,18 +1,42 @@
 # algo2-tp2
 Algoritmos 2 - TP2
 
-Si quieren hacer un update de enunciado, ponganle nombre de version asi no nos confundimos. Despues revisen en el repo a ver si se actualizo realmente.
+## Lista de cosas para hacer
 
-Los .pdf estan el el .gitignore, asi que tienen que usar -f cuando hacen el add (o si quieren hacerlo a manopla: quitar al pdf del gitignore, agregar, pushear y despues volver a poner el gitignore original)
+[ ] Mover
 
-###Pasos para actualizar un .pdf
+[ ] Conectar
 
-git pull
+[ ] Desconectar
 
-git rm archivo_viejo
+[ ] Rep de Juego
 
-git add archivo_nuevo_1.x -f
+[ ] Abs de Juego
 
-git commit -m "Update a version 1.x"
+[ ] Agregar Copiar() en mapa
 
-git push
+[ ] Ver complejidad de AgregarCoordenada en mapa
+
+[ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
+Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
+porque de como esta implementada se encarga el mapa. Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
+
+[ ] Preguntar lo de MultiConjunto. Es necesario hacer el modulo? ver .txt de preguntas para mas info
+
+[ ] Rep de Trie
+
+[ ] Abs de Trie
+
+[ ] Rep Heap
+
+[ ] Abs Heap
+
+[ ] Algoritmos de Heap
+
+[ ] Buscar algun checklist de diseño y ver que falta
+
+[ ] Revisar justificaciones de complejidades
+
+[ ] Informe
+
+[ ] Arreglar algunas funciones viejas que estan todo en modo matematico
