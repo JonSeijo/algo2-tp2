@@ -55,4 +55,4 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Informe
 
-[ ] Arreglar algunas funciones viejas que estan todo en modo matematico
+[X] Arreglar algunas funciones viejas que estan todo en modo matematico
