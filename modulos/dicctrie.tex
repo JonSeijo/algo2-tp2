@@ -127,7 +127,9 @@
 \State $actual$.$definicion$ $\gets$ puntero($a$) \Comment $O(1)$
 
 \If{$esNueva$} \Comment $O(1)$
-	\State $claves.AgregarRapido(s)$ \Comment $O(1)$
+	\State itConj($string$) $it$ $\gets$  $claves.AgregarRapido(s)$ \Comment $O(1)$
+	
+	\State $actual$.$itClave$ $\gets$ puntero($it$) \Comment $O(1)$
 \EndIf
 
 \medskip
@@ -171,7 +173,7 @@
 \end{algorithmic}
 \end{algorithm}
   
-
+%OBTENER
 \begin{algorithm}[H]
 {\textbf{Obtener}(\In{p}{string}, \In{d}{diccTrie($\alpha$)}}) $\to$ $res$ : $\alpha$
 \begin{algorithmic}[1]
@@ -195,6 +197,19 @@
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
 \State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}
+  
+%CLAVES
+\begin{algorithm}[H]
+{\textbf{Claves}(\In{d}{diccTrie($\alpha$)}}) $\to$ $res$ : $conj(\alpha)$
+\begin{algorithmic}[1]
+
+\State $res$ $\gets$ $d.claves$ \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
 
 \end{algorithmic}
 \end{algorithm}
