@@ -70,7 +70,7 @@
   [$O(1)$]
   [devuelve true si hay elementos por recorrer]
   
-  \InterfazFuncion{Elemento}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{jugStruct}%
+  \InterfazFuncion{Elemento}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla$<$id: nat, cantCapt: nat$>$)}%
   [HayNodo?(it)]
   {$HACER ESTO$}
   [$O(1)$]
@@ -216,13 +216,79 @@
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{HayPadre?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : heap(tupla$<$id: nat, cantCapt: nat$>$)}
+\begin{algorithm}[H]{\textbf{HayPadre?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
     	\begin{algorithmic}[1]
 			 \State $res \gets  (it.siguiente \rightarrow padre \not= NULL) $ \Comment $O(1)$
 
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{HayHijoDer?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente \rightarrow der \not= NULL) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{HayHijoIzq?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente \rightarrow izq \not= NULL) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{HayNodo?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente \not= NULL) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Elemento}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente \rightarrow elemento) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Elementohijoizq}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente  \rightarrow izq \rightarrow elemento) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Elementohijoder}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente  \rightarrow der \rightarrow elemento) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Elementopadre}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$)}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (it.siguiente  \rightarrow padre \rightarrow elemento) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+    	
+    	
+    	
 \end{algorithm}
 
 \end{Algoritmos}
