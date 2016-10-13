@@ -242,7 +242,7 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
       \tupItem{\\ sanciones}{nat}%
 	  \tupItem{\\ conectado}{bool}
 	  \tupItem{\\ pos}{coor}
- 	  \tupItem{\\ pokemons}{VECTOR(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
+ 	  \tupItem{\\ pokemons}{LISTA(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
 	  \tupItem{\\ indiceEnPokenodo}{nat} % Solo me interesa el indice, un puntero es al pedo
 	  \tupItem{\\ iteradorAPos}{itLista(nat)}   
 	  \tupItem{\\ cantCapt}{nat}
@@ -758,6 +758,24 @@ $ $\newline
 \medskip
 \State \underline{Complejidad:} $O(J)$
 \State \underline{Justificacion:} Aplico operaciones que son O(1) la cantidad de veces que ejecuto el ciclo. El ciclo se ejecuta J veces (porque j.jugadores tiene todos los jugadores que fueron agregados) Entonces es O(J), siendo J la cantidad de jugadores que fueron agregados.
+
+\end{algorithmic}
+\end{algorithm}
+
+
+% pokemons
+
+VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO?? 
+
+\begin{algorithm}[H]
+{\textbf{iPokemons}(\In{e}{jugador}, \In{j}{juego}) $\to$ $res$ : multiconj(jugador)}
+\begin{algorithmic}[1]
+
+\State $res \gets $ CrearIt(j.jugadores[e].pokemons) \Comment $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificacion:} Devuelvo un iterador
 
 \end{algorithmic}
 \end{algorithm}
