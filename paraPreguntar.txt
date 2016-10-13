@@ -5,5 +5,10 @@ No estoy seguro de la que le puse ahora, hay que pensarlo bien y tratar de pregu
 
 - Si declaro un iterador y lo meto en una tupla, es necesario inicializarlo antes? Si es asi, puedo inicializarlo en una lista vacia y cambiarlo cuando lo necesite de verdad?
 
-- Puedo poner en una tupla "Vacio()" directamente, sin decir que tipo de vector es? O necesito inicializarlo antes?
+|- Puedo poner en una tupla "Vacio()" directamente, sin decir que tipo de vector es? O necesito inicializarlo antes?
+----> Jonathan: los declaro todos y fue
 
+
+- Como es la onda con la postcondicion de CrearIt para nuestro heap
+
+- Como es la interfaz de la funcion Pokemones? El enunciado cambia la aridad con respecto a la especificacion? Que onda las pre/post? Devuelve un iterador, como lo digo? Hace falta hacer un modulo multiconjunto? Puedo usar directamente una lista de tuplas <pok, cant> sin decir que es es un multiconjunto?
