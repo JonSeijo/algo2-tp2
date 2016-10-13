@@ -299,8 +299,12 @@
 			\State $puntero(Nodo)$ nuevoNodo $\gets h.ultimo$			
 			\While{$(nuevoNodo \rightarrow padre) \not=$ NULL}
 				\If{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \implies ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$}
-					\State $SwapConPadre(h, nuevoNodo)$
+					\If{$(nuevoNodo \rightarrow padre) = h.raiz$}					
+						\State $SwapPadreRaiz(h, nuevoNodo)$
+					\Else
+						\State $SwapPadre(h, nuevoNodo)$							\EndIf		
 				\EndIf
+				\State $nuevoNodo \gets (nuevoNodo \rightarrow padre)$
 			\EndWhile
 		\EndIf
 		\State $res \gets it$
@@ -366,19 +370,18 @@
 
 
 
-\begin{algorithm}[H]{\textbf{SwapConPadre}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$), \In{nuevoNodo}{puntero(Nodoheap)}})}
+\begin{algorithm}[H]{\textbf{SwapPadreRaiz}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$), \In{nuevoNodo}{puntero(Nodoheap)}})}
     	\begin{algorithmic}[1]
 			 \If{$EsHijoIzquierdo?(nuevoNodo)$}
-						\If{$(nuevoNodo \rightarrow padre) = h.raiz$}
-						\State $nuevoNodo (\rightarrow padre) \gets NULL$
+						\State $(nuevoNodo \rightarrow padre) \gets NULL$
 							\If{$(nuevoNodo \rightarrow izq) = NULL$}
 								\State $(h.raiz \rightarrow izq) \gets NULL$
 							\Else
-								\State $(h.raiz \rightarrow izq) \gets nuevoNodo \rightarrow izq$
+								\State $(h.raiz \rightarrow izq) \gets (nuevoNodo \rightarrow izq)$
 								\State $(nuevoNodo \rightarrow izq \rightarrow padre) \gets h.raiz$
 							\EndIf
 							\If{$(nuevoNodo \rightarrow der) = NULL$}
-								\State $(nuevoNodo \rightarrow der) \gets h.raiz \rightarrow der$
+								\State $(nuevoNodo \rightarrow der) \gets (h.raiz \rightarrow der)$
 								\If{$(h.raiz \rightarrow der) \not= NULL$}
 									\State $(h.raiz \rightarrow der \rightarrow padre) \gets nuevoNodo$							
 								\EndIf
@@ -391,17 +394,14 @@
 								\Else
 									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets h.raiz$
 									\State $(h.raiz \rightarrow der \rightarrow padre) \gets nuevoNodo$
-									\State $puntero(Nodoheap) auxiliar \gets (nuevoNodo \rightarrow der)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow der)$
 									\State $(nuevoNodo \rightarrow der) \gets (h.raiz \rightarrow der)$
-									\State $(h.raiz \rightarrow der) \gets (auxiliar)$
+									\State $(h.raiz \rightarrow der) \gets auxiliar$
 								\EndIf
 							\EndIf
-						\State $(h.raiz \rightarrow padre \gets nuevoNodo)$
+						\State $(h.raiz \rightarrow padre) \gets nuevoNodo$
 						\State $(nuevoNodo \rightarrow izq) \gets h.raiz$
-						\State $h.raiz \gets nuevoNodo$						
-						
-						\EndIf
-					\Else	
+						\State $h.raiz \gets nuevoNodo$								\Else	
 					\EndIf					
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
