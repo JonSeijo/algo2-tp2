@@ -13,7 +13,7 @@ Algoritmos 2 - TP2
 
 [ ] Abs de Juego
 
-[x] Agregar Copiar() en mapa  (No hacia falta)
+[X] Agregar Copiar() en mapa  (No hacia falta)
 
 [ ] Ver complejidad de AgregarCoordenada en mapa
 
@@ -35,9 +35,9 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Los demas algoritmos de Juego
 
-[ ] Interfaz de las funciones que exporta coordenada (derecha, izquierda ..)
+[X] Interfaz de las funciones que exporta coordenada (derecha, izquierda ..)
 
-[ ] Algoritmos de las funciones que exporta coordenada (derecha, izquierda ..)
+[X] Algoritmos de las funciones que exporta coordenada (derecha, izquierda ..)
 
 [ ] Explicacion de estructura para Juego
 
