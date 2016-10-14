@@ -7,7 +7,7 @@ Algoritmos 2 - TP2
 
 [X] Conectar
 
-[ ] Desconectar
+[X] Desconectar
 
 [ ] Rep de Juego
 
@@ -15,9 +15,11 @@ Algoritmos 2 - TP2
 
 [X] Agregar Copiar() en mapa  (No hacia falta)
 
+[ ] REVISAR ALLIASING Y ALIAS!!!!!!!!!!!!!!!!! (sobre todo en heap)
+ 
 [ ] Revisar como borrar un nodo y acomodar iteradores en la funcion borrar del iterador del heap
 
-[ ] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
+[X] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
 
 [ ] Justificar algoritmos de heap
 

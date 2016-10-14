@@ -233,7 +233,7 @@ NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
     \begin{Tupla}[pokeStruc]
       \tupItem{poke}{pokemon}
       \tupItem{\\ contador}{nat}%
-	  \tupItem{\\ entrenadores}{HEAP(JUGADOR)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
+	  \tupItem{\\ entrenadores}{Heap(tupla<id: nat, cantCapt: nat>)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
     \end{Tupla}
     
     
@@ -353,7 +353,7 @@ $ $\newline
 	\State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
 	\State ($p$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
 	\State tupla<id: nat, cantCap: nat> $t \gets$ <j, $p$.jugadores[j].camtCap>	
-	\State $itpokenodo \gets Encolar((p.pokenodos[latPok][lonPok] \rightarrow heap) , t)$
+	\State $itpokenodo \gets Encolar((p.pokenodos[latPok][lonPok] \rightarrow entrenadores) , t)$
 \Comment $O(log(EC))$
 	\State $p$.jugadores[j].iteradorAHeap $\gets$ $itpokenodo$ \Comment $O(1)$
 \EndIf
@@ -366,6 +366,29 @@ $ $\newline
 \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}[H]
+{\textbf{iDesconectarse}(\Inout{p}{juego}, \In{j}{jugador})}
+\begin{algorithmic}[1]
+
+\State $p$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ false \Comment $O(1)$
+\State EliminarSiguiente($p$.jugadores[j].iteradorAPos) \Comment $O(1)$
+\State $it \gets$ $<NULL, NULL>$ \Comment $O(1)$
+\State $p$.jugadores[j].iteradorAPos $\gets$ $it$ \Comment $O(1)$
+\State $c \gets$ $p$.jugadores[j].pos 
+\If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
+	\State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+	\State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+	\State Borrar($p$.jugadores[j].iteradorAHeap, ($p$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
+	\State itHeap(tupla<id: nat, cantCap: nat>) $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
+	\State $p$.jugadores[j].iteradorAHeap $\gets ith$ \Comment $O(1)$
+\EndIf
+\medskip
+\State \underline{Complejidad:} $O(log(EC))$ 
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itHeap Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos del heap.
+
+
+\end{algorithmic}
+\end{algorithm}
 
 % cantPokemonsTotales
 
