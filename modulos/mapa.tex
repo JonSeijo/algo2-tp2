@@ -342,7 +342,8 @@ $ $\newline
 
 \State vector(vector(coor))$visitados$ $\gets$ Vacio() \Comment $O(1)$
 
-\For{$i = 0$ to m.tam $-$ 1}	    \Comment Fors anidados. Cada uno m.tam iteraciones // $O((m.tam)^2)$
+\For{$i = 0$ to m.tam $-$ 1}	    \Comment $m.tam^2$ iteraciones, pero m.tam pudo haber cambiado // O(max(Latitud($c$), Longitud($c$), $m$.tam)$^2$)
+
 	\State vector(coor) $visitadosAux \gets$ Vacio()  \Comment $O(1)$	
 	\For{$j = 0$ to m.tam $-$ 1}      \Comment Realiza m.tam iteraciones $O(m.tam)$
 		\State $visitadosAux$.AgregarAtras(false) \Comment $O(1)$
@@ -434,8 +435,9 @@ $ $\newline
 \EndWhile
 
 \medskip
-\Statex \underline{Complejidad:} O(max(Latitud($c$), Longitud($c$), m.tam))$^4$)
-\Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se recorren todos los elementos. VER COMO JUSTIFICAR MEJOR
+\Statex \underline{Complejidad:} O(max(Latitud($c$), Longitud($c$), $m$.tam))$^4$)
+\Statex \underline{Justificacion:} Trabajo con matrices de 4 dimensiones, en peor caso hay que redimensionar, en donde se crea una nueva grilla con el nuevo tamanio. CrearGrilla tiene complejidad O($n^4$), por lo que en este caso es O(max(Latitud($c$), Longitud($c$))$^4$). Si se redimensiona, es porque:  max(Latitud($c$), Longitud($c$)) $> $ m.tam. Entonces en ese caso,  max(Latitud($c$), Longitud($c$)) $=$ O(max(Latitud($c$), Longitud($c$), $m$.tam))$^4$). 
+\Statex En peor caso se recorren luego todas las coordenadas de la grilla "principal" (las primeras 2 dimensiones) La grilla pudo haber sido redimensionada, por lo que la complejidad del while es O(max(Latitud($c$), Longitud($c$), $m$.tam))$^2$), donde m.tam es el tamanio original de la grilla. Entonces la complejidad en peor caso es la de mayor exponente por algebra de ordenes: O(max(Latitud($c$), Longitud($c$), $m$.tam))$^4$)
 
 
 \end{algorithmic}
