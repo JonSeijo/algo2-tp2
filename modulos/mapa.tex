@@ -457,5 +457,58 @@ $ $\newline
 \end{algorithm}
 
 
+
+% crearGrilla
+
+
+
+\begin{algorithm}[H]
+{\textbf{iCrearGrilla}(\In{n}{nat})$\to$ $res$ : vector(vector(vector(vector(bool))))}
+\begin{algorithmic}[1]
+
+\Statex Funcion privada 
+\Statex Pre: n $>$ 0 
+\Statex Post: res es una grilla de tam n
+
+\State vector(vector(vector(vector(bool)))) $nGrilla \gets$ Vacio() \Comment $O(1)$
+
+\For{nat $i \gets$ 0 to $n - 1$}   \Comment O($n^4$)
+
+	\State vector(vector(vector(bool))) $nGrilla2 \gets$ Vacio()  \Comment $O(1)$
+	
+	\For{nat $j \gets$ 0 to $n - 1$}  \Comment O($n^3$)
+	
+		\State vector(vector(bool)) $nGrilla3 \gets$ Vacio()   \Comment $O(1)$
+		
+		\For{nat $k \gets$ 0 to $n - 1$}  \Comment O($n^2$)
+
+			\State vector(bool) $nGrilla4 \gets$ Vacio() \Comment $O(1)$
+			
+			 \For{nat $l \gets$ 0 to $n - 1$}  \Comment O($n$)
+			 	\State AgregarAtras($nGrilla4$, false) \Comment $O(1)$			 	
+			 \EndFor		
+			 
+			 \State AgregarAtras($nGrilla3$, $nGrilla4$)
+		
+		\EndFor
+		
+		\State AgregarAtras($nGrilla2$, $nGrilla3$)
+	
+	\EndFor
+	
+	\State AgregarAtras($nGrilla$, $nGrilla2$)
+
+
+\EndFor
+
+\medskip
+\Statex \underline{Complejidad:} $O(n^4)$
+\Statex \underline{Justificacion:} Son 4 fors anidados que se ejecutan $n$ veces cada uno. O($n$) $*$ O($n$) $*$ O($n$) $*$ O($n$) $=$  O($n^4$)
+ 
+\end{algorithmic}
+\end{algorithm}
+
+
+
   
 \end{Algoritmos}
