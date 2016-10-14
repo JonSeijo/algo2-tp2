@@ -73,4 +73,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [X] Arreglar algunas funciones viejas que estan todo en modo matematico
 
+lo haria pero se que hay cosas mas importantes -jonathan
+[ ] En modulo Mapa, reemplazar vectores por arreglos, para que las complejidades sean mas limpias
+
 [ ] Rezar no equivocarse
