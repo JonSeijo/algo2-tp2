@@ -61,6 +61,8 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [X] Algoritmos de las funciones que exporta coordenada (derecha, izquierda ..)
 
+[ ] !!! Hacer iterador para recorrer el vector de jugadores. Lo tenemos que hacer nosotros porque necesitamos que se saltee los eliminados!!!
+
 [ ] Explicacion de estructura para Juego
 
 [X] Explicacion de estructura para Mapa
