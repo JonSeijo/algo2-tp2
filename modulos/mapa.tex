@@ -326,17 +326,10 @@ $ $\newline
 
 \State vector(vector(vector(vector(bool))))) $nGrilla$
 
-%<<<<<<< HEAD
-%\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
-%\State iCopiarCoordenadas($nGrilla$, m.grilla) \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
-%\State m.grilla $\gets nGrilla$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
-%\State m.tam $\gets maximo$ \Comment $O(1)$
-%=======
-\State $nGrilla$ $\gets$ iCrearGrilla($maximo$) \Comment $O(maximo^4)$
-\State iCopiarCoordenadas($nGrilla$, $m$.grilla) \Comment $O((maximo^4)$
-\State $m$.grilla $\gets nGrilla$ \Comment $O(maximo^4)$
+\State $nGrilla \gets iCrearGrilla(maximo)$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+\State iCopiarCoordenadas($nGrilla$, $m$.grilla) \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
+\State $m$.grilla $\gets nGrilla$ \Comment O(max(Latitud($c$), Longitud($c$))$^4$)
 \State $m$.tam $\gets maximo$ \Comment $O(1)$
-%>>>>>>> d2615ecdabd9266dcb4b048d4188072441e17647
 
 \EndIf
 
