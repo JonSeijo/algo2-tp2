@@ -317,15 +317,15 @@
     			\State $puntero(Nodo)$ cambiado $\gets h.ultimo$
 				\State $SwapConElUltimo(h, it.siguiente)$
 				\State BORRAR ULTIMO Y REACOMODAR PUNTEROS
-				\While {$(cambiado \rightarrow izq) \not= NULL$}
+				\While {$(cambiado \rightarrow der) \not= NULL$}
 					\State $puntero(Nodoheap) minimo \gets Min(cambiado \rightarrow izq, cambiado \rightarrow der)$
 					\If{$((minimo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((minimo \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((minimo \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$}
-					
+					\State $Swap(h, minimo)$
 					\EndIf					
-					\State $cambiado \gets $
 				\EndWhile
-				\If{$(cambiado \rightarrow der) \not= NULL$}
-					\If
+				\If{$(cambiado \rightarrow izq) \not= NULL$}
+					\If{$((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((cambiado \rightarrow izq \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$}
+						\State $Swap(h, cambiado \rightarrow izq)$
 					\EndIf
 				\EndIf
 			\EndIf
