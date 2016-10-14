@@ -480,7 +480,73 @@ $ $\Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
 			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}   
     	
- 
-    	
+ \begin{algorithm}[H]{\textbf{SwapConElUltimo}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{aPonerUltimo}{puntero(Nodo)})}
+    	\begin{algorithmic}[1]
+	\If{($h.ultimo \rightarrow padre) \not= aPonerUltimo$} \Comment $O(1)$					\State $(h.ultimo \rightarrow izq) \gets (aPonerUltimo \rightarrow izq)$ \Comment $O(1)$
+			\State $(h.ultimo \rightarrow der) \gets (aPonerUltimo \rightarrow der)$ \Comment $O(1)$	
+			\If{$(aPonerUltimo \rightarrow izq) \not= NULL$} \Comment $O(1)$
+				\State $(aPonerUltimo \rightarrow izq \rightarrow padre) \gets h.ultimo$ \Comment $O(1)$
+			\EndIf	
+			\If{$(aPonerUltimo \rightarrow der) \not= NULL$} \Comment $O(1)$
+				\State $(aPonerUltimo \rightarrow der \rightarrow padre) \gets h.ultimo$ \Comment $O(1)$
+			\EndIf		
+			\If{$aPonerUltimo \not= h.raiz$} \Comment $O(1)$
+				\State $padreaPonerUltimo \gets (aPonerUltimo \rightarrow padre)$ \Comment $O(1)$
+				\State $padreUltimo \gets (h.ultimo \rightarrow padre)$			 	 \Comment $O(1)$
+			 	\If{$EsHijoIzquierdo?(aPonerUltimo) \land EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
+			 	\State $(padreaPonerUltimo \rightarrow izq) \gets h.ultimo$ \Comment $O(1)$
+			 	\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 	\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
+			 	\State $(padreUltimo \rightarrow izq) \gets aPonerUltimo$ \Comment $O(1)$
+			 	\Else
+			 		\If{$EsHijoIzquierdo?(aPonerUltimo) \land \neg EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
+			 		\State $(padreaPonerUltimo \rightarrow izq) \gets h.ultimo$ \Comment $O(1)$
+			 		\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
+			 		\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 		\State $(padreUltimo \rightarrow der) \gets aPonerUltimo$ \Comment $O(1)$
+			 		\Else
+			 			\If{$\neg EsHijoIzquierdo?(aPonerUltimo) \land EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
+			 			\State $(padreaPonerUltimo \rightarrow izq) \gets h.ultimo$ \Comment $O(1)$
+			 			\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
+			 			\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 			\State $(padreUltimo \rightarrow izq) \gets aPonerUltimo$ \Comment $O(1)$
+			 			\Else
+			 				\If{$\neg EsHijoIzquierdo?(aPonerUltimo) \land \neg EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
+			 				\State $(padreaPonerUltimo \rightarrow der) \gets h.ultimo$ \Comment $O(1)$
+			 				\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 				\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
+			 				\State $(padreUltimo \rightarrow der) \gets aPonerUltimo$ \Comment $O(1)$
+			 				\EndIf
+			 			\EndIf
+			 		\EndIf
+			 	\EndIf
+			\Else
+				\State $(h.raiz \rightarrow padre) \gets (h.ultimo \rightarrow padre)$ \Comment $O(1)$
+				\If{$EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
+					\State $(h.ultimo \rightarrow padre \rightarrow izq) \gets h.raiz$ \Comment $O(1)$
+				\Else
+					\State $(h.ultimo \rightarrow padre \rightarrow der) \gets h.raiz$ \Comment $O(1)$
+				\EndIf			
+				\State ($h.ultimo \rightarrow padre) \gets NULL$ \Comment $O(1)$
+				\State $h.raiz \gets h.ultimo$ \Comment $O(1)$
+			\EndIf
+	\Else
+		\State $Swap(h, h.ultimo)$	\Comment $O(1)$
+	\EndIf	
+	\State $h.ultimo \gets aPonerUltimo$	\Comment $O(1)$
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{EsHijoIzquierdo?}(\In{p}{puntero(Nodoheap)}) $\to$ $res$ : bool}
+    	\begin{algorithmic}[1]
+			 \State $res \gets  (p = p \rightarrow padre \rightarrow izq) $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+    	\end{algorithmic}   	
+\end{algorithm}
+
 
 \end{Algoritmos}

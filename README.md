@@ -15,6 +15,20 @@ Algoritmos 2 - TP2
 
 [X] Agregar Copiar() en mapa  (No hacia falta)
 
+[ ] Revisar como borrar un nodo y acomodar iteradores en la funcion borrar del iterador del heap
+
+[ ] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
+
+[ ] Justificar algoritmos de heap
+
+[ ] Revisar 40 veces los algoritmos del heap
+
+[ ] Agregar Copiar() en heap
+
+[ ] Retocar el heap (complejidades, justificaciones, etc)
+
+[ ] Desencolar de heap
+
 [ ] Ver complejidad de AgregarCoordenada en mapa
 
 [ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
@@ -56,3 +70,5 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 [ ] Informe
 
 [X] Arreglar algunas funciones viejas que estan todo en modo matematico
+
+[ ] Rezar no equivocarse
