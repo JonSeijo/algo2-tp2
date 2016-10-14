@@ -5,7 +5,7 @@ Algoritmos 2 - TP2
 
 [ ] Mover
 
-[ ] Conectar
+[X] Conectar
 
 [ ] Desconectar
 
