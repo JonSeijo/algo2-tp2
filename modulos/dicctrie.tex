@@ -45,6 +45,24 @@
   [devuelve del conjunto de claves de $d$.]
 
 
+
+ 
+%\begin{tad}{\tadNombre{dicc(string, $\alpha$) Extension}}
+%\tadExtiende{\tadNombre{dicc(string, $\alpha$)}}
+
+%\tadTitulo{Otras operaciones}{}
+
+%\tadOperacion{restaUno}{string$/s$, dicc(string, $\alpha$)/$d$}{dicc(string, $\alpha$)}{}
+
+
+%\tadAxioma{restaUno(s, d)}{}
+
+
+
+
+%\end{tad}
+
+
 \end{Interfaz}
 
 \pagebreak
@@ -91,7 +109,7 @@ $ $\newline
 {\textbf{Vacio}() $\to$ $res$ : diccTrie$(\alpha)$}
 \begin{algorithmic}[1]
 
-\State nodo $iRiaz$ $\gets $ $NULL$  \Comment $O(1)$
+\State puntero(nodo) $iRiaz$ $\gets $ $NULL$  \Comment $O(1)$
  
 \State conj($string$) $iClaves$ $\gets$ Vacio() \Comment $O(1)$
 
@@ -132,13 +150,13 @@ $ $\newline
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
 		
 
-	\State $actual$ $\gets$ $actual$.$siguientes$[ord($p$[$i$])] \Comment $O(1)$
+	\State $actual$ $\gets$ (*$actual$).$siguientes$[ord($p$[$i$])] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$ \Comment $O(1)$
 \EndWhile 
 
 
-\State $res$ $\gets$ $actual$.$definicion$ \Comment $O(1)$ 
+\State $res$ $\gets$ (*$actual$).$definicion$ \Comment $O(1)$ 
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
@@ -163,27 +181,26 @@ $ $\newline
 	
 	
 	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
-		\State nodo $n$ $\gets$ $\langle$ $NULL$, arreglo[$256$]($NULL$), $NULL$ $\rangle$ \Comment $O(1)$
-		\State $actual$.$siguientes$[ord($p$[$i$])] $\gets$	 $puntero(n)$ \Comment $O(1)$
+		\State (*$actual$).$siguientes$[ord($p$[$i$])] $\gets$	 $\&$ $\langle$ $NULL$, arreglo[$256$]($NULL$), $NULL$ $\rangle$  \Comment $O(1)$
 		
 		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
 	
 	\EndIf
 	
-	\State $actual$ $\gets$ $actual$.$siguientes$[ord($p$[$i$])] \Comment $O(1)$
+	\State $actual$ $\gets$ (*$actual$).$siguientes$[ord($p$[$i$])] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
 \If{$actual$.definicion  $\neq$  $NULL$} \Comment $O(1)$
-	\State $actual$.definicion $\gets$ $NULL$ \Comment se livera la memoria acupada por definicion $O(1)$
+	\State $actual$.definicion $\gets$ $NULL$ \Comment se libera la memoria acupada por definicion $O(1)$
 \EndIf
-\State $actual$.$definicion$ $\gets$ puntero($a$) \Comment $O(1)$
+\State (*$actual$).$definicion$ $\gets$ $\&$ $a$ \Comment $O(1)$
 
 \If{$esNueva$} \Comment $O(1)$
-	\State itConj($string$) $it$ $\gets$  $claves.AgregarRapido(s)$ \Comment $O(1)$
+	\State itConj($string$) $it$ $\gets$  $claves$.AgregarRapido($s$) \Comment $O(1)$
 	
-	\State $actual$.$itClave$ $\gets$ puntero($it$) \Comment $O(1)$
+	\State (*$actual$).$itClave$ $\gets$ $\&$ $it$ \Comment $O(1)$
 \EndIf
 
 \medskip
@@ -209,18 +226,18 @@ $ $\newline
 \While{$i$ $<$ Longitud($p$) $\land$  $pertenece$}   \Comment Se repite $|p|$ $O(1)$
 		
 	
-	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
+	\If{(*$actual$).$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
 
 		\State $pertenece$ $\gets$ $false$ \Comment $O(1)$	 
 	
 	\EndIf
 	
-	\State $actual$ $\gets$ $actual$.siguientes[$ord(p[i])$] \Comment $O(1)$
+	\State $actual$ $\gets$ (*$actual$).siguientes[$ord(p[i])$] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
-\If {$actual$.$significado$ $=$ $NULL$} \Comment $O(1)$ 
+\If {(*$actual$).$significado$ $=$ $NULL$} \Comment $O(1)$ 
 	\State $pertenece$ $\gets$ $false$ \Comment $O(1)$
 \EndIf
 
@@ -232,6 +249,88 @@ $ $\newline
 
 \end{algorithmic}
 \end{algorithm}
+
+
+
+%CLAVES
+\begin{algorithm}[H]
+{\textbf{Borrar}(\In{p}{string}, \Inout{d}{diccTrie($\alpha$)}})
+\begin{algorithmic}[1]
+
+\State bool $borrarRaiz$ $\gets$ $d$.Claves() $=$ 1 \Comment $O(1)$
+
+\State puntero(nodo) $reserva$ $\gets$ $raiz$ \Comment $O(1)$ 
+\State nat $rindex$ $\gets$ 0 \Comment $O(1)$
+
+\State puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$ 
+
+\State nat $i$ $\gets$ 0 \Comment $O(1)$
+\While{$i$ $<$ Longitud($p$) }   \Comment Se repite $|p|$ $O(1)$
+		
+	
+	
+	\State $actual$ $\gets$ (*$actual$).siguientes[$ord(p[i])$] \Comment $O(1)$
+
+	\State bool $definido$ $\gets$ $i$ $\neq$ $|p|$ $-$ 1 $\land$ (*$actual$).definicion $\neq$ $NULL$ \Comment $O(1)$
+
+	\If{CuentaHijos($actual$) $>$ 1 $\lor$ $definido$} \Comment $O(1)$
+
+	\State $reserva$ $\gets$ $actual$ \Comment $O(1)$
+	\State $rindex$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
+	
+	\EndIf
+
+	\State $i$ $\gets$ $i + 1$
+\EndWhile 
+
+
+\If{cuentaHijos($actual$) $>$ 1} \Comment $O(1)$
+
+	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria ocupada por la definicion $O(1)$
+
+\EndIf 
+
+\If{cuentaHijos($actual$) $=$ 0} \Comment $O(1)$
+	\State BorrarDesde($reserva$, $rindex$) \Comment $O(|P|)$
+\EndIf 
+
+
+\If{borrarRaiz} \Comment $O(1)$
+	\State $d$.raiz $\gets$ $NULL$ \Comment se libera la memori ocupada por raiz $O(1)$
+\EndIf 
+
+
+
+
+
+\medskip
+\State \underline{Complejidad:} $O(|P|)$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces $O(2*|p|)$ $=$	$O(|p|)$ $=$ $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}
+  
+%CLAVES
+\begin{algorithm}[H]
+{\textbf{BorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
+\begin{algorithmic}[1]
+
+\State puntero(nodo) $temp$ $\gets$ raiz \Comment $O(1)$
+
+\State $desde$ $\gets$ (*$desde$).$siguientes$[a] \Comment $O(1)$
+\State (*$desde$).$siguientes$[a] $\gets$ $NULL$ \Comment Se libera la memoria ocupada por (*desde).siguientes[a] $O(1)$
+
+
+
+
+\medskip
+\State \underline{Complejidad:} $O(|P|)$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}
+  
+  
   
 \end{Algoritmos}
 
