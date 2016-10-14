@@ -94,7 +94,7 @@
   [$O(1)$]
   [devuelve el elemento del padre del nodo]
   
-  \InterfazFuncion{Borrar}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{}%
+  \InterfazFuncion{Borrar}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}, \Inout{h}{heap(tupla<id: nat, cantCapt: nat>)}}{}%
   [ITERADOR VALIDO]
   {$HACER ESTO$}
   [$O(log(EC))$]
@@ -296,11 +296,9 @@
 
 		\If{$h.raiz \not= h.ultimo$} \Comment $O(1)$
 			\State $puntero(Nodo)$ nuevoNodo $\gets h.ultimo$			\Comment $O(1)$
-			\While{$(nuevoNodo \rightarrow padre) \not=$ NULL}
-				\If{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \implies ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$} \Comment $O(1)$
-					\State $Swap(h, nuevoNodo)$ \Comment $O(1)$
-				\EndIf			
-				\State $nuevoNodo \gets (nuevoNodo \rightarrow padre)$ \Comment $O(1)$
+			\While{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \implies ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$} \Comment $O(1)$
+				\State $Swap(h, nuevoNodo)$ \Comment $O(1)$
+						
 			\EndWhile
 		\EndIf
 		\State $res \gets it$ \Comment $O(1)$
@@ -308,6 +306,35 @@
 			\Statex \underline{Complejidad:} $O(log(EC))$
     	\end{algorithmic}   	
 \end{algorithm}
+
+\begin{algorithm}[H]{\textbf{Borrar}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}, \Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)})}
+    	\begin{algorithmic}[1]
+    		\If{$h.raiz = h.ultimo$}
+    			\State $it.siguiente \gets NULL$ \Comment Libera memoria $O(1)$
+    			\State $h.raiz \gets NULL$
+    			\State $h.ultimo \gets NULL$
+    		\Else    		
+    			\State $puntero(Nodo)$ cambiado $\gets h.ultimo$
+				\State $SwapConElUltimo(h, it.siguiente)$
+				\State BORRAR ULTIMO Y REACOMODAR PUNTEROS
+				\While {$(cambiado \rightarrow izq) \not= NULL$}
+					\State $puntero(Nodoheap) minimo \gets Min(cambiado \rightarrow izq, cambiado \rightarrow der)$
+					\If{$((minimo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((minimo \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((minimo \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$}
+					
+					\EndIf					
+					\State $cambiado \gets $
+				\EndWhile
+				\If{$(cambiado \rightarrow der) \not= NULL$}
+					\If
+					\EndIf
+				\EndIf
+			\EndIf
+			\medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+    	\end{algorithmic}
+\end{algorithm}
+
+
 
 \begin{algorithm}[H]{\textbf{InsertarAlFinal}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{p}{puntero(Nodoheap)})}
     	\begin{algorithmic}[1]
@@ -371,7 +398,8 @@ $ $\newline
 $ $\newline
 $ $\newline
 
-{\textbf{Swap}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$), \In{nuevoNodo}{puntero(Nodoheap)}})} \Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
+{\textbf{Swap}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$), \In{nuevoNodo}{puntero(Nodoheap)}})} $ $\newline
+$ $\Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
     	\begin{algorithmic}[1]
     		\State $puntero(Nodoheap)$ aSwapear $\gets (nuevoNodo \rightarrow padre)$
     		\If{$h.ultimo = nuevoNodo$}
@@ -452,7 +480,7 @@ $ $\newline
 			\Statex \underline{Complejidad:} $O(1)$
     	\end{algorithmic}   
     	
-   
+ 
     	
 
 \end{Algoritmos}
