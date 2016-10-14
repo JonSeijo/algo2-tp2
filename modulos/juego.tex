@@ -214,39 +214,36 @@ HAY DIFERENCIA ENTRE LA ESPECIFICACION Y SU SIGNATURA \\
 \begin{Representacion}
 
 % se representa con una tupla(variable, variable, pokenodos, )
-
-
-NO ES DEFINITIVO, PERO PARA IR TENIENDO LA IDEA
  
 \begin{Estructura}{Juego}[pokgo]
 
 \begin{Tupla}[pokgo]  
-	\tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
-	\tupItem{\\ cantPokemonsTotales}{nat} % Para acceso O(1) al total
-	\tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
-	\tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
-	\tupItem{\\ grillaJugs}{vector(vector(lista(jugStruc)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay un vector de los jugadores que estan en esa posicion
-	\tupItem{\\ pokenodos}{vector(vector(puntero(pokeStruc)))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
+    \tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
+    \tupItem{\\ cantPokemonsTotales}{nat} % Para acceso O(1) al total
+    \tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
+    \tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
+    \tupItem{\\ grillaJugs}{vector(vector(lista(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay una lista de los jugadores que estan en esa posicion
+    \tupItem{\\ pokenodos}{vector(vector(puntero(pokeStruc)))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
 \end{Tupla}
 \end{Estructura}
 
     \begin{Tupla}[pokeStruc]
       \tupItem{poke}{pokemon}
       \tupItem{\\ contador}{nat}%
-	  \tupItem{\\ entrenadores}{Heap(tupla<id: nat, cantCapt: nat>)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
+      \tupItem{\\ entrenadores}{Heap(tupla<id: nat, cantCapt: nat>)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
     \end{Tupla}
     
     
     \begin{Tupla}[jugStruc]
       \tupItem{id}{nat}
       \tupItem{\\ sanciones}{nat}%
-	  \tupItem{\\ conectado}{bool}
-	  \tupItem{\\ pos}{coor}
- 	  \tupItem{\\ pokemons}{LISTA(TUPLA(POKEMON, CANTIDAD))} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
-	  \tupItem{\\ iteradorAHeap}{itHeap(tupla<id: nat, cantCapt: nat>)} % Iterador al heap
-	  \tupItem{\\ iteradorAPos}{itLista(nat)}   
-	  \tupItem{\\ cantCapt}{nat}
-		
+      \tupItem{\\ conectado}{bool}
+      \tupItem{\\ pos}{coor}
+      \tupItem{\\ pokemons}{lista(tupla<pokemon, cantidad>)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
+      \tupItem{\\ iteradorAHeap}{itHeap(tupla<id: nat, cantCapt: nat>)} % Iterador al heap
+      \tupItem{\\ iteradorAPos}{itLista(nat)}   
+      \tupItem{\\ cantCapt}{nat}
+        
     \end{Tupla}
 
 
@@ -275,27 +272,27 @@ $ $\newline
 \State vector(vector(lista(jugador)))   $grillaJugs$
 $ $\newline
 \For{$i \gets 0$ to Tam($map$) $-$ 1} \Comment Se repite Tam(map) veces $O(1)$
-	
-	\State vector(lista(jugador)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
-	
-	\For{$j \gets 0$ to Tam($map$) $-$ 1}  \Comment Se repite Tam(map) veces $O(1)$
-		\State lista(jugador) $jugsVacia \gets$ Vacia()   \Comment $O(1)$
-		\State AgregarAtras($vectorInterno$, $jugsVacia$) \Comment $O(1)$	 
-	\EndFor
-	
-	AgregarAtras($jugs$, $vectorInterno$)   \Comment $O(1)$
+    
+    \State vector(lista(jugador)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
+    
+    \For{$j \gets 0$ to Tam($map$) $-$ 1}  \Comment Se repite Tam(map) veces $O(1)$
+        \State lista(jugador) $jugsVacia \gets$ Vacia()   \Comment $O(1)$
+        \State AgregarAtras($vectorInterno$, $jugsVacia$) \Comment $O(1)$    
+    \EndFor
+    
+    AgregarAtras($jugs$, $vectorInterno$)   \Comment $O(1)$
 
 \EndFor
 $ $\newline
 \State vector(vector(pokeStruc))  $pokenodos \gets$ Vacio()  \Comment $O(1)$
 
-\For{$i \gets 0$ to Tam($map$) $-$ 1}		\Comment Se repite Tam(map) veces $O(1)$
-	\State vector(puntero(pokeStruc)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
-	\For{$j \gets 0$ to Tam($map$) $-$ 1}    \Comment Se repite Tam(map) veces $O(1)$
-		\State puntero(pokeStruc) $pokePuntero \gets$ NULL   \Comment $O(1)$
-		\State AgregarAtras($vectorInterno$, $pokePuntero$)	\Comment $O(1)$
-	\EndFor
-	AgregarAtras($pokenodos$, $vectorInterno$)   \Comment $O(1)$
+\For{$i \gets 0$ to Tam($map$) $-$ 1}       \Comment Se repite Tam(map) veces $O(1)$
+    \State vector(puntero(pokeStruc)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
+    \For{$j \gets 0$ to Tam($map$) $-$ 1}    \Comment Se repite Tam(map) veces $O(1)$
+        \State puntero(pokeStruc) $pokePuntero \gets$ NULL   \Comment $O(1)$
+        \State AgregarAtras($vectorInterno$, $pokePuntero$) \Comment $O(1)$
+    \EndFor
+    AgregarAtras($pokenodos$, $vectorInterno$)   \Comment $O(1)$
 \EndFor
 
 \State $res \gets \langle cantPokemon$, $cantPokemonsTotales$, $map$, $jugs$, $grillaJugs$, $pokenodos \rangle$   \Comment $O(1)$
@@ -349,13 +346,13 @@ $ $\newline
 \State $p$.jugadores[j].iteradorAPos $\gets$ $it$ \Comment $O(1)$
 \State $p$.jugadores[j].pos $\gets$ $c$
 \If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
-	\State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-	\State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-	\State ($p$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
-	\State tupla<id: nat, cantCap: nat> $t \gets$ <j, $p$.jugadores[j].camtCap>	
-	\State $itpokenodo \gets Encolar((p.pokenodos[latPok][lonPok] \rightarrow entrenadores) , t)$
+    \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+    \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+    \State ($p$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
+    \State tupla<id: nat, cantCap: nat> $t \gets$ <j, $p$.jugadores[j].camtCap> 
+    \State $itpokenodo \gets Encolar((p.pokenodos[latPok][lonPok] \rightarrow entrenadores) , t)$
 \Comment $O(log(EC))$
-	\State $p$.jugadores[j].iteradorAHeap $\gets$ $itpokenodo$ \Comment $O(1)$
+    \State $p$.jugadores[j].iteradorAHeap $\gets$ $itpokenodo$ \Comment $O(1)$
 \EndIf
 
 \medskip
@@ -376,11 +373,11 @@ $ $\newline
 \State $p$.jugadores[j].iteradorAPos $\gets$ $it$ \Comment $O(1)$
 \State $c \gets$ $p$.jugadores[j].pos 
 \If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
-	\State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-	\State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-	\State Borrar($p$.jugadores[j].iteradorAHeap, ($p$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
-	\State itHeap(tupla<id: nat, cantCap: nat>) $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
-	\State $p$.jugadores[j].iteradorAHeap $\gets ith$ \Comment $O(1)$
+    \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+    \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
+    \State Borrar($p$.jugadores[j].iteradorAHeap, ($p$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
+    \State itHeap(tupla<id: nat, cantCap: nat>) $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
+    \State $p$.jugadores[j].iteradorAHeap $\gets ith$ \Comment $O(1)$
 \EndIf
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
@@ -467,23 +464,23 @@ $ $\newline
 \State itConj(jugador) $itPosibles \gets$ CrearIt($ec$) \Comment $O(1)$
 
 \While{HaySiguiente($itPosibels$)}   \Comment O($Cardinal(ec) * O(HaySiguiente) * Cardinal(jugsEnNodo)$)
-	
-	% Asumo que tengo una forma de recorrer el heap
-	\State itHeap $itJugsEnNodo \gets$ CrearIt(($*pokePuntero$).entrenadores)	  \Comment Depende del HEAP $O(Inifinito)$
-	
-	\While{HaySiguiente($itJugsEnNodo$)}   \Comment O($HaySiguiente * \#jugsEnNodo$)
+    
+    % Asumo que tengo una forma de recorrer el heap
+    \State itHeap $itJugsEnNodo \gets$ CrearIt(($*pokePuntero$).entrenadores)     \Comment Depende del HEAP $O(Inifinito)$
+    
+    \While{HaySiguiente($itJugsEnNodo$)}   \Comment O($HaySiguiente * \#jugsEnNodo$)
 
-		\If{Siguiente($itPosibles$) = Siguiente($itJugsEnNodo$)}   \Comment Depende del HEAP $O(Inifinito)$
-		
-			\State Agregar($res$, Siguiente($itPosible$))
-	
-		\EndIf
-		
-		\State Avanzar($itJugsEnNodo$))
-	
-	\EndWhile
-	
-	\State Avanzar($itPosible$)   \Comment()
+        \If{Siguiente($itPosibles$) = Siguiente($itJugsEnNodo$)}   \Comment Depende del HEAP $O(Inifinito)$
+        
+            \State Agregar($res$, Siguiente($itPosible$))
+    
+        \EndIf
+        
+        \State Avanzar($itJugsEnNodo$))
+    
+    \EndWhile
+    
+    \State Avanzar($itPosible$)   \Comment()
 
 
 
@@ -740,9 +737,9 @@ $ $\newline
 \State bool $puedo \gets$ false  \Comment $O(1)$
 
 \If{PosExistente(c, j.mapa)}   \Comment $O(1)$
-	\If{$\neg$ HayPokemonCercano(c, j)}   \Comment $O(1)$
-		\State $puedo \gets$ true        \Comment $O(1)$
-	\EndIf
+    \If{$\neg$ HayPokemonCercano(c, j)}   \Comment $O(1)$
+        \State $puedo \gets$ true        \Comment $O(1)$
+    \EndIf
 \EndIf
 
 \State $res \gets puedo$  \Comment $O(1)$
@@ -758,7 +755,7 @@ $ $\newline
 % cantMovimientosParaCaptura
 
 \begin{algorithm}[H]
-{\textbf{iCantMovimientosParaCaptura}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : 	nat}
+{\textbf{iCantMovimientosParaCaptura}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ :    nat}
 \begin{algorithmic}[1]
 
 \State puntero(pokeStruc) $pokenodo \gets$ j.pokenodos[latitud($c$)][longitud($c$)] \Comment $O(1)$
@@ -779,9 +776,9 @@ $ $\newline
 \begin{algorithmic}[1]
 
 \For{$nat i \gets$ 0 to Longitud(j.jugadores) $-$ 1}   \Comment $O(J)$
-	\If{j.jugadores[$i$].sanciones $\geq$ 5}   \Comment $O(1)$
-		AgregarRapido(res, j.jugadores[$i$].id)  \Comment $O(1)$		
-	\EndIf
+    \If{j.jugadores[$i$].sanciones $\geq$ 5}   \Comment $O(1)$
+        AgregarRapido(res, j.jugadores[$i$].id)  \Comment $O(1)$        
+    \EndIf
 \EndFor
 
 \medskip
