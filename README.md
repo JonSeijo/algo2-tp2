@@ -9,6 +9,8 @@ Algoritmos 2 - TP2
 
 [X] Desconectar
 
+[ ] Agregar pokemon!!
+
 [ ] Rep de Juego
 
 [ ] Abs de Juego
