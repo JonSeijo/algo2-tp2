@@ -246,13 +246,63 @@ HAY DIFERENCIA ENTRE LA ESPECIFICACION Y SU SIGNATURA \\
     \end{Tupla}
 
 
-Estoy en esto -> Jonathan
+$ $\newline
+$ $\newline
+
 \Title{Invariante de representacion en castellano}
+Estoy en esto -> Jonathan
 
 $ $\newline
 
-Estoy en esto -> Jonathan
+( ) id del juegador es igual al indice de la posicion del vector (de esto se desprende que los ids son unicos) $ $\newline
+
+( ) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada valida en el mapa $ $\newline
+
+( ) Dimensiones de la grillaJugs (vector de vectores) es igual al tama\~no del mapa $ $\newline
+
+( ) No hay elementos repetidos en las listas de grillaJugs  $ $\newline
+
+( ) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
+
+( ) Toda id en toda lista de grillaJugs es un de un jugador del juego que este conectado  $ $\newline
+
+( ) iteradorAPos apunta al elemento correcto (misma id) en la lista de grillaJugs correspondiente a su pos $ $\newline
+
+( ) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
+
+( ) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
+
+(MMMMM NO, creo que se deduce) Los pokemons que un jugador (NO eliminado) capturo, esta en las claves del diccionario del juego con un significado $>$ 0 $ $\newline
+
+( ) Para todo pokemon del diccionario, la cantidad que hay es igual a la suma de los salvajes mas los capturados por jugadores (no eliminados) $ $\newline
+
+( ) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
+
+( ) Dimensiones de pokenodos (vector de vectores) es igual al tama\~no del mapa $ $\newline
+
+( ) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa $ $\newline
+
+( ) No hay pokenodos con pokestrucs que esten a distancia menor a 5 $ $\newline
+
+( ) El contador de todo pokenodo es $<$ 10 $ $\newline
+
+( ) Todo pokestruc tiene un pokemon que esta bien definido $ $\newline
+
+--- relacionados con heaps, pensar mejor
+
+( ) Todos los ids de la cola de prioridad del pokestruc pertenecen a jugadores conectados que esten en el rango2 con un camino hacia el pokemon, y la cantidad de pokemones del heap y el jugador se corresponen $ $\newline
+
+( ) Si el jugador esta conectado, en rango2 con un camino hacia un pokestruc, entonces esta su id en la cola de prioridad del pokestruc y la cantidad de pokemons se corresponde $ $\newline
+
+( ) Si el jugador esta conectado, en rango2 con un camino hacia un pokenodo, el iterador a la cola de prioridad se corresponde consigo mismo $ $\newline
+
+
+
+
+$ $\newline
+
 \Title{Invariante de representacion en logica}
+Estoy en esto -> Jonathan
 
 HACER
 

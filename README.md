@@ -11,7 +11,7 @@ Algoritmos 2 - TP2
 
 [ ] Agregar pokemon!!
 
-[ ] Rep de Juego castellano
+[X] Rep de Juego castellano
 
 [ ] Rep de Juego logica
 
