@@ -13,6 +13,8 @@ Algoritmos 2 - TP2
 
 [ ] Abs de Juego
 
+[ ] Revisar Conectar y Desconectar (igual creo que están bien, pero por las dudas)
+
 [X] Agregar Copiar() en mapa  (No hacia falta)
 
 [ ] REVISAR ALLIASING Y ALIAS!!!!!!!!!!!!!!!!! (sobre todo en heap)
