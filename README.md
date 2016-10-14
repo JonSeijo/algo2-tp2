@@ -35,6 +35,8 @@ Algoritmos 2 - TP2
 Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
 porque de como esta implementada se encarga el mapa. Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
 
+[ ] Hay siguiente de iteradores de heap
+
 [ ] Preguntar lo de MultiConjunto. Es necesario hacer el modulo? ver .txt de preguntas para mas info
 
 [X] Rep de Trie
