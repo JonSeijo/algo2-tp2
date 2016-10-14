@@ -57,7 +57,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Explicacion de estructura para Juego
 
-[ ] Explicacion de estructura para Mapa
+[X] Explicacion de estructura para Mapa
 
 [X] Explicacion de estructura para Trie
 

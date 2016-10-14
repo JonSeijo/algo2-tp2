@@ -110,6 +110,13 @@ FI}
 
 \begin{Representacion}
 
+%\Title{Explicac\'ion de la estructura}
+La grilla con la que representamos el mapa es cuadrada, es decir, tiene la misma cantidad de coordenadas de alto que de ancho. m.tam es el tama\~no, la cantidad de coordenadas de ancho (o alto) que tiene la grilla. Esto es asi para que no haya que distinguir entre tama\~no de ancho o de alto, asi es mas sencillo escribir los algoritmos y los calculos de complejidades.
+$ $\newline
+La grilla es un vector de 4 dimensiones de booleanos. Estos booleanos son los que nos dicen si hay un camino entre dos coordenadas. De esta manera, conseguimos que HayCamino sea O(1), que nos es muy util para usarlo en el Juego.
+$ $\newline
+Si esta la coordenada C1=(x,y) y C2=(z,w), grilla[x][y][z][w] representa si hay camino entre C1 y C2. true significa que hay camino. Cuando agregamos una coordenada C=(i,j) a la grilla, la marcamos como existente poniendo en true el valor grilla[i][j][i][j] (Lo cual es coherente porque esto dice que C tiene camino consigo misma)
+
 \begin{Estructura}{mapa}[map]
 	\begin{Tupla}[map]  
 		\tupItem{tam}{nat}
@@ -118,12 +125,10 @@ FI}
   	
 \end{Estructura}
 
+
 \Title{Invariante de representacion en castellano}
 
 $ $\newline
-[Comentarios para la parte de explicacion de estructura] $ $\newline
-(decimos que C=(x,y) $"$esta en la grilla$"$ cuando grilla[x][y][x][y] == true) $ $\newline
-(decimos que hay camino entre C=(x,y) y C'=(z,w) cuando grilla[x][y][z][w] == true) $ $\newline
 
 (1) Todos los vectores que forman la grilla son de la misma longitud$ $\newline
 (2) tam es consistente con la longitud de la grilla $ $\newline
