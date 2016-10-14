@@ -31,7 +31,7 @@ Algoritmos 2 - TP2
 
 [ ] Desencolar de heap
 
-[ ] Ver complejidad de AgregarCoordenada en mapa
+[X] Ver complejidad de AgregarCoordenada en mapa
 
 [ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
 Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
@@ -67,12 +67,15 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Buscar algun checklist de diseño y ver que falta
 
-[ ] Funcion CrearGrilla(tam) en Mapa. Tiene que ser privada, no aparece en la interfaz pero falta el algoritmo
+[X] Funcion CrearGrilla(tam) en Mapa. Tiene que ser privada, no aparece en la interfaz pero falta el algoritmo
 
 [ ] Revisar justificaciones de complejidades
 
 [ ] Informe
 
 [X] Arreglar algunas funciones viejas que estan todo en modo matematico
+
+lo haria pero se que hay cosas mas importantes -jonathan
+[ ] En modulo Mapa, reemplazar vectores por arreglos, para que las complejidades sean mas limpias
 
 [ ] Rezar no equivocarse
