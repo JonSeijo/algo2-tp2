@@ -61,6 +61,8 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [X] Algoritmos de las funciones que exporta coordenada (derecha, izquierda ..)
 
+[ ] GrillaJugs deberia ser vector(vector(jugador)) (nat en vez del jugstruc) Cambiarlo y revisar los algoritmos que usan la grilla para ver que no rompemos nada
+
 [ ] !!! Hacer iterador para recorrer el vector de jugadores. Lo tenemos que hacer nosotros porque necesitamos que se saltee los eliminados!!!
 
 [ ] Explicacion de estructura para Juego
