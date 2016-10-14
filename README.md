@@ -11,7 +11,9 @@ Algoritmos 2 - TP2
 
 [ ] Agregar pokemon!!
 
-[ ] Rep de Juego
+[ ] Rep de Juego castellano
+
+[ ] Rep de Juego logica
 
 [ ] Abs de Juego
 
@@ -22,6 +24,10 @@ Algoritmos 2 - TP2
 [ ] REVISAR ALLIASING Y ALIAS!!!!!!!!!!!!!!!!! (sobre todo en heap)
 
 [ ] Revisar como borrar un nodo y acomodar iteradores en la funcion borrar del iterador del heap
+
+[ ] Los "hayPadre", "hijoderecho" etc no tienen que estar en la interfaz del heap
+
+[ ] Hacer la funcion publica "HaySiguiente" y "Siguiente" para poder recorrer el heap (inorder, postorder, pensar cual)
 
 [X] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
 
