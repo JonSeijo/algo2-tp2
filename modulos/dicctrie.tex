@@ -290,10 +290,6 @@ $dic$ : dicc(string, $\alpha$) / \\
 	\State $d$.raiz $\gets$ $NULL$ \Comment se libera la memoria ocupada por raiz $O(1)$
 \EndIf 
 
-
-
-
-
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
 \State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces $O(2*|p|)$ $=$	$O(|p|)$ $=$ $O(|P|)$
@@ -301,7 +297,11 @@ $dic$ : dicc(string, $\alpha$) / \\
 \end{algorithmic}
 \end{algorithm}
   
-%CLAVES
+  
+\textbf{Pre} $\equiv$ \{$desde$ y $desde$.siguientes[$a$] no nulos\}\\%
+\textbf{Post} $\equiv$ \{Borra la rama a partir de $desde$.siguientes[$a$]\}%
+
+ 
 \begin{algorithm}[H]
 {\textbf{iBorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
 \begin{algorithmic}[1]
@@ -346,7 +346,11 @@ $dic$ : dicc(string, $\alpha$) / \\
 \end{algorithmic}
 \end{algorithm}
   
+  
+\pagebreak
 
+\textbf{Pre} $\equiv$ \{$desde$ no nulo\}\\%
+\textbf{Post} $\equiv$ \{deveulve la cantidad de punteros no nulos en $desde$.siguientes\}%
 
 \begin{algorithm}[H]
 {\textbf{iCuentaHijos}(\In{desde}{puntero(nodo)}} $\to$ $res$ : $nat$)
