@@ -275,13 +275,34 @@ $ $\newline
 
 ( ) No hay elementos repetidos en las listas de grillaJugs  $ $\newline
 
+($\forall x, y$: nat) ((enRango($x$, $y$, $j$.mapa) sinRepetidos($j$.grillaJugs[$x$][$y$]))
+$ $\newline
+
 ( ) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
+
+($\forall e:$ jugador) (esJugadorConectado($e$, $j$) $\impluego$ \\
+	$j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
+	
+$ $\newline
 
 ( ) Toda id en toda lista de grillaJugs es un de un jugador del juego que este conectado  $ $\newline
 
+($\forall x, y:$ nat) (enRango($x$, $y$, $j$.mapa) $\impluego$ \\
+	($\forall i:$ nat) ($i \leq$ Longitud($j$.grillaJugs[$x$][$y$]) \\
+		$j$.jugadores($j$.grillaJugs[$x$][$y$][$i$]).conectado
+
+$ $\newline
+
 ( ) iteradorAPos apunta al elemento correcto (misma id) en la lista de grillaJugs correspondiente a su pos $ $\newline
 
+($\forall e:$ jugador) ( esJugadorConectado($e$, $j$) $\impluego$ Siguiente($j$.jugadores[$e$].iteradorAPos) = $e$ )
+
+$ $\newline
+
 ( ) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
+
+($\forall e:$ jugador) (esJugadorNoEliminado($e$, $j$) $\impluego$ $j$.jugadores[$e$].cantCapt = sumaCantidades($j$.jugadores[$e$].pokemons))
+
 
 ( ) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
 
