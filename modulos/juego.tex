@@ -172,7 +172,8 @@
 
 % entrenadoresPosibles : coor c × conj(jugador) es × juego j −→ conj(jugador)
 % {hayPokémonCercano(c,j) ∧ es ⊆ jugadoresConectados(j)}
-\InterfazFuncion{EntrenadoresPosibles}{\In{c}{coor},\In{es}{conj(jugador)}, \In{j}{juego}}{conj(jugador)}%
+
+\InterfazFuncion{EntrenadoresPosibles}{\In{c}{coor}, \In{es}{conj(jugador)}, \In{j}{juego}}{conj(jugador)}%
 [hayPokemonCercano(c, j) $\land$ es $\subset$ jugadoresConectados(j)] 
 {$res = entrenadoresPosibles(c, es, j)$}  % Ver que mucho no me convence
 [$O(1)$] % Se supone que vamos a guardar los posibles en un "AVL" en la coordenada del pokenodo
@@ -198,7 +199,7 @@
 
 % cantMismaEspecie : pokémon × multiconj(pokémon) −→ nat
 
-\InterfazFuncion{cantMismaEspecie}{{\In{p}{pokemon}, \In{j}{juego}}{nat}
+\InterfazFuncion{cantMismaEspecie}{\In{p}{pokemon}, \In{j}{juego}}{nat}
 [$p$ $\in$ todosLosPokemons($j$)] 
 {$res$ = cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
 [$O(|p|)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
@@ -447,7 +448,24 @@ $ $\newline
 
 \tadOperacion{Abs}{juego$/j$}{Juego}{Rep($j$)}%
 \tadAxioma{Abs($j$)}
-{INSERTAR ABS}%
+{
+$jue$ : Juego / \\
+	mapa($jue$) $\igobs$ $j$.map $\land$ \\
+	jugadores($jue$) $\igobs$ $j$.jugadores $\land$ \\ 
+
+	($\forall e$: jugador) (($e \in$ jugadores($jue$) $\impluego$ \\
+		estaConectado($e$, $jue$) $\igobs$ $j$.jugadores[$e$].conectado $\land$ \\
+		sanciones($e$, $jue$) $\igobs$ $j$.jugadores[$e$].sanciones $\land$ \\
+		pokemons($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pokemons $\land$ \\
+		estaConectado($e$, $jue$) $\implies$ posicion($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pos)) $\land$ \\
+
+	expulsados($jue$) $\igobs$ expulsadosAux($j$.jugadores) $\land$ \\
+	posConPokemon($jue$) $\igobs$ posConPokemonAux($j$.pokenodos) $\land$ \\
+	
+	($\forall c:$ coor) (($c \in$ posConPokemon($jue$)) $\impluego$ \\
+		pokemonEnPos($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ poke) $\land$ \\
+		cantMovimientosParaCaptura($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ contador))
+}%
 
 \end{Representacion}
 

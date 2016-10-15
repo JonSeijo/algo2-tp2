@@ -17,9 +17,9 @@ Algoritmos 2 - TP2
 
 [X] Rep de Juego logica
 
-[ ] Terminar auxiliares del rep de Juego
+[X] Terminar auxiliares del rep de Juego
  
-[ ] Abs de Juego
+[X] Abs de Juego
 
 [ ] Revisar Conectar y Desconectar (igual creo que están bien, pero por las dudas)
 
