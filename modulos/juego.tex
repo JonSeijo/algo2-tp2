@@ -334,14 +334,31 @@ longitud($j$.pokenodos) = tam($j$.mapa) $\yluego$
 $ $\newline
 
 ( ) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa $ $\newline
-($\forall pkStruc$: pokeStruc) BLABLABALBAL, USANDO POKESTRUCS NO TENGO QUILOMBO CON COORDENADAS
+
+($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neg$ NULL) \\
+	$\impluego$ posExistente(crearCoordenada(x,y), $j$.mapa))
+$ $\newline
 
 
 ( ) No hay pokenodos con pokestrucs que esten a distancia menor a 5 $ $\newline
 
+($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) $ \land$\\
+($\forall z, w$: nat) (($z$ < tam(j.mapa) $\land$ $w$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$z$][$w$] $\neq$ NULL) $\land$ \\
+($x \neq z \land y \neq w$) $\impluego$  distEuclidea(crearCoordenada($x$, $y$), crearCoordenada($z$, $w$)) > 25)
+
+$ $\newline
+
 ( ) El contador de todo pokenodo es $<$ 10 $ $\newline
 
+($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
+	$\impluego$ (*($j$.pokenodos[$x$][$y$])).contador < 10)
+
+$ $\newline
+
 ( ) Todo pokestruc tiene un pokemon que esta bien definido $ $\newline
+($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
+	$\impluego$ Def?((*($j$.pokenodos[$x$][$y$])).poke), $j$.cantPokemon)
+
 
 --- relacionados con heaps, pensar mejor
 
