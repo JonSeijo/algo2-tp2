@@ -79,7 +79,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Renombrar heap por colaDePrioridad donde corresponda
 
-[ ] Explicacion de estructura para Juego
+[X] Explicacion de estructura para Juego
 
 [X] Explicacion de estructura para Mapa
 
