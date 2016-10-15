@@ -15,8 +15,10 @@ Algoritmos 2 - TP2
 
 [X] Rep de Juego castellano
 
-[ ] Rep de Juego logica
+[X] Rep de Juego logica
 
+[ ] Terminar auxiliares del rep de Juego
+ 
 [ ] Abs de Juego
 
 [ ] Revisar Conectar y Desconectar (igual creo que están bien, pero por las dudas)
@@ -29,7 +31,7 @@ Algoritmos 2 - TP2
 
 [ ] Los "hayPadre", "hijoderecho" etc no tienen que estar en la interfaz del heap
 
-[ ] Hacer la funcion publica "HaySiguiente" y "Siguiente" para poder recorrer el heap (inorder, postorder, pensar cual)
+[ ] Hacer la funcion publica "HaySiguiente" y "Siguiente" para acceder al elemento del heap
 
 [X] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
 
