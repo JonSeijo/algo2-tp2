@@ -7,60 +7,44 @@
  
   \textbf{se explica con}: \tadNombre{dicc(string, $\alpha$)}, \tadNombre{conj(string)}.
 
-  \textbf{g\'eneros}: \TipoVariable{diccTrie($\alpha$)}.
+  \textbf{g\'eneros}: \TipoVariable{diccString($\alpha$)}.
 
-  \InterfazFuncion{Vacio}{}{diccTrie($\alpha$)}
+  \InterfazFuncion{Vacio}{}{diccString($\alpha$)}
   {$res$ $\igobs$ vac\'io}
   [$O(1)$]
   [genera un diccionario vac\'io.]
 
-  \InterfazFuncion{Definir}{\Inout{d}{diccTrie($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$}}{}
+  \InterfazFuncion{Definir}{\Inout{d}{diccString($\alpha$)}, \In{s}{string}, \In{a}{$\alpha$}}{}
   [$d$ $\igobs$ $d_0$]
   {$d$ $\igobs$ definir($p$, $a$, $d$)}
   [$O(|P|)$ siendo P la clave mas larga.]
   [define $a$ en $d$ con la clave $s$.]
-  [el elemento $a$ se define por copia.]
+  [el elemento $a$ se define por referencia.]
 
-  \InterfazFuncion{Def?}{\In{p}{string}, \In{d}{diccTrie($\alpha$)}}{bool}
+  \InterfazFuncion{Def?}{\In{p}{string}, \In{d}{diccString($\alpha$)}}{bool}
   {$res$ $\igobs$ def?($p$, $d$)}
   [$O(|P|)$ siendo P la clave mas larga.]
   [devuelve \texttt{true} si y s\'olo si la $p$ tiene una definicion en $d$.]
 
-  \InterfazFuncion{Obtener}{\In{p}{string}, \In{d}{diccTrie($\alpha$)}}{$\alpha$}
+  \InterfazFuncion{Obtener}{\In{p}{string}, \In{d}{diccString($\alpha$)}}{$\alpha$}
   [def?($s$, $d$)]
   {alias($res$ $\igobs$ obtener($p$, $d$))}
   [$O(|P|)$ siendo P la clave mas larga.]
   [devuelve el significado de la la clave $p$ en $d$.]
   [$res$ es modificable si y s\'olo si $d$ es modificable.]
 
-  \InterfazFuncion{Borrar}{\In{p}{string}, \Inout{d}{diccTrie($\alpha$)}}{}
+  \InterfazFuncion{Borrar}{\In{p}{string}, \Inout{d}{diccString($\alpha$)}}{}
   [$d$ $\igobs$ $d_0$ $\land$ def?($s$, $d$)]
   {$d$ $\igobs$ borrar($p$, $d_0$)}
   [$O(|P|)$ siendo P la clave mas larga.]
   [borra la clave $p$ y su significado.]
 
-  \InterfazFuncion{Claves}{\In{d}{diccTrie($\alpha$)}}{conj(string)}
+  \InterfazFuncion{Claves}{\In{d}{diccString($\alpha$)}}{conj(string)}
   {$res$ $\igobs$ claves($d$)}
   [$O(1)$]
   [devuelve del conjunto de claves de $d$.]
 
 
-
- 
-%\begin{tad}{\tadNombre{dicc(string, $\alpha$) Extension}}
-%\tadExtiende{\tadNombre{dicc(string, $\alpha$)}}
-
-%\tadTitulo{Otras operaciones}{}
-
-%\tadOperacion{restaUno}{string$/s$, dicc(string, $\alpha$)/$d$}{dicc(string, $\alpha$)}{}
-
-
-%\tadAxioma{restaUno(s, d)}{}
-
-
-
-
-%\end{tad}
 
 
 \end{Interfaz}
@@ -69,12 +53,12 @@
 
 \begin{Representacion}
   
-  \Title{Representaci\'on del diccTrie}  
+  \Title{Representaci\'on del diccString}  
   
 	En este m\'odulo usamos un trie para definir un diccionario cuyas claves son string.
 $ $\newline La idea es que la complejidad de definir y obtener no dependa de la cantidad de claves, si no de la longitud de la clave. Bajando asi la complejidad en peor caso.  
   
-  \begin{Estructura}{diccTrie($\alpha$)}[estr]
+  \begin{Estructura}{diccString($\alpha$)}[estr]
     \begin{Tupla}[estr]
       \tupItem{raiz}{puntero(nodo)}%
       \tupItem{claves}{conj(string)}%
@@ -95,7 +79,7 @@ Todos los elementos del conjunto de claves estan definidios en el diccTrie.
 $ $\newline
  
  
-  \AbsFc[estr]{dicc($\alpha$)}[e]{d : dicc(string, $\alpha$) / ($\forall s$: string)(c $\in$ claves($d$)) $\impluego$ $e$.Definido(s) $=$ $true$ $\land$ obtener($s$, $d$) $=$ $e$.Obtener($s$) }
+  \AbsFc[estr]{diccString($\alpha$)}[e]{d : dicc(string, $\alpha$) / ($\forall s$: string)(c $\in$ claves($d$)) $\impluego$ $e$.Definido(s) $=$ $true$ $\land$ obtener($s$, $d$) $=$ $e$.Obtener($s$) }
 
 
 
@@ -106,14 +90,14 @@ $ $\newline
   
 %crear diccTrie
 \begin{algorithm}[H]
-{\textbf{Vacio}() $\to$ $res$ : diccTrie$(\alpha)$}
+{\textbf{iVacio}() $\to$ $res$ : diccString($\alpha$)}
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $iRiaz$ $\gets $ $NULL$  \Comment $O(1)$
  
 \State conj($string$) $iClaves$ $\gets$ Vacio() \Comment $O(1)$
 
-\State $res$ $\gets$  $\langle$ $iRaiz$, $iClaves$ $\rangle$\Comment $O(1)$
+\State $res$ $\gets$  $\langle$ $iRaiz$, $iClaves$ $\rangle$ \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
@@ -124,7 +108,7 @@ $ $\newline
 
 %CLAVES
 \begin{algorithm}[H]
-{\textbf{Claves}(\In{d}{diccTrie($\alpha$)}}) $\to$ $res$ : $conj(\alpha)$
+{\textbf{iClaves}(\In{d}{diccString($\alpha$)}}) $\to$ $res$ : conj($\alpha$)
 \begin{algorithmic}[1]
 
 \State $res$ $\gets$ $d$.$claves$ \Comment $O(1)$
@@ -139,7 +123,7 @@ $ $\newline
   
 %OBTENER
 \begin{algorithm}[H]
-{\textbf{Obtener}(\In{p}{string}, \In{d}{diccTrie($\alpha$)}}) $\to$ $res$ : $\alpha$
+{\textbf{iObtener}(\In{p}{string}, \In{d}{diccString($\alpha$)}}) $\to$ $res$ : $\alpha$
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $n$ $\gets$ $raiz$ \Comment $O(1)$
@@ -168,7 +152,7 @@ $ $\newline
 
 %DEFINIR
 \begin{algorithm}[H]
-{\textbf{Definir}(\Inout{d}{diccTrie($\alpha$)}, \In{p}{string}, \In{a}{$\alpha$})}
+{\textbf{iDefinir}(\Inout{d}{diccString($\alpha$)}, \In{p}{string}, \In{a}{$\alpha$})}
 \begin{algorithmic}[1]
 
 \State Puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$
@@ -214,7 +198,7 @@ $ $\newline
   
 %DEFINIDO
 \begin{algorithm}[H]
-{\textbf{Def?}(\In{p}{string}) $\to$ $res$ : $bool$}
+{\textbf{iDef?}(\In{p}{string}) $\to$ $res$ : $bool$}
 \begin{algorithmic}[1]
 
 \State Nat $i$ $\gets$ $0$ \Comment $O(1)$
@@ -254,7 +238,7 @@ $ $\newline
 
 %CLAVES
 \begin{algorithm}[H]
-{\textbf{Borrar}(\In{p}{string}, \Inout{d}{diccTrie($\alpha$)}})
+{\textbf{iBorrar}(\In{p}{string}, \Inout{d}{diccString($\alpha$)}})
 \begin{algorithmic}[1]
 
 \State bool $borrarRaiz$ $\gets$ $d$.Claves() $=$ 1 \Comment $O(1)$
@@ -284,19 +268,19 @@ $ $\newline
 \EndWhile 
 
 
-\If{cuentaHijos($actual$) $>$ 1} \Comment $O(1)$
+\If{CuentaHijos($actual$) $>$ 1} \Comment $O(1)$
 
 	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria ocupada por la definicion $O(1)$
 
 \EndIf 
 
-\If{cuentaHijos($actual$) $=$ 0} \Comment $O(1)$
+\If{CuentaHijos($actual$) $=$ 0} \Comment $O(1)$
 	\State BorrarDesde($reserva$, $rindex$) \Comment $O(|P|)$
 \EndIf 
 
 
 \If{borrarRaiz} \Comment $O(1)$
-	\State $d$.raiz $\gets$ $NULL$ \Comment se libera la memori ocupada por raiz $O(1)$
+	\State $d$.raiz $\gets$ $NULL$ \Comment se libera la memoria ocupada por raiz $O(1)$
 \EndIf 
 
 
@@ -312,7 +296,7 @@ $ $\newline
   
 %CLAVES
 \begin{algorithm}[H]
-{\textbf{BorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
+{\textbf{iBorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $temp$ $\gets$ raiz \Comment $O(1)$
@@ -320,12 +304,63 @@ $ $\newline
 \State $desde$ $\gets$ (*$desde$).$siguientes$[a] \Comment $O(1)$
 \State (*$desde$).$siguientes$[a] $\gets$ $NULL$ \Comment Se libera la memoria ocupada por (*desde).siguientes[a] $O(1)$
 
+\While{$desde$ $\neq$ $NULL$} \Comment se repite a los sumo $|P|$ veces, siendo p la clave mas larga $O(1)$
 
+	\State puntero(nodo) $temp$ $\gets$ $desde$ \Comment $O(1)$
+
+	\State bool $sigue$ $\gets$ false \Comment $O(1)$
+
+	\State nat $i$ $\gets$ 0 \State $O(1)$
+
+	\While{$i$ $<$ 256} \Comment se repite siempre 256 veces $O(1)$
+
+		\If{(*$desde$).siguientes[$i$] $\neq$ $NULL$} \Comment $O(1)$
+			\State $desde$ $\gets$ (*$desde$).siguientes[$i$] \Comment $O(1)$		
+		
+			\State $sigue$ $\gets$ true \Comment $O(1)$		
+		
+		\EndIf
+	\EndWhile
+
+\EndWhile
+
+\If{$\lnot$ $sigue$} \Comment $O(1)$
+	\State $desde$ $\gets$ $NULL$ \Comment se libera la memoria ocupada por $desde$ $O(1)$
+
+\EndIf
+
+\State $temp$ $\gets$ $NULL$ \Comment se libera la memoria ocupada por $temp$ $O(1)$
 
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
-\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea la rama que estamos borrando, es mas corta que la rama representada por la clave mas larga. Llamo $p$ a la clave de la rama que estamos borrando y como $|p|$ $\leq$ $|P|$ entonces $O(|p|)$ = $O(|P|)$ 
+
+\end{algorithmic}
+\end{algorithm}
+  
+
+
+\begin{algorithm}[H]
+{\textbf{iCuentaHijos}(\In{desde}{puntero(nodo)}} $\to$ $res$ : $nat$)
+\begin{algorithmic}[1]
+
+\State nat $i$ $\gets$ 0 \Comment $O(1)$
+\State nat $hijos$ $\gets$ 0 \Comment $O(1)$
+
+\While{$i$ $<$ 256} \Comment se repite siempre 256 veces $O(1)$
+	\If{(*$actutal$).siguiente[$i$] $\neq$ $NULL$} \State $O(1)$ 
+	
+	\State $suma$ $\gets$ $suma$ $+$ 1 \Comment $O(1)$
+	
+	\EndIf
+\EndWhile
+\State $res$ $\gets$ $hijos$ \Comment $O(1)$
+
+
+\medskip
+\State \underline{Complejidad:} $O(1)$
+\State \underline{Justificaion:}  $O(1)$ $+$ $O(1)$ $+$ $O(256)$ $+$ $O(1)$ $+$ $O(1)$ $+$ $O(1)$ $=$ $O(261)$ = $O(1)$
 
 \end{algorithmic}
 \end{algorithm}
