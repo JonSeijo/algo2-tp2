@@ -9,7 +9,7 @@ Algoritmos 2 - TP2
 
 [X] Desconectar
 
-[ ] Agregar pokemon!!
+[X] Agregar pokemon!!
 
 [X] Rep de Juego castellano
 
