@@ -73,15 +73,22 @@ $ $\newline La idea es que la complejidad de definir y obtener no dependa de la 
 
 
 \Title{Invariante de representacion en castellano}
-Si raiz es $NULL$ entonces el conjunto de claves es vac\'io. $ $\newline
-Si la raiz no es $NULL$ entoncesw el conjunto de claves es no vac\'io. $ $\newline
-Todos los elementos del conjunto de claves estan definidios en el diccTrie.
-$ $\newline
- 
- 
-  \AbsFc[estr]{diccString($\alpha$)}[e]{d : dicc(string, $\alpha$) / ($\forall s$: string)(c $\in$ claves($d$)) $\impluego$ $e$.Definido(s) $=$ $true$ $\land$ obtener($s$, $d$) $=$ $e$.Obtener($s$) }
 
+- Si raiz es $NULL$ entonces el conjunto de claves es vac\'io. \\
+- Si la raiz no es $NULL$ entonces el conjunto de claves es no vac\'io. \\
+- Todos los elementos del conjunto de claves estan definidos en el diccString. \\
+- Ningun nodo tiene entre sus siguientes a un nodo que esta ``antes'' que \'el \\ 
 
+\tadOperacion{Abs}{estr$/d$}{dicc(string, $\alpha$)}{Rep($d$)}%
+\tadAxioma{Abs($d$)}
+{
+$dic$ : dicc(string, $\alpha$) / \\
+	claves($dic$) $\igobs$ $d$.claves $\land$ \\
+	
+	($\forall s$: string) 
+		((def?($s$, $dic$) $\igobs$ $s \in d$.claves)  $\yluego$ \\
+		(def?($s$, $dic$) $\impluego$ obtener($s$, $dic$) $\igobs$ significado de s en la estructura))   
+}%
 
 \end{Representacion}
 
