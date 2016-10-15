@@ -90,7 +90,7 @@ $ $\newline
   
 %crear diccTrie
 \begin{algorithm}[H]
-{\textbf{Vacio}() $\to$ $res$ : diccString($\alpha$)}
+{\textbf{iVacio}() $\to$ $res$ : diccString($\alpha$)}
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $iRiaz$ $\gets $ $NULL$  \Comment $O(1)$
@@ -108,7 +108,7 @@ $ $\newline
 
 %CLAVES
 \begin{algorithm}[H]
-{\textbf{Claves}(\In{d}{diccString($\alpha$)}}) $\to$ $res$ : conj($\alpha$)
+{\textbf{iClaves}(\In{d}{diccString($\alpha$)}}) $\to$ $res$ : conj($\alpha$)
 \begin{algorithmic}[1]
 
 \State $res$ $\gets$ $d$.$claves$ \Comment $O(1)$
@@ -123,7 +123,7 @@ $ $\newline
   
 %OBTENER
 \begin{algorithm}[H]
-{\textbf{Obtener}(\In{p}{string}, \In{d}{diccString($\alpha$)}}) $\to$ $res$ : $\alpha$
+{\textbf{iObtener}(\In{p}{string}, \In{d}{diccString($\alpha$)}}) $\to$ $res$ : $\alpha$
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $n$ $\gets$ $raiz$ \Comment $O(1)$
@@ -152,7 +152,7 @@ $ $\newline
 
 %DEFINIR
 \begin{algorithm}[H]
-{\textbf{Definir}(\Inout{d}{diccString($\alpha$)}, \In{p}{string}, \In{a}{$\alpha$})}
+{\textbf{iDefinir}(\Inout{d}{diccString($\alpha$)}, \In{p}{string}, \In{a}{$\alpha$})}
 \begin{algorithmic}[1]
 
 \State Puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$
@@ -198,7 +198,7 @@ $ $\newline
   
 %DEFINIDO
 \begin{algorithm}[H]
-{\textbf{Def?}(\In{p}{string}) $\to$ $res$ : $bool$}
+{\textbf{iDef?}(\In{p}{string}) $\to$ $res$ : $bool$}
 \begin{algorithmic}[1]
 
 \State Nat $i$ $\gets$ $0$ \Comment $O(1)$
@@ -238,7 +238,7 @@ $ $\newline
 
 %CLAVES
 \begin{algorithm}[H]
-{\textbf{Borrar}(\In{p}{string}, \Inout{d}{diccString($\alpha$)}})
+{\textbf{iBorrar}(\In{p}{string}, \Inout{d}{diccString($\alpha$)}})
 \begin{algorithmic}[1]
 
 \State bool $borrarRaiz$ $\gets$ $d$.Claves() $=$ 1 \Comment $O(1)$
@@ -268,13 +268,13 @@ $ $\newline
 \EndWhile 
 
 
-\If{cuentaHijos($actual$) $>$ 1} \Comment $O(1)$
+\If{CuentaHijos($actual$) $>$ 1} \Comment $O(1)$
 
 	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria ocupada por la definicion $O(1)$
 
 \EndIf 
 
-\If{cuentaHijos($actual$) $=$ 0} \Comment $O(1)$
+\If{CuentaHijos($actual$) $=$ 0} \Comment $O(1)$
 	\State BorrarDesde($reserva$, $rindex$) \Comment $O(|P|)$
 \EndIf 
 
@@ -296,7 +296,7 @@ $ $\newline
   
 %CLAVES
 \begin{algorithm}[H]
-{\textbf{BorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
+{\textbf{iBorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $temp$ $\gets$ raiz \Comment $O(1)$
@@ -342,7 +342,7 @@ $ $\newline
 
 
 \begin{algorithm}[H]
-{\textbf{cuentaHijos}(\In{desde}{puntero(nodo)}} $\to$ $res$ : $nat$)
+{\textbf{iCuentaHijos}(\In{desde}{puntero(nodo)}} $\to$ $res$ : $nat$)
 \begin{algorithmic}[1]
 
 \State nat $i$ $\gets$ 0 \Comment $O(1)$
