@@ -492,7 +492,7 @@ $ $\newline
 \State heap(tupla<id: nat, cantCapt: nat>) $h \gets$ Vacia() \Comment $O(1)$
 \State vector<jugador> \hspace{0.5mm} posiblesCapturadores $\gets$ DameJugadoresEnPokenodo(j, c) \Comment $O(EC)$
 \State nat $i \gets$ 0 \Comment $O(1)$
-\While{$i$ < $Longitud(posiblesCapturadores)$} \Comment $O(EC*log(EC))$
+\While{$i$ <\hspace{0.5mm} $Longitud(posiblesCapturadores)$} \Comment $O(EC*log(EC))$
 	\State aInsertar $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
 	\State it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
 	\State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAHeap $\gets$ $it$ \Comment $O(1)$
