@@ -249,37 +249,36 @@ HAY DIFERENCIA ENTRE LA ESPECIFICACION Y SU SIGNATURA \\
 $ $\newline
 $ $\newline
 
-\Title{Invariante de representacion en castellano}
-Estoy en esto -> Jonathan
+\Title{Invariante de representacion}
 
 $ $\newline
 
-( ) El indice de la posicion del vector es igual al id del juegador en ese indice (de esto se desprende que los ids son unicos) $ $\newline
+(1) El indice de la posicion del vector es igual al id del juegador en ese indice (de esto se desprende que los ids son unicos) $ $\newline
 
 ($\forall i$: nat)((i $<$ Longitud(j.jugadores)) $\impluego$ j.jugadores[$i$].id = i )
 $ $\newline
 
 
-( ) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada existente en el mapa $ $\newline
+(2) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada existente en el mapa $ $\newline
 
 %($\forall e$: jugador) ((esJugadorConectado($e$)) $\impluego$ PosExistente(j.jugadores[$e$].pos, j.mapa))
 ($\forall jug$: jugStruc) ((esJugadorConectado($jug$)) $\impluego$ PosExistente($jug$.pos, j.mapa))
 $ $\newline
 
 
-( ) Dimensiones de la grillaJugs (vector de vectores) es igual al tama\~no del mapa $ $\newline
+(3) Dimensiones de la grillaJugs (vector de vectores) es igual al tama\~no del mapa $ $\newline
 
 Longitud($j$.grillaJugs) = Tam($j$.mapa) $\yluego$ 
 ($\forall i$: nat) (($i <$ Logitud(j.grillaJugs)) Longitud($j$.grillaJugs[i]) = Tam($j$.mapa)) 
 $ $\newline
 
 
-( ) No hay elementos repetidos en las listas de grillaJugs  $ $\newline
+(4) No hay elementos repetidos en las listas de grillaJugs  $ $\newline
 
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j$.mapa) sinRepetidos($j$.grillaJugs[$x$][$y$]))
 $ $\newline
 
-( ) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
+(5) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
 
 %($\forall e:$ jugador) (esJugadorConectado($e$, $j$) $\impluego$ \\
 %	$j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
@@ -289,7 +288,7 @@ $ $\newline
 	
 $ $\newline
 
-( ) Toda id en toda lista de grillaJugs es un de un jugador del juego que este conectado  $ $\newline
+(6) Toda id en toda lista de grillaJugs es un de un jugador del juego que este conectado  $ $\newline
 
 ($\forall x, y:$ nat) (enRango($x$, $y$, $j$.mapa) $\impluego$ \\
 	($\forall i:$ nat) ($i \leq$ Longitud($j$.grillaJugs[$x$][$y$]) \\
@@ -297,73 +296,76 @@ $ $\newline
 
 $ $\newline
 
-( ) iteradorAPos apunta al elemento correcto (misma id) en la lista de grillaJugs correspondiente a su pos $ $\newline
+(7) iteradorAPos apunta al elemento correcto (misma id) en la lista de grillaJugs correspondiente a su pos $ $\newline
 
 ($\forall jug:$ jugStruc) ( esJugadorConectado($jug$, $j$) $\impluego$ Siguiente($jug$.iteradorAPos) = $jug$.id )
 
 $ $\newline
 
-( ) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
+(8) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
 $ $\newline
 ($\forall jug:$ jugStruc) (esJugadorNoEliminado($jug$, $j$) $\impluego$ $jug$.cantCapt = sumaCantidades($jug$.pokemons))
 $ $\newline
 
 
-( ) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
+(9) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
 $j$.cantPokemonTotales = sumatoriaSignificados($j$.cantPokemon)
 $ $\newline
 %(MMMMM NO, creo que se deduce) Los pokemons que un jugador (NO eliminado) capturo, esta en las claves del diccionario del juego con un significado $>$ 0 $ $\newline
 
-( ) Para todo pokemon del diccionario, la cantidad que hay es igual a la suma de los salvajes mas los capturados por jugadores (no eliminados) $ $\newline
+(10) Para todo pokemon del diccionario, la cantidad que hay es igual a la suma de los salvajes mas los capturados por jugadores (no eliminados) $ $\newline
 ($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\
 	Obtener($p$, $j$.cantPokemon) = cantSalvajes($p$, $j$) $+$ sumaPokesCapturados($p$, $j$))
 
 $ $\newline
 
-( ) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
+(11) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
 
 ($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\ 
 	(cantSalvajes($p$, $j$) = Obtener($p$, $j$.cantPokemon) $-$ sumaPokesCapturados($p$, $j$)))
 $ $\newline
 
 
-( ) Dimensiones de pokenodos (vector de vectores) es igual al tama\~no del mapa $ $\newline
+(12) Dimensiones de pokenodos (vector de vectores) es igual al tama\~no del mapa $ $\newline
 
 longitud($j$.pokenodos) = tam($j$.mapa) $\yluego$ 
 ($\forall i$: nat) (($i <$ Logitud(j.pokenodos)) Longitud($j$.pokenodos[i]) = Tam($j$.mapa)) 
 $ $\newline
 
-( ) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa $ $\newline
+(13) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa $ $\newline
 
-($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neg$ NULL) \\
+($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neg$ NULL) \\
 	$\impluego$ posExistente(crearCoordenada(x,y), $j$.mapa))
 $ $\newline
 
 
-( ) No hay pokenodos con pokestrucs que esten a distancia menor a 5 $ $\newline
+(14) No hay pokenodos con pokestrucs que esten a distancia menor a 5 $ $\newline
 
-($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) $ \land$\\
-($\forall z, w$: nat) (($z$ < tam(j.mapa) $\land$ $w$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$z$][$w$] $\neq$ NULL) $\land$ \\
+($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) $ \land$\\
+($\forall z, w$: nat) ((enRango($z$, $w$, $j.mapa$) $\yluego$ $j$.pokenodos[$z$][$w$] $\neq$ NULL) $\land$ \\
 ($x \neq z \land y \neq w$) $\impluego$  distEuclidea(crearCoordenada($x$, $y$), crearCoordenada($z$, $w$)) > 25)
 
 $ $\newline
 
-( ) El contador de todo pokenodo es $<$ 10 $ $\newline
+(15) El contador de todo pokenodo es $<$ 10 $ $\newline
 
-($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
+($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
 	$\impluego$ (*($j$.pokenodos[$x$][$y$])).contador < 10)
 
 $ $\newline
 
-( ) Todo pokestruc tiene un pokemon que esta bien definido $ $\newline
-($\forall x, y$: nat) (($x$ < tam(j.mapa) $\land$ $y$ < tam(j.mapa) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
+(16) Todo pokestruc tiene un pokemon que esta bien definido $ $\newline
+($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
 	$\impluego$ Def?((*($j$.pokenodos[$x$][$y$])).poke), $j$.cantPokemon)
 
+$ $\newline
 
---- relacionados con heaps, pensar mejor
-% creo que con solo hablar del minimo del heap es suficiente, porque es lo unico que necesitamos en realidad. El resto de los jugadores del heap estan solo para poder actualizar al minimo rapido
+% jonathan: creo que con solo hablar del minimo del heap es suficiente, porque es lo unico que necesitamos en realidad. El resto de los jugadores del heap estan solo para poder actualizar al minimo rapido
 
 ( ) Para todas los pokenodos con pokemons, de todos jugadores validos conectados que esten en radio2 con un camino a la posicion del pokemon, el que tiene menos capturados (y menor id si hay empate) se corresponde con el Proximo del heap
+
+
+
 
 $ $\newline
 
