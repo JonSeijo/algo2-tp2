@@ -296,7 +296,7 @@
 
 		\If{$h.raiz \not= h.ultimo$} \Comment $O(1)$
 			\State $puntero(Nodo)$ nuevoNodo $\gets h.ultimo$			\Comment $O(1)$
-			\While{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \implies ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$} \Comment $O(1)$
+			\While{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \implies ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$} \Comment $O(log(EC))$
 				\State $Swap(h, nuevoNodo)$ \Comment $O(1)$
 						
 			\EndWhile
@@ -309,23 +309,23 @@
 
 \begin{algorithm}[H]{\textbf{Borrar}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}, \Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)})}
     	\begin{algorithmic}[1]
-    		\If{$h.raiz = h.ultimo$}
+    		\If{$h.raiz = h.ultimo$} \Comment $O(1)$
     			\State $it.siguiente \gets NULL$ \Comment Libera memoria $O(1)$
-    			\State $h.raiz \gets NULL$
-    			\State $h.ultimo \gets NULL$
+    			\State $h.raiz \gets NULL$ \Comment $O(1)$
+    			\State $h.ultimo \gets NULL$ \Comment $O(1)$
     		\Else    		
-    			\State $puntero(Nodo)$ cambiado $\gets h.ultimo$
-				\State $SwapConElUltimo(h, it.siguiente)$
-				\State BORRAR ULTIMO Y REACOMODAR PUNTEROS
-				\While {$(cambiado \rightarrow der) \not= NULL$}
-					\State $puntero(Nodoheap) minimo \gets Min(cambiado \rightarrow izq, cambiado \rightarrow der)$
-					\If{$((minimo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((minimo \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((minimo \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$}
-					\State $Swap(h, minimo)$
+    			\State $puntero(Nodo)$ cambiado $\gets h.ultimo$ \Comment $O(1)$
+				\State $SwapConElUltimo(h, it.siguiente)$ \Comment $O(1)$
+				\State BORRAR ULTIMO Y REACOMODAR PUNTEROS \Comment $O(1)$
+				\While {$(cambiado \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
+					\State $puntero(Nodoheap) minimo \gets Min(cambiado \rightarrow izq, cambiado \rightarrow der)$ \Comment $O(1)$
+					\If{$((minimo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((minimo \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((minimo \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$} \Comment $O(1)$
+					\State $Swap(h, minimo)$ \Comment $O(1)$
 					\EndIf					
 				\EndWhile
-				\If{$(cambiado \rightarrow izq) \not= NULL$}
-					\If{$((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((cambiado \rightarrow izq \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$}
-						\State $Swap(h, cambiado \rightarrow izq)$
+				\If{$(cambiado \rightarrow izq) \not= NULL$} \Comment $O(1)$
+					\If{$((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((cambiado \rightarrow izq \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$} \Comment $O(1)$
+						\State $Swap(h, cambiado \rightarrow izq)$ \Comment $O(1)$
 					\EndIf
 				\EndIf
 			\EndIf
@@ -358,13 +358,13 @@
     					\State $h.ultimo \gets p$ \Comment $O(1)$
     				\Else
 						\State $puntero(Nodoheap)$ i $\gets h.ultimo$    				 \Comment $O(1)$	
-    					\While {$i \not= NULL \land \neg EsHijoIzquierdo?(j)$}
+    					\While {$i \not= NULL \land \neg EsHijoIzquierdo?(j)$} \Comment $O(log(EC))$
     						\State $i \gets (i \rightarrow padre)$ \Comment $O(1)$
     					
     					\EndWhile
     					\If{$i = NULL$} \Comment $O(1)$
     						\State $puntero(Nodoheap)$ ultimoizq $\gets h.raiz$ \Comment $O(1)$
-    						\While {$(ultimoizq \rightarrow izq) \not= NULL$}
+    						\While {$(ultimoizq \rightarrow izq) \not= NULL$} \Comment $O(log(EC))$
     							\State $ultimoizq \gets (ultimoizq \rightarrow izq)$ \Comment $O(1)$
     						\EndWhile
     						\State $n.padre \gets ultimoizqu$ \Comment $O(1)$
@@ -372,7 +372,7 @@
     						\State $h.ultimo \gets p$ \Comment $O(1)$
     					\Else
     						\State $i \gets (i \rightarrow padre \rightarrow der)$ \Comment $O(1)$
-    						\While{$(i \rightarrow izq) \not= NULL$}
+    						\While{$(i \rightarrow izq) \not= NULL$} \Comment $O(log(EC))$
     							\State $i \gets (i \rightarrow izq)$ \Comment $O(1)$
     						\EndWhile
     						\State $n.padre \gets i$ \Comment $O(1)$

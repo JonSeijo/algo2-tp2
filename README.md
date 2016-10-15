@@ -9,7 +9,9 @@ Algoritmos 2 - TP2
 
 [X] Desconectar
 
-[ ] Agregar pokemon!!
+[X] Agregar pokemon!!
+
+[ ] Esa funcion que te da un vector con los jugadores del pokenodo
 
 [X] Rep de Juego castellano
 
