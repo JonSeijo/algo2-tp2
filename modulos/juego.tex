@@ -322,7 +322,9 @@ $ $\newline
 
 ( ) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
 
-
+($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\ 
+	(cantSalvajes($p$, $j$) = Obtener($p$, $j$.cantPokemon) $-$ sumaPokesCapturados($p$, $j$)))
+$ $\newline
 
 ( ) Dimensiones de pokenodos (vector de vectores) es igual al tama\~no del mapa $ $\newline
 
