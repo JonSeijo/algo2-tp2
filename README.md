@@ -27,7 +27,7 @@ Algoritmos 2 - TP2
 
 [ ] REVISAR ALLIASING Y ALIAS!!!!!!!!!!!!!!!!! (sobre todo en heap)
 
-[ ] Revisar como borrar un nodo y acomodar iteradores en la funcion borrar del iterador del heap
+[X] Revisar como borrar un nodo y acomodar iteradores en la funcion borrar del iterador del heap
 
 [ ] Los "hayPadre", "hijoderecho" etc no tienen que estar en la interfaz del heap
 
@@ -37,7 +37,7 @@ Algoritmos 2 - TP2
 
 [ ] Arreglar interfaz de Juego incompletas (pre, post, complejidad)
 
-[ ] Justificar algoritmos de heap
+[X] Justificar algoritmos de heap
 
 [ ] Revisar 40 veces los algoritmos del heap
 
@@ -45,7 +45,7 @@ Algoritmos 2 - TP2
 
 [ ] Retocar el heap (complejidades, justificaciones, etc)
 
-[ ] Desencolar de heap
+[X] Desencolar de heap
 
 [X] Ver complejidad de AgregarCoordenada en mapa
 
@@ -65,7 +65,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Abs Heap
 
-[ ] Algoritmos de Heap
+[X] Algoritmos de Heap
 
 [ ] Los demas algoritmos de Juego
 
