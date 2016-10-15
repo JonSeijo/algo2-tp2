@@ -371,7 +371,7 @@ $ $\newline
 	
 $ $\newline
 
-(18) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hace ese pokemon entonces su iterador a heap esta bien definido
+(18) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hace ese pokemon entonces su iterador a heap esta bien definido $ $\newline
 
 ($\forall jug$: jugStruc) (esJugadorConectado($jug$, $j$) $\land$ hayPokemonCercano($jug$.pos, $j$) $\impluego$ \\
 hayCamino(posPokemonCercano($j.pos$, $j$), $j$) $\implies$ \\
@@ -381,9 +381,31 @@ $ $\newline
 $ $\newline
 
 
-\RepFc[]{}  
+% Auxiliar
 
-\AbsFc[]{}
+%\tadOperacion{esContigua}{nat$/x$, nat$/y$, nat$/z$, nat$/w$}{bool}{}%
+%\tadAxioma{esContigua($x, y, z, w$)}{contenido} 
+
+$ $\newline
+
+% REP  
+% REVISAR LOS YLUEGOS
+
+\tadOperacion{Rep}{juego$/j$}{bool}{}%
+\tadAxioma{Rep($j$)}
+{(1) $\yluego$ (2) $\land$ (3) $\yluego$ (4) $\land$ (5) $\land$ (6) $\yluego$ (7) $\land$ (8) $\land$ (9) $\yluego$\\
+ (10) $\land$ (11) $\land$ (12) $\yluego$ (13) $\land$ (14) $\land$ (15) $\land$ (16) $\yluego$ (17) $\yluego$ (18)}
+%{{(1) $\yluego$ (2) $\yluego$ (3) $\land$ (4) $\land$ (5) $\land$ (6)}} 
+
+$ $\newline
+$ $\newline
+
+
+% ABS
+
+\tadOperacion{Abs}{juego$/j$}{Juego}{Rep($j$)}%
+\tadAxioma{Abs($j$)}
+{INSERTAR ABS}%
 
 \end{Representacion}
 
