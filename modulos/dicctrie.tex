@@ -275,6 +275,10 @@ $dic$ : dicc(string, $\alpha$) / \\
 \EndWhile 
 
 
+\State EliminarSiguiente((*$actual$).(*$itClave$)) \Comment $O(1)$
+
+\State (*$actual$).$itClave$ $\gets$ $NULL$ \Comment Se libera la memoria ocupada por (*$actual$).$itClave$ $O(1)$
+
 \If{CuentaHijos($actual$) $>$ 1} \Comment $O(1)$
 
 	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria ocupada por la definicion $O(1)$
@@ -289,6 +293,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 \If{borrarRaiz} \Comment $O(1)$
 	\State $d$.raiz $\gets$ $NULL$ \Comment se libera la memoria ocupada por raiz $O(1)$
 \EndIf 
+
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
