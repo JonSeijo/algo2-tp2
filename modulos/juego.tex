@@ -559,7 +559,7 @@ $ $\newline
 
 \State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos>$) \Comment $O(1)$
 
-\State $res \gets proxId$ \Comment $O(1)$
+\State $res$ $\gets$ $proxId$ \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
@@ -624,34 +624,34 @@ $ $\newline
 {\textbf{iAgregarPokemon}(\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego})}
 \begin{algorithmic}[1]
 
-\State $j$.cantPokemonsTotales $\gets$ $j$.cantPokemonsTotales + 1 \Comment $O(1)$
+\State $j$.cantPokemonsTotales $\gets$ $j$.cantPokemonsTotales $+$ 1 \Comment $O(1)$
 
 % Lo defino bien
 \If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
-	\State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+	\State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) $+$ 1) \Comment $O(|P|)$
 \EndIf
 \If{$\neg$ Def?($p$, $j$.cantPokemon)}  \Comment $O(|P|)$
 	\State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
 \EndIf
 
 \State heap(tupla<id: nat, cantCapt: nat>) $h \gets$ Vacia() \Comment $O(1)$
-\State vector<jugador> \hspace{0.5mm} posiblesCapturadores $\gets$ DameJugadoresEnPokenodo(j, c) \Comment $O(EC)$
+\State vector(jugador) \hspace{0.5mm} $posiblesCapturadores$ $\gets$ DameJugadoresEnPokenodo($j$, $c$) \Comment $O(EC)$
 \State nat $i \gets$ 0 \Comment $O(1)$
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
 	\State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
 	\State itheap(tupla<id: nat, cantCapt: nat>) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
 	\State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAHeap $\gets$ $it$ \Comment $O(1)$
-	\State $i \gets i$ + 1 \Comment $O(1)$
+	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
 \EndWhile
 
 \State pokeStruc $pok$ $\gets$ <$p$, 0, $h$> \Comment $O(1)$
-\State puntero(pokeStruc) puntPok $\gets$ $pok$ \Comment $O(1)$
+\State puntero(pokeStruc) puntPok $\gets$ $\&$ $pok$ \Comment $O(1)$
 \State $j$.pokenodos[latitud($c$)][longitud($c$)] $\gets$ puntPok \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(EC*log(EC) + |P|)$ 
-\State \underline{Justificaion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de Heaps es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos del Heap. DameJugadoresEnPokenodo es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
+\State \underline{Justificaion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de Heaps es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos del Heap. DameJugadoresEnPokenodo es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteraci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
 
 \end{algorithmic}
 \end{algorithm}
@@ -661,7 +661,7 @@ $ $\newline
 {\textbf{iCantPokemonTotales}(\In{j}{juego}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
 
-\State $res \gets$ $j$.cantPokemonsTotales \Comment $O(1)$
+\State $res$ $\gets$ $j$.cantPokemonsTotales \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
@@ -675,13 +675,13 @@ $ $\newline
 {\textbf{iIndiceRareza}(\In{p}{pokemon}, \In{j}{juego}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
 
-\State nat $pokecant \gets$ Obtener(j.cantPokemon, $p$) \Comment $O(|P|)$
+\State nat $pokecant$ $\gets$ Obtener(j.cantPokemon, $p$) \Comment $O(|P|)$
 
 \State $res \gets$ 100 $-$ (100 $*$ $pokecant$ $/$ j.cantPokemonsTotales) \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
-\State \underline{Justificacion:} j.cantPokemon es un diccionario sobre trie. La complejidad de buscar (y obtener el significado) en peor caso es la longitud de la string mas larga entre sus claves, eso es O($|P|$). j.cantPokemonsTotales es un dato guardado en la estructura del juego, y se accede en O(1). El resto son una resta, multiplicacion y division, que tambien son O(1). O($|P|$) $+$ O(1) $=$ O($|P|$)
+\State \underline{Justificacion:} Obtener de diccString es $O(|P|)$ segun su iterfaz, y $O(|P|)$ $+$ $O(1)$ $=$ $O(|P|)$ 
 
 \end{algorithmic}
 \end{algorithm}
