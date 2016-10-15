@@ -304,17 +304,25 @@ $ $\newline
 $ $\newline
 
 ( ) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
-
+$ $\newline
 ($\forall jug:$ jugStruc) (esJugadorNoEliminado($jug$, $j$) $\impluego$ $jug$.cantCapt = sumaCantidades($jug$.pokemons))
+$ $\newline
 
 
 ( ) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
-
-(MMMMM NO, creo que se deduce) Los pokemons que un jugador (NO eliminado) capturo, esta en las claves del diccionario del juego con un significado $>$ 0 $ $\newline
+$j$.cantPokemonTotales = sumatoriaSignificados($j$.cantPokemon)
+$ $\newline
+%(MMMMM NO, creo que se deduce) Los pokemons que un jugador (NO eliminado) capturo, esta en las claves del diccionario del juego con un significado $>$ 0 $ $\newline
 
 ( ) Para todo pokemon del diccionario, la cantidad que hay es igual a la suma de los salvajes mas los capturados por jugadores (no eliminados) $ $\newline
+($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\
+	Obtener($p$, $j$.cantPokemon) = cantSalvajes($p$, $j$) $+$ sumaPokesCapturados($p$, $j$))
+
+$ $\newline
 
 ( ) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
+
+
 
 ( ) Dimensiones de pokenodos (vector de vectores) es igual al tama\~no del mapa $ $\newline
 
