@@ -361,15 +361,13 @@ $ $\newline
 
 
 --- relacionados con heaps, pensar mejor
+% creo que con solo hablar del minimo del heap es suficiente, porque es lo unico que necesitamos en realidad. El resto de los jugadores del heap estan solo para poder actualizar al minimo rapido
 
-( ) Todos los ids de la cola de prioridad del pokestruc pertenecen a jugadores conectados que esten en el rango2 con un camino hacia el pokemon, y la cantidad de pokemones del heap y el jugador se corresponen $ $\newline
+( ) Para todas los pokenodos con pokemons, de todos jugadores validos conectados que esten en radio2 con un camino a la posicion del pokemon, el que tiene menos capturados (y menor id si hay empate) se corresponde con el Proximo del heap
 
-( ) Si el jugador esta conectado, en rango2 con un camino hacia un pokestruc, entonces esta su id en la cola de prioridad del pokestruc y la cantidad de pokemons se corresponde $ $\newline
+$ $\newline
 
-( ) Si el jugador esta conectado, en rango2 con un camino hacia un pokenodo, el iterador a la cola de prioridad se corresponde consigo mismo $ $\newline
-
-
-
+( ) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hace ese pokemon entonces su iterador a heap esta bien definido
 
 $ $\newline
 
