@@ -254,7 +254,11 @@ Estoy en esto -> Jonathan
 
 $ $\newline
 
-( ) id del juegador es igual al indice de la posicion del vector (de esto se desprende que los ids son unicos) $ $\newline
+( ) El indice de la posicion del vector es igual al id del juegador en ese indice (de esto se desprende que los ids son unicos) $ $\newline
+$ $\newline
+($\forall i$: nat)(i $<$ Longitud(j.jugadores)) $\impluego$ j.jugadores[$i$].id = i 
+$ $\newline
+
 
 ( ) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada valida en el mapa $ $\newline
 
