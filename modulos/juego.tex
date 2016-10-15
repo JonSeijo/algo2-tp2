@@ -362,11 +362,13 @@ $ $\newline
 
 % jonathan: creo que con solo hablar del minimo del heap es suficiente, porque es lo unico que necesitamos en realidad. El resto de los jugadores del heap estan solo para poder actualizar al minimo rapido
 
-( ) Para todas los pokenodos con pokemons, de todos jugadores validos conectados que esten en radio2 con un camino a la posicion del pokemon, el que tiene menos capturados (y menor id si hay empate) se corresponde con el Proximo del heap
+( ) Para todas los pokenodos con pokemons, de todos jugadores validos, conectados, que esten en un radio menor a 2, con un camino a la posicion del pokemon, el que tiene menos cantidad de pokemons capturados (y menor id en caso de empate) se corresponde con el Proximo del Heap $ $\newline
 
-
-
-
+($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
+	(minJ(entrenadoresPosibles(crearCoordenada($x$, $y$), jugadoresConectados($j$), $j$) = \\
+	(proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).id) $\land$ \\
+	((proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).cant = $j$.jugadores[proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).id].cantcapt))
+	
 $ $\newline
 
 ( ) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hace ese pokemon entonces su iterador a heap esta bien definido
