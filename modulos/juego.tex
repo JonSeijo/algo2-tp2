@@ -309,7 +309,7 @@ $ $\newline
 
 
 (9) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
-$j$.cantPokemonTotales = sumatoriaSignificados($j$.cantPokemon)
+$j$.cantPokemonTotales = sumaSignif($j$.cantPokemon)
 $ $\newline
 %(MMMMM NO, creo que se deduce) Los pokemons que un jugador (NO eliminado) capturo, esta en las claves del diccionario del juego con un significado $>$ 0 $ $\newline
 
@@ -401,7 +401,35 @@ $ $\newline
 %{$x$ < tam($j$.mapa) $\land$ $y$ < tam($j$.mapa) $\land$} 
 $ $\newline
 
+\tadOperacion{sumaCantidades}{secu(tupla<p: pokemon, cant: nat>)}{nat}{}%
+\tadAxioma{sumaCantidades(<>)}{0} 
+\tadAxioma{sumaCantidades(a $\puntito$ s)}{a.cant + sumaCantidades(s)}
+$ $\newline
 
+\tadOperacion{sumaSignif}{dicc(string, nat)}{nat}{}%
+\tadAxioma{sumaSignif($d$)}{sumaSignifAux(claves($d$), $d$)} 
+$ $\newline
+
+\tadOperacion{sumaSignifAux}{conj(string), dicc(string, nat)}{nat}{}%
+\tadAxioma{sumaSignifAux($cs$, $d$)}
+{\IF $\emptyset$?(cs) THEN 0 ELSE obtener(dameUno($cs$), $d$) + sumaSignifAux(sinUno($cs$), $d$) FI} 
+$ $\newline
+
+\tadOperacion{cantSalvajes}{pokemon$/p$, juego$/j$}{nat}{}%
+\tadAxioma{cantSalvajes($p, j$)}
+{$\#$($p$, pokemonsSalvajes(posConPokemons($j$)))} 
+$ $\newline
+
+\tadOperacion{sumaPokesCapturados}{pokemon$/p$, juego$/j$}{nat}{}%
+\tadAxioma{sumaPokesCapturados($p$, $j$)}{sumaPokesCapturadosAux($p$, $j$, jugadoresConectados($j$))} 
+$ $\newline
+
+\tadOperacion{sumaPokesCapturadosAux}{pokemon$/p$, juego$/j$, conj(jugador)$/js$}{nat}{}%
+\tadAxioma{sumaPokesCapturadosAux($p$, $j$, $js$)}
+{\IF $\emptyset$?($js$) THEN 0 ELSE  
+$\#$($p$, dameUno($js$).pokemons) + sumaPokesCapturadosAux($p$, $j$, sinUno($js$))
+FI} 
+$ $\newline
 
 % REP  
 % REVISAR LOS YLUEGOS
