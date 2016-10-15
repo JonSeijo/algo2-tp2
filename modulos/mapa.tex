@@ -216,8 +216,9 @@ $ $\newline
 
 \tadOperacion{Abs}{estr$/m$}{Mapa}{Rep($m$)}%
 \tadAxioma{Abs($m$)}
-{map : Mapa / ($\forall c$: coord)(c $\in$ coordenadas(map)) $\impluego$ \\
-(m.grilla[latitud(c)][longitud(c)][latitud(c)][longitud(c)] = true )}%
+{map : Mapa / ($\forall c$: coord)(c $\in$ coordenadas(map)) $\iff$ \\
+( (latitud($c$) $< m$.tam) $\land$ (longitud($c$) $< m$.tam) $\yluego$ \\
+\hspace{1cm}	$m$.grilla[latitud($c$)][longitud($c$)][latitud($c$)][longitud($c$)] = true )}%
 
 \end{Representacion}
 
