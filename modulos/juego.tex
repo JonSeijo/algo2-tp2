@@ -262,7 +262,8 @@ $ $\newline
 
 ( ) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada existente en el mapa $ $\newline
 
-($\forall e$: jugador) ((esJugadorConectado($e$)) $\impluego$ PosExistente(j.jugadores[$e$].pos, j.mapa))
+%($\forall e$: jugador) ((esJugadorConectado($e$)) $\impluego$ PosExistente(j.jugadores[$e$].pos, j.mapa))
+($\forall jug$: jugStruc) ((esJugadorConectado($jug$)) $\impluego$ PosExistente($jug$.pos, j.mapa))
 $ $\newline
 
 
@@ -280,8 +281,11 @@ $ $\newline
 
 ( ) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
 
-($\forall e:$ jugador) (esJugadorConectado($e$, $j$) $\impluego$ \\
-	$j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
+%($\forall e:$ jugador) (esJugadorConectado($e$, $j$) $\impluego$ \\
+%	$j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
+
+($\forall jug:$ jugStruc) (esJugadorConectado($jug$) $\impluego$ \\
+	$jug$.id $\in$ $j$.grillaJugs[latitud($jug$.pos)][longitud($jug$.pos)])
 	
 $ $\newline
 
