@@ -49,6 +49,8 @@ Algoritmos 2 - TP2
 
 [X] Ver complejidad de AgregarCoordenada en mapa
 
+[ ] Para asignar a un puntero algo que no es un puntero hay que usar &. Ver AgregarPokemon, estado 18
+
 [ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
 Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
 porque de como esta implementada se encarga el mapa. Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
