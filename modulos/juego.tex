@@ -255,14 +255,23 @@ Estoy en esto -> Jonathan
 $ $\newline
 
 ( ) El indice de la posicion del vector es igual al id del juegador en ese indice (de esto se desprende que los ids son unicos) $ $\newline
-$ $\newline
-($\forall i$: nat)(i $<$ Longitud(j.jugadores)) $\impluego$ j.jugadores[$i$].id = i 
+
+($\forall i$: nat)((i $<$ Longitud(j.jugadores)) $\impluego$ j.jugadores[$i$].id = i )
 $ $\newline
 
 
-( ) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada valida en el mapa $ $\newline
+( ) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada existente en el mapa $ $\newline
+
+($\forall e$: jugador) ((esJugadorConectado($e$)) $\impluego$ PosExistente(j.jugadores[$e$].pos, j.mapa))
+$ $\newline
+
 
 ( ) Dimensiones de la grillaJugs (vector de vectores) es igual al tama\~no del mapa $ $\newline
+
+Longitud($j$.grillaJugs) = Tam($j$.mapa) $\yluego$ 
+($\forall i$: nat) (($i <$ Logitud(j.grillaJugs)) Longitud($j$.grillaJugs[i]) = Tam($j$.mapa)) 
+$ $\newline
+
 
 ( ) No hay elementos repetidos en las listas de grillaJugs  $ $\newline
 
