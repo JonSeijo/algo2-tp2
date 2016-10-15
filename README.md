@@ -67,6 +67,8 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Abs Heap
 
+[ ] Agregar en el rep de juego que no puede haber repetidos entre los elementos que capturo el jugador
+
 [X] Algoritmos de Heap
 
 [ ] Los demas algoritmos de Juego
