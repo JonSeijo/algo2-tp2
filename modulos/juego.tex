@@ -275,7 +275,7 @@ $ $\newline
 
 (4) No hay elementos repetidos en las listas de grillaJugs  $ $\newline
 
-($\forall x, y$: nat) ((enRango($x$, $y$, $j$.mapa) sinRepetidos($j$.grillaJugs[$x$][$y$]))
+($\forall x, y$: nat) ((enRango($x$, $y$, $j$.mapa) $\impluego$ sinRepetidos($j$.grillaJugs[$x$][$y$]))
 $ $\newline
 
 (5) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
@@ -378,15 +378,30 @@ hayCamino(posPokemonCercano($j.pos$, $j$), $j$) $\implies$ \\
 siguiente($jug$.iterAHeap).id = $jug$.id $\land$ siguiente($jug$.iterAHeap).cant = $j$.cantCapt) 
 
 $ $\newline
+
+% Auxiliares
+
+%\tadOperacion{esContigua}{nat$/x$, nat$/y$}{bool}{}%
+%\tadAxioma{esContigua($x, y$)}{contenido} 
+%$ $\newline
+
+\tadOperacion{esJugadorConectado}{jugStruc$/jug$, juego$/j$}{bool}{}%
+\tadAxioma{esJugadorConectado($jug, j$)}
+{$jug \in j$.jugadores $\yluego$ $jug$.conectado} 
+$ $\newline
+
+\tadOperacion{esJugadorNoEliminado}{jugStruc$/jug$, juego$/j$}{bool}{}%
+\tadAxioma{esJugadorNoEliminado($jug$, $j$)}
+{$jug \in j$.jugadores $\yluego$ $jug$.sanciones < 5} 
+$ $\newline
+
+\tadOperacion{enRango}{nat$/x$, nat$/y$, juego$/j$}{bool}{}%
+\tadAxioma{enRango($x, y, j$)}
+{posExistente(crearCoordenada($x$, $y$), $j$.mapa)}
+%{$x$ < tam($j$.mapa) $\land$ $y$ < tam($j$.mapa) $\land$} 
 $ $\newline
 
 
-% Auxiliar
-
-%\tadOperacion{esContigua}{nat$/x$, nat$/y$, nat$/z$, nat$/w$}{bool}{}%
-%\tadAxioma{esContigua($x, y, z, w$)}{contenido} 
-
-$ $\newline
 
 % REP  
 % REVISAR LOS YLUEGOS
