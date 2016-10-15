@@ -197,12 +197,11 @@
 
 
 % cantMismaEspecie : pokémon × multiconj(pokémon) −→ nat
-VERVERVER \\
-HAY DIFERENCIA ENTRE LA ESPECIFICACION Y SU SIGNATURA \\
-\InterfazFuncion{cantMismaEspecie}{\In{j}{juego}}{nat}%
-[true] 
-{$res = cantMismaEspecie(j)$}  % Ver que mucho no me convence
-[$O(iNFINITO)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
+
+\InterfazFuncion{cantMismaEspecie}{{\In{p}{pokemon}, \In{j}{juego}}{nat}
+[$p$ $\in$ todosLosPokemons($j$)] 
+{$res$ = cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
+[$O(|p|)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
 % Podemos guardar el dato como un valor de la estructura del juego
 [Devuelve la cantidad de pokemons totales del juego]
 
@@ -1040,5 +1039,19 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \end{algorithmic}
 \end{algorithm}
 
+
+
+\begin{algorithm}[H]
+{\textbf{icantMismaEspecie}(\In{p}{pkemon}, \In{j}{juego}) $\to$ $res$ : nat}
+\begin{algorithmic}[1]
+
+\State $res$ $\gets$ $cantPokemon$.Obtener($p$)  \Comment $O(|p|)$
+
+\medskip
+\Statex \underline{Complejidad:} $O(|p|)$
+\Statex \underline{Justificaion:} La unica operacion es $O(|p|)$
+
+\end{algorithmic}
+\end{algorithm}  
   
 \end{Algoritmos}
