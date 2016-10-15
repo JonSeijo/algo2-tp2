@@ -1090,28 +1090,4 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \end{algorithm}  
 
 
-
-\begin{algorithm}[H]
-{\textbf{iExpulsados}(\In{j}{juego}) $\to$ $res$ : conj(jugador)}
-\begin{algorithmic}[1]
-
-\State nat $i$ $\gets$ 0 \Comment $O(1)$
-
-\State conj(jugador) $js$ $\gets$ Vac\'io() \Comment $O(1)$
-
-\While{$i$ $<$ Longitud($j$.jugadores) $-$ 1} \Comment se repite Longitud($j$.jugadores) veces $O(1)$
-	\If{$j$.jugadores[$i$].sanciones $\geq$ 5} \Comment $O(1)$
-		\State AgregarRapido($js$, $j$.jugadores[$i$].id) \Comment $O(1)$
-	\EndIf
-\EndWhile
-
-\State $res$ $\gets$ $js$ \Comment $O(1)$
-
-\medskip
-\Statex \underline{Complejidad:} $O(J)$
-\Statex \underline{Justificaion:} Siendo $J$ la cantidad total de jugadores, se los recorre todos buscando los expulsados.
-
-\end{algorithmic}
-\end{algorithm}  
-  
 \end{Algoritmos}
