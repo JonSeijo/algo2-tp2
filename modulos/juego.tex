@@ -284,7 +284,7 @@ $ $\newline
 %($\forall e:$ jugador) (esJugadorConectado($e$, $j$) $\impluego$ \\
 %	$j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
 
-($\forall jug:$ jugStruc) (esJugadorConectado($jug$) $\impluego$ \\
+($\forall jug:$ jugStruc) (esJugadorConectado($jug$, $j$) $\impluego$ \\
 	$jug$.id $\in$ $j$.grillaJugs[latitud($jug$.pos)][longitud($jug$.pos)])
 	
 $ $\newline
@@ -299,13 +299,13 @@ $ $\newline
 
 ( ) iteradorAPos apunta al elemento correcto (misma id) en la lista de grillaJugs correspondiente a su pos $ $\newline
 
-($\forall e:$ jugador) ( esJugadorConectado($e$, $j$) $\impluego$ Siguiente($j$.jugadores[$e$].iteradorAPos) = $e$ )
+($\forall jug:$ jugStruc) ( esJugadorConectado($jug$, $j$) $\impluego$ Siguiente($jug$.iteradorAPos) = $jug$.id )
 
 $ $\newline
 
 ( ) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
 
-($\forall e:$ jugador) (esJugadorNoEliminado($e$, $j$) $\impluego$ $j$.jugadores[$e$].cantCapt = sumaCantidades($j$.jugadores[$e$].pokemons))
+($\forall jug:$ jugStruc) (esJugadorNoEliminado($jug$, $j$) $\impluego$ $jug$.cantCapt = sumaCantidades($jug$.pokemons))
 
 
 ( ) cantPokemonTotales es igual a la sumatoria de todos los significados del diccionario $ $\newline
