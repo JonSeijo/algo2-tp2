@@ -3,7 +3,7 @@ Algoritmos 2 - TP2
 
 ## Lista de cosas para hacer
 
-[ ] Mover
+[X] Mover
 
 [X] Conectar
 
