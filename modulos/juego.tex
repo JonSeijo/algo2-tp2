@@ -716,7 +716,7 @@ $ $\newline
 				\State CasoMov1($e$, $posAntes$, $c$, $j$)
 			\Else
 
-				\State CASO 5			
+				\State CasoMov5($e$, $posAntes$, $c$, $j$)
 			\EndIf		
 		\EndIf
 	\Else %If no hay despues
@@ -815,7 +815,6 @@ $ $\newline
 $ $\newline
 
 % tengo que borrarme del pokenodo del que sali
-
 % borro al jugador del pokestruc
 \State Eliminar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
 
@@ -952,6 +951,70 @@ $ $\newline
 $ $\newline
 $ $\newline
 
+% CASO 5
+
+%\begin{algorithm}[H]
+% Es casi igual al caso 2 + 3, si esta mal una esta mal la otra
+{\textbf{iCasoMov5}(\In{e}{jugador}, \In{ant}{coor} \In{desp}{coor}, \Inout{j}{juego}))}
+\begin{algorithmic}[1]
+
+\Statex \underline{CasoMov5} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Este es el caso en donde el jugador estaba cerca de un pokemon y se movi\'o hacias las cercanias de otro pokemon distinto
+\Statex \underline{Pre}: $j$ = $j_0$ $\land$ hayPokemonCercano($ant$, $j$) $\land$ $\neg$hayPokemonCercano($desp$, $j$) $\yluego$ posPokemonCercano($ant$, $j$) $\neq$ posPokemonCercano($desp$, $j$)
+\Statex \underline{Post}: $j_0$ = moverse($e$, $desp$, $j$) 
+\Statex \underline{Complejidad}:  $O((PS *|P|) + log(EC))$ 
+\Statex \underline{Aliasing}: Produce aliasing, el juego es modificable
+
+$ $\newline
+
+% tengo que borrarme del pokenodo del que sali
+% borro al jugador del pokestruc
+\State Eliminar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
+
+% Actualizo el iter al nuevo pokenodo
+\State coor $pokePos \gets$ PosPokemonCercano($desp$, $j$) \Comment $O(1)$
+
+\State $j$.jugadores[$e$].iterAEntrenadores $\gets$ Encolar(\\
+$   $\hspace*{2cm}	$j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
+$   $\hspace*{1cm}) \Comment $O(log(EC))$
+
+
+\State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
+
+\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+
+	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
+
+	% A donde me movi lo pongo en 0
+	\If{Siguiente($iterPos$) $\neq$ $pokepos$}
+		\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
+	\EndIf
+
+	
+	% Los actualizo todos pues me sali fuera
+	\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+	
+	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
+		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+	\Else 
+		\State Avanzar($iterPos$)	\Comment $O(1)$	
+	\EndIf
+
+\EndWhile 
+
+
+
+\medskip
+\Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
+\Statex \underline{Justificaci\'on:} Se elimina al jugador de la cola de entrenadores del pokestruc en el que se encontraba: $O(log(EC))$. Inserto el jugador en la ola de entrenadores del nuevo pokenodo: $O(log(EC))$. En total hasta ahora cuesta $2*O(log(EC)) = O(log(EC))$. Luego recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo, teniendo en cuenta la complejidad acumulada antes de ciclo, es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
+\end{algorithmic}
+%\end{algorithm}
+
+$ $\newline
+$ $\newline
 
 
 
