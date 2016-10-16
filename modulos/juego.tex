@@ -1255,18 +1255,18 @@ $ $\newline
 \State coor $coorConPokemon$    \Comment $O(1)$
 
 \If{j.pokenodos[$x$][$y$] $\neq$ NULL}     \Comment $O(1)$
-    \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+    \State $coorConPokemon \gets$ CrearCoor($x$, $y$)    \Comment $O(1)$
 \EndIf
 
 \If{$x > 0$}
     \If{j.pokenodos[$x-1$][$y$] $\neq$ NULL}     \Comment $O(1)$
-        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \State $coorConPokemon \gets$ CrearCoor($x-1$, $y$)    \Comment $O(1)$
     \EndIf
 
     \If{$y > 0$}
 
         \If{j.pokenodos[$x-1$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x-1$, $y-1$)    \Comment $O(1)$
         \EndIf
 
     \EndIf
@@ -1274,13 +1274,13 @@ $ $\newline
     % tam(m) no puede ser 0 porque existe una coordenada al menos (x,y)
     \If{$y < tam(m) - 1$}
         \If{j.pokenodos[$x-1$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x-1$, $y+1$)    \Comment $O(1)$
         \EndIf
     \EndIf
 
     \If{$x-1 > 0$}
         \If{j.pokenodos[$x-2$][$y$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x-1$, $y$)    \Comment $O(1)$
         \EndIf
     \EndIf
 
@@ -1289,13 +1289,13 @@ $ $\newline
 \If{$y > 0$}
 
     \If{j.pokenodos[$x$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
-        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \State $coorConPokemon \gets$ CrearCoor($x$, $y-1$)    \Comment $O(1)$
     \EndIf
 
     \If{$y-1 > 0$}
 
         \If{j.pokenodos[$x$][$y-2$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x$, $y-2$)    \Comment $O(1)$        
         \EndIf
 
     \EndIf
@@ -1305,13 +1305,13 @@ $ $\newline
 \If{$y < tam(m) - 1$}
 
     \If{j.pokenodos[$x$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
-        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \State $coorConPokemon \gets$ CrearCoor($x$, $y+1$)    \Comment $O(1)$    
     \EndIf
 
 
     \If{$tam(m) > 1 \land y < tam(m) - 2$}
         \If{j.pokenodos[$x$][$y+2$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x$, $y+2$)    \Comment $O(1)$
         \EndIf
 
 
@@ -1321,18 +1321,18 @@ $ $\newline
 
 \If{$x < tam(m) - 1$}
     \If{j.pokenodos[$x+1$][$y$] $\neq$ NULL}     \Comment $O(1)$
-        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
-        \EndIf
+        \State $coorConPokemon \gets$ CrearCoor($x+1$, $y$)    \Comment $O(1)$
+    \EndIf
 
     \If{$y > 0$}
         \If{j.pokenodos[$x+1$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x+1$, $y-1$)    \Comment $O(1)$
         \EndIf
     \EndIf
 
     \If{$y < tam(m)-1$}
         \If{j.pokenodos[$x+1$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
-            \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+            \State $coorConPokemon \gets$ CrearCoor($x+1$, $y+1$)    \Comment $O(1)$
         \EndIf
 
     \EndIf
@@ -1340,7 +1340,7 @@ $ $\newline
 
 \If{$tam(m) > 1 \land x < tam(m) - 2$}
     \If{j.pokenodos[$x+2$][$y$] $\neq$ NULL}     \Comment $O(1)$
-        \State $coorConPokemon \gets CrearCoor(x, y)$    \Comment $O(1)$
+        \State $coorConPokemon \gets$ CrearCoor($x+2$, $y$)    \Comment $O(1)$
     \EndIf
 \EndIf
 
