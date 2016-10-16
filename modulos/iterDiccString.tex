@@ -1,5 +1,5 @@
-
 \begin{Interfaz}
+\subsection{Interfaz}
 
   \textbf{par\'ametros formales}\hangindent=2\parindent\\
   \parbox{1.7cm}{\textbf{g\'eneros}} $\alpha$
@@ -40,12 +40,12 @@
 
 \end{Interfaz}
 
-\pagebreak
+%\pagebreak
+
 
 \begin{Representacion}
-  
-  \Title{Representaci\'on del iterDiccString}  
-  
+\subsection{Representacion del iterDiccString}
+    
   \begin{Estructura}{iterDiccString($\alpha$)}[estr]
     \begin{Tupla}[estr]
       \tupItem{itClave}{itConj(string)}%
@@ -54,9 +54,19 @@
   \end{Estructura}
 
 
-\Title{Invariante de representacion en castellano}
+\Title{Invariante de representacion}
 
-- Sarasa sarasa
+
+\tadOperacion{Rep}{estr$/e$}{bool}{}%
+\tadAxioma{Rep($e$)}
+{Rep($e$.itClave) $\yluego$ ((siguiente($e$.itClave) $=$ NULL $\oluego$ siguiente($e$.itClave) $\in$ claves($e$.dicc))}
+
+$ $\newline
+$ $\newline
+
+
+
+\Title{Funcion de abstraccion}
 
 \tadOperacion{Abs}{estr$/d$}{dicc(string, $\alpha$)}{Rep($d$)}%
 \tadAxioma{Abs($d$)}{
@@ -66,9 +76,9 @@
 \end{Representacion}
 
 \begin{Algoritmos}
-
-
+\subsection{Algoritmos}
 % crearIt 
+
 
 \begin{algorithm}[H]
 {\textbf{iCrearIt}(\In{d}{diccString($\alpha$)}) $\to$ $res$ : iterDiccString($\alpha$)}
@@ -129,7 +139,7 @@
 
 \end{Algoritmos}  
   
-Servicios usados: \\
+\subsection{Servicios usados}
 
 De conj($\alpha$) \\
 - CrearIt(conj($\alpha$)) debe ser O(1) \\
