@@ -703,7 +703,8 @@ $ $\newline
 	\State coor $posAntes \gets$ Copiar($j$.jugadores[$e$].pos)  \Comment $O(1)$
 	\State bool $hayPokAntes \gets$ HayPokemonCercano($posAntes$, $j$)  \Comment $O(1)$
 	\State bool $hayPokDesp \gets$ HayPokemonCercano($c$, $j$)  \Comment $O(1)$	
-	$ $\newline
+	
+	\Statex $ $
 	
 	\If{$hayPokDesp$}
 	
@@ -727,6 +728,14 @@ $ $\newline
 		\EndIf		
 		
 	\EndIf
+	
+	% En cualquier caso, hay que actualizar las nuevas posiciones
+	\Statex $ $
+	\Statex $ $
+	% Borro la posicion de la lista de posiciones y asigno una nueva
+	\State Borrar($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
+	\State $j$.jugadores[$e$].iterAPos $\gets$ AgregarAtras($j$.grillaJugs[Latitud($c$)][Longitud($c$)]) \Comment $O(1)$
+	\State $j$.jugadores[$e$].pos $\gets$ $c$ \Comment $O(1)$	
 	
 \EndIf
 
