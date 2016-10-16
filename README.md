@@ -29,9 +29,7 @@ Algoritmos 2 - TP2
 
 [X] Revisar como borrar un nodo y acomodar iteradores en la funcion borrar del iterador del heap
 
-[ ] Los "hayPadre", "hijoderecho" etc no tienen que estar en la interfaz del heap
-
-[ ] Hacer la funcion publica "HaySiguiente" y "Siguiente" para acceder al elemento del heap
+[X] Los "hayPadre", "hijoderecho" etc no tienen que estar en la interfaz del heap
 
 [X] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
 
@@ -43,7 +41,7 @@ Algoritmos 2 - TP2
 
 [ ] Agregar Copiar() en heap
 
-[ ] Retocar el heap (complejidades, justificaciones, etc)
+[X] Retocar el heap (complejidades, justificaciones, etc)
 
 [X] Desencolar de heap
 
@@ -54,8 +52,6 @@ Algoritmos 2 - TP2
 [ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
 Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
 porque de como esta implementada se encarga el mapa. Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
-
-[ ] Hay siguiente de iteradores de heap
 
 [X] Preguntar lo de MultiConjunto. Es necesario hacer el modulo? ver .txt de preguntas para mas info
 
@@ -91,7 +87,7 @@ jonathan: Ya no es necesario porque ahora usamos un diccionario
 [X] !!! Hacer iterador para recorrer el vector de jugadores. Lo tenemos que hacer nosotros porque necesitamos que se saltee los eliminados!!!
 - jonathan: solucion alternativa, mantener actualizado un conjunto de jugadores no eliminado. Voy a tener que modificar la estructura un poco.
 
-[ ] Renombrar heap por colaDePrioridad donde corresponda
+[X] Renombrar heap por colaDePrioridad donde corresponda
 
 [X] Explicacion de estructura para Juego
 
@@ -105,7 +101,7 @@ jonathan: Ya no es necesario porque ahora usamos un diccionario
 
 [X] Renombrar los usos de diccTrie
 
-[ ] Renombrar los usos de Heap
+[X] Renombrar los usos de Heap
 
 [X] Funcion CrearGrilla(tam) en Mapa. Tiene que ser privada, no aparece en la interfaz pero falta el algoritmo
 
