@@ -102,12 +102,12 @@
 
 %pokémons : jugador e × juego j −→ multiconj(pokémon) {e ∈ jugadores(j)}
 %VER
-\InterfazFuncion{Pokemons}{\In{j}{juego}, \In{e}{jugador}}{multiconj}%
+\InterfazFuncion{Pokemons}{\In{j}{juego}, \In{e}{jugador}}{iterDiccString(nat)}%
 [$e \in jugadores(j)$]
-{$res = ITERADOR?? VER ENUNCIADO POCO CLARO$}%
+{$res \igobs $ crearIt($j$.jugadores[$e$].pokemons)}%
 [$O(1)$] % por enunciado. 
-[FRUTA]
-{TENEMOS QUE HACER EL MULTICONJUNTO? ITERADOR A TUPLA POR ENUNCIADO? VER SI ESTA EN MODS BASICOS SINO QUE SEA VECTOR Y CHAU}
+[Devuelve un iterador a los pokemons capturados por el jugador]
+{Aliasing: el iterador se invalida si el conjunto de claves del DiccString (que contiene a los pokemons del jugador) cambia}
 
 
 
@@ -1426,17 +1426,15 @@ $ $\newline
 
 % pokemons
 
-VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO?? 
-
 \begin{algorithm}[H]
-{\textbf{iPokemons}(\In{e}{jugador}, \In{j}{juego}) $\to$ $res$ : multiconj(jugador)}
+{\textbf{iPokemons}(\In{e}{jugador}, \In{j}{juego}) $\to$ $res$ : iterDiccString(nat)}
 \begin{algorithmic}[1]
 
 \State $res \gets $ CrearIt(j.jugadores[e].pokemons) \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
-\State \underline{Justificacion:} Devuelvo un iterador
+\State \underline{Justificacion:} Devuelvo un iterador en O(1)
 
 \end{algorithmic}
 \end{algorithm}
