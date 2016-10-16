@@ -672,14 +672,16 @@ $ $\newline
 	
 		\State $j$.jugadores[$e$].conectado $\gets$ false \Comment $O(1)$
 		\State EliminarSiguiente($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
-		\State itDiccString $pokesJug \gets$ crearIterador($j$.jugadores[$e$].pokemons) \Comment $O(1)$
+	%	\State itDiccString $pokesJug \gets$ crearIterador($j$.jugadores[$e$].pokemons) \Comment $O(1)$
+	
+		\State itConj $pokesJug \gets$ Claves($j$.jugadores[$e$].pokemons) \Comment $O(1)$ 	
 		
 		\While{HaySiguiente($pokesJug$)}   \Comment El jugador pudo haber capturado PC pokemons $O(PC*|P|)$
-			% Asumo que tengo un iterador para el trie, cuyo siguiente es tupla <poke, cant>
+			% PokesJug es un iterador para el conjuntp de claves
 			\State pokemon $pokeActual \gets$ Siguiente($pokesJug$).poke 	\Comment $O(1)$
-			\State nat $cantActual \gets$ Siguiente($pokesJug$).cant 	\Comment $O(1)$
+			\State nat $cantActual \gets$ Obtener($j$.jugadores[$e$].pokemons, $pokeActual$) \Comment $O(|P|)$
 			
-			\State Definir($j$.cantPokemons, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cant$) \Comment $O(|P|)$
+			\State Definir($j$.cantPokemon, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cantActual$) \Comment $O(|P|)$
 		\EndWhile
 		
 		\State $j$.cantPokemonTotales $\gets$ $j$.cantPokemonTotales - $j$.jugadores[$e$].cantCapt \Comment $O(1)$
@@ -708,8 +710,7 @@ $ $\newline
 					
 		\Else %Hay Antes
 			\If{PosPokemonCercano($posAntes$, $j$) = PosPokemonCercano($c$, $j$)}  \Comment $O(1)$
-
-				\State CASO 1
+				\State CasoMov1($e$, $posAntes$, $c$, $j$)
 			\Else
 
 				\State CASO 5			
@@ -725,9 +726,6 @@ $ $\newline
 		
 	\EndIf
 	
-	
-
-
 \EndIf
 
 \medskip
@@ -739,6 +737,50 @@ $ $\newline
 
 
 
+$ $\newline
+$ $\newline
+
+%\begin{algorithm}[H]
+{\textbf{iCasoMov1}(\In{e}{jugador}, \In{ant}{coor} \In{desp}{coor}, \Inout{j}{juego}))}
+\begin{algorithmic}[1]
+
+\Statex \underline{CasoMov1} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Este es el caso en donde el jugador estaba cerca de un pokemon y se movi\'o dentro del mismo radio 
+\Statex \underline{Pre}: $j$ = $j_0$ $\land$ hayPokemonCercano($ant$, $j$) $\land$ hayPokemonCercano($desp$, $j$) $\yluego$ posPokemonCercano($ant$, $j$) = posPokemonCercano($desp$, $j$) 
+\Statex \underline{Post}: $j_0$ = moverse($e$, $desp$, $j$) 
+\Statex \underline{Complejidad}: INFINITO
+\Statex \underline{Aliasing}: Produce aliasing, el juego es modificable
+
+$ $\newline
+$ $\newline
+
+\State coor $pokePos \gets$ PosPokemonCercano($c$, $j$) \Comment $O(1)$
+\State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
+
+\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+
+	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
+	
+	\If{Siguiente($iterPos$) $\neq$ $pokepos$}
+		\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+	\EndIf
+	
+	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
+		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+	\Else 
+		\State Avanzar($iterPos$)	\Comment $O(1)$	
+	\EndIf
+
+\EndWhile 
+
+\medskip
+\Statex \underline{Complejidad:} $O(PS *|P|)$ 
+\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$
+\end{algorithmic}
+%\end{algorithm}
 
 
 
