@@ -133,7 +133,7 @@
 [$c \in posConPokemons(j)$]
 {$res = pokemonEnPos(c, j)$}%
 [$O(1)$] % Ibamos a guardar el pokemon en la tupla del pokenodo
-[Devuelve el pokemon que se encuentra en la posicion c. Sin aliasing, devuelve por copia]
+[Devuelve el pokemon que se encuentra en la posicion c]
 
 
 %cantMovimientosParaCaptura : coor c × juego j −→ nat {c ∈ posConPokémons(j)}
@@ -1064,6 +1064,20 @@ $ $\newline
 \begin{algorithmic}[1]
 
 \State $res \gets$ $j$.posPokemons \Comment Por referencia $O(1)$
+ 
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+\end{algorithmic}
+\end{algorithm}
+
+
+% pokemonEnPos 
+
+\begin{algorithm}[H]
+{\textbf{iPokemonEnPos}(\In{j}{juego}, \In{c}{coor}) $\to$ $res$ : pokemon}
+\begin{algorithmic}[1]
+
+\State $res \gets$ (($j$.pokenodos[Latitud($c$)][Longitud($c$)]) $\rightarrow$ poke) \Comment $O(1)$
  
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
