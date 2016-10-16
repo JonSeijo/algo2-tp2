@@ -69,6 +69,10 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Agregar en el rep de juego que no puede haber repetidos entre los elementos que capturo el jugador
 
+[ ] Revisar rep y abs para la nueva estructura
+
+[ ] Modificar agregarPokemon para que actualice las posConPokemons
+
 [X] Algoritmos de Heap
 
 [ ] Los demas algoritmos de Juego
