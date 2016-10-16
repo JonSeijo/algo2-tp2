@@ -1473,4 +1473,31 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \end{algorithmic}
 \end{algorithm}  
   
+
+
+
+\begin{algorithm}[H]
+{\textbf{iMovValido}(\In{e}{jugador}, \In{c}{coor}, \In{j}{juego}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+\Statex \underline{MovValido} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Dice si el movimiento entre la posicion del jugador y la nueva coordenada c, es valido 
+\Statex \underline{Pre}: $e \in$ jugadoresConctados($j$) $\land$ posExistente($c$, $j$.mapa) 
+\Statex \underline{Post}: $res$ = hayCamino($c$, $j$.jugadores[$e$].pos, $j$.mapa) $\land$ 
+\Statex $ $\hspace*{2cm} DistEuclidea($c$, $j$.jugadores[$e$].pos) $\leq$ 100
+\Statex \underline{Complejidad}: $O(1)$ 
+
+\State bool $camino \gets$ HayCamino($c$, $j$.jugadores[$e$].pos, $j$.mapa) \Comment $O(1)$
+\State bool $distancia \gets$ (DistEuclidea($c$, $j$.jugadores[$e$].pos) $\leq$ 100) \Comment $O(1)$
+\State $res$ $\gets$ $camino \land distancia$ \Comment $O(1)$
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+\Statex \underline{Justificaion:} Todas las operaciones usadas son O(1): O(1) + O(1) + O(1) = O(1)
+
+\end{algorithmic}
+\end{algorithm}  
+  
+
+
 \end{Algoritmos}
