@@ -15,6 +15,7 @@
 {alias(esPermutaci\'on(SecuSuby($res$), claves($d$)))}%
 [$O(1)$] % Por enunciado
 [Devuelve un iterador al diccionario]
+{Aliasing: El iterador se invalida si se modifican claves del diccionario}
 
 \InterfazFuncion{HayMas?}{\In{it}{iterDiccString($\alpha$)}}{bool}%
 [true]
@@ -66,7 +67,30 @@
 \end{Representacion}
 
 \begin{Algoritmos}
+
+
+% crearIt 
+
+\begin{algorithm}[H]
+{\textbf{iCrearIt}(\In{d}{diccString($\alpha$)}) $\to$ $res$ : iterDiccString($\alpha$)}
+\begin{algorithmic}[1]
+
+\State $res \gets$ $\langle$ $d$ , $Claves(d)$ $\rangle$ \Comment Por referencia $O(1)$
+ 
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+\end{algorithmic}
+\end{algorithm}
+
+
+
   
   
 \end{Algoritmos}
+
+
+Servicios usados:
+
+- Claves(diccString($\alpha$)) debe ser O(1)
+
 
