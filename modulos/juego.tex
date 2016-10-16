@@ -1474,7 +1474,7 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \end{algorithm}  
   
 
-
+% movValido
 
 \begin{algorithm}[H]
 {\textbf{iMovValido}(\In{e}{jugador}, \In{c}{coor}, \In{j}{juego}) $\to$ $res$ : bool}
@@ -1498,6 +1498,35 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \end{algorithmic}
 \end{algorithm}  
   
+
+% sumarUnoEnJug
+
+\begin{algorithm}[H]
+{\textbf{iSumarUnoEnJug}(\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego})}
+\begin{algorithmic}[1]
+
+\Statex \underline{SumarUnoEnJug} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Suma uno a la cantidad de pokemons p que tiene el jugador 
+\Statex \underline{Pre}: $j = j_0$ $\land$  $e \in$ jugadores($j$)
+\Statex \underline{Post}: $\#$pokemons($p$, $j_0$.jugadores[$e$].pokemons) = $\#$pokemons($p$, $j$.jugadores[$e$].pokemons) + 1 (y lo demas no cambi\'o)
+\Statex \underline{Complejidad}: $O(|P|)$ 
+
+% Lo defino bien
+\If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+\Else
+  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
+\EndIf
+
+
+\medskip
+\Statex \underline{Complejidad:} $O(|P|)$
+\Statex \underline{Justificaion:} Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}  
+  
+
 
 
 \end{Algoritmos}
