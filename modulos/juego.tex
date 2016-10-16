@@ -241,6 +241,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
     \tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
     \tupItem{\\ grillaJugs}{vector(vector(lista(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay una lista de los jugadores que estan en esa posicion
     \tupItem{\\ pokenodos}{vector(vector(puntero(pokeStruc)))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
+    \tupItem{\\ posPokemons}{conj(coor)}
 \end{Tupla}
 \end{Estructura}
 
@@ -256,7 +257,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
       \tupItem{\\ sanciones}{nat}%
       \tupItem{\\ conectado}{bool}
       \tupItem{\\ pos}{coor}
-      \tupItem{\\ pokemons}{lista(tupla<pokemon, cantidad>)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
+      \tupItem{\\ pokemons}{diccString(nat)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
       \tupItem{\\ iteradorAHeap}{itHeap(tupla<id: nat, cantCapt: nat>)} % Iterador al heap
       \tupItem{\\ iteradorAPos}{itLista(nat)}   
       \tupItem{\\ cantCapt}{nat}
@@ -298,18 +299,18 @@ $ $\newline
 (5) Todo jugador que esta conectado tiene su id en la lista que se encuentra en grillaJugs para su posicion  $ $\newline
 
 %($\forall e:$ jugador) (esJugadorConectado($e$, $j$) $\impluego$ \\
-%	$j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
+% $j$.jugadores[$e$].id $\in$ $j$.grillaJugs[latitud($j$.jugadores[$e$])][longitud($j$.jugadores[$e$])])
 
 ($\forall jug:$ jugStruc) (esJugadorConectado($jug$, $j$) $\impluego$ \\
-	$jug$.id $\in$ $j$.grillaJugs[latitud($jug$.pos)][longitud($jug$.pos)])
-	
+  $jug$.id $\in$ $j$.grillaJugs[latitud($jug$.pos)][longitud($jug$.pos)])
+  
 $ $\newline
 
 (6) Toda id en toda lista de grillaJugs es un de un jugador del juego que este conectado  $ $\newline
 
 ($\forall x, y:$ nat) (enRango($x$, $y$, $j$.mapa) $\impluego$ \\
-	($\forall i:$ nat) ($i \leq$ Longitud($j$.grillaJugs[$x$][$y$]) \\
-		$j$.jugadores($j$.grillaJugs[$x$][$y$][$i$]).conectado
+  ($\forall i:$ nat) ($i \leq$ Longitud($j$.grillaJugs[$x$][$y$]) \\
+    $j$.jugadores($j$.grillaJugs[$x$][$y$][$i$]).conectado
 
 $ $\newline
 
@@ -332,14 +333,14 @@ $ $\newline
 
 (10) Para todo pokemon del diccionario, la cantidad que hay es igual a la suma de los salvajes mas los capturados por jugadores (no eliminados) $ $\newline
 ($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\
-	Obtener($p$, $j$.cantPokemon) = cantSalvajes($p$, $j$) $+$ sumaPokesCapturados($p$, $j$))
+  Obtener($p$, $j$.cantPokemon) = cantSalvajes($p$, $j$) $+$ sumaPokesCapturados($p$, $j$))
 
 $ $\newline
 
 (11) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
 
 ($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\ 
-	(cantSalvajes($p$, $j$) = Obtener($p$, $j$.cantPokemon) $-$ sumaPokesCapturados($p$, $j$)))
+  (cantSalvajes($p$, $j$) = Obtener($p$, $j$.cantPokemon) $-$ sumaPokesCapturados($p$, $j$)))
 $ $\newline
 
 
@@ -352,7 +353,7 @@ $ $\newline
 (13) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa $ $\newline
 
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neg$ NULL) \\
-	$\impluego$ posExistente(crearCoordenada(x,y), $j$.mapa))
+  $\impluego$ posExistente(crearCoordenada(x,y), $j$.mapa))
 $ $\newline
 
 
@@ -367,13 +368,13 @@ $ $\newline
 (15) El contador de todo pokenodo es $<$ 10 $ $\newline
 
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
-	$\impluego$ (*($j$.pokenodos[$x$][$y$])).contador < 10)
+  $\impluego$ (*($j$.pokenodos[$x$][$y$])).contador < 10)
 
 $ $\newline
 
 (16) Todo pokestruc tiene un pokemon que esta bien definido $ $\newline
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
-	$\impluego$ Def?((*($j$.pokenodos[$x$][$y$])).poke), $j$.cantPokemon)
+  $\impluego$ Def?((*($j$.pokenodos[$x$][$y$])).poke), $j$.cantPokemon)
 
 $ $\newline
 
@@ -382,10 +383,10 @@ $ $\newline
 (17) Para todas los pokenodos con pokemons, de todos jugadores validos, conectados, que esten en un radio menor a 2, con un camino a la posicion del pokemon, el que tiene menos cantidad de pokemons capturados (y menor id en caso de empate) se corresponde con el Proximo del Heap $ $\newline
 
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
-	(minJ(entrenadoresPosibles(crearCoordenada($x$, $y$), jugadoresConectados($j$), $j$) = \\
-	(proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).id) $\land$ \\
-	((proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).cant = $j$.jugadores[proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).id].cantcapt))
-	
+  (minJ(entrenadoresPosibles(crearCoordenada($x$, $y$), jugadoresConectados($j$), $j$) = \\
+  (proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).id) $\land$ \\
+  ((proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).cant = $j$.jugadores[proximo(*($j$.pokenodos[$x$][$y$]).entrenadores)).id].cantcapt))
+  
 $ $\newline
 
 (18) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hace ese pokemon entonces su iterador a heap esta bien definido $ $\newline
@@ -467,21 +468,21 @@ $ $\newline
 \tadAxioma{Abs($j$)}
 {
 $jue$ : Juego / \\
-	mapa($jue$) $\igobs$ $j$.map $\land$ \\
-	jugadores($jue$) $\igobs$ $j$.jugadores $\land$ \\ 
+  mapa($jue$) $\igobs$ $j$.map $\land$ \\
+  jugadores($jue$) $\igobs$ $j$.jugadores $\land$ \\ 
 
-	($\forall e$: jugador) (($e \in$ jugadores($jue$) $\impluego$ \\
-		estaConectado($e$, $jue$) $\igobs$ $j$.jugadores[$e$].conectado $\land$ \\
-		sanciones($e$, $jue$) $\igobs$ $j$.jugadores[$e$].sanciones $\land$ \\
-		pokemons($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pokemons $\land$ \\
-		estaConectado($e$, $jue$) $\implies$ posicion($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pos)) $\land$ \\
+  ($\forall e$: jugador) (($e \in$ jugadores($jue$) $\impluego$ \\
+    estaConectado($e$, $jue$) $\igobs$ $j$.jugadores[$e$].conectado $\land$ \\
+    sanciones($e$, $jue$) $\igobs$ $j$.jugadores[$e$].sanciones $\land$ \\
+    pokemons($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pokemons $\land$ \\
+    estaConectado($e$, $jue$) $\implies$ posicion($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pos)) $\land$ \\
 
-	expulsados($jue$) $\igobs$ expulsadosAux($j$.jugadores) $\land$ \\
-	posConPokemon($jue$) $\igobs$ posConPokemonAux($j$.pokenodos) $\land$ \\
-	
-	($\forall c:$ coor) (($c \in$ posConPokemon($jue$)) $\impluego$ \\
-		pokemonEnPos($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ poke) $\land$ \\
-		cantMovimientosParaCaptura($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ contador))
+  expulsados($jue$) $\igobs$ expulsadosAux($j$.jugadores) $\land$ \\
+  posConPokemon($jue$) $\igobs$ posConPokemonAux($j$.pokenodos) $\land$ \\
+  
+  ($\forall c:$ coor) (($c \in$ posConPokemon($jue$)) $\impluego$ \\
+    pokemonEnPos($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ poke) $\land$ \\
+    cantMovimientosParaCaptura($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ contador))
 }%
 
 \end{Representacion}
@@ -625,13 +626,14 @@ $ $\newline
 \begin{algorithmic}[1]
 
 \State $j$.cantPokemonsTotales $\gets$ $j$.cantPokemonsTotales + 1 \Comment $O(1)$
+\State AgregarRepido($j$.posPokemons) \Comment Por precondicion puedoAgregarPokemon $O(1)$
 
 % Lo defino bien
 \If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
-	\State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
 \EndIf
 \If{$\neg$ Def?($p$, $j$.cantPokemon)}  \Comment $O(|P|)$
-	\State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
 \EndIf
 
 \State heap(tupla<id: nat, cantCapt: nat>) $h \gets$ Vacia() \Comment $O(1)$
@@ -639,10 +641,10 @@ $ $\newline
 \State nat $i \gets$ 0 \Comment $O(1)$
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
-	\State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
-	\State itheap(tupla<id: nat, cantCapt: nat>) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
-	\State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAHeap $\gets$ $it$ \Comment $O(1)$
-	\State $i \gets i$ + 1 \Comment $O(1)$
+  \State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
+  \State itheap(tupla<id: nat, cantCapt: nat>) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
+  \State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAHeap $\gets$ $it$ \Comment $O(1)$
+  \State $i \gets i$ + 1 \Comment $O(1)$
 \EndWhile
 
 \State pokeStruc $pok$ $\gets$ <$p$, 0, $h$> \Comment $O(1)$
@@ -665,78 +667,78 @@ $ $\newline
 
 % Si el movimiento es invalido, tengo que sancionarle y posiblemente eliminarlo
 \If{$\neg$MovValido($e$, $c$, $j$)}
-	
-	\State $j$.jugadores[$e$].sanciones $\gets$ $j$.jugadores[$e$].sanciones $+$ 1 \Comment $O(1)$
-	
-	\If{$j$.jugadores[$e$].sanciones $\geq$ 5}
-	
-		\State $j$.jugadores[$e$].conectado $\gets$ false \Comment $O(1)$
-		\State EliminarSiguiente($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
-	%	\State itDiccString $pokesJug \gets$ crearIterador($j$.jugadores[$e$].pokemons) \Comment $O(1)$
-	
-		\State itConj $pokesJug \gets$ Claves($j$.jugadores[$e$].pokemons) \Comment $O(1)$ 	
-		
-		\While{HaySiguiente($pokesJug$)}   \Comment El jugador pudo haber capturado PC pokemons $O(PC*|P|)$
-			% PokesJug es un iterador para el conjuntp de claves
-			\State pokemon $pokeActual \gets$ Siguiente($pokesJug$).poke 	\Comment $O(1)$
-			\State nat $cantActual \gets$ Obtener($j$.jugadores[$e$].pokemons, $pokeActual$) \Comment $O(|P|)$
-			
-			\State Definir($j$.cantPokemon, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cantActual$) \Comment $O(|P|)$
-		\EndWhile
-		
-		\State $j$.cantPokemonTotales $\gets$ $j$.cantPokemonTotales - $j$.jugadores[$e$].cantCapt \Comment $O(1)$
-		
-		\If{HayPokemonCerca($j$.jugadores[$e$].pos)}   \Comment $O(1)$
-			\State Borrar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
-		\EndIf
-		
-		\State Avanzar($pokesJug$) \Comment $O(1)$
+  
+  \State $j$.jugadores[$e$].sanciones $\gets$ $j$.jugadores[$e$].sanciones $+$ 1 \Comment $O(1)$
+  
+  \If{$j$.jugadores[$e$].sanciones $\geq$ 5}
+  
+    \State $j$.jugadores[$e$].conectado $\gets$ false \Comment $O(1)$
+    \State EliminarSiguiente($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
+  % \State itDiccString $pokesJug \gets$ crearIterador($j$.jugadores[$e$].pokemons) \Comment $O(1)$
+  
+    \State itConj $pokesJug \gets$ Claves($j$.jugadores[$e$].pokemons) \Comment $O(1)$  
+    
+    \While{HaySiguiente($pokesJug$)}   \Comment El jugador pudo haber capturado PC pokemons $O(PC*|P|)$
+      % PokesJug es un iterador para el conjuntp de claves
+      \State pokemon $pokeActual \gets$ Siguiente($pokesJug$).poke  \Comment $O(1)$
+      \State nat $cantActual \gets$ Obtener($j$.jugadores[$e$].pokemons, $pokeActual$) \Comment $O(|P|)$
+      
+      \State Definir($j$.cantPokemon, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cantActual$) \Comment $O(|P|)$
+    \EndWhile
+    
+    \State $j$.cantPokemonTotales $\gets$ $j$.cantPokemonTotales - $j$.jugadores[$e$].cantCapt \Comment $O(1)$
+    
+    \If{HayPokemonCerca($j$.jugadores[$e$].pos)}   \Comment $O(1)$
+      \State Borrar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
+    \EndIf
+    
+    \State Avanzar($pokesJug$) \Comment $O(1)$
 
-	\EndIf
+  \EndIf
 
 \EndIf
 
 
 % Ahora tengo que hacer los movimientos propiamente dichos (solo si el jugador no fue eliminado)
 \If{$j$.jugadores[$e$].sanciones $<$ $5$}
-	
-	\State coor $posAntes \gets$ Copiar($j$.jugadores[$e$].pos)  \Comment $O(1)$
-	\State bool $hayPokAntes \gets$ HayPokemonCercano($posAntes$, $j$)  \Comment $O(1)$
-	\State bool $hayPokDesp \gets$ HayPokemonCercano($c$, $j$)  \Comment $O(1)$	
-	
-	\Statex $ $
-	
-	\If{$hayPokDesp$}
-	
-		\If{$\neg$ $hayPokAntes$}	
-			\State CasoMov3($e$, $posAntes$, $c$, $j$)  \Comment $O((PS *|P|) + log(EC))$ 
-					
-		\Else %Hay Antes
-			\If{PosPokemonCercano($posAntes$, $j$) = PosPokemonCercano($c$, $j$)}  \Comment $O(1)$
-				\State CasoMov1($e$, $posAntes$, $c$, $j$) \Comment $O(PS *|P|)$ 
-			\Else
+  
+  \State coor $posAntes \gets$ Copiar($j$.jugadores[$e$].pos)  \Comment $O(1)$
+  \State bool $hayPokAntes \gets$ HayPokemonCercano($posAntes$, $j$)  \Comment $O(1)$
+  \State bool $hayPokDesp \gets$ HayPokemonCercano($c$, $j$)  \Comment $O(1)$ 
+  
+  \Statex $ $
+  
+  \If{$hayPokDesp$}
+  
+    \If{$\neg$ $hayPokAntes$} 
+      \State CasoMov3($e$, $posAntes$, $c$, $j$)  \Comment $O((PS *|P|) + log(EC))$ 
+          
+    \Else %Hay Antes
+      \If{PosPokemonCercano($posAntes$, $j$) = PosPokemonCercano($c$, $j$)}  \Comment $O(1)$
+        \State CasoMov1($e$, $posAntes$, $c$, $j$) \Comment $O(PS *|P|)$ 
+      \Else
 
-				\State CasoMov5($e$, $posAntes$, $c$, $j$) \Comment  $O((PS *|P|) + log(EC))$ 
- 			\EndIf		
-		\EndIf
-	\Else %If no hay despues
-		\If{$hayPokAntes$}
-			
-			\State CasoMov2($e$, $posAntes$, $c$, $j$) \Comment  $O((PS *|P|) + log(EC))$ 
-		\Else
-			\State CasoMov4($e$, $posAntes$, $c$, $j$) \Comment  $O(PS *|P|)$ 
-		\EndIf		
-		
-	\EndIf
-	
-	% En cualquier caso, hay que actualizar las nuevas posiciones
-	\Statex $ $
-	\Statex $ $
-	% Borro la posicion de la lista de posiciones y asigno una nueva
-	\State Borrar($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
-	\State $j$.jugadores[$e$].iterAPos $\gets$ AgregarAtras($j$.grillaJugs[Latitud($c$)][Longitud($c$)]) \Comment $O(1)$
-	\State $j$.jugadores[$e$].pos $\gets$ $c$ \Comment $O(1)$	
-	
+        \State CasoMov5($e$, $posAntes$, $c$, $j$) \Comment  $O((PS *|P|) + log(EC))$ 
+      \EndIf    
+    \EndIf
+  \Else %If no hay despues
+    \If{$hayPokAntes$}
+      
+      \State CasoMov2($e$, $posAntes$, $c$, $j$) \Comment  $O((PS *|P|) + log(EC))$ 
+    \Else
+      \State CasoMov4($e$, $posAntes$, $c$, $j$) \Comment  $O(PS *|P|)$ 
+    \EndIf    
+    
+  \EndIf
+  
+  % En cualquier caso, hay que actualizar las nuevas posiciones
+  \Statex $ $
+  \Statex $ $
+  % Borro la posicion de la lista de posiciones y asigno una nueva
+  \State Borrar($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
+  \State $j$.jugadores[$e$].iterAPos $\gets$ AgregarAtras($j$.grillaJugs[Latitud($c$)][Longitud($c$)]) \Comment $O(1)$
+  \State $j$.jugadores[$e$].pos $\gets$ $c$ \Comment $O(1)$ 
+  
 \EndIf
 
 \medskip
@@ -772,20 +774,20 @@ $ $\newline
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
 
-	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
-	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
-	
-	\If{Siguiente($iterPos$) $\neq$ $pokepos$}
-		\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
-	\EndIf
-	
-	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
-		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
-		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
-	\Else 
-		\State Avanzar($iterPos$)	\Comment $O(1)$	
-	\EndIf
+  \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+  \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
+  
+  \If{Siguiente($iterPos$) $\neq$ $pokepos$}
+    \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+  \EndIf
+  
+  \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State EliminarSiguiente($iterPos$) \Comment $O(1)$
+    \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+  \Else 
+    \State Avanzar($iterPos$) \Comment $O(1)$ 
+  \EndIf
 
 \EndWhile 
 
@@ -822,19 +824,19 @@ $ $\newline
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
 
-	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
-	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
-	
-	% Los actualizo todos pues me sali fuera
-	\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
-	
-	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
-		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
-		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
-	\Else 
-		\State Avanzar($iterPos$)	\Comment $O(1)$	
-	\EndIf
+  \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+  \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
+  
+  % Los actualizo todos pues me sali fuera
+  \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+  
+  \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State EliminarSiguiente($iterPos$) \Comment $O(1)$
+    \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+  \Else 
+    \State Avanzar($iterPos$) \Comment $O(1)$ 
+  \EndIf
 
 \EndWhile 
 
@@ -870,26 +872,26 @@ $ $\newline
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
 \State $j$.jugadores[$e$].iterAEntrenadores $\gets$ Encolar(\\
-$   $\hspace*{2cm}	$j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
+$   $\hspace*{2cm}  $j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
 $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
 
-	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
-	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
-	
-	% A donde me movi lo pongo en 0
-	\If{Siguiente($iterPos$) $\neq$ $pokepos$}
-		\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
-	\EndIf
-	
-	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
-		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
-		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
-	\Else 
-		\State Avanzar($iterPos$)	\Comment $O(1)$	
-	\EndIf
+  \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+  \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
+  
+  % A donde me movi lo pongo en 0
+  \If{Siguiente($iterPos$) $\neq$ $pokepos$}
+    \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
+  \EndIf
+  
+  \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State EliminarSiguiente($iterPos$) \Comment $O(1)$
+    \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+  \Else 
+    \State Avanzar($iterPos$) \Comment $O(1)$ 
+  \EndIf
 
 \EndWhile 
 
@@ -924,19 +926,19 @@ $ $\newline
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
 
-	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
-	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
-	
-	% Los actualizo todos pues me sali fuera
-	\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
-	
-	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
-		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
-		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
-	\Else 
-		\State Avanzar($iterPos$)	\Comment $O(1)$	
-	\EndIf
+  \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+  \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
+  
+  % Los actualizo todos pues me sali fuera
+  \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+  
+  \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State EliminarSiguiente($iterPos$) \Comment $O(1)$
+    \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+  \Else 
+    \State Avanzar($iterPos$) \Comment $O(1)$ 
+  \EndIf
 
 \EndWhile 
 
@@ -975,7 +977,7 @@ $ $\newline
 \State coor $pokePos \gets$ PosPokemonCercano($desp$, $j$) \Comment $O(1)$
 
 \State $j$.jugadores[$e$].iterAEntrenadores $\gets$ Encolar(\\
-$   $\hspace*{2cm}	$j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
+$   $\hspace*{2cm}  $j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
 $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
 
@@ -983,25 +985,25 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
 
-	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
-	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
+  \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+  \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
 
-	% A donde me movi lo pongo en 0
-	\If{Siguiente($iterPos$) $\neq$ $pokepos$}
-		\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
-	\EndIf
+  % A donde me movi lo pongo en 0
+  \If{Siguiente($iterPos$) $\neq$ $pokepos$}
+    \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
+  \EndIf
 
-	
-	% Los actualizo todos pues me sali fuera
-	\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
-	
-	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
-		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
-		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
-	\Else 
-		\State Avanzar($iterPos$)	\Comment $O(1)$	
-	\EndIf
+  
+  % Los actualizo todos pues me sali fuera
+  \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+  
+  \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State EliminarSiguiente($iterPos$) \Comment $O(1)$
+    \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+  \Else 
+    \State Avanzar($iterPos$) \Comment $O(1)$ 
+  \EndIf
 
 \EndWhile 
 
@@ -1462,9 +1464,9 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \State conj(jugador) $js$ $\gets$ Vac\'io() \Comment $O(1)$
 
 \While{$i$ $<$ Longitud($j$.jugadores) $-$ 1} \Comment se repite Longitud($j$.jugadores) veces $O(1)$
-	\If{$j$.jugadores[$i$].sanciones $\geq$ 5} \Comment $O(1)$
-		\State AgregarRapido($js$, $j$.jugadores[$i$].id) \Comment $O(1)$
-	\EndIf
+  \If{$j$.jugadores[$i$].sanciones $\geq$ 5} \Comment $O(1)$
+    \State AgregarRapido($js$, $j$.jugadores[$i$].id) \Comment $O(1)$
+  \EndIf
 \EndWhile
 
 \State $res$ $\gets$ $js$ \Comment $O(1)$
