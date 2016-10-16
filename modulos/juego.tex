@@ -693,6 +693,43 @@ $ $\newline
 \EndIf
 
 
+% Ahora tengo que hacer los movimientos propiamente dichos (solo si el jugador no fue eliminado)
+\If{$j$.jugadores[$e$].sanciones $<$ $5$}
+	
+	\State coor $posAntes \gets$ Copiar($j$.jugadores[$e$].pos)  \Comment $O(1)$
+	\State bool $hayPokAntes \gets$ HayPokemonCercano($posAntes$, $j$)  \Comment $O(1)$
+	\State bool $hayPokDesp \gets$ HayPokemonCercano($c$, $j$)  \Comment $O(1)$	
+	$ $\newline
+	
+	\If{$hayPokDesp$}
+	
+		\If{$\neg$ $hayPokAntes$}	
+			\State CASO 3
+					
+		\Else %Hay Antes
+			\If{PosPokemonCercano($posAntes$, $j$) = PosPokemonCercano($c$, $j$)}  \Comment $O(1)$
+
+				\State CASO 1
+			\Else
+
+				\State CASO 5			
+			\EndIf		
+		\EndIf
+	\Else %If no hay despues
+		\If{$hayPokAntes$}
+			
+			\State CASO 2
+		\Else
+			\State CASO 4
+		\EndIf		
+		
+	\EndIf
+	
+	
+
+
+\EndIf
+
 \medskip
 \State \underline{Complejidad:} $O((PS + PC)*|P| + log(EC))$ 
 \State \underline{Justificaci\'on:} :)
