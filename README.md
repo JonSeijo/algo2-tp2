@@ -69,6 +69,10 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Agregar en el rep de juego que no puede haber repetidos entre los elementos que capturo el jugador
 
+[ ] Actualizar estructura: ahora existen posConPokemons que es una lista de coordenadas, y reemplaza la lista de pokemons del jugador, por un trie de pokemons - cantidad
+
+[ ] Iterador de funcion pokemons, es un iterador modificado de conjunto (despues de todo quiero que recorra las claves del conjunto) lo unico que modifica el es "siguiente" que me da el significado como tuplas ?
+
 [ ] Revisar rep y abs para la nueva estructura
 
 [ ] Modificar agregarPokemon para que actualice las posConPokemons
@@ -81,7 +85,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [X] Algoritmos de las funciones que exporta coordenada (derecha, izquierda ..)
 
-[ ] GrillaJugs deberia ser vector(vector(jugador)) (nat en vez del jugstruc) Cambiarlo y revisar los algoritmos que usan la grilla para ver que no rompemos nada
+[X] GrillaJugs deberia ser vector(vector(jugador)) (nat en vez del jugstruc) Cambiarlo y revisar los algoritmos que usan la grilla para ver que no rompemos nada
 
 [ ] !!! Hacer iterador para recorrer el vector de jugadores. Lo tenemos que hacer nosotros porque necesitamos que se saltee los eliminados!!!
 

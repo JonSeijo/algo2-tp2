@@ -709,7 +709,7 @@ $ $\newline
 	\If{$hayPokDesp$}
 	
 		\If{$\neg$ $hayPokAntes$}	
-			\State CASO 3
+			\State CasoMov3($e$, $posAntes$, $c$, $j$)
 					
 		\Else %Hay Antes
 			\If{PosPokemonCercano($posAntes$, $j$) = PosPokemonCercano($c$, $j$)}  \Comment $O(1)$
@@ -791,7 +791,7 @@ $ $\newline
 
 \medskip
 \Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
-\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$
+\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. 
 \end{algorithmic}
 %\end{algorithm}
 
@@ -843,13 +843,65 @@ $ $\newline
 
 \medskip
 \Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
-\Statex \underline{Justificaci\'on:} Se elimina al jugador de la cola de entrenadores del pokestruc en el que se encontraba: $O(log(EC))$. Luego recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total es $O(PC*|P|)$. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
+\Statex \underline{Justificaci\'on:} Se elimina al jugador de la cola de entrenadores del pokestruc en el que se encontraba: $O(log(EC))$. Luego recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
 \end{algorithmic}
 %\end{algorithm}
 
 $ $\newline
 $ $\newline
 
+
+% CASO 3
+
+% Es casi igual al caso 1, si esta mal una esta mal la otra
+%\begin{algorithm}[H]
+{\textbf{iCasoMov3}(\In{e}{jugador}, \In{ant}{coor} \In{desp}{coor}, \Inout{j}{juego}))}
+\begin{algorithmic}[1]
+
+\Statex \underline{CasoMov3} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Este es el caso en donde el jugador no estaba cerca de ninguno y se movi\'o dentro de algun radio de pokemon
+\Statex \underline{Pre}: $j$ = $j_0$ $\land$ $\neg$hayPokemonCercano($ant$, $j$) $\land$ hayPokemonCercano($desp$, $j$) 
+\Statex \underline{Post}: $j_0$ = moverse($e$, $desp$, $j$) 
+\Statex \underline{Complejidad}: $O(PS *|P|)$ 
+\Statex \underline{Aliasing}: Produce aliasing, el juego es modificable
+
+$ $\newline
+
+\State coor $pokePos \gets$ PosPokemonCercano($desp$, $j$) \Comment $O(1)$
+\State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
+
+\State $j$.jugadores[$e$].iterAEntrenadores $\gets$ Encolar(\\
+$   $\hspace*{2cm}	$j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
+$   $\hspace*{1cm}) \Comment $O(log(EC))$
+
+\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+
+	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
+	
+	% A donde me movi lo pongo en 0
+	\If{Siguiente($iterPos$) $\neq$ $pokepos$}
+		\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
+	\EndIf
+	
+	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
+		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+	\Else 
+		\State Avanzar($iterPos$)	\Comment $O(1)$	
+	\EndIf
+
+\EndWhile 
+
+\medskip
+\Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
+\Statex \underline{Justificaci\'on:} Modifico la cola de entrenadores del pokestruc al cual el jugador se mueve agregando el jugador a la cola: $O(log(EC))$. Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
+\end{algorithmic}
+%\end{algorithm}
+
+$ $\newline
+$ $\newline
 
 % CASO 4
 
@@ -893,7 +945,7 @@ $ $\newline
 
 \medskip
 \Statex \underline{Complejidad:} $O((PS *|P|))$ 
-\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total es $O(PC*|P|)$. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
+\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
 \end{algorithmic}
 %\end{algorithm}
 
