@@ -89,6 +89,7 @@ jonathan: Ya no es necesario porque ahora usamos un diccionario
 [X] GrillaJugs deberia ser vector(vector(jugador)) (nat en vez del jugstruc) Cambiarlo y revisar los algoritmos que usan la grilla para ver que no rompemos nada
 
 [ ] !!! Hacer iterador para recorrer el vector de jugadores. Lo tenemos que hacer nosotros porque necesitamos que se saltee los eliminados!!!
+- jonathan: solucion alternativa, mantener actualizado un conjunto de jugadores no eliminado. Voy a tener que modificar la estructura un poco.
 
 [ ] Renombrar heap por colaDePrioridad donde corresponda
 
