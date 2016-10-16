@@ -757,7 +757,7 @@ $ $\newline
 $ $\newline
 $ $\newline
 
-\State coor $pokePos \gets$ PosPokemonCercano($c$, $j$) \Comment $O(1)$
+\State coor $pokePos \gets$ PosPokemonCercano($desp$, $j$) \Comment $O(1)$
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
@@ -780,7 +780,7 @@ $ $\newline
 \EndWhile 
 
 \medskip
-\Statex \underline{Complejidad:} $O(PS *|P|)$ 
+\Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
 \Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$
 \end{algorithmic}
 %\end{algorithm}
@@ -802,7 +802,11 @@ $ $\newline
 $ $\newline
 $ $\newline
 
-\State coor $pokePos \gets$ PosPokemonCercano($c$, $j$) \Comment $O(1)$
+% tengo que borrarme del pokenodo del que sali
+
+% borro al jugador del pokestruc
+\State Eliminar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
+
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
 \While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
@@ -823,9 +827,11 @@ $ $\newline
 
 \EndWhile 
 
+
+
 \medskip
-\Statex \underline{Complejidad:} $O(PS *|P|)$ 
-\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$
+\Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
+\Statex \underline{Justificaci\'on:} Se elimina al jugador de la cola de entrenadores del pokestruc en el que se encontraba: $O(log(EC))$. Luego recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total es $O(PC*|P|)$. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
 \end{algorithmic}
 %\end{algorithm}
 
