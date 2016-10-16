@@ -773,7 +773,7 @@ $ $\newline
 \State coor $pokePos \gets$ PosPokemonCercano($desp$, $j$) \Comment $O(1)$
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
-\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+\While{HaySiguente($iterPos$)}  \Comment $O(PS * |P|)$
 
   \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
@@ -823,7 +823,7 @@ $ $\newline
 
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
-\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+\While{HaySiguente($iterPos$)}  \Comment $O(PS * |P|)$
 
   \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
