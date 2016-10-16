@@ -523,6 +523,34 @@ $ $\newline
 \end{algorithm}
 
 
+% copiarCoordenadas
+
+\begin{algorithm}[H]
+{\textbf{iCopiarCoordenadas}(\Inout{nGrilla}{vector(vector(vector(vector(bool))))}), \In{vGrilla}{vector(vector(vector(vector(bool))))})}
+\begin{algorithmic}[1]
+
+\Statex \underline{CopiarCoordenadas} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Asigno las coordenadas existentes de la vieja grilla en la nueva grilla
+\Statex \underline{Pre}: longitud($vGrilla$) $\leq$ longitud($nGrilla$)
+\Statex \underline{Post}: ($\forall i, j$: nat)($i < $longitud($vGrilla$)$ \land$ $j < $longitud($vGrilla$) $\impluego$
+\Statex $ $\hspace*{2cm} nGrilla[$i$][$j$][$i$][$j$] $\igobs$ vGrilla[$i$][$j$][$i$][$j$]
+\Statex \underline{Complejidad}: O(Longitud($vGrilla$)$^2$) 
+
+\Statex $ $
+\Statex $ $
+
+\For{nat $i \gets$ 0 to Longitud($vGrilla$) $-$ $1$}  \Comment O(Longitud($vGrilla$)$^2$)
+	\For{nat $j \gets$ 0 to Longitud($vGrilla$) $-$ $1$}  \Comment O(Longitud($vGrilla$))
+		\State nGrilla[$i$][$j$][$i$][$j$] $\gets$ vGrilla[$i$][$j$][$i$][$j$] \Comment $O(1)$
+	\EndFor
+\EndFor
+
+
+\medskip
+\Statex \underline{Complejidad:}  \Comment O(Longitud($vGrilla$)$^2$)
+\Statex \underline{Justificacion:} Son 2 fors anidados, donde en cada uno hago Longitud($vGrilla$) iteraciones. O(Longitud($vGrilla$)) $*$ O(Longitud($vGrilla$)) = O(Longitud($vGrilla$)$^2$)
+\end{algorithmic}
+\end{algorithm}
 
   
 \end{Algoritmos}
