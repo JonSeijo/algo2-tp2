@@ -27,7 +27,7 @@
 \InterfazFuncion{Actual}{\In{it}{iterDiccString($\alpha$)}}{tupla<string, $\alpha$>}%
 [hayMas?($it$)]
 {$res$ = actual($it$)}%
-[$O(|actual(it)|)$]
+[$O(|P|)$, donde |P| es la longitud de la clave mas larga]
 [Devuelve una tupla con el elemento actual y su significado]
 
 \InterfazFuncion{Avanzar}{\Inout{it}{iterDiccString($\alpha$)}}{}%
@@ -75,22 +75,53 @@
 {\textbf{iCrearIt}(\In{d}{diccString($\alpha$)}) $\to$ $res$ : iterDiccString($\alpha$)}
 \begin{algorithmic}[1]
 
-\State $res \gets$ $\langle$ $d$ , $Claves(d)$ $\rangle$ \Comment Por referencia $O(1)$
+\State $res \gets$ $\langle$ $d$ , CrearIt(Claves($d$)) $\rangle$ \Comment Por referencia $O(1)$
  
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+\Statex \underline{Justificacion:} Crear el iterador de conjunto es O(1), obtener las claves del diccionario es O(1), crear la tupla con los dos elementos es O(1). La complejidad total es O(1)
+\end{algorithmic}
+\end{algorithm}
+
+
+% hayMas? 
+
+\begin{algorithm}[H]
+{\textbf{iHayMas?}(\In{iter}{iterDiccString($\alpha$)}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+\State $res \gets$ HaySiguiente($iter$.itClave) \Comment $O(1)$
+
 \medskip
 \Statex \underline{Complejidad:} $O(1)$
 \end{algorithmic}
 \end{algorithm}
 
+% actual
+
+\begin{algorithm}[H]
+{\textbf{iActual}(\In{iter}{iterDiccString($\alpha$)}) $\to$ $res$ : tupla$<$string, $\alpha$ $>$}
+\begin{algorithmic}[1]
+
+\State $res \gets$ $\langle$ Siguiente($iter$.iClave), Obtener(Siguiente($iter$.iClave), $iter$.dicc) $\rangle$ \Comment $O(|P|)$
+
+\medskip
+\Statex \underline{Complejidad:} $O(|P|)$
+\Statex \underline{Justificaci\'on:} Para crear la tupla, necesito acceder al significado de la clave. Por las complejidades del DiccString, el peor caso se corresponde con la longitud de la clave mas larga: O(|P|), donde P es la clave mas large. Acceder al Siguiente del conjunto es O(1). En total, el algoritmo cuesta O(|P|)
+
+\end{algorithmic}
+\end{algorithm}
 
 
+\end{Algoritmos}  
   
-  
-\end{Algoritmos}
 
 
 Servicios usados:
 
-- Claves(diccString($\alpha$)) debe ser O(1)
-
+- CrearIt(conj($\alpha$)) debe ser O(1) \\
+- Claves(diccString($\alpha$)) debe ser O(1) \\
+- HaySiguiente(itConj($\alpha$)) debe ser O(1) \\
+- Siguiente(itConj($\alpha$)) debe ser O(1) \\
+- Obtener(string, diccString($\alpha$)) debe ser O(|P|) \\
 
