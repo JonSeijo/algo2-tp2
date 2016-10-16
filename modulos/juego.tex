@@ -498,20 +498,22 @@ $jue$ : Juego / \\
 \State nat $cantPokemonsTotales \gets $ 0  \Comment $O(1)$
 $ $\newline
 \State vector(jugStruc)  $jugs \gets$ Vacio()     \Comment $O(1)$
+\State conj(jugador) $jugsNoElim \gets$ Vacio()     \Comment $O(1)$
+\State conj(coor) $posPokes \gets$ Vacio()     \Comment $O(1)$
 
 % Creo la grilla de listas de posiciones (con las listas vacias)
 \State vector(vector(lista(jugador)))   $grillaJugs$
 $ $\newline
-\For{$i \gets 0$ to Tam($map$) $-$ 1} \Comment Se repite Tam(map) veces $O(1)$
+\For{$i \gets 0$ to Tam($map$) $-$ 1} \Comment $O((Tam(m))^2)$
     
     \State vector(lista(jugador)) $vectorInterno \gets$ Vacio()  \Comment $O(1)$
     
-    \For{$j \gets 0$ to Tam($map$) $-$ 1}  \Comment Se repite Tam(map) veces $O(1)$
+    \For{$j \gets 0$ to Tam($map$) $-$ 1}  \Comment $O((Tam(m)))$
         \State lista(jugador) $jugsVacia \gets$ Vacia()   \Comment $O(1)$
-        \State AgregarAtras($vectorInterno$, $jugsVacia$) \Comment $O(1)$    
+        \State AgregarAtras($vectorInterno$, $jugsVacia$) \Comment $O(1)$ amortizado
     \EndFor
     
-    AgregarAtras($jugs$, $vectorInterno$)   \Comment $O(1)$
+    AgregarAtras($jugs$, $vectorInterno$)   \Comment $O(1)$ amortizado
 
 \EndFor
 $ $\newline
@@ -526,11 +528,11 @@ $ $\newline
     AgregarAtras($pokenodos$, $vectorInterno$)   \Comment $O(1)$
 \EndFor
 
-\State $res \gets \langle cantPokemon$, $cantPokemonsTotales$, $map$, $jugs$, $grillaJugs$, $pokenodos \rangle$   \Comment $O(1)$
+\State $res \gets \langle cantPokemon$, $cantPokemonsTotales$, $map$, $jugs$, $jugsNoElim$, $grillaJugs$, $pokenodos$, $posPokes$ $\rangle$   \Comment $O(1)$
 
 \medskip
 \Statex \underline{Complejidad:} $O((Tam(map))^2)$
-\Statex \underline{Justificaion:} Se crean 2 vectores de vectores, de Tam(map) elementos tanto el vector interno como el externo $O((Tam(map))^2) + O((Tam(map))^2) = O((Tam(map))^2)$. Crear vectores vacios cuesta O(1) y el mapa lo pasamos por referencia, $O(1) + O((Tam(map))^2) = O((Tam(map))^2)$
+\Statex \underline{Justificaion:} Se crean 2 vectores de vectores, de Tam(map) elementos tanto el vector interno como el externo $O((Tam(map))^2) + O((Tam(map))^2) = O((Tam(map))^2)$. Se crean varios contenedores vacios que cuestan O(1). El mapa lo pasamos por referencia. La tupla tiene una cantidad constante de elementos. $O(1)$ + .. + $O(1) + O((Tam(map))^2) = O((Tam(map))^2)$
 
 \end{algorithmic}
 \end{algorithm}
