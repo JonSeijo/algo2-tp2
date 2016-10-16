@@ -97,6 +97,7 @@
 \end{algorithmic}
 \end{algorithm}
 
+
 % actual
 
 \begin{algorithm}[H]
@@ -113,15 +114,33 @@
 \end{algorithm}
 
 
+% avanzar
+
+\begin{algorithm}[H]
+{\textbf{iAvanzar}(\Inout{iter}{iterDiccString($\alpha$)})}
+\begin{algorithmic}[1]
+
+\State Avanzar($iter$.itClave) \Comment $O(1)$
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+
+\end{algorithmic}
+\end{algorithm}
+
 \end{Algoritmos}  
   
+Servicios usados: \\
 
-
-Servicios usados:
-
+De conj($\alpha$) \\
 - CrearIt(conj($\alpha$)) debe ser O(1) \\
-- Claves(diccString($\alpha$)) debe ser O(1) \\
+
+De itConj($\alpha$) \\
 - HaySiguiente(itConj($\alpha$)) debe ser O(1) \\
 - Siguiente(itConj($\alpha$)) debe ser O(1) \\
+- Avanzar(itConj($\alpha$)) debe ser O(1) \\
+
+De diccString($\alpha$) \\
+- Claves(diccString($\alpha$)) debe ser O(1) \\
 - Obtener(string, diccString($\alpha$)) debe ser O(|P|) \\
 
