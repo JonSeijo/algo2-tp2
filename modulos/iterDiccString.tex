@@ -14,27 +14,27 @@
 [true]
 {alias(esPermutaci\'on(SecuSuby($res$), claves($d$)))}%
 [$O(1)$] % Por enunciado
-[Devuelve un iterador al diccionario]
-{Aliasing: El iterador se invalida si se modifican claves del diccionario}
+[Devuelve un iterador al diccionario.]
+[El iterador se invalida si se modifican claves del diccionario.]
 
 \InterfazFuncion{HayMas?}{\In{it}{iterDiccString($\alpha$)}}{bool}%
 [true]
 {$res$ = hayMas?($it$)}%
 [$O(1)$]
-[Devuelve true si hay mas claves por recorrer]
+[Devuelve true si hay mas claves por recorrer.]
 
 % AVISAR EN INFORME SOBRE EL CAMBIO DE ARIDAD
 \InterfazFuncion{Actual}{\In{it}{iterDiccString($\alpha$)}}{tupla<string, $\alpha$>}%
 [hayMas?($it$)]
 {$res$ = actual($it$)}%
-[$O(|P|)$, donde |P| es la longitud de la clave mas larga]
-[Devuelve una tupla con el elemento actual y su significado]
+[$O(|P|)$, donde |P| es la longitud de la clave mas larga.]
+[Devuelve una tupla con el elemento actual y su significado.]
 
 \InterfazFuncion{Avanzar}{\Inout{it}{iterDiccString($\alpha$)}}{}%
 [$it$ = $it_0$ $\land$ hayMas?($it$)]
 {$it$ = avanzar($it_0$)}%
 [$O(1)$]
-[Avanza a la posicion siguiente del iterador]
+[Avanza a la posicion siguiente del iterador.]
 
 
 
