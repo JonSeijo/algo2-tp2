@@ -1,0 +1,45 @@
+Mapa:
+
+iTam(in m: map) res : nat O(1)
+HayCamino( in c1 : coord, in c2 : coord, in m: map) ! res : bool  O(1)
+PosExistente( in c : coord, in m: map) ! res : bool O(1)
+
+Coordenada:
+
+longitud(in c : coor) ! res : nat O(1)
+distEuclidea(in c1 : coor, in c2 : coor) ! res : nat
+
+
+Lista enlazada:
+
+CrearIt(lista) O(1) mal usado
+EliminarSiguiente(in/out it : itLista()) O(1)
+Avanzar(in/out it : itLista()) O(1)
+
+Vector:
+
+
+AgregarAtras(in/out v : vector(), in a : )  O(f(long(v)) + copy(a))
+
+Cola:
+
+Encolar(in/out h : colaEntr, in j : entrenador) ! res : itcolaEntrenador) O(log(EC))
+
+Diccstring:
+
+iVacio() ! res : diccString() O(1)
+Borrar(in p : string, in/out d : diccString()) O(|P|)
+Def?(in p : string, in d : diccString()) ! res : bool O(|P|)
+Definir(in/out d : diccString(), in s : string, in a : ) O(|P|)
+Obtener(in p : string, in d : diccString()) ! res :  O(|P|)
+
+Conjunto Lineal:
+
+AgregarRapido(in/out c : conj(), in a : ) ! res : itConj()  O(copy(a))
+EliminarSiguiente(in/out it : itConj()) O(1)
+HaySiguiente(in it : itConjAcotado) ! res : bool
+Avanzar(in/out it : itConj()) O(1)
+Siguiente(in it : itConj()) ! res :  O(1)
+
+
+Copiar (iMoverse) ???
