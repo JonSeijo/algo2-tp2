@@ -1,0 +1,22 @@
+De Vector \\
+ - AgregarAtras( vector(), $\alpha$ ) debe ser O(f(long(v)) + copy(a))
+Vacía()  res : vector()
+
+De Conjunto Lineal \\
+ - AgregarRapido( conj(), $\alpha$ ) debe ser O(copy(a))
+
+De Coordenada \\ 	
+ - CrearCoor(in n1 : nat, in n2 : nat)  res : coor O(1)
+ - longitud(coor) debe ser O(1)
+ - latitud(coor) debe ser O(1)
+ - CoordenadaArriba(in c : coor) ! res : coor O(1)
+ - CoordenadaAbajo(in c : coor) ! res : coor O(1)
+ - CoordenadaALaDerecha(in c : coor) ! res : coor O(1)
+ - CoordenadaALaIzquierda(in c : coor) ! res : coor O(1)
+ - iCopiarCoordenadas(in/out nGrilla : vector(vector(vector(vector(bool))))), in vGrilla :
+vector(vector(vector(vector(bool))))) O(Longitud(vGrilla)2)
+
+De Cola \\
+ - Encolar(colaEntr, entrenador) debe ser O(log(EC))
+ - Proximo(in c : cola())  res :  O(1)
+ - Desencolar(in/out c : cola()) O(1)
