@@ -550,17 +550,18 @@ $ $\newline
 % Le pongo (0,0) pero en realidad no importa porque no tenemos que chequear la posicion si esta desconectado)
 \State coor $pos$ $\gets$ CrearCoor(0,0) \Comment $O(1)$
 
-\State vector($<$pokemon, nat$>$) $pokes$ $\gets$ Vacio() \Comment $O(1)$
+\State diccString(nat) $pokes$ $\gets$ Vacio() \Comment $O(1)$
  
-% Le pongo 0 pero en realidad no nos importa porque no hay que usarlo si no tiene pokemon cerca
-\State nat $indiceEnPokenodo$ $\gets$ 0  \Comment $O(1)$
+% JONATHAN: COSA TURBIA, No tengo forma de crear un iterador a un heap si hacer encolar. Lo declaro pero no lo inicializo, no importaria porque solo lo usamos bajo ciertas precondiciones, peeeeero ... 
+\State itcolaEntrenador $itEntrenadores$  \Comment $O(1)$
 
 % Creo el iterador de una lista vacia para poder crearlo
 \State lista(nat) $listaDummy$ $\gets$ Vacia() \Comment $O(1)$
 \State itLista(nat) $iteradorAPos$ $\gets$ CrearIt($listaDummy$) \Comment $O(1)$
 \State itConj(jugador) $iteradorAJuego$ $\gets$ AgregarRapido($proxId$, $j$.jugadoresNoEliminados) \Comment $O(1)$
 
-\State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos$, $iteradorAJuego$, $0>$) \Comment $O(J)$
+\State AgregarRapido($j$.jugadoresNoEliminados, $e$) \Comment $O(1)$
+\State AgregarAtras($j$.jugadores, $<proxId$, 0, $false$, $pos$, $pokes$, $itEntregadores$, $iteradorAPos$, $iteradorAJuego$, $0>$) \Comment $O(J)$
 
 \State $res \gets proxId$ \Comment $O(1)$
 
@@ -572,26 +573,28 @@ $ $\newline
 \end{algorithm}
 
 \begin{algorithm}[H]
-{\textbf{iConectarse}(\Inout{p}{juego}, \In{c}{coordenada}, \In{j}{jugador})}
+{\textbf{iConectarse}(\Inout{p}{juego}, \In{c}{coordenada}, \In{e}{jugador})}
 \begin{algorithmic}[1]
 
-\State $p$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ true \Comment $O(1)$
-\State itLista(nat) $it$ $\gets$ AgregarAtras($p$.grillaJugs[latitud(c)][longitud(c)], $j$) \Comment $O(1)$
-\State $p$.jugadores[j].iteradorAPos $\gets$ $it$ \Comment $O(1)$
-\State $p$.jugadores[j].pos $\gets$ $c$
-\If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
-    \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-    \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-    \State ($p$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
-    \State entrenador $t \gets$ <j, $p$.jugadores[j].camtCap> 
-    \State $itpokenodo \gets Encolar((p.pokenodos[latPok][lonPok] \rightarrow entrenadores) , t)$
-\Comment $O(log(EC))$
-    \State $p$.jugadores[j].iteradorAEntrenadores $\gets$ $itpokenodo$ \Comment $O(1)$
+\State $j$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ true \Comment $O(1)$
+\State $j$.jugadores[$e$].iteradorAPos $\gets$ $it$ AgregarAtras($j$.grillaJugs[latitud(c)][longitud(c)], $e$) \Comment $O(1)$
+\State $j$.jugadores[$e$].pos $\gets$ $c$
+\If {HayPokemonCercano($c$, $j$) }
+
+  \If{HayCamino($c$, PosPokemonCercano($c$, $j$), Mapa($j$))} \Comment $O(1)$
+      \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $j$)) \Comment $O(1)$
+      \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $j$)) \Comment $O(1)$
+      \State ($j$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
+      \State tupla <nat, nat> $t \gets$ <$e$, $j$.jugadores[$e$].cantCap> 
+      \State $j$.jugadores[$e$].iteradorAEntrenadores $\gets$ Encolar(($j$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ entrenadores) , t) \Comment $O(log(EC))$
+
+  \EndIf
+
 \EndIf
 
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1). La funci\'on de Cola de entrenadores Encolar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1). La funci\'on de Cola de entrenadores Encolar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos, el costo final el algoritmo es $O(log(EC))$, donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, (la cantidad m\'axima de elementos de la cola).
 
 
 \end{algorithmic}
