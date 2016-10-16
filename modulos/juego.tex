@@ -122,11 +122,10 @@
 %posConPokémons : juego −→ conj(coor)
 \InterfazFuncion{PosConPokemons}{\In{j}{juego}}{conj(coor)}%
 [true]
-{$res = posConPokemons(j)$}%
+{alias($res \igobs $posConPokemons($j$))}%
 [$O(1)$] % Devuelve por referencia el conjunto, asi que habria que ir construyendolo
-[Devuelve un conjunto con las posiciones del mapa que tienen pokemons. Aliasing: devuelve el conjunto por referencia]
-% ACA DEVOLVEMOS LAS COORDENADAS DE LOS POKENODOS
-
+[Devuelve un conjunto con las posiciones del mapa que tienen pokemons.]
+{Aliasing: el conjunto es devuelto por referencia}
 
 
 %pokémonEnPos : coor c × juego j −→ pokémon {c ∈ posConPokémons(j)}
@@ -1055,6 +1054,23 @@ $ $\newline
 
 \end{algorithmic}
 \end{algorithm}
+
+
+
+% posConPokemons 
+
+\begin{algorithm}[H]
+{\textbf{iPosConPokemons}(\In{j}{juego}) $\to$ $res$ : conj(coor)}
+\begin{algorithmic}[1]
+
+\State $res \gets$ $j$.posPokemons \Comment Por referencia $O(1)$
+ 
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
+\end{algorithmic}
+\end{algorithm}
+
+
 
 % Posicion
 
