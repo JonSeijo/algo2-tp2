@@ -8,35 +8,35 @@
 
 
   \InterfazFuncion{Vacia}{}{colaEntr}%
-  {$res \igobs vacia$}%
+  {$res$ $\igobs$ $vacia$}%
   [$O(1)$]
   [genera una nueva cola de entrenadores]
 
 
   \InterfazFuncion{Encolar}{\Inout{h}{colaEntr}, \In{j}{entrenador}}{itcolaEntrenador)}
-  [$h \igobs h_{0}$]
-  {$h \igobs encolar(h_{0}, j)$}
+  [$h$ $\igobs$ $h_0$]
+  {$h$ $\igobs$ encolar($h_0$, $j$)}
   [$O(log(EC))$]
   [encola $j$ a $h$]
   [el elemento $j$ se encola por copia]
 
   \InterfazFuncion{EsVacia?}{\In{h}{colaEntr}}{bool}
-  {$res \igobs vacia?(h)$}
+  {$res$ $\igobs$ vacia?($h$)}
   [$O(1)$]
   [devuelve true si la cola es vacia]
 
 
   \InterfazFuncion{Proximo}{\In{h}{colaEntr}}{itcolaEntrenador)}
   [$\neg$ vacia?(h)]  
-  {$alias(res \igobs proximo(h))$} 
+  {alias($res$ $\igobs$ proximo($h$))} 
   [$O(1)$]
   [devuelve el pr\'oximo de la cola]
   [el elemento se devuelve por copia]
   
   
   \InterfazFuncion{Desencolar}{\Inout{h}{colaEntr}}{}
-  [$h \igobs h_{0} \land \neg vacia(h)$ ]  
-  {$h \igobs desencolar(h_{0})$} 
+  [$h$ $\igobs$ $h_0$ $\land$ $\neg$ vacia($h$) ]  
+  {$h$ $\igobs$ desencolar($h_0$)} 
   [$O(log(EC))$]
   [desencola el pr\'oximo de h]
  
@@ -85,7 +85,7 @@
 \tadAxioma{Abs($c$)}
 {
 $cola$ : colaPrior(Tupla(nat, nat)) / \\
-	vacia?($cola$)  $\implies$  $c$.$raiz$ $=$ $NULL$ $\yluego$ \\
+	vacia?($cola$)  $\iff$  $c$.$raiz$ $=$ $NULL$ $\yluego$ \\
 	proximo($cola$) $\igobs$ $c$.(*$raiz$).elemento \\
 	
 }%
@@ -115,7 +115,7 @@ $cola$ : colaPrior(Tupla(nat, nat)) / \\
    
 \begin{algorithm}[H]{\textbf{iVacio}() $\to$ $res$ : colaEntr}
     	\begin{algorithmic}[1]
-			 \State $res \gets  <NULL, NULL> $ \Comment $O(1)$
+			 \State $res$ $\gets$  $<$ $NULL$, $NULL$ $>$ \Comment $O(1)$
 
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
@@ -125,7 +125,7 @@ $cola$ : colaPrior(Tupla(nat, nat)) / \\
    
 \begin{algorithm}[H]{\textbf{iEsVacia?}(\In{h}{colaEntr}) $\to$ $res$ : bool}
     	\begin{algorithmic}[1]
-			 \State $res \gets  h.raiz \not=$ NULL \Comment $O(1)$
+			 \State $res$ $\gets$  $h$.raiz $\neq$ $NULL$ \Comment $O(1)$
 
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
@@ -135,35 +135,35 @@ $cola$ : colaPrior(Tupla(nat, nat)) / \\
 
 [H]{\textbf{iEncolarElem}(\Inout{h}{colaEntr}, \In{j}{entrenador}) $\to$ $res$ : itcolaEntrenador)}
     	\begin{algorithmic}[1]
-    	\State $Nodoheap$ n $\gets <j, NULL, NULL, NULL>$ \Comment $O(1)$
-    	\State $puntero(Nodoheap)$ p $\gets n$  \Comment $O(1)$
+    	\State Nodoheap $n$ $\gets$ $<j, NULL, NULL, NULL>$ \Comment $O(1)$
+    	\State puntero(Nodoheap) $p$ $\gets$ $\&$ $n$  \Comment $O(1)$
 		\If{$EsVacia?(h)$} \Comment Insertamos el nodo al final de la cola $O(1)$
-    		\State $h.raiz \gets p$ \Comment $O(1)$
-    		\State $h.ultimo \gets p$ \Comment $O(1)$
+    		\State $h$.raiz $\gets$ $p$ \Comment $O(1)$
+    		\State $h$.ultimo $\gets$ $p$ \Comment $O(1)$
     	\Else
-    		\If{$h.raiz = h.ultimo$} \Comment $O(1)$
-    			\State $(p \rightarrow padre) \gets h.raiz$ \Comment $O(1)$
-    			\State $(h.raiz \rightarrow izq) \gets p$ \Comment $O(1)$
-    			\State $h.ultimo \gets p$    \Comment $O(1)$
+    		\If{$h$.raiz $=$ $h$.ultimo} \Comment $O(1)$
+    			\State ($p$ $\rightarrow$ $padre$) $\gets$ $h$.raiz \Comment $O(1)$
+    			\State ($h$.raiz $\rightarrow$ $izq$) $\gets$ $p$ \Comment $O(1)$
+    			\State $h$.ultimo $\gets$ $p$    \Comment $O(1)$
     		\Else
-    			\If{$(h.raiz \rightarrow izq) = h.ultimo$} \Comment $O(1)$
-    				\State $(p \rightarrow padre) \gets h.raiz$ \Comment $O(1)$
-    				\State $(h.raiz \rightarrow der) \gets p$ \Comment $O(1)$
-    				\State $h.ultimo \gets p$ \Comment $O(1)$
+    			\If{($h$.raiz $\rightarrow$ $izq$) $=$ $h$.ultimo} \Comment $O(1)$
+    				\State ($p$ $\rightarrow$ $padre$) $\gets$ $h$.raiz \Comment $O(1)$
+    				\State ($h$.raiz $\rightarrow$ $der$) $\gets$ $p$ \Comment $O(1)$
+    				\State $h$.ultimo $\gets$ $p$ \Comment $O(1)$
     			\Else
-    				\If{$EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-    					\State $(p \rightarrow padre) \gets (h.ultimo \rightarrow padre)$ \Comment $O(1)$
-    					\State $(h.ultimo \rightarrow padre \rightarrow der) \gets p$ \Comment $O(1)$
-    					\State $h.ultimo \gets p$ \Comment $O(1)$
+    				\If{EsHijoIzquierdo?($h$.ultimo)} \Comment $O(1)$
+    					\State ($p$ $\rightarrow$ $padre$) $\gets$ ($h$.ultimo $\rightarrow$ $padre$) \Comment $O(1)$
+    					\State ($h$.ultimo $\rightarrow$ $padre$ $\rightarrow$ $der$) $\gets$ $p$ \Comment $O(1)$
+    					\State $h$.ultimo $\gets$ $p$ \Comment $O(1)$
     				\Else
-						\State $puntero(Nodoheap)$ i $\gets h.ultimo$    				 \Comment $O(1)$	
-    					\While {$i \not= NULL \land \neg EsHijoIzquierdo?(j)$} \Comment $O(log(EC))$
-    						\State $i \gets (i \rightarrow padre)$ \Comment $O(1)$
+						\State puntero(Nodoheap) $i$ $\gets$ $h$.ultimo	 \Comment $O(1)$	
+    					\While {$i$ $\neq$ $NULL$ $\land$ $\neg$ EsHijoIzquierdo?($j$)} \Comment $O(log(EC))$
+    						\State $i$ $\gets$ ($i$ $\rightarrow$ $padre$) \Comment $O(1)$
     					
     					\EndWhile
-    					\If{$i = NULL$} \Comment $O(1)$
-    						\State $puntero(Nodoheap)$ ultimoizq $\gets h.raiz$ \Comment $O(1)$
-    						\While {$(ultimoizq \rightarrow izq) \not= NULL$} \Comment $O(log(EC))$
+    					\If{$i$ $=$ $NULL$} \Comment $O(1)$
+    						\State puntero(Nodoheap) $ultimoizq$ $\gets$ $h$.raiz \Comment $O(1)$
+    						\While {($ultimoizq$ $\rightarrow$ $izq$) $\neq$ $NULL$} \Comment $O(log(EC))$
     							\State $ultimoizq \gets (ultimoizq \rightarrow izq)$ \Comment $O(1)$
     						\EndWhile
     						\State $(p \rightarrow padre) \gets ultimoizqu$ \Comment $O(1)$
