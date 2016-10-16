@@ -235,7 +235,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
 \begin{Estructura}{Juego}[pokgo]
 
 \begin{Tupla}[pokgo]  
-    \tupItem{cantPokemon}{diccTrie}  % Tendria la cantidad total de cada pokemon
+    \tupItem{cantPokemon}{diccString(nat)}  % Tendria la cantidad total de cada pokemon
     \tupItem{\\ cantPokemonsTotales}{nat} % Para acceso O(1) al total
     \tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
     \tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
@@ -337,7 +337,7 @@ $ $\newline
 
 $ $\newline
 
-(11) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad del trie menos los capturados por jugadores (no eliminados) $ $\newline
+(11) Para todo pokemon salvaje, su cantidad es la resta entre la cantidad total en el diccionario menos los capturados por jugadores (no eliminados) $ $\newline
 
 ($\forall p: $ pokemon) (($p \in$ Claves($j$.cantPokemon)) $\impluego$ \\ 
   (cantSalvajes($p$, $j$) = Obtener($p$, $j$.cantPokemon) $-$ sumaPokesCapturados($p$, $j$)))
@@ -419,7 +419,7 @@ $ $\newline
 %{$x$ < tam($j$.mapa) $\land$ $y$ < tam($j$.mapa) $\land$} 
 $ $\newline
 
-\tadOperacion{sumaSignif}{dicc(string, (nat)}{nat}{}%
+\tadOperacion{sumaSignif}{dicc(string, nat)}{nat}{}%
 \tadAxioma{sumaSignif($d$)}{sumaSignifAux(claves($d$), $d$)} 
 $ $\newline
 
@@ -490,7 +490,7 @@ $jue$ : Juego / \\
 {\textbf{iCrearJuego}(\In{map}{mapa}) $\to$ $res$ : juego}
 \begin{algorithmic}[1]
 
-\State dictTrie $cantPokemon \gets $ Vacio()  \Comment $O(1)$
+\State dictString $cantPokemon \gets $ Vacio()  \Comment $O(1)$
 \State nat $cantPokemonsTotales \gets $ 0  \Comment $O(1)$
 $ $\newline
 \State vector(jugStruc)  $jugs \gets$ Vacio()     \Comment $O(1)$
@@ -1040,7 +1040,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
-\State \underline{Justificacion:} j.cantPokemon es un diccionario sobre trie. La complejidad de buscar (y obtener el significado) en peor caso es la longitud de la string mas larga entre sus claves, eso es O($|P|$). j.cantPokemonsTotales es un dato guardado en la estructura del juego, y se accede en O(1). El resto son una resta, multiplicacion y division, que tambien son O(1). O($|P|$) $+$ O(1) $=$ O($|P|$)
+\State \underline{Justificacion:} j.cantPokemon es un dicciString. La complejidad de buscar (y obtener el significado) en peor caso es la longitud de la string mas larga entre sus claves, eso es O($|P|$). j.cantPokemonsTotales es un dato guardado en la estructura del juego, y se accede en O(1). El resto son una resta, multiplicacion y division, que tambien son O(1). O($|P|$) $+$ O(1) $=$ O($|P|$)
 
 \end{algorithmic}
 \end{algorithm}
