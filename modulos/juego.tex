@@ -19,155 +19,149 @@
 
 
 \InterfazFuncion{agregarPok\'emon}{\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego}}{}
-[$j_0 \igobs j \land posExistente(c, mapa(j)) \land p \not \in pokemones(j) Y PUEDOAGREGARPOKEMON() QUE CHECKEE LAS DISTANCIAS $]  
+[$j_0$ $\igobs$ $j$ $\land$ posExistente($c$, mapa($j$)) $\land$ $p$ $\not \in$ pokemones($j$) $\land$ PuedoAgregarPokemon($c$, $j$)]  
 {$j \igobs agregarPokemon(p, c, j_0)  \land p \in pokemones(j)$}
-[$\Theta(¡¡completar!!)$]
-[agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
-
-
-\InterfazFuncion{AgregarJugador}{\In{j}{juego}}{nat}% REVISAR SI HAY QUE DEVOLVER NAT
-[$ j_0 \igobs j $]
-{$res \igobs ProxId(j_0) \land j \igobs agregarJugador(j_0)$}%
 [$O(J)$]
-[agrega un jugador al juego \texttt{j} con id igual a ProxId(j).]
+[Agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
+
+
+\InterfazFuncion{AgregarJugador}{\In{j}{juego}}{nat}
+[$ j_0 \igobs j $]
+{$res$ $\igobs$ ProxId($j_0$) $\land$ $j$ $\igobs$ agregarJugador($j_0$)}%
+[$O(J)$]
+[Agrega un jugador al juego \texttt{j} con id igual a ProxId($j$).]
 
 
 \InterfazFuncion{conectarse}{\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego}, }{}%
-[$j \igobs j_0 \land e \in jugadores(j) \yluego \neg estaConectado(e, j) \land posExistente(c, mapa(j)) $]
-{$estaConectado(e, j) Y cambian capturables y contadores y sarasa$}%
+[$j$ $\igobs$ $j_0$ $\land$ $e$ $\in$ jugadores($j$) $\yluego$ $\neg$ estaConectado($e$, $j$) $\land $ posExistente($c$, mapa($j$))]
+{estaConectado($e$, $j$) Y cambian capturables y contadores y sarasa}%
 [$O(log(EC))$] % Es asi por enunciado
-[Conecta al jugador e en la posicion c]
+[Conecta al jugador e en la posicion c.]
 
 
 \InterfazFuncion{Desconectarse}{\In{e}{jugador}, \Inout{j}{juego}}{}%
-[$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j)$]
-{$\neg estaConectado(e, j) Y cambian capturables y contadores y sarasa$}%
+[$j$ $\igobs$ $j_0$ $\land$ $e$ $\in$ jugadores($j$) $\yluego$ estaConectado($e$, $j$)]
+{$\neg$ estaConectado($e$, $j$) Y cambian capturables y contadores y sarasa}%
 [$O(log(EC))$] % Es asi por enunciado
-[Desconecta al jugador e del juego]
+[Desconecta al jugador e del juego.]
 
 
 \InterfazFuncion{Moverse}{\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego}}{}%
 [$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j) \land posExistente(c, mapa(j)) $]
 {$cambia posicion y cambian capturables y contadores y sarasa$}%
 [$O((PC + PS) * |P| + log(EC))$] % Es asi por enunciado
-[Mueve al jugador e en la posicion c si es valido, sino sanciona o captura o sarasa]
+[Mueve al jugador e en la posicion c si es valido y captura si debe, sino sanciona o expulsa.]
 
 % OBSERVADORES
 
 %mapa : juego −→ map
 \InterfazFuncion{Mapa}{\In{j}{juego}}{map}%
-[true]
-{$res = mapa(j)$}%
+{$res$ $=$ mapa($j$)}%
 [$O(1)$] % HAGAMOS QUE LO DEVUELVA POR REFERENCIA
-[Devuelve el mapa del juego]
-{Es por referencia, produce aliasing}
+[Devuelve el mapa del juego.]
+[Es por referencia, produce aliasing.]
 
 
 %jugadores : juego −→ conj(jugador)
 \InterfazFuncion{Jugadores}{\In{j}{juego}}{itConj(jugador)}%
-[true]
-{$res \igobs$ jugadores($j$)}%
+{$res$ $\igobs$ jugadores($j$)}%
 [$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
 [Devuelve un iterador a los jugadores del juego]
-{Aliasing: Modificar el conjunto que se devuelve modifica la estructura del juego}
+[Modificar el conjunto que se devuelve modifica la estructura del juego.]
 
 
 
 %estaConectado : jugador e × juego j −→ bool  {e ∈ jugadores(j)}
 \InterfazFuncion{EstaConectado}{\In{j}{juego}, \In{e}{jugador}}{bool}%
-[$e \in jugadores(j)$]
-{$res = estaConectado(e, j)$}%
+[$e$ $\in$ jugadores($j$)]
+{$res$ $=$ estaConectado($e$, $j$)}%
 [$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
-[Devuelve true si el jugador esta conectado]
+[Devuelve true si el jugador esta conectado.]
 
 
 
 %sanciones : jugador e × juego j −→ nat {e ∈ jugadores(j)}
 \InterfazFuncion{Sanciones}{\In{e}{jugador}, \In{j}{juego}}{nat}%
-[$e \in jugadores(j)$]
-{$res = sanciones(e, j)$}%
+[$e$ $\in$ jugadores($j$)]
+{$res$ $=$ sanciones($e$, $j$)}%
 [$O(1)$] % por enunciado. 
-[Devuelve la cantidad de sanciones de un jugador]
+[Devuelve la cantidad de sanciones de un jugador.]
 
 
 
 %posicion : jugador e × juego j −→ coor  {e ∈ jugadores(j) ∧ L estaConectado(e, j)}
 \InterfazFuncion{Posicion}{\In{j}{juego}, \In{e}{jugador}}{coor}%
-[$e \in jugadores(j)  \yluego estaConectado(e, j)$]
-{$res = posicion(e, j)$}%
+[$e$ $\in$ jugadores($j$)  $\yluego$ estaConectado($e$, $j$)]
+{$res$ $=$ posicion($e$, $j$)}%
 [$O(1)$] % por enunciado. 
-[Devuelve la posicion actual de un jugador]
+[Devuelve la posicion actual de un jugador.]
 
 
 
 %pokémons : jugador e × juego j −→ multiconj(pokémon) {e ∈ jugadores(j)}
 %VER
 \InterfazFuncion{Pokemons}{\In{j}{juego}, \In{e}{jugador}}{iterDiccString(nat)}%
-[$e \in jugadores(j)$]
-{$res \igobs $ crearIt($j$.jugadores[$e$].pokemons)}%
+[$e$ $\in$ jugadores($j$)]
+{$res$ $\igobs$ crearIt($j$.jugadores[$e$].pokemons)}%
 [$O(1)$] % por enunciado. 
-[Devuelve un iterador a los pokemons capturados por el jugador]
-{Aliasing: el iterador se invalida si el conjunto de claves del DiccString (que contiene a los pokemons del jugador) cambia}
+[Devuelve un iterador a los pokemons capturados por el jugador.]
+[El iterador se invalida si el conjunto de claves del DiccString (que contiene a los pokemons del jugador) cambia.]
 
 
 
 %expulsados : juego −→ conj(jugador)
 \InterfazFuncion{Expulsados}{\In{j}{juego}}{conj(jugador)}%
-[true]
-{$res = expulsados(j)$}%
+{$res$ $=$ expulsados($j$)}%
 [$O(J)$]  
-[Devuelve un conjunto con los jugadores expulsados]
+[Devuelve un conjunto con los jugadores expulsados.]
 
 
 %posConPokémons : juego −→ conj(coor)
 \InterfazFuncion{PosConPokemons}{\In{j}{juego}}{conj(coor)}%
-[true]
-{alias($res \igobs $posConPokemons($j$))}%
+{alias($res$ $\igobs$ posConPokemons($j$))}%
 [$O(1)$] % Devuelve por referencia el conjunto, asi que habria que ir construyendolo
 [Devuelve un conjunto con las posiciones del mapa que tienen pokemons.]
-{Aliasing: el conjunto es devuelto por referencia}
+[El conjunto es devuelto por referencia.]
 
 
 %pokémonEnPos : coor c × juego j −→ pokémon {c ∈ posConPokémons(j)}
 \InterfazFuncion{PokemonEnPos}{\In{j}{juego}, \In{c}{coor}}{pokemon}%
-[$c \in posConPokemons(j)$]
+[$c$ $\in$ posConPokemons($j$)]
 {$res = pokemonEnPos(c, j)$}%
 [$O(1)$] % Ibamos a guardar el pokemon en la tupla del pokenodo
-[Devuelve el pokemon que se encuentra en la posicion c]
+[Devuelve el pokemon que se encuentra en la posicion c.]
 
 
 %cantMovimientosParaCaptura : coor c × juego j −→ nat {c ∈ posConPokémons(j)}
 \InterfazFuncion{CantMovimientosParaCaptura}{\In{c}{coor}, \In{j}{juego}}{nat}%
-[$c \in posConPokemons(j)$] %requiere que c sea pos de pokenodo
-{$res = cantMovimientosParaCaptura(c, j)$}%
+[$c$ $\in$ posConPokemons($j$)] %requiere que c sea pos de pokenodo
+{$res$ $=$ cantMovimientosParaCaptura($c$, $j$)}%
 [$O(1)$] % Ibamos a guardar el contador en la tupla del pokenodo
-[Devuelve el numero de movimientos que indican cuando se captura un pokemon]
+[Devuelve el numero de movimientos que indican cuando se captura un pokemon.]
 
 
 % otras operaciones publicas
 
 % puedoAgregarPokémon : coor c × juego j −→ bool
 \InterfazFuncion{PuedoAgregarPokemon}{\In{c}{coor}, \In{j}{juego}}{bool}%
-[true] 
-{$res = puedoAgregarPokemon(c, j)$}  % Ver que mucho no me convence
+{$res$ $=$ puedoAgregarPokemon($c$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] 
-[Devuelve verdadero si la coordenada es valida y no hay ningun pokemon en el territorio]
+[Devuelve verdadero si la coordenada es valida y no hay ningun pokemon en el territorio.]
 
 
 % hayPokémonCercano : coor c × juego j −→ bool
 \InterfazFuncion{HayPokemonCercano}{\In{c}{coor}, \In{j}{juego}}{bool}%
-[true] 
-{$res = hayPokemonCercano(c, j)$}  % Ver que mucho no me convence
+{$res$ $=$ hayPokemonCercano($c$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] 
-[Devuelve verdadero si hay algun pokemon en el territorio]
+[Devuelve verdadero si hay algun pokemon en el territorio.]
 
 
 % posPókemonCercano : coor c × juego j −→ coor {hayPokémonCercano(c,j)}
 \InterfazFuncion{PosPokemonCercano}{\In{c}{coor}, \In{j}{juego}}{coor}%
 [hayPokemonCercano(c, j)] 
-{$res = posPokemonCercano(c, j)$}  % Ver que mucho no me convence
+{$res$ $=$ posPokemonCercano($c$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] 
-[Devuelve la posicion del pokemon que esta en territorio]
+[Devuelve la posicion del pokemon que esta en territorio.]
 
 
 % entrenadoresPosibles : coor c × conj(jugador) es × juego j −→ conj(jugador)
@@ -175,26 +169,25 @@
 
 \InterfazFuncion{EntrenadoresPosibles}{\In{c}{coor}, \In{es}{conj(jugador)}, \In{j}{juego}}{conj(jugador)}%
 [hayPokemonCercano(c, j) $\land$ es $\subset$ jugadoresConectados(j)] 
-{$res = entrenadoresPosibles(c, es, j)$}  % Ver que mucho no me convence
+{$res$ $=$ entrenadoresPosibles($c$, $es$, $j$)}  % Ver que mucho no me convence
 [$O$(Longitud($ec$) * $EC$)] 
-[De todos los jugadores de la entrada ec, devuelve un conjunto con los entrenadores que estan en condiciones de capturar el pokemon que se encuentra en el rango de c. Que esten en condiciones de capturar significa que estan en rango2 del pokemon y que existe un camino hacia el]
+[De todos los jugadores de la entrada ec, devuelve un conjunto con los entrenadores que estan en condiciones de capturar el pokemon que se encuentra en el rango de c. Que esten en condiciones de capturar significa que estan en rango2 del pokemon y que existe un camino hacia el.]
 
 
 % indiceRareza : pokémon p × juego j −→ nat  {p ∈ todosLosPokémons(j)}
 \InterfazFuncion{IndiceRareza}{\In{p}{pokemon}, \In{j}{juego}}{nat}%
-[p $\in$ todosLosPokemons(j)] 
+[$p$ $\in$ todosLosPokemons($j$)] 
 {$res = indiceRareza(p, j)$}  % Ver que mucho no me convence
 [$O(|P|)$] % es una cuenta, obtener los numeros de p nos cuesta recorrer el trie
-[Devuelve el indice de rareza del pokemon dado]
+[Devuelve el indice de rareza del pokemon dado.]
 
 
 % cantPokémonsTotales : juego −→ nat
 \InterfazFuncion{cantPokemonsTotales}{\In{j}{juego}}{nat}%
-[true] 
-{$res = cantPokemonsTotales(p, j)$}  % Ver que mucho no me convence
+{$res$ $=$ cantPokemonsTotales($p$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
 % Podemos guardar el dato como un valor de la estructura del juego
-[Devuelve la cantidad de pokemons totales del juego]
+[Devuelve la cantidad de pokemons totales del juego.]
 
 
 % cantMismaEspecie : pokémon × multiconj(pokémon) −→ nat
@@ -204,7 +197,7 @@
 {$res$ = cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
 [$O(|p|)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
 % Podemos guardar el dato como un valor de la estructura del juego
-[Devuelve la cantidad de pokemons totales del juego]
+[Devuelve la cantidad de pokemons totales del juego.]
 
 
 \end{Interfaz}
