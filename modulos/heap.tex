@@ -81,7 +81,7 @@
 - Ningun nodo tiene como padre a ninguno de sus hijos ni a los hijos de sus hijos. \\ 
 
 
-\tadOperacion{Abs}{estr$/c$}{colaPrior(Tupla(nat, nat}{Rep($d$)}%
+\tadOperacion{Abs}{estr$/c$}{colaPrior(Tupla(nat, nat))}{Rep($d$)}%
 \tadAxioma{Abs($c$)}
 {
 $cola$ : colaPrior(Tupla(nat, nat)) / \\
@@ -94,18 +94,30 @@ $cola$ : colaPrior(Tupla(nat, nat)) / \\
 
 \begin{Representacion}
  
-  \begin{Estructura}{itcolaRntrenador)}[estr]
+  \begin{Estructura}{itcolaEntrenador}[estr]
       \begin{Tupla}[estr]%
       \tupItem{siguiente}{puntero(Nodoheap)}%
       \tupItem{estructura}{puntero(colaEntr)}%
     \end{Tupla}
   \end{Estructura}
 
-  \RepFc[estr$/e$]{true}
+  \RepFc[estr$/e$]{true $\Leftrightarrow$ Rep(*(e.estructura)) $\yluego $ (it.siguiente = NULL) $\oluego $ ($\exists$ j, k: nat)($\exists$ i, d, p: puntero(Nodoheap))(Nodohep(j, k, i, d, p) = it.siguiente)}
 
+\tadOperacion{Nodoheap}{nat$/j$, nat$/k$, punt(Nodoheap)$/i$, punt(Nodoheap)$/d$, punt(Nodoheap)$/p$}
+{punt(Nodoheap)}{}
+
+\tadAxioma{Nodoheap(j, k, i, d, p)}{$<<$i, j$>$, p, i, d$>$}
   ~
 
-  \AbsFc[estr]{Cola de entrenadores}[e]{}
+\tadOperacion{Abs}{estr$/e$}{itcolaEntr}{Rep($e$)}
+
+\tadAxioma{Abs($e$)}
+{
+$it$ : itcolaEntr / \\
+	siguiente($it$)  $=$ $NULL$ $\oluego$ \\
+	siguiente($it$) $\igobs$ *($e$.siguiente) \\
+	
+}%
 
 \end{Representacion}
 
