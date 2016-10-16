@@ -721,7 +721,7 @@ $ $\newline
 	\Else %If no hay despues
 		\If{$hayPokAntes$}
 			
-			\State CASO 2
+			\State CasoMov2($e$, $posAntes$, $c$, $j$)
 		\Else
 			\State CASO 4
 		\EndIf		
@@ -742,6 +742,7 @@ $ $\newline
 $ $\newline
 $ $\newline
 
+% Es casi igual al caso 2, si esta mal una esta mal la otra
 %\begin{algorithm}[H]
 {\textbf{iCasoMov1}(\In{e}{jugador}, \In{ant}{coor} \In{desp}{coor}, \Inout{j}{juego}))}
 \begin{algorithmic}[1]
@@ -750,7 +751,7 @@ $ $\newline
 \Statex \underline{Descripci\'on} : Este es el caso en donde el jugador estaba cerca de un pokemon y se movi\'o dentro del mismo radio 
 \Statex \underline{Pre}: $j$ = $j_0$ $\land$ hayPokemonCercano($ant$, $j$) $\land$ hayPokemonCercano($desp$, $j$) $\yluego$ posPokemonCercano($ant$, $j$) = posPokemonCercano($desp$, $j$) 
 \Statex \underline{Post}: $j_0$ = moverse($e$, $desp$, $j$) 
-\Statex \underline{Complejidad}: INFINITO
+\Statex \underline{Complejidad}: $O(PS *|P|)$ 
 \Statex \underline{Aliasing}: Produce aliasing, el juego es modificable
 
 $ $\newline
@@ -783,6 +784,53 @@ $ $\newline
 \Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$
 \end{algorithmic}
 %\end{algorithm}
+
+$ $\newline
+$ $\newline
+%\begin{algorithm}[H]
+% Es casi igual al caso 1, si esta mal una esta mal la otra
+{\textbf{iCasoMov2}(\In{e}{jugador}, \In{ant}{coor} \In{desp}{coor}, \Inout{j}{juego}))}
+\begin{algorithmic}[1]
+
+\Statex \underline{CasoMov2} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Este es el caso en donde el jugador estaba cerca de un pokemon y se movi\'o fuera del radio
+\Statex \underline{Pre}: $j$ = $j_0$ $\land$ hayPokemonCercano($ant$, $j$) $\land$ $\neg$hayPokemonCercano($desp$, $j$) 
+\Statex \underline{Post}: $j_0$ = moverse($e$, $desp$, $j$) 
+\Statex \underline{Complejidad}: $O(PS *|P|)$ 
+\Statex \underline{Aliasing}: Produce aliasing, el juego es modificable
+
+$ $\newline
+$ $\newline
+
+\State coor $pokePos \gets$ PosPokemonCercano($c$, $j$) \Comment $O(1)$
+\State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
+
+\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+
+	\State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
+	\State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$		
+	
+	% Los actualizo todos pues me sali fuera
+	\State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
+	
+	\If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
+		\State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+		\State EliminarSiguiente($iterPos$) \Comment $O(1)$
+		\State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
+	\Else 
+		\State Avanzar($iterPos$)	\Comment $O(1)$	
+	\EndIf
+
+\EndWhile 
+
+\medskip
+\Statex \underline{Complejidad:} $O(PS *|P|)$ 
+\Statex \underline{Justificaci\'on:} Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$
+\end{algorithmic}
+%\end{algorithm}
+
+$ $\newline
+$ $\newline
 
 
 
