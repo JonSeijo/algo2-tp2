@@ -1720,7 +1720,44 @@ $ $\newline
 \end{algorithmic}
 \end{algorithm}  
   
-
-
-
 \end{Algoritmos}
+
+
+
+Servicios usados: \\
+
+De Mapa \\
+ - iTam(map) debe ser O(1)
+ - HayCamino( coord, coord, map) debe ser  O(1)
+ - PosExistente( coord,  map)  debe ser O(1)
+
+De Coordenada \\
+ - longitud(coor) debe ser O(1)
+ - distEuclidea( coor, coor)  debe ser O(1)
+
+
+De Lista enlazada \\
+ - CrearIt(lista) debe ser O(1)
+ - EliminarSiguiente( itLista()) debe ser O(1)
+ - Avanzar(itLista()) debe ser O(1)
+
+De Vector \\
+ - AgregarAtras( vector(), $\alpha$ ) debe ser O(f(long(v)) + copy(a))
+
+De Cola \\
+ - Encolar(colaEntr, entrenador) debe ser O(log(EC))
+
+De Diccstring \\
+iVacio() debe ser O(1)
+ - Borrar( string, diccString()) debe ser O(|P|)
+ - Def?(string,  diccString()) debe ser O(|P|)
+ - Definir(diccString(), string, $\alpha$ ) debe ser O(|P|)
+ - Obtener(string, diccString()) debe ser  O(|P|)
+
+De Conjunto Lineal \\
+ - AgregarRapido( conj(), $\alpha$ ) debe ser O(copy(a))
+ - EliminarSiguiente(itConj()) debe ser O(1)
+ - HaySiguiente( itConjAcotado) debe ser O(1)
+ - Avanzar( itConj()) debe ser O(1)
+ - Siguiente(tConj()) debe ser O(1)
+

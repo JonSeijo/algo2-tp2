@@ -1,45 +1,34 @@
-Mapa:
+De Mapa \\
+ - iTam(map) debe ser O(1)
+ - HayCamino( coord, coord, map) debe ser  O(1)
+ - PosExistente( coord,  map)  debe ser O(1)
 
-iTam(in m: map) res : nat O(1)
-HayCamino( in c1 : coord, in c2 : coord, in m: map) ! res : bool  O(1)
-PosExistente( in c : coord, in m: map) ! res : bool O(1)
-
-Coordenada:
-
-longitud(in c : coor) ! res : nat O(1)
-distEuclidea(in c1 : coor, in c2 : coor) ! res : nat
+De Coordenada \\
+ - longitud(coor) debe ser O(1)
+ - distEuclidea( coor, coor)  debe ser O(1)
 
 
-Lista enlazada:
+De Lista enlazada \\
+ - CrearIt(lista) debe ser O(1)
+ - EliminarSiguiente( itLista()) debe ser O(1)
+ - Avanzar(itLista()) debe ser O(1)
 
-CrearIt(lista) O(1) mal usado
-EliminarSiguiente(in/out it : itLista()) O(1)
-Avanzar(in/out it : itLista()) O(1)
+De Vector \\
+ - AgregarAtras( vector(), $\alpha$ ) debe ser O(f(long(v)) + copy(a))
 
-Vector:
+De Cola \\
+ - Encolar(colaEntr, entrenador) debe ser O(log(EC))
 
+De Diccstring \\
+iVacio() debe ser O(1)
+ - Borrar( string, diccString()) debe ser O(|P|)
+ - Def?(string,  diccString()) debe ser O(|P|)
+ - Definir(diccString(), string, $\alpha$ ) debe ser O(|P|)
+ - Obtener(string, diccString()) debe ser  O(|P|)
 
-AgregarAtras(in/out v : vector(), in a : )  O(f(long(v)) + copy(a))
-
-Cola:
-
-Encolar(in/out h : colaEntr, in j : entrenador) ! res : itcolaEntrenador) O(log(EC))
-
-Diccstring:
-
-iVacio() ! res : diccString() O(1)
-Borrar(in p : string, in/out d : diccString()) O(|P|)
-Def?(in p : string, in d : diccString()) ! res : bool O(|P|)
-Definir(in/out d : diccString(), in s : string, in a : ) O(|P|)
-Obtener(in p : string, in d : diccString()) ! res :  O(|P|)
-
-Conjunto Lineal:
-
-AgregarRapido(in/out c : conj(), in a : ) ! res : itConj()  O(copy(a))
-EliminarSiguiente(in/out it : itConj()) O(1)
-HaySiguiente(in it : itConjAcotado) ! res : bool
-Avanzar(in/out it : itConj()) O(1)
-Siguiente(in it : itConj()) ! res :  O(1)
-
-
-Copiar (iMoverse) ???
+De Conjunto Lineal \\
+ - AgregarRapido( conj(), $\alpha$ ) debe ser O(copy(a))
+ - EliminarSiguiente(itConj()) debe ser O(1)
+ - HaySiguiente( itConjAcotado) debe ser O(1)
+ - Avanzar( itConj()) debe ser O(1)
+ - Siguiente(tConj()) debe ser O(1)
