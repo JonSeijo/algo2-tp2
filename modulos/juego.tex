@@ -1556,6 +1556,133 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 
 \end{algorithmic}
 \end{algorithm}  
+
+
+$ $\newline
+$ $\newline
+$ $\newline
+
+
+% dameJugadoresEnPokerango
+
+%\begin{algorithm}[H]
+{\textbf{iDameJugadoresEnPokerango}(\In{c}{coor}, \In{j}{juego}) $\to$ $res$ : vector(jugador)}
+\begin{algorithmic}[1]
+
+\Statex \underline{DameJugadoresEnPokerango} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Devuelve un vector con todos los jugadores que pueden esperar captura que estan en el rango de c 
+\Statex \underline{Pre}: posValida($c$, $j$.mapa)
+\Statex \underline{Post}: $res \igobs$ entrenadoresPosibles($c$, jugadores($j$), $j$)
+\Statex \underline{Complejidad}: $O(EC)$ 
+\Statex \underline{Aliasing}: Devuelve el vector por referencia 
+
+\State vector(jugador) $jugsRadio \gets$ Vacio() \Comment $O(1)$
+
+\State nat $x \gets$ latitud(c)    \Comment $O(1)$
+\State nat $y \gets$ longitud(c)   \Comment $O(1)$
+
+\State coor $coorConPokemon$    \Comment $O(1)$
+
+\If{j.pokenodos[$x$][$y$] $\neq$ NULL}     \Comment $O(1)$
+    \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x$, $y$), $c$, $j$)    \Comment $O(EC)$
+\EndIf
+
+\If{$x > 0$}
+    \If{j.pokenodos[$x-1$][$y$] $\neq$ NULL}     \Comment $O(1)$
+        \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x-1$, $y$), $c$, $j$)    \Comment $O(EC)$
+    \EndIf
+
+    \If{$y > 0$}
+
+        \If{j.pokenodos[$x-1$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x-1$, $y-1$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+
+    \EndIf
+
+    % tam(m) no puede ser 0 porque existe una coordenada al menos (x,y)
+    \If{$y < tam(m) - 1$}
+        \If{j.pokenodos[$x-1$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x-1$, $y+1$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+    \EndIf
+
+    \If{$x-1 > 0$}
+        \If{j.pokenodos[$x-2$][$y$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x-2$, $y$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+    \EndIf
+
+\EndIf
+
+\If{$y > 0$}
+
+    \If{j.pokenodos[$x$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
+        \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x$, $y-1$), $c$, $j$)    \Comment $O(EC)$
+    \EndIf
+
+    \If{$y-1 > 0$}
+
+        \If{j.pokenodos[$x$][$y-2$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x$, $y-2$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+
+    \EndIf
+
+\EndIf
+
+\If{$y < tam(m) - 1$}
+
+    \If{j.pokenodos[$x$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
+        \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x$, $y+1$), $c$, $j$)    \Comment $O(EC)$
+    \EndIf
+
+
+    \If{$tam(m) > 1 \land y < tam(m) - 2$}
+        \If{j.pokenodos[$x$][$y+2$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x$, $y+2$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+
+
+    \EndIf
+
+\EndIf
+
+\If{$x < tam(m) - 1$}
+    \If{j.pokenodos[$x+1$][$y$] $\neq$ NULL}     \Comment $O(1)$
+        \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x+1$, $y$), $c$, $j$)    \Comment $O(EC)$
+    \EndIf
+
+    \If{$y > 0$}
+        \If{j.pokenodos[$x+1$][$y-1$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x+1$, $y-1$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+    \EndIf
+
+    \If{$y < tam(m)-1$}
+        \If{j.pokenodos[$x+1$][$y+1$] $\neq$ NULL}     \Comment $O(1)$
+            \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x+1$, $y+1$), $c$, $j$)    \Comment $O(EC)$
+        \EndIf
+
+    \EndIf
+\EndIf
+
+\If{$tam(m) > 1 \land x < tam(m) - 2$}
+    \If{j.pokenodos[$x+2$][$y$] $\neq$ NULL}     \Comment $O(1)$
+        \State AgregarAtrasJugsQueEstanEnPos($jugsRadio$, crearCoordenada($x+21$, $y$), $c$, $j$)    \Comment $O(EC)$
+    \EndIf
+\EndIf
+
+\State $res \gets jugsRadio$ \Comment Por referencia $O(1)$
+
+\medskip
+\State \underline{Complejidad:} $O(EC)$ % por enunciado
+\State \underline{Justificacion:} En peor caso agrego jugadores de 13 posiciones, donde ese agregar me cuesta O(EC) cada vez. $O(EC)$ + $O(EC)$ + ... + $O(EC)$ = $O(EC)$ 
+
+\end{algorithmic}
+%\end{algorithm}
+
+
   
 
 
