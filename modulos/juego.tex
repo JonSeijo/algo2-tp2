@@ -651,20 +651,51 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(EC*log(EC) + |P|)$ 
-\State \underline{Justificaion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de Heaps es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos del Heap. DameJugadoresEnPokenodo es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
+\State \underline{Justificacion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de Heaps es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos del Heap. DameJugadoresEnPokenodo es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
 
 \end{algorithmic}
 \end{algorithm}
 
 
-
+$ $\newline
+$ $\newline
 %\begin{algorithm}[H]
 {\textbf{iMoverse}(\In{e}{jugador}, \In{c}{coord}, \Inout{j}{juego})}
 \begin{algorithmic}[1]
 
+% Si el movimiento es invalido, tengo que sancionarle y posiblemente eliminarlo
+\If{$\neg$MovValido($e$, $c$, $j$)}
+	
+	\State $j$.jugadores[$e$].sanciones $\gets$ $j$.jugadores[$e$].sanciones $+$ 1 \Comment $O(1)$
+	
+	\If{$j$.jugadores[$e$].sanciones $\geq$ 5}
+	
+		\State $j$.jugadores[$e$].conectado $\gets$ false \Comment $O(1)$
+		\State EliminarSiguiente($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
+		\State itDiccString $pokesJug \gets$ crearIterador($j$.jugadores[$e$].pokemons) \Comment $O(1)$
+		
+		\While{HaySiguiente($pokesJug$)}   \Comment El jugador pudo haber capturado PC pokemons $O(PC*|P|)$
+			% Asumo que tengo un iterador para el trie, cuyo siguiente es tupla <poke, cant>
+			\State pokemon $pokeActual \gets$ Siguiente($pokesJug$).poke 	\Comment $O(1)$
+			\State nat $cantActual \gets$ Siguiente($pokesJug$).cant 	\Comment $O(1)$
+			
+			\State Definir($j$.cantPokemons, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cant$) \Comment $O(|P|)$
+		\EndWhile
+		
+		\State $j$.cantPokemonTotales $\gets$ $j$.cantPokemonTotales - $j$.jugadores[$e$].cantCapt \Comment $O(1)$
+		
+		\If{HayPokemonCerca($j$.jugadores[$e$].pos)}   \Comment $O(1)$
+			\State Borrar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
+		\EndIf
+
+	\EndIf
+
+\EndIf
+
+
 \medskip
 \State \underline{Complejidad:} $O((PS + PC)*|P| + log(EC))$ 
-\State \underline{Justificaion:} :)
+\State \underline{Justificaci\'on:} :)
 
 \end{algorithmic}
 %\end{algorithm}
