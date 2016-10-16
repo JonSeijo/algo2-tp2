@@ -12,9 +12,9 @@
 % GENERADORES %
 
 
-\InterfazFuncion{crearJuego}{\In{m}{map}}{juego}%
+\InterfazFuncion{CrearJuego}{\In{m}{map}}{juego}%
 {$res \igobs crearJuego(m)$}%
-[$O((Tam(m))^2)$]
+[$O((tam(m))^2)$]
 [Genera una juego con el mapa \texttt{m} y sin jugadores.]
 
 
@@ -25,10 +25,10 @@
 [agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
 
 
-\InterfazFuncion{agregarJugador}{\In{j}{juego}}{nat}% REVISAR SI HAY QUE DEVOLVER NAT
+\InterfazFuncion{AgregarJugador}{\In{j}{juego}}{nat}% REVISAR SI HAY QUE DEVOLVER NAT
 [$ j_0 \igobs j $]
 {$res \igobs ProxId(j_0) \land j \igobs agregarJugador(j_0)$}%
-[$O(1)$]
+[$O(J)$]
 [agrega un jugador al juego \texttt{j} con id igual a ProxId(j).]
 
 
@@ -64,11 +64,12 @@
 
 
 %jugadores : juego −→ conj(jugador)
-\InterfazFuncion{Jugadores}{\In{j}{juego}, \In{e}{jugador}}{ITERADOR}%
+\InterfazFuncion{Jugadores}{\In{j}{juego}}{itConj(jugador)}%
 [true]
-{$TENGO QUE DEVOLVER ITERADOR VER ENUNCIADO$}%
+{$res \igobs$ jugadores($j$)}%
 [$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
-[Devuelve un iterador al jugador. Puede borrarse]
+[Devuelve un iterador a los jugadores del juego]
+{Aliasing: Modificar el conjunto que se devuelve modifica la estructura del juego}
 
 
 
@@ -238,7 +239,8 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
     \tupItem{cantPokemon}{diccString(nat)}  % Tendria la cantidad total de cada pokemon
     \tupItem{\\ cantPokemonsTotales}{nat} % Para acceso O(1) al total
     \tupItem{\\ map}{mapa}  % Tendria el mapa con el que se crea
-    \tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de los jugadores, o iteradores, VER
+    \tupItem{\\ jugadores}{vector(jugStruc)}  % Tendria los datos de TODOS los jugadores
+    \tupItem{\\ jugadoresNoEliminados}{conj(jugador)}  % Tiene los jugadores que no fueron eliminados
     \tupItem{\\ grillaJugs}{vector(vector(lista(jugador)))} % Una grilla R2 del tamaño del mapa donde en cada posicion hay una lista de los jugadores que estan en esa posicion
     \tupItem{\\ pokenodos}{vector(vector(puntero(pokeStruc)))}  % Una grilla R2 del tamaño del mapa donde en cada coordenada puede haber un pokenodo (ver en REP que tienen que estar a cierta distancia)
     \tupItem{\\ posPokemons}{conj(coor)}
@@ -260,6 +262,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
       \tupItem{\\ pokemons}{diccString(nat)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
       \tupItem{\\ iteradorAHeap}{itHeap(tupla<id: nat, cantCapt: nat>)} % Iterador al heap
       \tupItem{\\ iteradorAPos}{itLista(nat)}   
+      \tupItem{\\ iteradorAJuego}{itConj(jugador)}   
       \tupItem{\\ cantCapt}{nat}
     \end{Tupla}
 
@@ -271,11 +274,15 @@ $ $\newline
 
 $ $\newline
 
-(1) El indice de la posicion del vector es igual al id del juegador en ese indice (de esto se desprende que los ids son unicos) $ $\newline
+(0) El indice de la posicion del vector es igual al id del juegador en ese indice (de esto se desprende que los ids son unicos) $ $\newline
 
 ($\forall i$: nat)((i $<$ Longitud(j.jugadores)) $\impluego$ j.jugadores[$i$].id = i )
 $ $\newline
 
+
+(1) El jugador e esta en j.jugadoresNoEliminados sii no esta eliminado $ $\newline
+($\forall e$: jugador)($e \in$ $j$.jugadoresNoEliminados $\iff$ ($e$ < longitud($j$.jugadores) $\land$ $j$.jugadores[$e$].sanciones < 5)
+$ $\newline
 
 (2) Todo jugador de j.jugadores que este conectado, tiene una posicion que es una coordenada existente en el mapa $ $\newline
 
@@ -350,10 +357,12 @@ longitud($j$.pokenodos) = tam($j$.mapa) $\yluego$
 ($\forall i$: nat) (($i <$ Logitud(j.pokenodos)) Longitud($j$.pokenodos[i]) = Tam($j$.mapa)) 
 $ $\newline
 
-(13) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa $ $\newline
+(13) Todo pokenodo que tenga un pokestruc, esta en una coordenada valida del mapa y es coherente con j.posPokemons$ $\newline
 
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neg$ NULL) \\
-  $\impluego$ posExistente(crearCoordenada(x,y), $j$.mapa))
+  $\impluego$ (posExistente(crearCoordenada($x$, $y$), $j$.mapa) $\land$ crearCoordenada($x$, $y$) $\in$ $j$.posPokemons)) $\land$ \\
+($\forall c$: coor) (($c \in j$.posPokemons) $\impluego$ (enRango(latitud($c$), longitud($c$), $j.mapa$) \\
+$\yluego$ $j$.pokenodos[latitud($c$)][longitud($c$)] $\neg$ NULL))
 $ $\newline
 
 
@@ -449,7 +458,7 @@ $ $\newline
 
 \tadOperacion{Rep}{juego$/j$}{bool}{}%
 \tadAxioma{Rep($j$)}
-{(1) $\yluego$ (2) $\land$ (3) $\yluego$ (4) $\land$ (5) $\land$ (6) $\yluego$ (7) $\land$ (8) $\land$ (9) $\yluego$\\
+{(0) $\yluego$ (1) $\yluego$ (2) $\land$ (3) $\yluego$ (4) $\land$ (5) $\land$ (6) $\yluego$ (7) $\land$ (8) $\land$ (9) $\yluego$\\
  (10) $\land$ (11) $\land$ (12) $\yluego$ (13) $\land$ (14) $\land$ (15) $\land$ (16) $\yluego$ (17) $\yluego$ (18)}
 %{{(1) $\yluego$ (2) $\yluego$ (3) $\land$ (4) $\land$ (5) $\land$ (6)}} 
 
@@ -464,7 +473,7 @@ $ $\newline
 {
 $jue$ : Juego / \\
   mapa($jue$) $\igobs$ $j$.map $\land$ \\
-  jugadores($jue$) $\igobs$ $j$.jugadores $\land$ \\ 
+  jugadores($jue$) $\igobs$ $j$.jugadoresNoExpulsados $\land$ \\ 
 
   ($\forall e$: jugador) (($e \in$ jugadores($jue$) $\impluego$ \\
     estaConectado($e$, $jue$) $\igobs$ $j$.jugadores[$e$].conectado $\land$ \\
@@ -473,7 +482,7 @@ $jue$ : Juego / \\
     estaConectado($e$, $jue$) $\implies$ posicion($e$, $jue$) $\igobs$ $j$.jugadores[$e$].pos)) $\land$ \\
 
   expulsados($jue$) $\igobs$ expulsadosAux($j$.jugadores) $\land$ \\
-  posConPokemon($jue$) $\igobs$ posConPokemonAux($j$.pokenodos) $\land$ \\
+  posConPokemon($jue$) $\igobs$ $j$.posConPokemon $\land$ \\
   
   ($\forall c:$ coor) (($c \in$ posConPokemon($jue$)) $\impluego$ \\
     pokemonEnPos($c$, $jue$) $\igobs$ (($j$.pokenodos[latitud($c$)][longitud($c$)])$ \rightarrow$ poke) $\land$ \\
@@ -552,14 +561,15 @@ $ $\newline
 % Creo el iterador de una lista vacia para poder crearlo
 \State lista(nat) $listaDummy$ $\gets$ Vacia() \Comment $O(1)$
 \State itLista(nat) $iteradorAPos$ $\gets$ CrearIt($listaDummy$) \Comment $O(1)$
+\State itConj(jugador) $iteradorAJuego$ $\gets$ AgregarRapido($proxId$, $j$.jugadoresNoEliminados) \Comment $O(1)$
 
-\State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos>$) \Comment $O(1)$
+\State $j$.jugadores.AgregarAtras($<proxId$, 0, $false$, $pos$, $pokes$, $indiceEnPokenodo$, $iteradorAPos$, $iteradorAJuego$, $0>$) \Comment $O(J)$
 
 \State $res \gets proxId$ \Comment $O(1)$
 
 \medskip
-\State \underline{Complejidad:} $O(1)$
-\State \underline{Justificaion:} Todas las operaciones son O(1)
+\State \underline{Complejidad:} $O(J)$
+\State \underline{Justificaci\'on:} En el peor caso, hay que redimensionar el vector y eso cuesta O(cantElementosEnVector) = O(J) pues son todos los jugadores del juego.
 
 \end{algorithmic}
 \end{algorithm}
@@ -669,6 +679,7 @@ $ $\newline
   
     \State $j$.jugadores[$e$].conectado $\gets$ false \Comment $O(1)$
     \State EliminarSiguiente($j$.jugadores[$e$].iterAPos) \Comment $O(1)$
+    \State EliminarSiguiente($j$.jugadores[$e$].iterAJuego) \Comment $O(1)$
   % \State itDiccString $pokesJug \gets$ crearIterador($j$.jugadores[$e$].pokemons) \Comment $O(1)$
   
     \State itConj $pokesJug \gets$ Claves($j$.jugadores[$e$].pokemons) \Comment $O(1)$  
