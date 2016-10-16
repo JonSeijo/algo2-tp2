@@ -74,11 +74,21 @@
 	\end{Tupla}
 
 
-  \RepFc[estr$/e$]{true}
+\Title{Invariante de representaci\'on en castellano}	
+	
+- Si raiz es $NULL$ entonces ultimo tambien es $NULL$. \\
+- Si la raiz no es $NULL$ entonces ultimo tampoco es $NULL$.. \\
+- Ningun nodo tiene como padre a ninguno de sus hijos ni a los hijos de sus hijos. \\ 
 
-  ~
 
-  \AbsFc[estr]{coor}[e]{}
+\tadOperacion{Abs}{estr$/c$}{colaPrior(Tupla(nat, nat}{Rep($d$)}%
+\tadAxioma{Abs($c$)}
+{
+$cola$ : colaPrior(Tupla(nat, nat)) / \\
+	vacia?($cola$)  $\implies$  $c$.$raiz$ $=$ $NULL$ $\yluego$ \\
+	proximo($cola$) $\igobs$ $c$.(*$raiz$).elemento \\
+	
+}%
 
 \end{Representacion}
 
