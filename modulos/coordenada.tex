@@ -1,4 +1,5 @@
 \begin{Interfaz}
+\subsection{Interfaz}
 
 
   \textbf{se explica con}: \tadNombre{Coordenada}.
@@ -8,45 +9,45 @@
   \Title{Operaciones b\'asicas de Coordenada}
 
 
-  \InterfazFuncion{crearCoor}{\In{n_1}{nat}, \In{n_2}{nat}}{coor}%
+  \InterfazFuncion{CrearCoor}{\In{n_1}{nat}, \In{n_2}{nat}}{coor}%
   {$res \igobs crearCoor$}%
   [$O(1)$]
   [genera una coordenada nueva.]
 
 
-  \InterfazFuncion{latitud}{\In{c}{coor}}{nat}
+  \InterfazFuncion{Latitud}{\In{c}{coor}}{nat}
   {$res \igobs latitud(c)$}
   [$O(1)$]
   [devuelve la latitud de la coordenada \texttt{c}.]
 
-  \InterfazFuncion{longitud}{\In{c}{coor}}{nat}
+  \InterfazFuncion{Longitud}{\In{c}{coor}}{nat}
   {$res \igobs longitud(c)$}
   [$O(1)$]
   [devuelve la longitud de la coordenada \texttt{c}.]
 
 
-  \InterfazFuncion{distEuclidea}{\In{c_1}{coor}, \In{c_2}{coor}}{nat}%
+  \InterfazFuncion{DistEuclidea}{\In{c_1}{coor}, \In{c_2}{coor}}{nat}%
   {$res \igobs distEuclidea(c_1, c_2)$}%
   [$O(1)$]
   [devuelve la disntancia entre la coordenadas \texttt{$c_1$} y \texttt{$c_2$}.]
 
-  \InterfazFuncion{coordenadaArriba}{\In{c}{coor}}{coor}
+  \InterfazFuncion{CoordenadaArriba}{\In{c}{coor}}{coor}
   {$res \igobs distEuclidea(c_1, c_2)$}
   [$O(1)$]
   [devuelve la coordenadas .]
 
-  \InterfazFuncion{coordenadaAbajo}{\In{c}{coor}}{coor}
+  \InterfazFuncion{CoordenadaAbajo}{\In{c}{coor}}{coor}
   [Latitud($c$) $>$ 0]
   {$res \igobs distEuclidea(c_1, c_2)$}
   [$O(1)$]
   [devuelve la coordenadas .]
 
-  \InterfazFuncion{coordenadaALaDerecha}{\In{c}{coor}}{coor}
+  \InterfazFuncion{CoordenadaALaDerecha}{\In{c}{coor}}{coor}
   {$res \igobs distEuclidea(c_1, c_2)$}
   [$O(1)$]
   [devuelve la coordenadas .]
 
-  \InterfazFuncion{coordenadaALaIzquierda}{\In{c}{coor}}{coor}
+  \InterfazFuncion{CoordenadaALaIzquierda}{\In{c}{coor}}{coor}
   [Longitud($c$) $>$ 0]
   {$res \igobs distEuclidea(c_1, c_2)$}
   [$O(1)$]
@@ -56,6 +57,7 @@
 \end{Interfaz}
 
 \begin{Representacion}
+\subsection{Representacion}
  
   \begin{Estructura}{coor}[estr]
       \begin{Tupla}[estr]%
@@ -73,8 +75,9 @@
 \end{Representacion}
 
 \begin{Algoritmos}
+\subsection{Algoritmos}
    
-\begin{algorithm}[H]{\textbf{crearCoor}(\In{n_1}{nat}, \In{n_2}{nat}) $\to$ $res$ : coor}
+\begin{algorithm}[H]{\textbf{iCrearCoor}(\In{n_1}{nat}, \In{n_2}{nat}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $\langle$ $n_1$ , $n_2$ $\rangle$ \Comment $O(1)$
 
@@ -83,7 +86,7 @@
 \end{algorithmic}
 \end{algorithm}
    
-\begin{algorithm}[H]{\textbf{latitud}(\In{c}{coor}) $\to$ $res$ : nat}
+\begin{algorithm}[H]{\textbf{iLatitud}(\In{c}{coor}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $c$.$latitud$ \Comment $O(1)$
 
@@ -94,7 +97,7 @@
 \end{algorithm}
 
 
-\begin{algorithm}[H]{\textbf{longitud}(\In{c}{coor}) $\to$ $res$ : nat}
+\begin{algorithm}[H]{\textbf{iLongitud}(\In{c}{coor}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $c$.$longitud$ \Comment $O(1)$
 
@@ -103,7 +106,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{distEuclidea}(\In{c_1}{coor}, \In{c_2}{coor}) $\to$ $res$ : nat}
+\begin{algorithm}[H]{\textbf{iDistEuclidea}(\In{c_1}{coor}, \In{c_2}{coor}) $\to$ $res$ : nat}
 \begin{algorithmic}[1]
     \State $a$ $\gets$ $0$ \Comment $O(1)$
     \If{ $c_1$.$latitud$ $<$ $c_2$.$latitud$ }	\Comment $O(1)$
@@ -126,7 +129,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{coordenadaArriba}(\In{c}{coor}) $\to$ $res$ : coor}
+\begin{algorithm}[H]{\textbf{iCoordenadaArriba}(\In{c}{coor}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $\langle$ Latitud($c$) $+$ 1 , Longitud($c$) $\rangle$ \Comment $O(1)$
 
@@ -136,7 +139,7 @@
 \end{algorithm}
 
 
-\begin{algorithm}[H]{\textbf{coordenadaAbajo}(\In{c}{coor}) $\to$ $res$ : coor}
+\begin{algorithm}[H]{\textbf{iCoordenadaAbajo}(\In{c}{coor}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $\langle$ Latitud($c$) $-$ 1 , Longitud($c$) $\rangle$ \Comment $O(1)$
 
@@ -145,7 +148,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{coordenadaALaDerecha}(\In{c}{coor}) $\to$ $res$ : coor}
+\begin{algorithm}[H]{\textbf{iCoordenadaALaDerecha}(\In{c}{coor}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $\langle$ Latitud($c$) , Longitud($c$) $+$ 1 $\rangle$ \Comment $O(1)$
 
@@ -154,7 +157,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{coordenadaALaIzquierda}(\In{c}{coor}) $\to$ $res$ : coor}
+\begin{algorithm}[H]{\textbf{iCoordenadaALaIzquierda}(\In{c}{coor}) $\to$ $res$ : coor}
 \begin{algorithmic}[1]
 	\State $res$ $\gets$  $\langle$ Latitud($c$) , Longitud($c$) $-$ 1  $\rangle$ \Comment $O(1)$
 
