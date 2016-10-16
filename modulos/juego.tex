@@ -632,7 +632,7 @@ $ $\newline
 \EndIf
 
 \State heap(tupla<id: nat, cantCapt: nat>) $h \gets$ Vacia() \Comment $O(1)$
-\State vector<jugador> \hspace{0.5mm} posiblesCapturadores $\gets$ DameJugadoresEnPokenodo(j, c) \Comment $O(EC)$
+\State vector<jugador> \hspace{0.5mm} posiblesCapturadores $\gets$ DameJugadoresEnPokerango(j, c) \Comment $O(EC)$
 \State nat $i \gets$ 0 \Comment $O(1)$
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
@@ -648,7 +648,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(EC*log(EC) + |P|)$ 
-\State \underline{Justificacion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de la cola de entrenadores es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos de la cola. DameJugadoresEnPokenodo es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
+\State \underline{Justificacion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de la cola de entrenadores es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos de la cola. DameJugadoresEnPokerango es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
 
 \end{algorithmic}
 \end{algorithm}
@@ -1508,7 +1508,7 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \Statex \underline{SumarUnoEnJug} : Funci\'on privada 
 \Statex \underline{Descripci\'on} : Suma uno a la cantidad de pokemons p que tiene el jugador 
 \Statex \underline{Pre}: $j = j_0$ $\land$  $e \in$ jugadores($j$)
-\Statex \underline{Post}: $\#$pokemons($p$, $j_0$.jugadores[$e$].pokemons) = $\#$pokemons($p$, $j$.jugadores[$e$].pokemons) + 1 (y lo demas no cambi\'o)
+\Statex \underline{Post}: $\#$pokemons($p$, $j_0$.jugadores[$e$].pokemons) = $\#$pokemons($p$, $j$.jugadores[$e$].pokemons) + 1
 \Statex \underline{Complejidad}: $O(|P|)$ 
 
 % Lo defino bien
@@ -1522,6 +1522,73 @@ VER TODO EL TEMILLA DEL MULTICONJUNTO... HAY QUE HACERLO??
 \medskip
 \Statex \underline{Complejidad:} $O(|P|)$
 \Statex \underline{Justificaion:} Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}  
+  
+
+
+
+% dameJugadoresEnPokerango
+
+\begin{algorithm}[H]
+{\textbf{iSumarUnoEnJug}(\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego})}
+\begin{algorithmic}[1]
+
+
+\Statex \underline{SumarUnoEnJug} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Suma uno a la cantidad de pokemons p que tiene el jugador 
+\Statex \underline{Pre}: $j = j_0$ $\land$  posValida($c$, $j$.mapa)
+\Statex \underline{Post}: $\#$pokemons($p$, $j_0$.jugadores[$e$].pokemons) = $\#$pokemons($p$, $j$.jugadores[$e$].pokemons) + 1
+\Statex \underline{Complejidad}: $O(|P|)$ 
+
+ Lo defino bien
+\If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+\Else
+  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
+\EndIf
+
+
+\medskip
+\Statex \underline{Complejidad:} $O(|P|)$
+\Statex \underline{Justificaci\'on:} Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
+
+\end{algorithmic}
+\end{algorithm}  
+  
+
+
+% agregarAtrasJugsEnPos
+
+\begin{algorithm}[H]
+{\textbf{iAgregarAtrasJugsQueEstanEnPos}(\Inout{jugs}{vector(jugador)}, \In{posJug}{coor}, \In{posPoke}{coor}, \In{j}{juego})}
+\begin{algorithmic}[1]
+
+\Statex \underline{AgregarAtrasJugsQueEstanEnPos} : Funci\'on privada 
+\Statex \underline{Descripci\'on} : Agrega los jugadores en condiciones de capturar que se encuentran en esa posicion, al vector pasado por parametros,   
+\Statex \underline{Pre}: $jugs = jugs_0$ $\land$  posValida($posJug$, $j$.mapa) $\land$ posValida($posPoke$, $j$.mapa)
+\Statex \underline{Post}: $jugs = jugs_0 con los jugadores en condiciones de capturar agregados atras$
+\Statex \underline{Complejidad}: $O(EC)$ 
+
+\State lista(jugador) $jugsEnPos \gets$ $j$.grillaJugs[Latitud($posJug$)][Longitud($posJug$)] \Comment Por referencia $O(1)$
+\State itLista $iterJug \gets$ CreatIt($jugsEnPos$) \Comment $O(1)$
+
+\While{HaySiguiente($iterJug$)} \Comment $O(longitud(jugsEnPos))$
+    \State nat $e \gets$ Siguiente($iterJug$) \Comment $O(1)$
+
+    \If{Conectado($e$) $\land$ HayCamino(Posicion($e$), $posPoke$)}
+        \State AgregarAtras($jugs$, $e$) \Comment $O(1) amortizado$
+    \EndIf 
+
+    \State Avanzar($iterJug$) \Comment $O(1)$
+
+
+\EndWhile
+
+\medskip
+\Statex \underline{Complejidad:} $O(EC)$
+\Statex \underline{Justificaion:} En el peor caso todos los jugadores que estan en la posici\'on dada son todos los que tienen que esperar la captura. Como longitud($jugsEnPos$) $\leq$ EC, O(longitud($jugsEnPos$)) = O(EC)
 
 \end{algorithmic}
 \end{algorithm}  
