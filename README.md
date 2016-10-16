@@ -33,7 +33,7 @@ Algoritmos 2 - TP2
 
 [X] Revisar si hace falta de verdad iteradores de heap, capaz con punteros funca, no se
 
-[ ] Arreglar interfaz de Juego incompletas (pre, post, complejidad)
+[X] Arreglar interfaz de Juego incompletas (pre, post, complejidad)
 
 [X] Justificar algoritmos de heap
 
