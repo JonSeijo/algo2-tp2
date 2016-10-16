@@ -40,10 +40,11 @@
   [borra la clave $p$ y su significado.]
 
   \InterfazFuncion{Claves}{\In{d}{diccString($\alpha$)}}{conj(string)}
-  {$res$ $\igobs$ claves($d$)}
+  [true]
+  {alias($res$ $\igobs$ claves($d$))}
   [$O(1)$]
-  [devuelve del conjunto de claves de $d$.]
-
+  [Devuelve del conjunto de claves de $d$.]
+  {Aliasing: $res$ se modifica sii claves($d$) se modifica}
 
 
 
