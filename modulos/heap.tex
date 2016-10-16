@@ -2,7 +2,7 @@
 
   \textbf{se explica con}: \tadNombre{Cola de Prioridad($\alpha$), Iterador Cola de Prioridades($\alpha$)}.
 
-  \textbf{g\'eneros}: \TipoVariable{colaEntr}, \TipoVariable{itcola(entrenador)}.
+  \textbf{g\'eneros}: \TipoVariable{colaEntr}, \TipoVariable{itcolaEntrenador)}.
 
   \Title{Operaciones b\'asicas de Cola de Entrenadores}
 
@@ -13,7 +13,7 @@
   [genera una nueva cola de entrenadores]
 
 
-  \InterfazFuncion{Encolar}{\Inout{h}{colaEntr}, \In{j}{entrenador}}{itcola(entrenador)}
+  \InterfazFuncion{Encolar}{\Inout{h}{colaEntr}, \In{j}{entrenador}}{itcolaEntrenador)}
   [$h \igobs h_{0}$]
   {$h \igobs encolar(h_{0}, j)$}
   [$O(log(EC))$]
@@ -26,7 +26,7 @@
   [devuelve true si la cola es vacia]
 
 
-  \InterfazFuncion{Proximo}{\In{h}{colaEntr}}{itcola(entrenador)}
+  \InterfazFuncion{Proximo}{\In{h}{colaEntr}}{itcolaEntrenador)}
   [$\neg$ vacia?(h)]  
   {$alias(res \igobs proximo(h))$} 
   [$O(1)$]
@@ -44,7 +44,7 @@
 
   \Title{Operaciones del iterador}
  
-  \InterfazFuncion{Borrar}{\In {it}{itcola(entrenador)}, \In{h}{colaEntr}}{}%
+  \InterfazFuncion{Borrar}{\In {it}{itcolaEntrenador)}, \In{h}{colaEntr}}{}%
   [$siguiente(it) \in elementos(h)$]
   {$siguiente(it) \not\in elementos(h)$}
   [$O(log(EC))$]
@@ -84,7 +84,7 @@
 
 \begin{Representacion}
  
-  \begin{Estructura}{itcola(entrenador)}[estr]
+  \begin{Estructura}{itcolaRntrenador)}[estr]
       \begin{Tupla}[estr]%
       \tupItem{siguiente}{puntero(Nodoheap)}%
       \tupItem{estructura}{puntero(colaEntr)}%
@@ -95,7 +95,7 @@
 
   ~
 
-  \AbsFc[estr]{heap}[e]{}
+  \AbsFc[estr]{Cola de entrenadores}[e]{}
 
 \end{Representacion}
 
@@ -123,11 +123,11 @@
     	\end{algorithmic}
 \end{algorithm}
 
-[H]{\textbf{iEncolarElem}(\Inout{h}{colaEntr}, \In{j}{entrenador}) $\to$ $res$ : itcola(entrenador)}
+[H]{\textbf{iEncolarElem}(\Inout{h}{colaEntr}, \In{j}{entrenador}) $\to$ $res$ : itcolaEntrenador)}
     	\begin{algorithmic}[1]
     	\State $Nodoheap$ n $\gets <j, NULL, NULL, NULL>$ \Comment $O(1)$
     	\State $puntero(Nodoheap)$ p $\gets n$  \Comment $O(1)$
-		\If{$EsVacia?(h)$} \Comment Insertamos el nodo al final del heap $O(1)$
+		\If{$EsVacia?(h)$} \Comment Insertamos el nodo al final de la cola $O(1)$
     		\State $h.raiz \gets p$ \Comment $O(1)$
     		\State $h.ultimo \gets p$ \Comment $O(1)$
     	\Else
@@ -259,7 +259,7 @@
 		\State $res \gets it$ \Comment $O(1)$
 			\medskip
 			\Statex \underline{Complejidad:} $O(log(EC))$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en el ciclo se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto los ciclos se repiten log(EC) veces en el peor caso.
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en el ciclo se va recorriendo la cola desde una de las hojas hasta la raiz (o vice versa). Al ser la cola un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto los ciclos se repiten log(EC) veces en el peor caso.
     	\end{algorithmic}   	
 
 
@@ -288,7 +288,7 @@
 \begin{Algoritmos}
 
 
-[H]{\textbf{iBorrar}(\In{it}{itcola(entrenador)}, \In{h}{}colaEntr)}
+[H]{\textbf{iBorrar}(\In{it}{itcolaEntrenador)}, \In{h}{}colaEntr)}
     	\begin{algorithmic}[1]
     		\If{$(it.estructura \rightarrow raiz) = (it.estructura \rightarrow ultimo)$} \Comment $O(1)$
     			\State $it.siguiente \gets NULL$ \Comment Libera memoria $O(1)$
@@ -297,7 +297,7 @@
     		\Else    		
     			\State $puntero(Nodo)$ cambiado $\gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
     			\State $aPonerUltimo \gets it.siguiente$
-				\If{($it.estructura \rightarrow ultimo \rightarrow padre) \not= aPonerUltimo$} \Comment Swapeamos con el \'ultimo del heap. $O(1)$	
+				\If{($it.estructura \rightarrow ultimo \rightarrow padre) \not= aPonerUltimo$} \Comment Swapeamos con el \'ultimo de la cola. $O(1)$	
 					\State $(it.estructura \rightarrow ultimo \rightarrow izq) \gets (aPonerUltimo \rightarrow izq)$ \Comment $O(1)$
 			\State $(it.estructura \rightarrow ultimo \rightarrow der) \gets (aPonerUltimo \rightarrow der)$ \Comment $O(1)$	
 			\If{$(aPonerUltimo \rightarrow izq) \not= NULL$} \Comment $O(1)$
@@ -615,7 +615,7 @@
 			\EndIf
 			\medskip
 			\Statex \underline{Complejidad:} $O(log(EC))$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en cada uno de los ciclos se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto estos ciclos se repiten log(EC) veces en el peor caso.
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en cada uno de los ciclos se va recorriendo la cola desde una de las hojas hasta la raiz (o vice versa). Al ser la cola un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto estos ciclos se repiten log(EC) veces en el peor caso.
     	\end{algorithmic}
     	
 \begin{algorithm}[H]{\textbf{iEsHijoIzquierdo?}(\In{p}{puntero(Nodoheap)}) $\to$ $res$ : bool} $ $\newline
@@ -643,7 +643,7 @@
     	\end{algorithmic}   	
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{iCrearItCola}(\In{h}{colaEntr}, \In{p}{puntero(Nodoheap)}) $\to$ $res$ : itcola(entrenador)} $ $\newline
+\begin{algorithm}[H]{\textbf{iCrearItCola}(\In{h}{colaEntr}, \In{p}{puntero(Nodoheap)}) $\to$ $res$ : itcolaEntrenador)} $ $\newline
 \Comment Funci\'on privada que devuelve un iterador a un elemento de la cola de prioridad.
     	\begin{algorithmic}[1]
     		 \State $puntero(crearEntr) q \gets h$

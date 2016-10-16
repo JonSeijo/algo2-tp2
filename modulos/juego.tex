@@ -250,7 +250,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
     \begin{Tupla}[pokeStruc]
       \tupItem{poke}{pokemon}
       \tupItem{\\ contador}{nat}%
-      \tupItem{\\ entrenadores}{Heap(tupla<id: nat, cantCapt: nat>)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
+      \tupItem{\\ entrenadores}{colaEntr} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
     \end{Tupla}
     
     
@@ -260,7 +260,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
       \tupItem{\\ conectado}{bool}
       \tupItem{\\ pos}{coor}
       \tupItem{\\ pokemons}{diccString(nat)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
-      \tupItem{\\ iteradorAHeap}{itHeap(tupla<id: nat, cantCapt: nat>)} % Iterador al heap
+      \tupItem{\\ iteradorAEntrenadores}{itcolaEntrenador} % Iterador al heap
       \tupItem{\\ iteradorAPos}{itLista(nat)}   
       \tupItem{\\ iteradorAJuego}{itConj(jugador)}   
       \tupItem{\\ cantCapt}{nat}
@@ -389,7 +389,7 @@ $ $\newline
 
 % jonathan: creo que con solo hablar del minimo del heap es suficiente, porque es lo unico que necesitamos en realidad. El resto de los jugadores del heap estan solo para poder actualizar al minimo rapido
 
-(17) Para todas los pokenodos con pokemons, de todos jugadores validos, conectados, que esten en un radio menor a 2, con un camino a la posicion del pokemon, el que tiene menos cantidad de pokemons capturados (y menor id en caso de empate) se corresponde con el Proximo del Heap $ $\newline
+(17) Para todas los pokenodos con pokemons, de todos jugadores validos, conectados, que esten en un radio menor a 2, con un camino a la posicion del pokemon, el que tiene menos cantidad de pokemons capturados (y menor id en caso de empate) se corresponde con el Proximo de la Cola de entrenadores $ $\newline
 
 ($\forall x, y$: nat) ((enRango($x$, $y$, $j.mapa$) $\yluego$ $j$.pokenodos[$x$][$y$] $\neq$ NULL) \\
   (minJ(entrenadoresPosibles(crearCoordenada($x$, $y$), jugadoresConectados($j$), $j$) = \\
@@ -398,11 +398,11 @@ $ $\newline
   
 $ $\newline
 
-(18) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hace ese pokemon entonces su iterador a heap esta bien definido $ $\newline
+(18) Todo jugador valido conectado que tenga un pokemon cercano, si tiene un camino hacia ese pokemon entonces su iterador a entrenadores esta bien definido $ $\newline
 
 ($\forall jug$: jugStruc) (esJugadorConectado($jug$, $j$) $\land$ hayPokemonCercano($jug$.pos, $j$) $\impluego$ \\
 hayCamino(posPokemonCercano($j.pos$, $j$), $j$) $\implies$ \\
-siguiente($jug$.iterAHeap).id = $jug$.id $\land$ siguiente($jug$.iterAHeap).cant = $j$.cantCapt) 
+siguiente($jug$.iterAEntrenadores).id = $jug$.id $\land$ siguiente($jug$.iterAEntrenadores).cant = $j$.cantCapt) 
 
 $ $\newline
 
@@ -586,15 +586,15 @@ $ $\newline
     \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
     \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
     \State ($p$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
-    \State tupla<id: nat, cantCap: nat> $t \gets$ <j, $p$.jugadores[j].camtCap> 
+    \State entrenador $t \gets$ <j, $p$.jugadores[j].camtCap> 
     \State $itpokenodo \gets Encolar((p.pokenodos[latPok][lonPok] \rightarrow entrenadores) , t)$
 \Comment $O(log(EC))$
-    \State $p$.jugadores[j].iteradorAHeap $\gets$ $itpokenodo$ \Comment $O(1)$
+    \State $p$.jugadores[j].iteradorAEntrenadores $\gets$ $itpokenodo$ \Comment $O(1)$
 \EndIf
 
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1). La funci\'on de Heap Encolar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos del heap.
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1). La funci\'on de Cola de entrenadores Encolar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
 
 
 \end{algorithmic}
@@ -612,13 +612,13 @@ $ $\newline
 \If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
     \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
     \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-    \State Borrar($p$.jugadores[j].iteradorAHeap, ($p$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
-    \State itHeap(tupla<id: nat, cantCap: nat>) $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
-    \State $p$.jugadores[j].iteradorAHeap $\gets ith$ \Comment $O(1)$
+    \State Borrar($p$.jugadores[j].iteradorAEntrenadores, ($p$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
+    \State itcolaEntrenador $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
+    \State $p$.jugadores[j].iteradorAEntrenadores $\gets ith$ \Comment $O(1)$
 \EndIf
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itHeap Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos del heap.
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itcolaEntrenadores Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
 
 
 \end{algorithmic}
@@ -641,14 +641,14 @@ $ $\newline
   \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
 \EndIf
 
-\State heap(tupla<id: nat, cantCapt: nat>) $h \gets$ Vacia() \Comment $O(1)$
+\State colaEntr $h \gets$ Vacia() \Comment $O(1)$
 \State vector<jugador> \hspace{0.5mm} posiblesCapturadores $\gets$ DameJugadoresEnPokerango(j, c) \Comment $O(EC)$
 \State nat $i \gets$ 0 \Comment $O(1)$
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
   \State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
-  \State itheap(tupla<id: nat, cantCapt: nat>) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
-  \State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAHeap $\gets$ $it$ \Comment $O(1)$
+  \State itcolaEntrenador it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
+  \State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAEntrenadores $\gets$ $it$ \Comment $O(1)$
   \State $i \gets i$ + 1 \Comment $O(1)$
 \EndWhile
 
