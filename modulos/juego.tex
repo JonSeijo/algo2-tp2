@@ -709,22 +709,22 @@ $ $\newline
 	\If{$hayPokDesp$}
 	
 		\If{$\neg$ $hayPokAntes$}	
-			\State CasoMov3($e$, $posAntes$, $c$, $j$)
+			\State CasoMov3($e$, $posAntes$, $c$, $j$)  \Comment $O((PS *|P|) + log(EC))$ 
 					
 		\Else %Hay Antes
 			\If{PosPokemonCercano($posAntes$, $j$) = PosPokemonCercano($c$, $j$)}  \Comment $O(1)$
-				\State CasoMov1($e$, $posAntes$, $c$, $j$)
+				\State CasoMov1($e$, $posAntes$, $c$, $j$) \Comment $O(PS *|P|)$ 
 			\Else
 
-				\State CasoMov5($e$, $posAntes$, $c$, $j$)
-			\EndIf		
+				\State CasoMov5($e$, $posAntes$, $c$, $j$) \Comment  $O((PS *|P|) + log(EC))$ 
+ 			\EndIf		
 		\EndIf
 	\Else %If no hay despues
 		\If{$hayPokAntes$}
 			
-			\State CasoMov2($e$, $posAntes$, $c$, $j$)
+			\State CasoMov2($e$, $posAntes$, $c$, $j$) \Comment  $O((PS *|P|) + log(EC))$ 
 		\Else
-			\State CasoMov4($e$, $posAntes$, $c$, $j$)
+			\State CasoMov4($e$, $posAntes$, $c$, $j$) \Comment  $O(PS *|P|)$ 
 		\EndIf		
 		
 	\EndIf
@@ -741,7 +741,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O((PS + PC)*|P| + log(EC))$ 
-\State \underline{Justificaci\'on:} :)
+\State \underline{Justificaci\'on:} Si el movimiento no fue valido, en el peor caso hay que eliminar al jugador. Esto cuesta $O((PC *|P|) + log(EC))$ pues se ejecuta el ciclo. La segunda parte del algoritmo no se ejecuta si el jugador fue eliminado (pues no entra en el if de sanciones menores a 5), sin embargo, en caso que no fue eliminado el peor caso cuesta $O((PS *|P|) + log(EC))$ si tomo la rama con mayor complejidad. Esto nos da que la complejidad total del algoritmo en peor caso, es la ``rama'' que mayor complejidad tenga, osea $O(max((PC *|P|) + log(EC), (PS *|P|) + log(EC)))$. Por \'algebra de \'ordenes, usando que el m\'aximo es la suma, esa complejidad es igual a $O((PC *|P|) + log(EC) + (PS *|P|) + log(EC))$ = $O((PC *|P|) + (PS *|P|) + log(EC))$ = $O((PC + PS) *|P|) + log(EC))$
 
 \end{algorithmic}
 %\end{algorithm}
