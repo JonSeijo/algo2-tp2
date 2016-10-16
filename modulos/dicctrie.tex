@@ -174,7 +174,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
 	
 	
-	\If{$actual$.$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
+	\If{(*$actual$).$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
 		\State (*$actual$).$siguientes$[ord($p$[$i$])] $\gets$	 $\&$ $\langle$ $NULL$, arreglo[$256$]($NULL$), $NULL$ $\rangle$  \Comment $O(1)$
 		
 		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
@@ -186,8 +186,8 @@ $dic$ : dicc(string, $\alpha$) / \\
 	\State $i$ $\gets$ $i + 1$
 \EndWhile 
 
-\If{$actual$.definicion  $\neq$  $NULL$} \Comment $O(1)$
-	\State $actual$.definicion $\gets$ $NULL$ \Comment se libera la memoria acupada por definicion $O(1)$
+\If{(*$actual$).definicion  $\neq$  $NULL$} \Comment $O(1)$
+	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria acupada por definicion $O(1)$
 \EndIf
 \State (*$actual$).$definicion$ $\gets$ $\&$ $a$ \Comment $O(1)$
 
@@ -228,7 +228,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 	
 	\State $actual$ $\gets$ (*$actual$).siguientes[$ord(p[i])$] \Comment $O(1)$
 
-	\State $i$ $\gets$ $i + 1$
+	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
 \EndWhile 
 
 \If {(*$actual$).$significado$ $=$ $NULL$} \Comment $O(1)$ 
@@ -274,7 +274,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 	
 	\EndIf
 
-	\State $i$ $\gets$ $i + 1$
+	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
 \EndWhile 
 
 
@@ -336,6 +336,8 @@ $dic$ : dicc(string, $\alpha$) / \\
 			\State $sigue$ $\gets$ true \Comment $O(1)$		
 		
 		\EndIf
+		\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
+
 	\EndWhile
 
 \EndWhile
@@ -371,7 +373,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 	\If{(*$actutal$).siguiente[$i$] $\neq$ $NULL$} \State $O(1)$ 
 	
 	\State $suma$ $\gets$ $suma$ $+$ 1 \Comment $O(1)$
-	
+	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
 	\EndIf
 \EndWhile
 \State $res$ $\gets$ $hijos$ \Comment $O(1)$
@@ -383,8 +385,21 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \end{algorithmic}
 \end{algorithm}
-  
-  
+
   
 \end{Algoritmos}
 
+
+\subsection{Servicios usados} 
+
+De Conjunto Lineal \\
+ - Vacio() debe ser O(1) \\ 
+ - AgregarRapido( conj($\alpha$), $\alpha$ $\alpha$) debe ser O(copy(a)) \\
+ - EliminarSiguiente(itConj($\alpha$)) debe ser O(1) \\
+
+De String \\
+ - Longitud(string) debe ser O(1) \\
+ 
+De Char \\
+ - ord(char) debe ser O(1) \\
+ 
