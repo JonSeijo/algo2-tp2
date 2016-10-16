@@ -1,102 +1,52 @@
 \begin{Interfaz}
 
-  \textbf{se explica con}: \tadNombre{Cola de Prioridad(jugStruct)}.
+  \textbf{se explica con}: \tadNombre{Cola de Prioridad($\alpha$), Iterador Cola de Prioridades($\alpha$)}.
 
-  \textbf{g\'eneros}: \TipoVariable{heap(tupla<id: nat, cantCapt: nat>)}, \TipoVariable{itheap(jugStruct)}.
+  \textbf{g\'eneros}: \TipoVariable{colaEntr}, \TipoVariable{itcola(entrenador)}.
 
-  \Title{Operaciones b\'asicas de Heap}
+  \Title{Operaciones b\'asicas de Cola de Entrenadores}
 
 
-  \InterfazFuncion{Vacia}{}{heap(tupla<id: nat, cantCapt: nat>)}%
+  \InterfazFuncion{Vacia}{}{colaEntr}%
   {$res \igobs vacia$}%
   [$O(1)$]
-  [genera un nuevo heap]
+  [genera una nueva cola de entrenadores]
 
 
-  \InterfazFuncion{Encolar}{\Inout{h}{heap(tupla<id: nat, cantCapt: nat>)}, \In{j}{tupla<id: nat, cantCapt: nat>}}{itHeap(tupla<id: nat, cantCapt: nat>)}
+  \InterfazFuncion{Encolar}{\Inout{h}{colaEntr}, \In{j}{entrenador}}{itcola(entrenador)}
   [$h \igobs h_{0}$]
   {$h \igobs encolar(h_{0}, j)$}
   [$O(log(EC))$]
   [encola $j$ a $h$]
-  [el elemento $j$ se encola por copia, REVISAR PRE Y POS]
+  [el elemento $j$ se encola por copia]
 
-  \InterfazFuncion{EsVacia?}{\In{h}{heap(tupla<id: nat, cantCapt: nat>)}}{bool}
+  \InterfazFuncion{EsVacia?}{\In{h}{colaEntr}}{bool}
   {$res \igobs vacia?(h)$}
   [$O(1)$]
   [devuelve true si la cola es vacia]
 
 
-  \InterfazFuncion{Proximo}{\In{h}{heap(tupla<id: nat, cantCapt: nat>)}}{tupla<id: nat, cantCapt: nat>}
+  \InterfazFuncion{Proximo}{\In{h}{colaEntr}}{itcola(entrenador)}
   [$\neg$ vacia?(h)]  
   {$alias(res \igobs proximo(h))$} 
   [$O(1)$]
   [devuelve el pr\'oximo de la cola]
-  [PREGUNTAR ALIASING Y ALIAS]
+  [el elemento se devuelve por copia]
   
   
-  \InterfazFuncion{Desencolar}{\Inout{h}{heap(tupla<id: nat, cantCapt: nat>)}}{}
+  \InterfazFuncion{Desencolar}{\Inout{h}{colaEntr}}{}
   [$h \igobs h_{0} \land \neg vacia(h)$ ]  
   {$h \igobs desencolar(h_{0})$} 
   [$O(log(EC))$]
   [desencola el pr\'oximo de h]
+ 
 
 
   \Title{Operaciones del iterador}
-  
-   \InterfazFuncion{CrearIt}{\In {h}{heap(tupla<id: nat, cantCapt: nat>)}}{itHeap(tupla<id: nat, cantCapt: nat>)}%
-  {$HCER ESTO$}%
-  [$O(1)$]
-  [crea un iterador unidireccional modificable a la \'ultima posici\'on]
-  [el iterador se invalida si se elimina el siguiente sin usar la funcion BORRARSIGUIENTE]
  
- 
- \InterfazFuncion{HayPadre?}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{bool}%
-  {$HCER ESTO$}
-  [$O(1)$]
-  [devuelve true si hay padre del elemento]
-  
-  \InterfazFuncion{HayHijoIzq?}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{bool}%
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve true si hay hijo izquierdo del elemento]
-  
-  \InterfazFuncion{HayHijoDer?}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{bool}%
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve true si hay hijo derecho del elemento]
-  
-  \InterfazFuncion{HayNodo?}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>t)}}{bool}%
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve true si hay elementos por recorrer]
-  
-  \InterfazFuncion{Elemento}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla$<$id: nat, cantCapt: nat$>$}%
-  [HayNodo?(it)]
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve el elemento del nodo]
-  
-  \InterfazFuncion{Elementohijoizq}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla<id: nat, cantCapt: nat>}%
-  [HayHijoIzq?(it)]
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve el elemento del hijo izquierdo del nodo]
-  
-  \InterfazFuncion{Elementohijoder}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla<id: nat, cantCapt: nat>}%
-  [HayHijoDer?(it)]
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve el elemento del hijo derecho del nodo]
-  
-  \InterfazFuncion{Elementopadre}{\In {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{tupla<id: nat, cantCapt: nat>}%
-  [HayPadre?(it)]
-  {$HACER ESTO$}
-  [$O(1)$]
-  [devuelve el elemento del padre del nodo]
-  
-  \InterfazFuncion{Borrar}{\Inout {it}{itHeap(tupla<id: nat, cantCapt: nat>)}}{}%
-  [ITERADOR VALIDO]
-  {$HACER ESTO$}
+  \InterfazFuncion{Borrar}{\In {it}{itcola(entrenador)}, \In{h}{colaEntr}}{}%
+  [$siguiente(it) \in elementos(h)$]
+  {$siguiente(it) \not\in elementos(h)$}
   [$O(log(EC))$]
   [Borra el elemento dado]
   
@@ -104,7 +54,7 @@
 
 \begin{Representacion}
  
-  \begin{Estructura}{heap(tupla<id: nat, cantCapt: nat>)}[estr]
+  \begin{Estructura}{colaEntr}[estr]
       \begin{Tupla}[estr]%
       \tupItem{raiz}{puntero(Nodoheap)}%
       \tupItem{ultimo}{puntero(Nodoheap)}%
@@ -112,11 +62,17 @@
   \end{Estructura}
 
 	\begin{Tupla}[Nodoheap]
-	\tupItem{elemento}{tupla<id: nat, cantCapt: nat>}%
+	\tupItem{elemento}{entrenador}%
 	\tupItem{padre}{puntero(Nodoheap)}%
 	\tupItem{izq}{puntero(Nodoheap)}%
 	\tupItem{der}{puntero(Nodoheap)}%
 	\end{Tupla}
+
+	\begin{Tupla}[entrenador]
+	\tupItem{id}{nat}%
+	\tupItem{cantCapt}{nat}%
+	\end{Tupla}
+
 
   \RepFc[estr$/e$]{true}
 
@@ -128,10 +84,10 @@
 
 \begin{Representacion}
  
-  \begin{Estructura}{itHeap(tupla<id: nat, cantCapt: nat>)}[estr]
+  \begin{Estructura}{itcola(entrenador)}[estr]
       \begin{Tupla}[estr]%
       \tupItem{siguiente}{puntero(Nodoheap)}%
-      \tupItem{estructura}{puntero(Heap)}%
+      \tupItem{estructura}{puntero(colaEntr)}%
     \end{Tupla}
   \end{Estructura}
 
@@ -147,227 +103,46 @@
 
 \begin{Algoritmos}
    
-\begin{algorithm}[H]{\textbf{iVacio}() $\to$ $res$ : heap(jugStruct)}
+\begin{algorithm}[H]{\textbf{iVacio}() $\to$ $res$ : colaEntr}
     	\begin{algorithmic}[1]
 			 \State $res \gets  <NULL, NULL> $ \Comment $O(1)$
 
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ 
     	\end{algorithmic}
 \end{algorithm}
    
-\begin{algorithm}[H]{\textbf{iEsVacia?}(\In{h}{heap(tupla<id: nat, cantCapt: nat>)}) $\to$ $res$ : bool}
+\begin{algorithm}[H]{\textbf{iEsVacia?}(\In{h}{colaEntr}) $\to$ $res$ : bool}
     	\begin{algorithmic}[1]
 			 \State $res \gets  h.raiz \not=$ NULL \Comment $O(1)$
 
 			\medskip
 			\Statex \underline{Complejidad:} $O(1)$
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ 
     	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]{\textbf{iEncolarElem}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{j}{tupla$<$id: nat, cantCapt: nat$>$}) $\to$ $res$ : itHeap(tupla$<$id: nat, cantCapt: nat$>$)}
+[H]{\textbf{iEncolarElem}(\Inout{h}{colaEntr}, \In{j}{entrenador}) $\to$ $res$ : itcola(entrenador)}
     	\begin{algorithmic}[1]
     	\State $Nodoheap$ n $\gets <j, NULL, NULL, NULL>$ \Comment $O(1)$
     	\State $puntero(Nodoheap)$ p $\gets n$  \Comment $O(1)$
-		\State $InsertarAlFinal(h, p)$
-		\State $it \gets CrearIt(h)$ \Comment $O(1)$
-
-		\If{$h.raiz \not= h.ultimo$} \Comment $O(1)$
-			\State $puntero(Nodo)$ nuevoNodo $\gets h.ultimo$			\Comment $O(1)$
-			\While{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \land ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$} \Comment $O(log(EC))$
-				\State $Swap(h, nuevoNodo)$ \Comment $O(1)$
-						
-			\EndWhile
-		\EndIf
-		\State $res \gets it$ \Comment $O(1)$
-			\medskip
-			\Statex \underline{Complejidad:} $O(log(EC))$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en el ciclo se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto el ciclo se repiten log(EC) veces en el peor caso.
-    	\end{algorithmic}   	
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{iProximo}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
-    	\begin{algorithmic}[1]
-    		 \State $res \gets (h.raiz \rightarrow elemento)$ \Comment $O(1)$
-    		 \medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{iDesencolar}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
-    	\begin{algorithmic}[1]
-    		 \State $it \gets <h.raiz, h>$ \Comment $O(1)$
-		     \State $res \gets Proximo(h)$ \Comment $O(1)$	 
-    		 \State $Borrar(it)$ \Comment $O(log(EC))$
-    		 \medskip
-			\Statex \underline{Complejidad:} $O(log(EC))$
-			\Statex \underline{Justificaci\'on:} Hay dos operaciones $O(1)$ y una $O(log(EC))$, por lo tanto, por \'algebra de \'ordenes $O(1)$ + $O(1)$ + $O(log(EC))$ = $O(log(EC))$
-    	\end{algorithmic}
-\end{algorithm}
-
-\end{Algoritmos}
-
-\begin{Algoritmos}
-
-
-\begin{algorithm}[H]{\textbf{iCrearIt}(\In{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : itHeap(tupla$<$id: nat, cantCapt: nat$>$)}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  <h.ultimo, h> $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{HayPadre?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente \rightarrow padre \not= NULL) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{HayHijoDer?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente \rightarrow der \not= NULL) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{HayHijoIzq?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente \rightarrow izq \not= NULL) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{iHayNodo?}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : bool}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente \not= NULL) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{iElemento}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente \rightarrow elemento) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{Elementohijoizq}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente  \rightarrow izq \rightarrow elemento) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{Elementohijoder}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente  \rightarrow der \rightarrow elemento) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{Elementopadre}(\In{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}) $\to$ $res$ : tupla$<$id: nat, cantCapt: nat$>$}
-    	\begin{algorithmic}[1]
-			 \State $res \gets  (it.siguiente  \rightarrow padre \rightarrow elemento) $ \Comment $O(1)$
-
-			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}   	
-\end{algorithm}
-
-\begin{algorithm}[H]{\textbf{iBorrar}(\Inout{it}{itHeap(tupla$<$id: nat, cantCapt: nat$>$)}}
-    	\begin{algorithmic}[1]
-    		\If{$(it.estructura \rightarrow raiz) = (it.estructura \rightarrow ultimo)$} \Comment $O(1)$
-    			\State $it.siguiente \gets NULL$ \Comment Libera memoria $O(1)$
-    			\State $(it.estructura \rightarrow raiz) \gets NULL$ \Comment $O(1)$
-    			\State $(it.estructura \rightarrow ultimo) \gets NULL$ \Comment $O(1)$
-    		\Else    		
-    			\State $puntero(Nodo)$ cambiado $\gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
-				\State $SwapConElUltimo(*(it.estructura), it.siguiente)$ \Comment $O(1)$
-				\If{$EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
-					\State $puntero(Nodoheap)$ $buscador \gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
-					\State $nat$ i $\gets 7$ \Comment $O(1)$
-					\While{$(buscador \rightarrow padre) \not= NULL$ $\land i = 7$} \Comment $O(log(EC))$
-						\If{$\neg EsHijoIzquierdo?(buscador)$} \Comment $O(1)$
-							\State $i \gets 0$ \Comment $O(1)$
-						\Else$ $ $buscador \gets (buscador \rightarrow padre)$ \Comment $O(1)$
-						\EndIf
-					\EndWhile
-					\If{$(buscador \rightarrow padre) = NULL$} \Comment $O(1)$
-						\While{$(buscador \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
-							\State $buscador \gets (buscador \rightarrow der)$ \Comment $O(1)$
-						\EndWhile
-						\State $(it.estructura \rightarrow ultimo) \gets NULL$ \Comment Libera memoria $O(1)$						
-						\State $(it.estructura \rightarrow ultimo) \gets buscador$ \Comment $O(1)$
-					\Else $buscador \gets (buscador \rightarrow padre \rightarrow izq)$ \Comment $O(1)$
-						\While{$(buscador \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
-							\State $buscador \gets (buscador \rightarrow der)$ \Comment $O(1)$
-						\EndWhile
-						\State $(it.estructura \rightarrow ultimo) \gets NULL$ \Comment Libera memoria $O(1)$						
-						\State $(it.estructura \rightarrow ultimo) \gets buscador$ \Comment $O(1)$
-					\EndIf
-				\Else
-					\State $(it.estructura \rightarrow ultimo) \gets (it.estructura \rightarrow ultimo \rightarrow padre \rightarrow izq)$ \Comment $O(1)$
-					\State $(it.estructura \rightarrow ultimo \rightarrow padre \rightarrow der) \gets NULL$ \Comment Libera memoria del nodo borrado $O(1)$
-				\EndIf				
-				\While {$(cambiado \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
-					\State $puntero(Nodoheap) minimo \gets Min(cambiado \rightarrow izq, cambiado \rightarrow der)$ \Comment $O(1)$
-					\If{$((minimo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((minimo \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \land ((minimo \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$} \Comment $O(1)$
-					\State $Swap(*(it.estructura), minimo)$ \Comment $O(1)$
-					\EndIf					
-				\EndWhile
-				\If{$(cambiado \rightarrow izq) \not= NULL$} \Comment $O(1)$
-					\If{$((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((cambiado \rightarrow izq \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$} \Comment $O(1)$
-						\State $Swap(*(it.estructura), cambiado \rightarrow izq)$ \Comment $O(1)$
-					\EndIf
-				\EndIf
-			\EndIf
-			\medskip
-			\Statex \underline{Complejidad:} $O(log(EC))$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en cada uno de los ciclos se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto estos ciclos se repiten log(EC) veces en el peor caso.
-    	\end{algorithmic}
-\end{algorithm}
-
-
-
-\begin{algorithm}[H]{\textbf{iInsertarAlFinal}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{p}{puntero(Nodoheap)})} $ $\newline
-\Comment Esta funci\'on es privada y lo que hace es modificar los punteros del heap para que el nodo apuntado por el puntero pasado por par\'ametro quede en la posici\'on del \'ultimo.
-    	\begin{algorithmic}[1]
-			\If{$EsVacia?(h)$} \Comment $O(1)$
+		\If{$EsVacia?(h)$} \Comment Insertamos el nodo al final del heap $O(1)$
     		\State $h.raiz \gets p$ \Comment $O(1)$
     		\State $h.ultimo \gets p$ \Comment $O(1)$
     	\Else
     		\If{$h.raiz = h.ultimo$} \Comment $O(1)$
-    			\State $n.padre \gets h.raiz$ \Comment $O(1)$
+    			\State $(p \rightarrow padre) \gets h.raiz$ \Comment $O(1)$
     			\State $(h.raiz \rightarrow izq) \gets p$ \Comment $O(1)$
     			\State $h.ultimo \gets p$    \Comment $O(1)$
     		\Else
     			\If{$(h.raiz \rightarrow izq) = h.ultimo$} \Comment $O(1)$
-    				\State $n.padre \gets h.raiz$ \Comment $O(1)$
+    				\State $(p \rightarrow padre) \gets h.raiz$ \Comment $O(1)$
     				\State $(h.raiz \rightarrow der) \gets p$ \Comment $O(1)$
     				\State $h.ultimo \gets p$ \Comment $O(1)$
     			\Else
     				\If{$EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-    					\State $n.padre \gets (h.ultimo \rightarrow padre)$ \Comment $O(1)$
+    					\State $(p \rightarrow padre) \gets (h.ultimo \rightarrow padre)$ \Comment $O(1)$
     					\State $(h.ultimo \rightarrow padre \rightarrow der) \gets p$ \Comment $O(1)$
     					\State $h.ultimo \gets p$ \Comment $O(1)$
     				\Else
@@ -381,7 +156,7 @@
     						\While {$(ultimoizq \rightarrow izq) \not= NULL$} \Comment $O(log(EC))$
     							\State $ultimoizq \gets (ultimoizq \rightarrow izq)$ \Comment $O(1)$
     						\EndWhile
-    						\State $n.padre \gets ultimoizqu$ \Comment $O(1)$
+    						\State $(p \rightarrow padre) \gets ultimoizqu$ \Comment $O(1)$
     						\State $(ultimoizq \rightarrow izq) \gets p$ \Comment $O(1)$
     						\State $h.ultimo \gets p$ \Comment $O(1)$
     					\Else
@@ -389,7 +164,7 @@
     						\While{$(i \rightarrow izq) \not= NULL$} \Comment $O(log(EC))$
     							\State $i \gets (i \rightarrow izq)$ \Comment $O(1)$
     						\EndWhile
-    						\State $n.padre \gets i$ \Comment $O(1)$
+    						\State $(p \rightarrow padre) \gets i$ \Comment $O(1)$
     						\State $(j \rightarrow izq) \gets p$ \Comment $O(1)$
     						\State $h.ultimo \gets p$ \Comment $O(1)$
     					\EndIf
@@ -397,18 +172,13 @@
     			\EndIf	    	
 	    	\EndIf
 		\EndIf
+		\State $puntero(colaEntr) q \gets h$
+		\State $it \gets CrearItCola(h.ultimo, q)$ \Comment $O(1)$
 
-			\medskip
-			\Statex \underline{Complejidad:} $O(log(EC))$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en cada uno de los ciclos se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto estos ciclos se repiten log(EC) veces en el peor caso.
-    	\end{algorithmic}   	
-\end{algorithm} $ $\newline
-$ $\newline
-
-{\textbf{iSwap}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$), \In{nuevoNodo}{puntero(Nodoheap)}})} $ $\newline
-$ $\Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
-    	\begin{algorithmic}[1]
-    		\State $puntero(Nodoheap)$ aSwapear $\gets (nuevoNodo \rightarrow padre)$
+		\If{$h.raiz \not= h.ultimo$} \Comment $O(1)$
+			\State $puntero(Nodo)$ nuevoNodo $\gets h.ultimo$			\Comment $O(1)$
+			\While{$((nuevoNodo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \lor (((nuevoNodo \rightarrow elemento.cantCapt)$ = $(nuevoNodo \rightarrow padre \rightarrow elemento.cantCapt)) \land ((nuevoNodo \rightarrow elemento.id)$ <\hspace{0.4mm} $(nuevoNodo \rightarrow padre \rightarrow elemento.id)))$} \Comment $O(log(EC))$
+				\State $puntero(Nodoheap)$ aSwapear $\gets (nuevoNodo \rightarrow padre)$
     		\If{$h.ultimo = nuevoNodo$}
     			\State $h.ultimo \gets aSwapear$
     		\EndIf
@@ -483,45 +253,83 @@ $ $\Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
 							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
 						\EndIf
 					\EndIf
+						
+			\EndWhile
+		\EndIf
+		\State $res \gets it$ \Comment $O(1)$
 			\medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en el ciclo se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto los ciclos se repiten log(EC) veces en el peor caso.
+    	\end{algorithmic}   	
+
+
+\begin{algorithm}[H]{\textbf{iProximo}(\In{h}{colaEntr}) $\to$ $res$ : entrenador}
+    	\begin{algorithmic}[1]
+    		 \State $res \gets (h.raiz \rightarrow elemento)$ \Comment $O(1)$
+    		 \medskip
 			\Statex \underline{Complejidad:} $O(1)$
-    	\end{algorithmic}   
-    	
- \begin{algorithm}[H]{\textbf{iSwapConElUltimo}(\Inout{h}{heap(tupla$<$id: nat, cantCapt: nat$>$)}, \In{aPonerUltimo}{puntero(Nodo)})} $ $\newline
- \Comment Esta funci\'on es privada y swapea al nodo apuntado con el \'ultimo del heap.
-    	\begin{algorithmic}[1] 
-	\If{($h.ultimo \rightarrow padre) \not= aPonerUltimo$} \Comment $O(1)$					\State $(h.ultimo \rightarrow izq) \gets (aPonerUltimo \rightarrow izq)$ \Comment $O(1)$
-			\State $(h.ultimo \rightarrow der) \gets (aPonerUltimo \rightarrow der)$ \Comment $O(1)$	
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ 
+    	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{iDesencolar}(\In{h}{colaEntr})}
+    	\begin{algorithmic}[1]
+			 \State $puntero(colaEntr) q \gets h$    		 
+    		 \State $it \gets CrearItCola(h.raiz, q)$ \Comment $O(1)$
+    		 \State $Borrar(it)$ \Comment $O(log(EC))$
+    		 \medskip
+			\Statex \underline{Complejidad:} $O(log(EC))$
+			\Statex \underline{Justificaci\'on:} Hay una operacion $O(1)$ y una $O(log(EC))$, por lo tanto, por \'algebra de \'ordenes $O(1)$ + $O(log(EC))$ = $O(log(EC))$
+    	\end{algorithmic}
+\end{algorithm}
+
+\end{Algoritmos}
+
+\begin{Algoritmos}
+
+
+[H]{\textbf{iBorrar}(\In{it}{itcola(entrenador)}, \In{h}{}colaEntr)}
+    	\begin{algorithmic}[1]
+    		\If{$(it.estructura \rightarrow raiz) = (it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+    			\State $it.siguiente \gets NULL$ \Comment Libera memoria $O(1)$
+    			\State $(it.estructura \rightarrow raiz) \gets NULL$ \Comment $O(1)$
+    			\State $(it.estructura \rightarrow ultimo) \gets NULL$ \Comment $O(1)$
+    		\Else    		
+    			\State $puntero(Nodo)$ cambiado $\gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
+    			\State $aPonerUltimo \gets it.siguiente$
+				\If{($it.estructura \rightarrow ultimo \rightarrow padre) \not= aPonerUltimo$} \Comment Swapeamos con el \'ultimo del heap. $O(1)$	
+					\State $(it.estructura \rightarrow ultimo \rightarrow izq) \gets (aPonerUltimo \rightarrow izq)$ \Comment $O(1)$
+			\State $(it.estructura \rightarrow ultimo \rightarrow der) \gets (aPonerUltimo \rightarrow der)$ \Comment $O(1)$	
 			\If{$(aPonerUltimo \rightarrow izq) \not= NULL$} \Comment $O(1)$
-				\State $(aPonerUltimo \rightarrow izq \rightarrow padre) \gets h.ultimo$ \Comment $O(1)$
+				\State $(aPonerUltimo \rightarrow izq \rightarrow padre) \gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
 			\EndIf	
 			\If{$(aPonerUltimo \rightarrow der) \not= NULL$} \Comment $O(1)$
-				\State $(aPonerUltimo \rightarrow der \rightarrow padre) \gets h.ultimo$ \Comment $O(1)$
+				\State $(aPonerUltimo \rightarrow der \rightarrow padre) \gets it.estructura \rightarrow ultimo$ \Comment $O(1)$
 			\EndIf		
-			\If{$aPonerUltimo \not= h.raiz$} \Comment $O(1)$
+			\If{$aPonerUltimo \not= it.estructura \rightarrow raiz$} \Comment $O(1)$
 				\State $padreaPonerUltimo \gets (aPonerUltimo \rightarrow padre)$ \Comment $O(1)$
-				\State $padreUltimo \gets (h.ultimo \rightarrow padre)$			 	 \Comment $O(1)$
-			 	\If{$EsHijoIzquierdo?(aPonerUltimo) \land EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-			 	\State $(padreaPonerUltimo \rightarrow izq) \gets h.ultimo$ \Comment $O(1)$
-			 	\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+				\State $padreUltimo \gets (it.estructura \rightarrow ultimo \rightarrow padre)$			 	 \Comment $O(1)$
+			 	\If{$EsHijoIzquierdo?(aPonerUltimo) \land EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+			 	\State $(padreaPonerUltimo \rightarrow izq) \gets it.estructura \rightarrow ultimo$ \Comment $O(1)$
+			 	\State $(it.estructura \rightarrow ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
 			 	\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
 			 	\State $(padreUltimo \rightarrow izq) \gets aPonerUltimo$ \Comment $O(1)$
 			 	\Else
-			 		\If{$EsHijoIzquierdo?(aPonerUltimo) \land \neg EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-			 		\State $(padreaPonerUltimo \rightarrow izq) \gets h.ultimo$ \Comment $O(1)$
+			 		\If{$EsHijoIzquierdo?(aPonerUltimo) \land \neg EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+			 		\State $(padreaPonerUltimo \rightarrow izq) \gets it.estructura \rightarrow ultimo$ \Comment $O(1)$
 			 		\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
-			 		\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 		\State $(it.estructura \rightarrow ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
 			 		\State $(padreUltimo \rightarrow der) \gets aPonerUltimo$ \Comment $O(1)$
 			 		\Else
-			 			\If{$\neg EsHijoIzquierdo?(aPonerUltimo) \land EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-			 			\State $(padreaPonerUltimo \rightarrow izq) \gets h.ultimo$ \Comment $O(1)$
+			 			\If{$\neg EsHijoIzquierdo?(aPonerUltimo) \land EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+			 			\State $(padreaPonerUltimo \rightarrow izq) \gets it.estructura \rightarrow ultimo$ \Comment $O(1)$
 			 			\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
-			 			\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 			\State $(it.estructura \rightarrow ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
 			 			\State $(padreUltimo \rightarrow izq) \gets aPonerUltimo$ \Comment $O(1)$
 			 			\Else
-			 				\If{$\neg EsHijoIzquierdo?(aPonerUltimo) \land \neg EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-			 				\State $(padreaPonerUltimo \rightarrow der) \gets h.ultimo$ \Comment $O(1)$
-			 				\State $(h.ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
+			 				\If{$\neg EsHijoIzquierdo?(aPonerUltimo) \land \neg EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+			 				\State $(padreaPonerUltimo \rightarrow der) \gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
+			 				\State $(it.estructura \rightarrow ultimo \rightarrow padre) \gets padreaPonerUltimo$ \Comment $O(1)$
 			 				\State $(aPonerUltimo \rightarrow padre) \gets padreUltimo$ \Comment $O(1)$
 			 				\State $(padreUltimo \rightarrow der) \gets aPonerUltimo$ \Comment $O(1)$
 			 				\EndIf
@@ -529,25 +337,287 @@ $ $\Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
 			 		\EndIf
 			 	\EndIf
 			\Else
-				\State $(h.raiz \rightarrow padre) \gets (h.ultimo \rightarrow padre)$ \Comment $O(1)$
-				\If{$EsHijoIzquierdo?(h.ultimo)$} \Comment $O(1)$
-					\State $(h.ultimo \rightarrow padre \rightarrow izq) \gets h.raiz$ \Comment $O(1)$
+				\State $(it.estructura \rightarrow raiz \rightarrow padre) \gets (it.estructura \rightarrow ultimo \rightarrow padre)$ \Comment $O(1)$
+				\If{$EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+					\State $(it.estructura \rightarrow ultimo \rightarrow padre \rightarrow izq) \gets it.estructura \rightarrow raiz$ \Comment $O(1)$
 				\Else
-					\State $(h.ultimo \rightarrow padre \rightarrow der) \gets h.raiz$ \Comment $O(1)$
+					\State $(it.estructura \rightarrow ultimo \rightarrow padre \rightarrow der) \gets it.estructura \rightarrow raiz$ \Comment $O(1)$
 				\EndIf			
-				\State ($h.ultimo \rightarrow padre) \gets NULL$ \Comment $O(1)$
-				\State $h.raiz \gets h.ultimo$ \Comment $O(1)$
+				\State ($it.estructura \rightarrow ultimo \rightarrow padre) \gets NULL$ \Comment $O(1)$
+				\State $(it.estructura \rightarrow raiz) \gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
 			\EndIf
 	\Else
-		\State $Swap(h, h.ultimo)$	\Comment $O(1)$
+		\State $puntero(Nodoheap) nuevoNodo \gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$		
+		\State $puntero(Nodoheap)$ aSwapear $\gets (nuevoNodo \rightarrow padre)$
+    		\If{$(it.estructura \rightarrow ultimo) = nuevoNodo$}
+    			\State $(it.estructura \rightarrow ultimo) \gets aSwapear$
+    		\EndIf
+			\If{$EsHijoIzquierdo?(nuevoNodo)$} \Comment $O(1)$
+						\If{$(nuevoNodo \rightarrow izq) = NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow izq) \gets NULL$ \Comment $O(1)$
+							\Else
+								\State $(aSwapear \rightarrow izq) \gets (nuevoNodo \rightarrow izq)$ \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow der) = NULL$} \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow der) \gets (aSwapear \rightarrow der)$ \Comment $O(1)$
+								\If{$(aSwapear \rightarrow der) \not= NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow der \rightarrow padre) \gets nuevoNodo$	 \Comment $O(1)$						
+								\EndIf
+								\State $(aSwapear \rightarrow der) \gets NULL$ \Comment $O(1)$
+							\Else
+								\If{$(aSwapear \rightarrow der) = NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow der) \gets (nodoNuevo \rightarrow der)$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow der) \gets NULL$ \Comment $O(1)$
+								\Else
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow der \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow der)$ \Comment $O(1)$
+									\State $(nuevoNodo \rightarrow der) \gets (aSwapear \rightarrow der)$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow der) \gets auxiliar$ \Comment $O(1)$
+								\EndIf
+							\EndIf
+						\State $(nuevoNodo \rightarrow izq) \gets aSwapear$ \Comment $O(1)$
+					\Else
+						\If{$(nuevoNodo \rightarrow der) = NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow der) \gets NULL$ \Comment $O(1)$
+							\Else
+								\State $(aSwapear \rightarrow der) \gets (nuevoNodo \rightarrow der)$ \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow izq) = NULL$} \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow izq) \gets (aSwapear \rightarrow izq)$ \Comment $O(1)$
+								\If{$(aSwapear \rightarrow izq) \not= NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq \rightarrow padre) \gets nuevoNodo$	\Comment $O(1)$						
+								\EndIf
+								\State $(aSwapear \rightarrow izq) \gets NULL$ \Comment $O(1)$
+							\Else
+								\If{$(aSwapear \rightarrow izq) = NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq) \gets (nodoNuevo \rightarrow izq)$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow izq) \gets NULL$ \Comment $O(1)$
+								\Else
+									\State $(nodoNuevo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow izq)$ \Comment $O(1)$
+									\State $(nuevoNodo \rightarrow izq) \gets (aSwapear \rightarrow izq)$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq) \gets auxiliar$ \Comment $O(1)$
+								\EndIf
+							\EndIf
+						\State $(nuevoNodo \rightarrow der) \gets aSwapear$ \Comment $O(1)$
+					\EndIf	
+					\If{$aSwapear = (it.estructura \rightarrow raiz)$}					
+					\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+					\State $(it.estructura \rightarrow raiz) \gets nuevoNodo$	 \Comment $O(1)$
+					\State $(nuevoNodo \rightarrow padre) \gets NULL$			 \Comment $O(1)$
+					\Else
+					\State $puntero(Nodoheap)$ abuelo $\gets (aSwapear \rightarrow padre)$ \Comment $O(1)$
+						\If{$EsHijoIzquierdo?(aSwapear)$} \Comment $O(1)$
+							\State $(abuelo \rightarrow izq) \gets nuevoNuevo$ \Comment $O(1)$
+							\State $(nuevoNodo \rightarrow padre) \gets abuelo$ \Comment $O(1)$
+							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+						\Else
+							\State $(abuelo \rightarrow der) \gets nuevoNuevo$ \Comment $O(1)$
+							\State $(nuevoNodo \rightarrow padre) \gets abuelo$ \Comment $O(1)$
+							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+						\EndIf
+					\EndIf
 	\EndIf	
-	\State $h.ultimo \gets aPonerUltimo$	\Comment $O(1)$
+	\State $(it.estructura \rightarrow ultimo) \gets aPonerUltimo$	\Comment $O(1)$
+				\If{$EsHijoIzquierdo?(it.estructura \rightarrow ultimo)$} \Comment $O(1)$
+					\State $puntero(Nodoheap)$ $buscador \gets (it.estructura \rightarrow ultimo)$ \Comment $O(1)$
+					\State $nat$ i $\gets 7$ \Comment $O(1)$
+					\While{$(buscador \rightarrow padre) \not= NULL$ $\land i = 7$} \Comment $O(log(EC))$
+						\If{$\neg EsHijoIzquierdo?(buscador)$} \Comment $O(1)$
+							\State $i \gets 0$ \Comment $O(1)$
+						\Else$ $ $buscador \gets (buscador \rightarrow padre)$ \Comment $O(1)$
+						\EndIf
+					\EndWhile
+					\If{$(buscador \rightarrow padre) = NULL$} \Comment $O(1)$
+						\While{$(buscador \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
+							\State $buscador \gets (buscador \rightarrow der)$ \Comment $O(1)$
+						\EndWhile
+						\State $(it.estructura \rightarrow ultimo) \gets NULL$ \Comment Libera memoria $O(1)$						
+						\State $(it.estructura \rightarrow ultimo) \gets buscador$ \Comment $O(1)$
+					\Else $buscador \gets (buscador \rightarrow padre \rightarrow izq)$ \Comment $O(1)$
+						\While{$(buscador \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
+							\State $buscador \gets (buscador \rightarrow der)$ \Comment $O(1)$
+						\EndWhile
+						\State $(it.estructura \rightarrow ultimo) \gets NULL$ \Comment Libera memoria $O(1)$						
+						\State $(it.estructura \rightarrow ultimo) \gets buscador$ \Comment $O(1)$
+					\EndIf
+				\Else
+					\State $(it.estructura \rightarrow ultimo) \gets (it.estructura \rightarrow ultimo \rightarrow padre \rightarrow izq)$ \Comment $O(1)$
+					\State $(it.estructura \rightarrow ultimo \rightarrow padre \rightarrow der) \gets NULL$ \Comment Libera memoria del nodo borrado $O(1)$
+				\EndIf				
+				\While {$(cambiado \rightarrow der) \not= NULL$} \Comment $O(log(EC))$
+					\State $puntero(Nodoheap) minimo \gets Min(cambiado \rightarrow izq, cambiado \rightarrow der)$ \Comment $O(1)$
+					\If{$((minimo \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((minimo \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \land ((minimo \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$} \Comment $O(1)$
+					\State $puntero(Nodoheap) nuevoNodo \gets minimo$					
+					\State $puntero(Nodoheap)$ aSwapear $\gets (nuevoNodo \rightarrow padre)$
+    		\If{$(it.estructura \rightarrow ultimo) = nuevoNodo$} \Comment Swapea los Nodos $O(1)$
+    			\State $it.estructura \rightarrow ultimo \gets aSwapear$ \Comment $O(1)$
+    		\EndIf
+			\If{$EsHijoIzquierdo?(nuevoNodo)$} \Comment $O(1)$
+						\If{$(nuevoNodo \rightarrow izq) = NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow izq) \gets NULL$ \Comment $O(1)$
+							\Else
+								\State $(aSwapear \rightarrow izq) \gets (nuevoNodo \rightarrow izq)$ \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow der) = NULL$} \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow der) \gets (aSwapear \rightarrow der)$ \Comment $O(1)$
+								\If{$(aSwapear \rightarrow der) \not= NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow der \rightarrow padre) \gets nuevoNodo$	 \Comment $O(1)$						
+								\EndIf
+								\State $(aSwapear \rightarrow der) \gets NULL$ \Comment $O(1)$
+							\Else
+								\If{$(aSwapear \rightarrow der) = NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow der) \gets (nodoNuevo \rightarrow der)$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow der) \gets NULL$ \Comment $O(1)$
+								\Else
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow der \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow der)$ \Comment $O(1)$
+									\State $(nuevoNodo \rightarrow der) \gets (aSwapear \rightarrow der)$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow der) \gets auxiliar$ \Comment $O(1)$
+								\EndIf
+							\EndIf
+						\State $(nuevoNodo \rightarrow izq) \gets aSwapear$ \Comment $O(1)$
+					\Else
+						\If{$(nuevoNodo \rightarrow der) = NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow der) \gets NULL$ \Comment $O(1)$
+							\Else
+								\State $(aSwapear \rightarrow der) \gets (nuevoNodo \rightarrow der)$ \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow izq) = NULL$} \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow izq) \gets (aSwapear \rightarrow izq)$ \Comment $O(1)$
+								\If{$(aSwapear \rightarrow izq) \not= NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq \rightarrow padre) \gets nuevoNodo$	\Comment $O(1)$						
+								\EndIf
+								\State $(aSwapear \rightarrow izq) \gets NULL$ \Comment $O(1)$
+							\Else
+								\If{$(aSwapear \rightarrow izq) = NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq) \gets (nodoNuevo \rightarrow izq)$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow izq) \gets NULL$ \Comment $O(1)$
+								\Else
+									\State $(nodoNuevo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow izq)$ \Comment $O(1)$
+									\State $(nuevoNodo \rightarrow izq) \gets (aSwapear \rightarrow izq)$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq) \gets auxiliar$ \Comment $O(1)$
+								\EndIf
+							\EndIf
+						\State $(nuevoNodo \rightarrow der) \gets aSwapear$ \Comment $O(1)$
+					\EndIf	
+					\If{$aSwapear = (it.estructura \rightarrow raiz)$}					
+					\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+					\State $(it.estructura \rightarrow raiz) \gets nuevoNodo$	 \Comment $O(1)$
+					\State $(nuevoNodo \rightarrow padre) \gets NULL$			 \Comment $O(1)$
+					\Else
+					\State $puntero(Nodoheap)$ abuelo $\gets (aSwapear \rightarrow padre)$ \Comment $O(1)$
+						\If{$EsHijoIzquierdo?(aSwapear)$} \Comment $O(1)$
+							\State $(abuelo \rightarrow izq) \gets nuevoNuevo$ \Comment $O(1)$
+							\State $(nuevoNodo \rightarrow padre) \gets abuelo$ \Comment $O(1)$
+							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+						\Else
+							\State $(abuelo \rightarrow der) \gets nuevoNuevo$ \Comment $O(1)$
+							\State $(nuevoNodo \rightarrow padre) \gets abuelo$ \Comment $O(1)$
+							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+						\EndIf
+					\EndIf
+					\EndIf					
+				\EndWhile
+				\If{$(cambiado \rightarrow izq) \not= NULL$} \Comment $O(1)$
+					\If{$((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ <\hspace{0.4mm} $(cambiado \rightarrow elemento.cantCapt)) \lor (((cambiado \rightarrow izq \rightarrow elemento.cantCapt)$ = $(cambiado \rightarrow elemento.cantCapt)) \implies ((cambiado \rightarrow izq \rightarrow elemento.id)$ <\hspace{0.4mm} $(cambiado elemento.id)))$} \Comment $O(1)$
+						\State $puntero(Nodoheap) nuevoNodo \gets (cambiado \rightarrow izq)$						
+						\State $puntero(Nodoheap)$ aSwapear $\gets (nuevoNodo \rightarrow padre)$
+    		\If{$(it.estructura \rightarrow ultimo) = nuevoNodo$} \Comment Swapea los nodos $O(1)$
+    			\State $it.estructura \rightarrow ultimo \gets aSwapear$ \Comment $O(1)$
+    		\EndIf
+			\If{$EsHijoIzquierdo?(nuevoNodo)$} \Comment $O(1)$
+						\If{$(nuevoNodo \rightarrow izq) = NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow izq) \gets NULL$ \Comment $O(1)$
+							\Else
+								\State $(aSwapear \rightarrow izq) \gets (nuevoNodo \rightarrow izq)$ \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow der) = NULL$} \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow der) \gets (aSwapear \rightarrow der)$ \Comment $O(1)$
+								\If{$(aSwapear \rightarrow der) \not= NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow der \rightarrow padre) \gets nuevoNodo$	 \Comment $O(1)$						
+								\EndIf
+								\State $(aSwapear \rightarrow der) \gets NULL$ \Comment $O(1)$
+							\Else
+								\If{$(aSwapear \rightarrow der) = NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow der) \gets (nodoNuevo \rightarrow der)$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow der) \gets NULL$ \Comment $O(1)$
+								\Else
+									\State $(nodoNuevo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow der \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow der)$ \Comment $O(1)$
+									\State $(nuevoNodo \rightarrow der) \gets (aSwapear \rightarrow der)$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow der) \gets auxiliar$ \Comment $O(1)$
+								\EndIf
+							\EndIf
+						\State $(nuevoNodo \rightarrow izq) \gets aSwapear$ \Comment $O(1)$
+					\Else
+						\If{$(nuevoNodo \rightarrow der) = NULL$} \Comment $O(1)$
+								\State $(aSwapear \rightarrow der) \gets NULL$ \Comment $O(1)$
+							\Else
+								\State $(aSwapear \rightarrow der) \gets (nuevoNodo \rightarrow der)$ \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow der \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+							\EndIf
+							\If{$(nuevoNodo \rightarrow izq) = NULL$} \Comment $O(1)$
+								\State $(nuevoNodo \rightarrow izq) \gets (aSwapear \rightarrow izq)$ \Comment $O(1)$
+								\If{$(aSwapear \rightarrow izq) \not= NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq \rightarrow padre) \gets nuevoNodo$	\Comment $O(1)$						
+								\EndIf
+								\State $(aSwapear \rightarrow izq) \gets NULL$ \Comment $O(1)$
+							\Else
+								\If{$(aSwapear \rightarrow izq) = NULL$} \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq) \gets (nodoNuevo \rightarrow izq)$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(nodoNuevo \rightarrow izq) \gets NULL$ \Comment $O(1)$
+								\Else
+									\State $(nodoNuevo \rightarrow izq \rightarrow padre) \gets aSwapear$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+									\State $puntero(Nodoheap)$ auxiliar $\gets (nuevoNodo \rightarrow izq)$ \Comment $O(1)$
+									\State $(nuevoNodo \rightarrow izq) \gets (aSwapear \rightarrow izq)$ \Comment $O(1)$
+									\State $(aSwapear \rightarrow izq) \gets auxiliar$ \Comment $O(1)$
+								\EndIf
+							\EndIf
+						\State $(nuevoNodo \rightarrow der) \gets aSwapear$ \Comment $O(1)$
+					\EndIf	
+					\If{$aSwapear = (it.estructura \rightarrow raiz)$}					
+					\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+					\State $(it.estructura \rightarrow raiz) \gets nuevoNodo$	 \Comment $O(1)$
+					\State $(nuevoNodo \rightarrow padre) \gets NULL$			 \Comment $O(1)$
+					\Else
+					\State $puntero(Nodoheap)$ abuelo $\gets (aSwapear \rightarrow padre)$ \Comment $O(1)$
+						\If{$EsHijoIzquierdo?(aSwapear)$} \Comment $O(1)$
+							\State $(abuelo \rightarrow izq) \gets nuevoNuevo$ \Comment $O(1)$
+							\State $(nuevoNodo \rightarrow padre) \gets abuelo$ \Comment $O(1)$
+							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+						\Else
+							\State $(abuelo \rightarrow der) \gets nuevoNuevo$ \Comment $O(1)$
+							\State $(nuevoNodo \rightarrow padre) \gets abuelo$ \Comment $O(1)$
+							\State $(aSwapear \rightarrow padre) \gets nuevoNodo$ \Comment $O(1)$
+						\EndIf
+					\EndIf
+					\EndIf
+				\EndIf
+			\EndIf
 			\medskip
-			\Statex \underline{Complejidad:} $O(1)$
-			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
+			\Statex \underline{Complejidad:} $O(log(EC))$
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ y en cada uno de los ciclos se va recorriendo el heap desde una de las hojas hasta la raiz (o vice versa). Al ser el heap un \'arbol completo (ya que siempre se agregan elementos al \'ultimo lugar disponible), si la cantidad de elementos es EC en el peor cas, entonces su altura es log(EC). Por lo tanto estos ciclos se repiten log(EC) veces en el peor caso.
     	\end{algorithmic}
-\end{algorithm}
-
+    	
 \begin{algorithm}[H]{\textbf{iEsHijoIzquierdo?}(\In{p}{puntero(Nodoheap)}) $\to$ $res$ : bool} $ $\newline
 \Comment Esta funci\'on es privada y devuelve true si el nodo apuntado es hijo izquierdo de su padre. Pre: el padre del nodo tiene que ser $\not=$ NULL
     	\begin{algorithmic}[1] 
@@ -571,6 +641,19 @@ $ $\Comment Esta funci\'on es privada y swapea dos nodos cambiando los punteros.
 			\Statex \underline{Complejidad:} $O(1)$
 			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$ 
     	\end{algorithmic}   	
+\end{algorithm}
+
+\begin{algorithm}[H]{\textbf{iCrearItCola}(\In{h}{colaEntr}, \In{p}{puntero(Nodoheap)}) $\to$ $res$ : itcola(entrenador)} $ $\newline
+\Comment Funci\'on privada que devuelve un iterador a un elemento de la cola de prioridad.
+    	\begin{algorithmic}[1]
+    		 \State $puntero(crearEntr) q \gets h$
+			 \State $res \gets  <p, q> $ \Comment $O(1)$
+
+			\medskip
+			\Statex \underline{Complejidad:} $O(1)$
+			\Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
+			Pre: si el puntero es $\not=$ NULL, tiene que apuntar a un nodo perteneciente a la estructura de la cola de entrenadores. Si es NULL, entonces la cola de entrenadores tiene que ser vac\'ia. Post: se devuelve un iterador a dicho nodo, o en caso de que sea vac\'ia devuelve un iterador que no apunta a ning\'un nodo
+    	\end{algorithmic}
 \end{algorithm}
 
 
