@@ -322,7 +322,7 @@ $ $\newline
 
 (8) cantCapt es consistente con las cantidades de su lista de pokemons capturados $ $\newline
 $ $\newline
-($\forall jug:$ jugStruc) (esJugadorNoEliminado($jug$, $j$) $\impluego$ $jug$.cantCapt = sumaCantidades($jug$.pokemons))
+($\forall jug:$ jugStruc) (esJugadorNoEliminado($jug$, $j$) $\impluego$ $jug$.cantCapt = sumaSignif($jug$.pokemons))
 $ $\newline
 
 
@@ -419,12 +419,7 @@ $ $\newline
 %{$x$ < tam($j$.mapa) $\land$ $y$ < tam($j$.mapa) $\land$} 
 $ $\newline
 
-\tadOperacion{sumaCantidades}{secu(tupla<p: pokemon, cant: nat>)}{nat}{}%
-\tadAxioma{sumaCantidades(<>)}{0} 
-\tadAxioma{sumaCantidades(a $\puntito$ s)}{a.cant + sumaCantidades(s)}
-$ $\newline
-
-\tadOperacion{sumaSignif}{dicc(string, nat)}{nat}{}%
+\tadOperacion{sumaSignif}{dicc(string, (nat)}{nat}{}%
 \tadAxioma{sumaSignif($d$)}{sumaSignifAux(claves($d$), $d$)} 
 $ $\newline
 
@@ -445,7 +440,7 @@ $ $\newline
 \tadOperacion{sumaPokesCapturadosAux}{pokemon$/p$, juego$/j$, conj(jugador)$/js$}{nat}{}%
 \tadAxioma{sumaPokesCapturadosAux($p$, $j$, $js$)}
 {\IF $\emptyset$?($js$) THEN 0 ELSE  
-$\#$($p$, dameUno($js$).pokemons) + sumaPokesCapturadosAux($p$, $j$, sinUno($js$))
+{\IF def?($p$, dameUno($js$).pokemons) THEN Obtener($p$, dameUno($js$).pokemons) ELSE 0 FI}  + sumaPokesCapturadosAux($p$, $j$, sinUno($js$))
 FI} 
 $ $\newline
 

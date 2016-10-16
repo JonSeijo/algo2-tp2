@@ -57,7 +57,7 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Hay siguiente de iteradores de heap
 
-[ ] Preguntar lo de MultiConjunto. Es necesario hacer el modulo? ver .txt de preguntas para mas info
+[X] Preguntar lo de MultiConjunto. Es necesario hacer el modulo? ver .txt de preguntas para mas info
 
 [X] Rep de Trie
 
@@ -67,15 +67,16 @@ porque de como esta implementada se encarga el mapa. Deberia usar las funciones 
 
 [ ] Abs Heap
 
-[ ] Agregar en el rep de juego que no puede haber repetidos entre los elementos que capturo el jugador
+[X] Agregar en el rep de juego que no puede haber repetidos entre los elementos que capturo el jugador.
+jonathan: Ya no es necesario porque ahora usamos un diccionario
 
-[ ] Actualizar estructura: ahora existen posConPokemons que es una lista de coordenadas, y reemplaza la lista de pokemons del jugador, por un trie de pokemons - cantidad
+[X] Actualizar estructura: ahora existen posConPokemons que es una lista de coordenadas, y reemplaza la lista de pokemons del jugador, por un trie de pokemons - cantidad
 
 [ ] Iterador de funcion pokemons, es un iterador modificado de conjunto (despues de todo quiero que recorra las claves del conjunto) lo unico que modifica el es "siguiente" que me da el significado como tuplas ?
 
-[ ] Revisar rep y abs para la nueva estructura
+[X] Revisar rep y abs para la nueva estructura
 
-[ ] Modificar agregarPokemon para que actualice las posConPokemons
+[X] Modificar agregarPokemon para que actualice las posConPokemons
 
 [X] Algoritmos de Heap
 
