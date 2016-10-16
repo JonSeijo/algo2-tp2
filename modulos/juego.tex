@@ -47,8 +47,8 @@
 
 
 \InterfazFuncion{Moverse}{\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego}}{}%
-[$j \igobs j_0 \land e \in jugadores(j) \yluego estaConectado(e, j) \land posExistente(c, mapa(j)) $]
-{$cambia posicion y cambian capturables y contadores y sarasa$}%
+[$j_0 \igobs j \land e \in jugadores(j) \yluego estaConectado(e, j) \land posExistente(c, mapa(j)) $]
+{$j$ $\igobs$ moverse($e$, $c$, $j_0$)}%
 [$O((PC + PS) * |P| + log(EC))$] % Es asi por enunciado
 [Mueve al jugador e en la posicion c si es valido y captura si debe, sino sanciona o expulsa.]
 
