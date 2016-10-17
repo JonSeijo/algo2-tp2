@@ -44,6 +44,9 @@
 
 
 \begin{Representacion}
+
+Este es el iterador que se usa para recorrer el DiccString. Para recorrerlo, aprovechando que tenemos un conjunto de claves en nuestro diccionario, vamos a recorrer el conjunto de claves usando el iterador de conjunto que ya existe. Para obtener el elemento, buscamos la clave ``actual'' (seg\'un iterador de claves) en el diccionario. Esto implica que obtener el elemento sea un poco costoso, porque hay que buscarlo en el diccionario, pero decidimos hacerlo as\'i ya que nos pareci\'o la forma mas simple que cumpl\'ia los requisitos de complejidad.
+
 \subsection{Representacion del iterDiccString}
     
   \begin{Estructura}{iterDiccString($\alpha$)}[estr]
