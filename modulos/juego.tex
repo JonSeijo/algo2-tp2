@@ -887,7 +887,7 @@ $ $\newline
 $   $\hspace*{2cm}  $j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
 $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
-\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+\While{HaySiguente($iterPos$)} \Comment $O(PS * |P|)$
 
   \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
@@ -936,7 +936,7 @@ $ $\newline
 
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
-\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+\While{HaySiguente($iterPos$)} \Comment $O(PS * |P|)$
 
   \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
@@ -995,7 +995,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
 
-\While{HaySiguente($iterPos$)} Recorro todos los salvajes \Comment $O(PS * |P|)$
+\While{HaySiguente($iterPos$)} \Comment $O(PS * |P|)$
 
   \State nat $x \gets$ Latitud(Siguiente($iterPos$)) \Comment $O(1)$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
