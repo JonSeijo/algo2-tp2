@@ -8,25 +8,6 @@
 \end{itemize}
 
 
-\subsection{Juego}
-
-\begin{itemize}
-\item{La operaci\'on cantMismaEspecie de la especificaci\'on recive como parametro un multiconjunto. 
-Reemplazamos ese parametro por un $juego$, porque usando el $juego$ podemos obtener la cantidad de cada especie pokemon}
-
-\end{itemize}
-
-\subsection{Cola de Prioridad}
-
-\begin{itemize}
-
-\item{Sabemos que no era la unica forma de mantener a los entrenadores que esperan, podiamos usar un AVL y las complejidades seguirian valiendo. Elegimos implementarlo con un Heap porque era mas facil de implementar, o eso creimos..}
-
-\item{En la cola de entrenadores, se usan nodos y punteros para la estructura. Los nodos se mantienen ``fijos'' una vez que se agregar, hasta que son borrados. Cada vez que hay que hacer alg\'un cambio o ``swap'' lo \'unico que se modifican son los punteros ``padre'', ``izq'' y ``der''. Es decir que si hay alg\'un puntero apuntando al nodo y se realiza un swap entre ese nodo y otro, dicho puntero seguir\'a apunt\'andolo.}
-
-\end{itemize}
-
-
 \subsection{Algoritmos privados}
 
 \begin{itemize}
@@ -36,11 +17,31 @@ Reemplazamos ese parametro por un $juego$, porque usando el $juego$ podemos obte
 \end{itemize}
 
 
+\subsection{Juego}
+
+\begin{itemize}
+\item{La operaci\'on cantMismaEspecie de la especificaci\'on recive como parametro un multiconjunto. 
+Reemplazamos ese parametro por un $juego$, porque usando el $juego$ podemos obtener la cantidad de cada especie pokemon}
+
+\end{itemize}
+
+
 \subsection{IterDiccString}
 
 \begin{itemize}
 
 \item{Si bien iterDiccString se explica con IteradorUnidireccional, hicimos un cambio en la aridad de ``siguiente''. En su TAD, el tipo que se devuelve es del mismo tipo que recibe en $crear$, pero nosotros cambiamos eso para que devuelva las tuplas que al usuario le interesan (particularmente en la funcion Pokemons() del juego)}
+
+\end{itemize}
+
+
+\subsection{Cola de Prioridad}
+
+\begin{itemize}
+
+\item{Sabemos que no era la unica forma de mantener a los entrenadores que esperan, podiamos usar un AVL y las complejidades seguirian valiendo. Elegimos implementarlo con un Heap porque era mas facil de implementar, o eso creimos..}
+
+\item{En la cola de entrenadores, se usan nodos y punteros para la estructura. Los nodos se mantienen ``fijos'' una vez que se agregar, hasta que son borrados. Cada vez que hay que hacer alg\'un cambio o ``swap'' lo \'unico que se modifican son los punteros ``padre'', ``izq'' y ``der''. Es decir que si hay alg\'un puntero apuntando al nodo y se realiza un swap entre ese nodo y otro, dicho puntero seguir\'a apunt\'andolo.}
 
 \end{itemize}
 
