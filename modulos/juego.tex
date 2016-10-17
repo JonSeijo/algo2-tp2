@@ -601,24 +601,30 @@ $ $\newline
 \end{algorithm}
 
 \begin{algorithm}[H]
-{\textbf{iDesconectarse}(\Inout{p}{juego}, \In{j}{jugador})}
+{\textbf{iDesconectarse}(\Inout{j}{juego}, \In{e}{jugador})}
 \begin{algorithmic}[1]
 
-\State $p$.jugadores[\hspace{0.5mm}j\hspace{0.5mm}].conectado $\gets$ false \Comment $O(1)$
-\State EliminarSiguiente($p$.jugadores[j].iteradorAPos) \Comment $O(1)$
-\State $it \gets$ $<NULL, NULL>$ \Comment $O(1)$
-\State $p$.jugadores[j].iteradorAPos $\gets$ $it$ \Comment $O(1)$
-\State $c \gets$ $p$.jugadores[j].pos 
-\If {$HayPokemonCercano(c, p) \land HayCamino(c, PosPokemonCercano(c, p), Mapa(p))$} \Comment $O(1)$
-    \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-    \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $p$)) \Comment $O(1)$
-    \State Borrar($p$.jugadores[j].iteradorAEntrenadores, ($p$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
-    \State itcolaEntrenador $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
-    \State $p$.jugadores[j].iteradorAEntrenadores $\gets ith$ \Comment $O(1)$
+\State $j$.jugadores[$e$].conectado $\gets$ false \Comment $O(1)$
+\State EliminarSiguiente($j$.jugadores[$e$].iteradorAPos) \Comment $O(1)$
+
+% Si no esta conectado no haria falta ponerlo a null porque por precondicion nunca lo usariamos
+% Ademas me parece que esta mal asignarle una tupla porque el juego no puede saber que el iter es una tupla
+%\State $it \gets$ $<NULL, NULL>$ \Comment $O(1)$
+%\State $j$.jugadores[$e$].iteradorAPos $\gets$ $it$ \Comment $O(1)$
+
+\State $c \gets$ $j$.jugadores[$e$].pos 
+\If {HayPokemonCercano($c$, $j$) $\land$ HayCamino($c$, PosPokemonCercano($c$, $j$), Mapa($j$))} \Comment $O(1)$
+    \State nat $latPok$ $\gets$ latitud(PosPokemonCercano($c$, $j$)) \Comment $O(1)$
+    \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $j$)) \Comment $O(1)$
+    \State Borrar($j$.jugadores[$e$].iteradorAEntrenadores, ($j$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
+    % Si no esta conectado no haria falta ponerlo a null porque por precondicion nunca lo usariamos 
+    % Ademas me parece que esta mal asignarle una tupla porque el juego no puede saber que el iter es una tupla    
+    %\State itcolaEntrenador $ith \gets$ $<NULL, NULL>$ \Comment $O(1)$
+    %\State $j$.jugadores[$e$].iteradorAEntrenadores $\gets ith$ \Comment $O(1)$
 \EndIf
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones "HayPokemonCercano", "HayCamino", "PosPokemonCercano", "Mapa"\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itcolaEntrenadores Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
+\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itcolaEntrenadores Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
 
 
 \end{algorithmic}
