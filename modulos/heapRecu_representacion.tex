@@ -1,0 +1,40 @@
+\begin{Representacion}
+\subsection{Representacion de Cola de Entrenadores}
+ 
+AHORA SOLO COPIE LA ESTRUCTURA QUE TENIAMOS, HAY QUE VER SI TENEMOS QUE REPENSARLA 
+ 
+\begin{Estructura}{colaEntr}[estr]
+    \begin{Tupla}[estr]%
+    \tupItem{raiz}{puntero(Nodoheap)}%
+    \tupItem{ultimo}{puntero(Nodoheap)}%
+  \end{Tupla}
+\end{Estructura}
+
+\begin{Tupla}[Nodoheap]
+	\tupItem{elemento}{entrenador}%
+	\tupItem{padre}{puntero(Nodoheap)}%
+	\tupItem{izq}{puntero(Nodoheap)}%
+	\tupItem{der}{puntero(Nodoheap)}%
+\end{Tupla}
+
+\begin{Tupla}[entrenador]
+	\tupItem{id}{nat}%
+	\tupItem{cantCapt}{nat}%
+\end{Tupla}
+
+
+\Title{Invariante de representaci\'on en castellano}	
+	
+HACER
+
+\tadOperacion{Abs}{estr$/c$}{colaPrior(Tupla(nat, nat))}{Rep($d$)}%
+\tadAxioma{Abs($c$)}
+{
+%$cola$ : colaPrior(Tupla(nat, nat)) / \\
+%	vacia?($cola$)  $\iff$  $c$.$raiz$ $=$ $NULL$ $\yluego$ \\
+%	proximo($cola$) $\igobs$ $c$.(*$raiz$).elemento \\
+
+	
+}%
+
+\end{Representacion}

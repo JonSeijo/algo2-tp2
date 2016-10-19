@@ -1,0 +1,74 @@
+
+\begin{tad}{\tadNombre{Iterador Cola de Entrenadores($\alpha$)}}
+\tadGeneros{itcola($\alpha$)}
+
+
+\tadIgualdadObservacional{it}{it'}{itcola($\alpha$)}{$siguiente(it) \igobs siguiente(it')$}
+
+\tadExporta{itcola($\alpha$), generadores, observadores}
+\tadUsa{\tadNombre{Conjunto($\alpha$)}, \tadNombre{Cola De Prioridad($\alpha$)}}
+
+
+\tadAlinearFunciones{elementos}{itcola($\alpha$) $it$, colaPrior($\alpha$) cp}{colaPrior($\alpha$)}{}
+
+\tadObservadores
+
+\tadOperacion{siguiente}{itcola}{$\alpha$}{}
+
+
+
+\tadGeneradores
+\tadOperacion{crearIt}{colaPrior($\alpha$), $\alpha$}{itcola($\alpha$)}{}
+
+
+\tadOtrasOperaciones
+
+\tadOperacion{borrar}{itcola($\alpha$) $it$, colaPrior($\alpha$) cp}{colaPrior($\alpha$)}{siguiente(it) $\in$ elementos(cp)}
+
+\tadOperacion{elementos}{colaPrior($\alpha$)}{conj($\alpha$)}{}
+
+\tadOperacion{agregarSin}{$\alpha$, conj($\alpha$)}{colaPrior($\alpha$)}{}
+
+\tadAxiomas[\paratodo{colaPrior($\alpha$)}{cp, sp},  \paratodo{$\alpha$}{e}, \paratodo{Conj($\alpha$)}{con}] 
+
+\tadAlinearAxiomas{damePokemon(crearPknodo($pk$, c))~}
+
+
+$ $\newline
+\tadAxioma{siguiente(crearIt($cp$, e))}{e}
+
+$ $\newline
+\tadAxioma{borrar(crearIt($cp$, e), $sp$)}{agregarSin(e, elementos(sp))}
+
+$ $\newline
+\tadAxioma{elementos($sp$)}
+{
+\IF
+vacia?(sp)
+THEN
+$\emptyset$
+ELSE
+Ag(proximo(sp), elementos(desencolar(sp)))
+FI
+}
+
+$ $\newline
+\tadAxioma{agregarSin(e, con))}
+{
+\IF
+$\emptyset$?(con)
+THEN
+vacia
+ELSE
+	{\IF
+	dameUno(con) = e
+	THEN
+	agregarSin(e, sinUno(conj))
+	ELSE
+	encolar(dameUno(con), agregarSin(e, sinUno(con)))
+	FI}
+FI
+}
+
+
+\end{tad}
