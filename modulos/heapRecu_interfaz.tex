@@ -24,11 +24,29 @@
 [$O(1)$]   % Complejidad
 [Genera una nueva cola de prioridades vac\'ia]  % Comentarios
 
-
 \InterfazFuncion{Encolar}{\Inout{cola}{colaPrioridad($\alpha$)}, \In{x}{$\alpha$}}{}%
 [true]   % Pre
-{$res$ $\igobs$ encolar()} %Post
-[$O(1)$]   % Complejidad
-[Genera una nueva cola de prioridades vac\'ia]  % Comentarios
+{$res$ $\igobs$ encolar($x$, $cola$)} %Post
+[O(log($\#$($cola$)))]   % Complejidad
+[Encola el elemento en la cola de prioridad]  % Comentarios
+
+
+
+
+
+
+% Ver si en vez de extender no lo uso simplemente como "auxiliares" en funcional
+\Title{Extension del tad}
+
+\begin{tad}{\tadNombre{Cola de Prioridades Extension}}
+\tadExtiende{\tadNombre{Cola de Prioridades}}
+
+\tadTitulo{Otras operaciones}{}
+
+\tadOperacion{$\#$}{colaPrior($\alpha$)/$c$}{nat}{}
+
+\tadAxioma{$\#$(vacia)}{0}
+\tadAxioma{$\#$(encolar($e$, $c$))}{1 + $\#$($c$)}
+\end{tad}
 
 \end{Interfaz}
