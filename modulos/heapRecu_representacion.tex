@@ -1,27 +1,24 @@
 \begin{Representacion}
 \subsection{Representacion de Cola de Entrenadores}
  
-AHORA SOLO COPIE LA ESTRUCTURA QUE TENIAMOS, HAY QUE VER SI TENEMOS QUE REPENSARLA 
- 
 \begin{Estructura}{colaEntr}[estr]
     \begin{Tupla}[estr]%
-    \tupItem{raiz}{puntero(Nodoheap)}%
-    \tupItem{ultimo}{puntero(Nodoheap)}%
+    \tupItem{raiz}{puntero(nodo)}
+    \tupItem{\\ ultimo}{puntero(nodo)}%
   \end{Tupla}
 \end{Estructura}
 
-\begin{Tupla}[Nodoheap]
-	\tupItem{elemento}{entrenador}%
-	\tupItem{padre}{puntero(Nodoheap)}%
-	\tupItem{izq}{puntero(Nodoheap)}%
-	\tupItem{der}{puntero(Nodoheap)}%
+\begin{Tupla}[nodo]
+	\tupItem{elem}{$\alpha$}%
+	\tupItem{\\ padre}{puntero(nodo)}%
+	\tupItem{\\ izq}{puntero(nodo)}%
+	\tupItem{\\ der}{puntero(nodo)}%
 \end{Tupla}
 
-\begin{Tupla}[entrenador]
-	\tupItem{id}{nat}%
-	\tupItem{cantCapt}{nat}%
-\end{Tupla}
-
+%\begin{Tupla}[entrenador]
+%	\tupItem{id}{nat}%
+%	\tupItem{cantCapt}{nat}%
+%\end{Tupla}
 
 \Title{Invariante de representaci\'on en castellano}	
 	
