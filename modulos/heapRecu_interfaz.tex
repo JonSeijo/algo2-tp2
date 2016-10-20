@@ -24,11 +24,28 @@
 [$O(1)$]   % Complejidad
 [Genera una nueva cola de prioridades vac\'ia]  % Comentarios
 
-\InterfazFuncion{Encolar}{\Inout{cola}{colaPrioridad($\alpha$)}, \In{x}{$\alpha$}}{}%
+\InterfazFuncion{Encolar}{\Inout{cola}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}}{}%
 [true]   % Pre
-{$res$ $\igobs$ encolar($x$, $cola$)} %Post
+{$res$ $\igobs$ encolar($e$, $cola$)} %Post
 [O(log($\#$($cola$)))]   % Complejidad
 [Encola el elemento en la cola de prioridad]  % Comentarios
+
+\InterfazFuncion{EsVacia?}{\In{c}{colaPrioridad}}{bool}
+{$res$ $\igobs$ vacia?($c$)}
+[$O(1)$]
+[Devuelve verdadero si la cola est\'a vac\'ia]
+
+\InterfazFuncion{Pr\'oximo}{\In{c}{colaPrioridad}}{itcolaPrioridad)}
+[$\neg$ vacia?($c$)]  
+{$res$ $\igobs$ proximo($c$)}  % VER TEMA DE ALIASING 
+[$O(1)$]
+[Devuelve el pr\'oximo de la cola, sin eliminarlo]
+
+\InterfazFuncion{Desencolar}{\Inout{c}{colaPrioridad}}{}
+[$c$ $\igobs$ $c_0$ $\land$ $\neg$ vacia($c$) ]  
+{$c$ $\igobs$ desencolar($c_0$)} 
+[O(log($\#$($cola$)))]   % Complejidad
+[Desencola el pr\'oximo de la cola]
 
 
 
