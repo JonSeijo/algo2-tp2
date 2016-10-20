@@ -1,5 +1,5 @@
 \begin{Interfaz}
-\subsection{Interfaz de Cola de Entrenadores}
+\subsection{Interfaz de ColaPrioridad}
 
   \textbf{par\'ametros formales}\hangindent=2\parindent\\
   \parbox{1.7cm}{\textbf{g\'eneros}} $\alpha$\\
@@ -13,14 +13,21 @@
 
 \textbf{se explica con}: \tadNombre{Cola de Prioridad($\alpha$), Iterador Cola de Prioridades($\alpha$)}.
 
-\textbf{g\'eneros}: \TipoVariable{colaEntr}, \TipoVariable{itcolaEntrenador}.
+\textbf{g\'eneros}: \TipoVariable{colaPrioridad}, \TipoVariable{itcolaPrioridad}.
 
 
-\Title{Operaciones b\'asicas de Cola de Entrenadores}
+\Title{Operaciones b\'asicas de ColaPrioridad}
 
-\InterfazFuncion{Vacia}{}{colaEntr}%
+\InterfazFuncion{Vacia}{}{colaPrioridad}%
 [true]   % Pre
 {$res$ $\igobs$ $vacia$} %Post
+[$O(1)$]   % Complejidad
+[Genera una nueva cola de entrenadores vac\'ia]  % Comentarios
+
+
+\InterfazFuncion{Encolar}{\Inout{cola}{colaPrioridad($\alpha$)}, \In{x}{$\alpha$}}{}%
+[true]   % Pre
+{$res$ $\igobs$ encolar()} %Post
 [$O(1)$]   % Complejidad
 [Genera una nueva cola de entrenadores vac\'ia]  % Comentarios
 
