@@ -1,9 +1,20 @@
 \begin{Interfaz}
 \subsection{Interfaz de Cola de Entrenadores}
 
+  \textbf{par\'ametros formales}\hangindent=2\parindent\\
+  \parbox{1.7cm}{\textbf{g\'eneros}} $\alpha$\\
+  \parbox[t]{1.7cm}{\textbf{funci\'on}}\parbox[t]{\textwidth-2\parindent-1.7cm}{%
+    \InterfazFuncion{$\puntito$ < $\puntito$ }{\In{a}{$\alpha$}, \In{b}{$\alpha$}}{$\alpha$}
+    [$true$]
+    {$res \igobs a < b$}
+    [$O(a < b)$]
+    [Funcion menor de $\alpha$'s]
+  }
+
 \textbf{se explica con}: \tadNombre{Cola de Prioridad($\alpha$), Iterador Cola de Prioridades($\alpha$)}.
 
 \textbf{g\'eneros}: \TipoVariable{colaEntr}, \TipoVariable{itcolaEntrenador}.
+
 
 \Title{Operaciones b\'asicas de Cola de Entrenadores}
 
