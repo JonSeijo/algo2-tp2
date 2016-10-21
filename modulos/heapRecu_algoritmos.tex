@@ -39,7 +39,7 @@
  
 
 % encolar
-\begin{algorithm}[H]
+%\begin{algorithm}[H]
 {\textbf{iEncolar}(\In{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}) $\to$ $res$ : itColaPrioridad}
 \begin{algorithmic}[1]
 
@@ -74,7 +74,7 @@
     \Statex \underline{Complejidad:} $O(log(\#(c)))$
     \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + .. $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
 \end{algorithmic}
-\end{algorithm}
+%\end{algorithm}
  
 
 
