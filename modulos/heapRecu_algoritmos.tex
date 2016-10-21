@@ -36,6 +36,35 @@
     \Statex \underline{Complejidad:} $O(1)$
 \end{algorithmic}
 \end{algorithm}
+ 
+
+
+
+
+
+$ $\newline
+$ $\newline
+
+% estaCompleto
+% explicacion: si el de mas abajo a la derecha es el ultimo, entonces esta completo
+\textbf{Funcion PRIVADA}\\
+\textbf{Pre} $\equiv$ \{$\neg$ vac\'ia?($c$)\}\\%
+\textbf{Post} $\equiv$ \{Res es true sii el ultimo es el de mas abajo a la derecha\}%
+\begin{algorithm}[H]
+{\textbf{iEstaCompleto}(\In{c}{colaPrioridad($\alpha$)}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+    
+    \State nodo $nodoActual \gets$ $c$.raiz \Comment $O(1)$
+    \While{$nodoActual$ $\rightarrow$ der $\neq$ NULL}
+        $nodoActual$ $\gets$ $nodoActual$ $\rightarrow$ der \Comment $O(1)$
+    \EndWhile
+
+    \State $res \gets$ ($nodoActual$ = $c$.ultimo)
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+\end{algorithmic}
+\end{algorithm}
        
    
 
