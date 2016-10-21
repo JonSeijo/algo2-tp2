@@ -68,6 +68,8 @@
     \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$   
 
 
+
+
     AHORA TENGO QUE IR SWAPPEANDO HASTA ARRIBA
     SWAPPEAR SOLO LOS VALORES, NO REACOMODAR NODOS
 
@@ -100,6 +102,29 @@ $ $\newline
     \EndWhile
 
     \State $res \gets$ ($nodoActual$ = $c$.ultimo)
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+\end{algorithmic}
+\end{algorithm}
+    
+
+$ $\newline
+$ $\newline
+   
+
+% swapValores
+% explicacion: swap de los valores
+\textbf{Funcion PRIVADA}\\
+\textbf{Pre} $\equiv$ \{$na$ $\igobs$ $na_0$ $\land$ $nb$ $\igobs$ $nb_0$ $\land$ $na$ $\neq$ NULL $\land$ $nb$ $\neq$ NULL\}\\%
+\textbf{Post} $\equiv$ \{($na \to$ elem $\igobs$ $nb_0 \to$ elem) $\land$ ($nb \to$ elem $\igobs$ $na_0 \to$ elem)\}%
+\begin{algorithm}[H]
+{\textbf{iSwapValores}(\Inout{na}{nodo}, \Inout{nb}{nodo}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+    
+    \State $tmp \gets$ (na $\to$ elem) \Comment $O(1)$
+    \State ($na \to$ elem) $\gets$ ($nb \to$ elem) \Comment $O(1)$
+    \State ($nb \to$ elem) $\gets$ tmp \Comment $O(1)$
 
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
