@@ -68,6 +68,8 @@
     \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$   
     \State SiftUp($c$.ultimo) \Comment $O(log(\#(c)))$
 
+    NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO
+
     \medskip
     \Statex \underline{Complejidad:} $O(log(\#(c)))$
     \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + .. $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
