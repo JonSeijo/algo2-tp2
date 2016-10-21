@@ -64,18 +64,13 @@
             \EndIf
         \EndIf
     \EndIf
-
+    \State $ $
     \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$   
-
-
-
-
-    AHORA TENGO QUE IR SWAPPEANDO HASTA ARRIBA
-    SWAPPEAR SOLO LOS VALORES, NO REACOMODAR NODOS
-
+    \State SiftUp($c$.ultimo) \Comment $O(log(\#(c)))$
 
     \medskip
     \Statex \underline{Complejidad:} $O(log(\#(c)))$
+    \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + .. $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
 \end{algorithmic}
 \end{algorithm}
  
@@ -89,7 +84,7 @@ $ $\newline
 
 % estaCompleto
 % explicacion: si el de mas abajo a la derecha es el ultimo, entonces esta completo
-\textbf{Funcion PRIVADA}\\
+\textbf{Funcion privada}\\
 \textbf{Pre} $\equiv$ \{$\neg$ vac\'ia?($c$)\}\\%
 \textbf{Post} $\equiv$ \{Res es true sii el ultimo es el de mas abajo a la derecha\}%
 \begin{algorithm}[H]
@@ -110,12 +105,10 @@ $ $\newline
     
 
 $ $\newline
-$ $\newline
-   
 
 % swapValores
 % explicacion: swap de los valores
-\textbf{Funcion PRIVADA}\\
+\textbf{Funcion privada}\\
 \textbf{Pre} $\equiv$ \{$na$ $\igobs$ $na_0$ $\land$ $nb$ $\igobs$ $nb_0$ $\land$ $na$ $\neq$ NULL $\land$ $nb$ $\neq$ NULL\}\\%
 \textbf{Post} $\equiv$ \{($na \to$ elem $\igobs$ $nb_0 \to$ elem) $\land$ ($nb \to$ elem $\igobs$ $na_0 \to$ elem)\}%
 \begin{algorithm}[H]
@@ -128,6 +121,30 @@ $ $\newline
 
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
+\end{algorithmic}
+\end{algorithm}
+
+   
+$ $\newline
+   
+
+%siftUp
+%explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
+\textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con su padre mientras era menor\}%
+\begin{algorithm}[H]
+{\textbf{iSiftUp}(\Inout{n}{nodo})}
+\begin{algorithmic}[1]
+
+    \While{($n \to$ padre $\neq$ NULL) $\land$ (($n \to$ elem) < ($n \to$ padre $\to$ elem))} \Comment $O(log(\#c))$
+        \State Swap($n$, $n \to$ padre) \Comment $O(1)$
+        \State $n$ $\gets$ ($n \to$ padre) \Comment $O(1)$
+    \EndWhile
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
 \end{algorithmic}
 \end{algorithm}
        
