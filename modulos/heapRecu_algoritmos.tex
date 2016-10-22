@@ -12,7 +12,7 @@
     \Statex \underline{Complejidad:} $O(1)$
 \end{algorithmic}
 \end{algorithm}
-   
+
 
 % esVacia
 \begin{algorithm}[H]
@@ -36,7 +36,7 @@
     \Statex \underline{Complejidad:} $O(1)$
 \end{algorithmic}
 \end{algorithm}
- 
+
 
 % encolar
 %\begin{algorithm}[H]
@@ -65,7 +65,7 @@
         \EndIf
     \EndIf
     \State $ $
-    \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$   
+    \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$
     \State SiftUp($c$.ultimo) \Comment $O(log(\#(c)))$
 
     NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO
@@ -75,7 +75,7 @@
     \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + .. $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
 \end{algorithmic}
 %\end{algorithm}
- 
+
 
 
 
@@ -92,7 +92,7 @@ $ $\newline
 \begin{algorithm}[H]
 {\textbf{iEstaCompleto}(\In{c}{colaPrioridad($\alpha$)}) $\to$ $res$ : bool}
 \begin{algorithmic}[1]
-    
+
     \State nodo $nodoActual \gets$ $c$.raiz \Comment $O(1)$
     \While{$nodoActual$ $\rightarrow$ der $\neq$ NULL}
         $nodoActual$ $\gets$ $nodoActual$ $\rightarrow$ der \Comment $O(1)$
@@ -104,7 +104,7 @@ $ $\newline
     \Statex \underline{Complejidad:} $O(1)$
 \end{algorithmic}
 \end{algorithm}
-    
+
 
 $ $\newline
 
@@ -116,7 +116,7 @@ $ $\newline
 \begin{algorithm}[H]
 {\textbf{iSwapValores}(\Inout{na}{nodo}, \Inout{nb}{nodo}) $\to$ $res$ : bool}
 \begin{algorithmic}[1]
-    
+
     \State $tmp \gets$ (na $\to$ elem) \Comment $O(1)$
     \State ($na \to$ elem) $\gets$ ($nb \to$ elem) \Comment $O(1)$
     \State ($nb \to$ elem) $\gets$ tmp \Comment $O(1)$
@@ -126,9 +126,101 @@ $ $\newline
 \end{algorithmic}
 \end{algorithm}
 
-   
+
+% swapNodos
+% explicacion: swap de los nodos
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{$na$ $\igobs$ $na_0$ $\land$ $nb$ $\igobs$ $nb_0$ $\land$ $na$ $\neq$ NULL $\land$ $nb$ $\neq$ NULL \}\\%
+\textbf{Post} $\equiv$ \{($na \to$ padre $\igobs$ $nb_0 \to$ padre) $\land$ ($nb \to$ padre $\igobs$ $na_0 \to$ padre) $\land$ ($na \to$ izq $\igobs$ $nb_0 \to$ izq) $\land$ ($nb \to$ izq $\igobs$ $na_0 \to$ izq) $\land$ ($na \to$ der $\igobs$ $nb_0 \to$ der) $\land$ ($nb \to$ der $\igobs$ $na_0 \to$ der)\}%
+\begin{algorithm}[H]
+{\textbf{iSwapNodos}(\Inout{na}{nodo}, \Inout{nb}{nodo}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+    % Me guardo los nodos que voy a sobreescribir
+
+    \State nodo $izqNA \gets$ ($na \to$ izq)
+    \State nodo $derNA \gets$ ($na \to$ der)
+    \State nodo $padreNA \gets$ ($na \to$ padre)
+
+    \State " "
+
+    \If{$na \to$ izq $\neq$ NULL}
+        \State nodo $padreDelIzqNA \gets$ ($na \to$ izq $\to$ padre)
+    \EndIf
+    \If{$na \to$ der $\neq$ NULL}
+        \State nodo $padreDelDerNA \gets$ ($na \to$ der $\to$ padre)
+    \EndIf
+
+    \If{EsHijoIzq($na$)}
+        \State nodo $izqDelPadreNA \gets$ ($na \to$ padre $\to$ izq)
+    \EndIf
+    \If{EsHijoDer($na$)}
+        \State nodo $derDelPadreNA \gets$ ($na \to$ padre $\to$ der)
+    \EndIf
+
+    \State " "
+
+    % Ahora quiero meter nb en na (porque me guarde los datos de na)
+
+    \If{$na \to izq$ $\neq$ NULL}
+        \State ($na \to$ izq $\to$ padre) $\gets$ $nb$
+    \EndIf
+
+    \If{$na \to der$ $\neq$ NULL}
+        \State ($na \to$ der $\to$ padre) $\gets$ $nb$
+    \EndIf
+
+    \If{EsHijoIzq($na$)}
+        \State ($na \to$ padre $\to$ izq) $\gets$ $nb$
+    \EndIf
+    \If{EsHijoDer($na$)}
+        \State ($na \to$ padre $\to$ der) $\gets$ $nb$
+    \EndIf
+    \State " "
+    \State ($na \to$ padre) $\gets$ ($nb \to$ padre)
+    \State ($na \to$ izq) $\gets$ ($nb \to$ izq)
+    \State ($na \to$ der) $\gets$ ($nb \to$ der)
+    \State " "
+
+
+    \If{$nb \to izq$ $\neq$ NULL}
+        \State ($nb \to$ izq $\to$ padre) $\gets$ $padreDelIzqNA$
+    \EndIf
+
+    \If{$nb \to der$ $\neq$ NULL}
+        \State ($nb \to$ der $\to$ padre) $\gets$ $padreDelDerNA$
+    \EndIf
+
+    \If{EsHijoIzq($nb$)}
+        \State ($nb \to$ padre $\to$ izq) $\gets$ $na$
+    \EndIf
+    \If{EsHijoDer($nb$)}
+        \State ($nb \to$ padre $\to$ der) $\gets$ $na$
+    \EndIf
+
+
+
+
+
+    \State " "
+    \State ($nb \to$ padre) $\gets$ $padreNa$
+    \State ($nb \to$ izq) $\gets$ $izqNA$
+    \State ($nb \to$ der) $\gets$ $derNA$
+    \State " "
+
+
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
 $ $\newline
-   
+
 
 %siftUp
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
@@ -140,7 +232,7 @@ $ $\newline
 \begin{algorithmic}[1]
 
     \While{($n \to$ padre $\neq$ NULL) $\land$ (($n \to$ elem) < ($n \to$ padre $\to$ elem))} \Comment $O(log(\#c))$
-        \State Swap($n$, $n \to$ padre) \Comment $O(1)$
+        \State SwapNodo($n$, $n \to$ padre) \Comment $O(1)$
         \State $n$ $\gets$ ($n \to$ padre) \Comment $O(1)$
     \EndWhile
 
@@ -149,8 +241,8 @@ $ $\newline
     \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
 \end{algorithmic}
 \end{algorithm}
-       
-   
 
-   
+
+
+
 \end{Algoritmos}
