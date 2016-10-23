@@ -3,9 +3,9 @@ Algoritmos 2 - TP2
 
 ## Lista de cosas para el recu
 
-[ ] Estructura de nuevoHeap
+[X] Estructura de nuevoHeap
 
-[ ] Algoritmos de heap
+[X] Algoritmos de heap
 
 [ ] Rep de Heap
 
