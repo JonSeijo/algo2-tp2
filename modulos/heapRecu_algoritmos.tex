@@ -450,6 +450,50 @@ $ $\newline
 
 $ $\newline
 
+%eliminarUltimo
+%explicacion: elimina el ultimo nodo y actualiza c.ultimo
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{ $\#$c > 0 \}\\%
+\textbf{Post} $\equiv$ \{El nodo c.ultimo se elimina, y es actualizado\}%
+\begin{algorithm}[H]
+{\textbf{iEliminarUltimo}(\Inout{c}{ColaPrioridad})}
+\begin{algorithmic}[1]
+
+    \If{$c$.ultimo = $c$.raiz}
+        \State $c$.ultimo $\gets$ NULL \Comment Libero memoria $O(1)$
+        \State $c$.raiz $\gets$ NULL \Comment $O(1)$
+    \Else
+
+    \If{EsHijoDerecho($c$.ultimo)}
+        \State puntero(nodo) $antiguoUltimo \gets$ $c$.ultimo \Comment $O(1)$
+        \State $c$.ultimo $\gets$ ($c$.ultimo $\to$ padre $\to$ izq) \Comment $O(1)$
+        \State ($c$.ultimo $\to$ padre $\to$ der) $\gets$ NULL \Comment $O(1)$
+        \State $antiguoUltimo \gets$ NULL \Comment $O(1)$
+    \Else
+        \If{UnicoDelNivel($c$.ultimo)}
+            \State ($c$.ultimo $\to$ padre $\to$ izq) $\gets$ NULL \Comment Libero memoria $O(1)$
+            \State $c$.ultimo $\gets$ NULL \Comment Libero memoria $O(1)$
+            \State puntero(nodo) $nodoActual \gets$ $c$.raiz \Comment $O(1)$
+            \While{($nodoActual \to$ der) $\neq$ NULL}
+                $nodoActual \gets$ ($nodoActual \to$ der)
+            \EndWhile
+            \State $c$.ultimo $\gets$ $nodoActual$
+        \Else
+
+        \EndIf
+
+
+    \EndIf
+
+    \EndIf
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
+\end{algorithmic}
+\end{algorithm}
+
+$ $\newline
 
 %siftUp
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
