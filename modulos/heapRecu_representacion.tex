@@ -22,7 +22,14 @@
 
 \Title{Invariante de representaci\'on en castellano}	
 	
-HACER
+- estr es completo a izquierda \\
+- Para todo nodo, su valor es menor que todos los nodos de su izquierda y los de su derecha \\
+- c.raiz no tiene padre, y ningun otro nodo tiene a la raiz como hijo \\
+- Para todo a,b nodos  ((a$\to$izq = b) sii (b$\to$padre = a)) y ((a$\to$der = b) sii (b$\to$padre = a)) \\
+- Desde cualquier nodo se puede llegar a la raiz yendo hacia arriba \\
+- c.ultimo es el nodo de mas abajo a la derecha \\
+- c.raiz es NULL sii c.ultimo es NULL \\
+- No hay ciclos \\
 
 \tadOperacion{Abs}{estr$/c$}{colaPrior(Tupla(nat, nat))}{Rep($d$)}%
 \tadAxioma{Abs($c$)}
