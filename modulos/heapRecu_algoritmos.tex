@@ -463,5 +463,52 @@ $ $\newline
 
 
 
+$ $\newline
+
+%siftDown
+%explicacion: dado un nodo, lleva el elemento hacia abajo hasta que este en la pos correcta
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
+\textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con sus hijos mientras era menor\}%
+\begin{algorithm}[H]
+{\textbf{iSiftDown}(\Inout{n}{nodo})}
+\begin{algorithmic}[1]
+
+    \State bool $sigueBajando \gets$ true \Comment $O(1)$
+
+    \While{$sigueBajando$}  \Comment $O(log(\#c))$
+        \If{EsMenorIzquierdo($n \to$ izq, $n \to$ der)} \Comment $O(1)$ 
+
+            \If{($n \to$ izq $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
+                \State SwapNodos($n$, $n \to$ izq) \Comment $O(1)$
+            \Else
+                \State $sigueBajando \gets$ false \Comment $O(1)$
+            \EndIf
+
+        \Else
+            \If{EsMenorDerecho($n \to$ izq, $n \to$ der)} \Comment $O(1)$
+            
+                \If{($n \to$ der $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
+                    \State SwapNodos($n$, $n \to$ der) \Comment $O(1)$
+                \Else
+                    \State $sigueBajando \gets$ false \Comment $O(1)$
+                \EndIf
+            
+            \Else
+                \State $sigueBajando \gets$ false \Comment $O(1)$
+            \EndIf
+        \EndIf
+
+
+    \EndWhile 
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
+\end{algorithmic}
+\end{algorithm}
+
+
+
 
 \end{Algoritmos}
