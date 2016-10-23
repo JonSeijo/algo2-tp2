@@ -7,7 +7,7 @@ Algoritmos 2 - TP2
 
 [X] Algoritmos de heap
 
-[ ] Rep de Heap
+[X] Rep de Heap (en castellano)
 
 [ ] Abs de heap
 
