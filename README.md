@@ -9,7 +9,7 @@ Algoritmos 2 - TP2
 
 [X] Rep de Heap (en castellano)
 
-[ ] Abs de heap
+[X] Abs de heap
 
 [ ] Iterador
 
