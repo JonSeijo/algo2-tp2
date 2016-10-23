@@ -441,6 +441,48 @@ $ $\newline
 
 $ $\newline
 
+
+%esMenorNodos
+%explicacion: dado dos nodos a y b, devuelve true si a tiene elemento y es menor a b
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{true\}\\%
+\textbf{Post} $\equiv$ \{devuelve true si a tiene un elemento y es menor o igual al de b. Si ambos son null res es false\}%
+\begin{algorithm}[H]
+{\textbf{iEsMenorNodos}(\In{a}{nodo}), \In{b}{nodo}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+    \If{$a$ $\neq$ NULL $\lor$ $b$ $\neq$ NULL}
+
+        \If{$a$ = NULL $\land$ $b$ $\neq$ NULL}
+            \State $res \gets$ false
+        \Else
+
+            \If{$a$ $\neq$ NULL $\land$ $b$ = NULL}
+                \State $res \gets$ true
+                
+            \Else
+
+                \If{(($a$ $\to$ elem) < ($b$ $\to$ elem)) $\lor$ ($a$ $\to$ elem) = ($b$ $\to$ elem)}
+                    \State $res \gets$ true
+                \EndIf
+            \EndIf
+        \EndIf
+    \Else
+        \State $res \gets$ false
+    \EndIf
+
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificacion:} Todas las operaciones son O(1)
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+$ $\newline
+
 %siftUp
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
 \textbf{Funcion privada}\\
@@ -477,7 +519,7 @@ $ $\newline
     \State bool $sigueBajando \gets$ true \Comment $O(1)$
 
     \While{$sigueBajando$}  \Comment $O(log(\#c))$
-        \If{EsMenorIzquierdo($n \to$ izq, $n \to$ der)} \Comment $O(1)$ 
+        \If{EsMenorNodos($n \to$ izq, $n \to$ der)} \Comment $O(1)$ 
 
             \If{($n \to$ izq $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
                 \State SwapNodos($n$, $n \to$ izq) \Comment $O(1)$
@@ -486,7 +528,7 @@ $ $\newline
             \EndIf
 
         \Else
-            \If{EsMenorDerecho($n \to$ izq, $n \to$ der)} \Comment $O(1)$
+            \If{EsMenorNodos($n \to$ der, $n \to$ izq)} \Comment $O(1)$
             
                 \If{($n \to$ der $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
                     \State SwapNodos($n$, $n \to$ der) \Comment $O(1)$
