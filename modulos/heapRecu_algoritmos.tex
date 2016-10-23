@@ -471,7 +471,7 @@ $ $\newline
         \State $antiguoUltimo \gets$ NULL \Comment $O(1)$
     \Else
         \If{UnicoDelNivel($c$.ultimo)}
-            \State ($c$.ultimo $\to$ padre $\to$ izq) $\gets$ NULL \Comment Libero memoria $O(1)$
+            \State ($c$.ultimo $\to$ padre $\to$ izq) $\gets$ NULL \Comment $O(1)$
             \State $c$.ultimo $\gets$ NULL \Comment Libero memoria $O(1)$
             \State puntero(nodo) $nodoActual \gets$ $c$.raiz \Comment $O(1)$
             \While{($nodoActual \to$ der) $\neq$ NULL}
@@ -479,6 +479,19 @@ $ $\newline
             \EndWhile
             \State $c$.ultimo $\gets$ $nodoActual$
         \Else
+            % es hijo izquierdo pero no es el unico
+            \State puntero(nodo) $nuevoUltimo \gets$ $c$.ultimo \Comment $O(1)$
+            \While{$\neg$EsHijoDerecho($nuevoUltimo$)}  \Comment En peor caso recorro toda la altura $O(log(\#c))$
+                \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ padre) \Comment $O(1)$  
+            \EndWhile
+            \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ padre $\to$ izq)  \Comment $O(1)$
+
+            \While{$nuevoUltimo$ $\neq$ NULL)}  \Comment En peor caso recorro toda la altura  $O(log(\#c))$
+                \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ der) \Comment $O(1)$  
+            \EndWhile
+
+            \State $c$.ultimo $\gets$ NULL \Comment Libero memoria $O(1)$
+            \State $c$.ultimo $\gets$ $nuevoUltimo$ \Comment $O(1)$
 
         \EndIf
 
@@ -489,7 +502,8 @@ $ $\newline
 
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
-    \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
+    \Statex \underline{Justificacion:} Para la complejidad del peor caso, tomo la rama que mas complejidad tiene. Todas las ramas son O(1) (por ser suma de O(1)) expecto la que contiene los While (cuando es hijo izquierdo pero no el unico del nivel) En esta rama, loa complejidad en peor caso es: $O(1)$ + $O(log(\#c))$ + $O(1)$ + $O(log(\#c))$ + $O(1)$ = 2*$O(log(\#c))$ = $O(log(\#c))$
+
 \end{algorithmic}
 \end{algorithm}
 
