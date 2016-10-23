@@ -381,6 +381,62 @@ $ $\newline
 $ $\newline
 
 
+$ $\newline
+
+% swapDisjunto
+% explicacion: swap de los nodos
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{a distinto de b. a no es hijo de b. b no es hijo de a.\}\\%
+\textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
+\begin{algorithm}[H]
+{\textbf{iSwapDisjunto}(\Inout{a}{nodo}, \Inout{b}{nodo})}
+\begin{algorithmic}[1]
+
+    \If{EsHijoIzquierdo($b$)}
+        \State ($b \to$ padre $\to$ izq) $\gets$ a \Comment $O(1)$
+    \Else \If{EsHijoDerecho($b$)}
+        \State ($b \to$ padre $\to$ der) $\gets$ a \Comment $O(1)$
+    \EndIf
+    \EndIf
+
+    \If{$b$ $\to$ der $\neq$ NULL}
+        \State ($b \to$ der $\to$ padre) $\gets$ a \Comment $O(1)$
+    \EndIf
+
+    \If{$b$ $\to$ izq $\neq$ NULL}
+        \State ($b \to$ izq $\to$ padre) $\gets$ a \Comment $O(1)$
+    \EndIf
+
+    \State " "
+
+    \If{EsHijoIzquierdo($a$)}
+        \State ($a \to$ padre $\to$ izq) $\gets$ b \Comment $O(1)$
+    \Else \If{EsHijoDerecho($b$)}
+        \State ($a \to$ padre $\to$ der) $\gets$ b \Comment $O(1)$
+    \EndIf
+    \EndIf
+
+    \If{$a$ $\to$ der $\neq$ NULL}
+        \State ($a \to$ der $\to$ padre) $\gets$ b \Comment $O(1)$
+    \EndIf
+
+    \If{$a$ $\to$ izq $\neq$ NULL}
+        \State ($a \to$ izq $\to$ padre) $\gets$ b \Comment $O(1)$
+    \EndIf
+
+    \State " "
+
+
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+
+\end{algorithmic}
+\end{algorithm}
+
+$ $\newline
+
+
 %siftUp
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
 \textbf{Funcion privada}\\
