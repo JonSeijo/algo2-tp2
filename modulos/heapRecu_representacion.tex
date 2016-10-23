@@ -31,14 +31,12 @@
 - c.raiz es NULL sii c.ultimo es NULL \\
 - No hay ciclos \\
 
-\tadOperacion{Abs}{estr$/c$}{colaPrior(Tupla(nat, nat))}{Rep($d$)}%
+\tadOperacion{Abs}{estr$/c$}{colaPrior($\alpha$)}{Rep($c$)}%
 \tadAxioma{Abs($c$)}
 {
-%$cola$ : colaPrior(Tupla(nat, nat)) / \\
-%	vacia?($cola$)  $\iff$  $c$.$raiz$ $=$ $NULL$ $\yluego$ \\
-%	proximo($cola$) $\igobs$ $c$.(*$raiz$).elemento \\
-
-	
+$cola$ : colaPrior($\alpha$) / \\
+	vacia?($cola$)  $\iff$  ($c$.raiz = NULL) $\yluego$ \\
+	proximo($cola$) $\igobs$ ($c$.raiz $\to$ elem) \\
 }%
 
 \end{Representacion}
