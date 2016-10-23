@@ -69,7 +69,7 @@ $ $\newline La idea es que la complejidad de definir y obtener no dependa de la 
 
     \begin{Tupla}[nodo]
       \tupItem{definicion}{puntero($\alpha$)}%
-      \tupItem{siguientes}{arreglo[256](puntero(nodo))}%
+      \tupItem{siguientes}{arreglo(puntero(nodo))}%
       \tupItem{itClave}{puntero(itConj(string))}%
     \end{Tupla}
   \end{Estructura}
@@ -175,7 +175,16 @@ $dic$ : dicc(string, $\alpha$) / \\
 	
 	
 	\If{(*$actual$).$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
-		\State (*$actual$).$siguientes$[ord($p$[$i$])] $\gets$	 $\&$ $\langle$ $NULL$, arreglo[$256$]($NULL$), $NULL$ $\rangle$  \Comment $O(1)$
+	
+		\State arreglo(puntero(Nodo)) $sig$ $\gets$ CrearArreglo(256) \Comment $O(1)$
+		
+		\For{$i$ $=$ 0 to 256} \Comment se repite siempre 256 veces $O(1)$
+		
+			\State $sig$[i] $\gets$ $NULL$ \Comment $O(1)$
+		
+		\EndFor
+		
+		\State (*$actual$).$siguientes$[ord($p$[$i$])] $\gets$	 $\&$ $\langle$ $NULL$, $sig$, $NULL$ $\rangle$  \Comment $O(1)$
 		
 		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
 	
