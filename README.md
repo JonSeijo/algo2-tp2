@@ -11,6 +11,8 @@ Algoritmos 2 - TP2
 
 [X] Abs de heap
 
+[ ] Hay un error cuando busco el siguiente ultimo. Lo arreglo despues
+
 [ ] Iterador
 
 [ ] Borrar de iterador
