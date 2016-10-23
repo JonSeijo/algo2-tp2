@@ -385,10 +385,10 @@ $ $\newline
 
 % swapDisjunto
 % explicacion: swap de los nodos
-\textbf{Funcion privada}\\
-\textbf{Pre} $\equiv$ \{a distinto de b. a no es hijo de b. b no es hijo de a.\}\\%
-\textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
+\textbf{SwapDisjunto(a, b)\hspace*{1cm}Funcion privada}\\
+\textbf{Pre} $\equiv$ \{a distinto de b. a no es hijo de b. b no es hijo de a.\}\\
+\textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}\\
 {\textbf{iSwapDisjunto}(\Inout{a}{nodo}, \Inout{b}{nodo})}
 \begin{algorithmic}[1]
 
@@ -426,10 +426,24 @@ $ $\newline
 
     \State " "
 
+    \State puntero(nodo) tmpPadreB $\gets$ ($b \to$ padre) \Comment $O(1)$
+    \State puntero(nodo) tmpIzqB $\gets$ ($b \to$ izq) \Comment $O(1)$
+    \State puntero(nodo) tmpDerB $\gets$ ($b \to$ der) \Comment $O(1)$
+
+    \State " "
+
+    \State ($b \to$ padre) $\gets$ ($a \to$ padre) \Comment $O(1)$
+    \State ($b \to$ izq) $\gets$ ($a \to$ izq) \Comment $O(1)$
+    \State ($b \to$ der) $\gets$ ($a \to$ der) \Comment $O(1)$
+
+    \State ($a \to$ padre) $\gets$ tmpPadreB \Comment $O(1)$
+    \State ($a \to$ izq) $\gets$ tmpIzqB \Comment $O(1)$
+    \State ($a \to$ der) $\gets$ tmpDerB \Comment $O(1)$
 
 
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificaci\'on:} Todas las operaciones son O(1)
 
 \end{algorithmic}
 \end{algorithm}
