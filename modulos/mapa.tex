@@ -142,7 +142,6 @@ $ $\newline
 (4) Si C no esta en la grilla, entonces no tiene camino con ninguna $ $\newline
 (5) Si C y C' son contiguas y ambas estan en la grilla, entonces hay camino entre ellas $ $\newline
 (6) Si hay camino entre C y C', y hay camino entre C' y C'' entonces hay camino entre C y C'' $ $\newline
-Y Si hay camino entre C y C', y NO hay camino entre C' y C'' entonces NO hay camino entre C y C'' $ $\newline
 
 \Title{Invariante de representacion en logica}
 
@@ -184,10 +183,7 @@ $ $\newline
 (enRango(m, c, d) $\yluego$ m.grilla[c][d][c][d]) $\land$ $ $\newline
 (enRango(m, e, f) $\yluego$ m.grilla[e][f][e][f]) $\land$ $ $\newline
 (a $\neq$ c $\lor$ b $\neq$ d) $\land$ (c $\neq$ e $\lor$ d $\neq$ f)) $ $\newline
-$\impluego$ ( $ $\newline
-((m.grilla[a][b][c][d] $\land$ m.grilla[c][d][e][f]) $\implies$ m.grilla[a][b][e][f]) $\land $\newline
-((m.grilla[a][b][c][d] $\land$ $\neg$m.grilla[c][d][e][f]) $\implies$ $\neg$ m.grilla[a][b][e][f])$ $\newline
-)
+$\impluego$ ( (m.grilla[a][b][c][d] $\land$ m.grilla[c][d][e][f]) $\implies$ m.grilla[a][b][e][f]) ) $ $\newline
 
 % Auxiliar EN RANGO
 $ $\newline

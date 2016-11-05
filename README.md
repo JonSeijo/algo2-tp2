@@ -88,7 +88,7 @@ jonathan: creo que por defecto siempre es yluego en programacion, podriamos chus
 
 Correcciones marcadas:
 
-[ ] Rep de mapa
+[X] Rep de mapa
 
 [ ] PosExistente de mapa
 
