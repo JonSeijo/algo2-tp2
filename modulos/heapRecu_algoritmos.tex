@@ -239,7 +239,7 @@ $ $\newline
 % swapNodos
 % explicacion: swap de los nodos
 \textbf{Funcion privada: SwapNodos}\\
-\textbf{Descripci\'on}: Dados dos nodos cualesquiera que esten en el heap, los swappea (encargandose de reacomodar lo)\\
+\textbf{Descripci\'on}: Dados dos nodos cualesquiera que esten en el heap, los swappea reencadenando punteros (encargandose de reacomodar $c$.raiz y $c$.ultimo en caso de ser necesario)\\
 \textbf{Pre} $\equiv$ \{$a$ $\igobs$ $a_0$ $\land$ $b$ $\igobs$ $b_0$ $\land$ $a$ $\neq$ NULL $\land$ $b$ $\neq$ NULL $\land$ $a \in c$ $\land$ $b \in c$ \}\\%
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
