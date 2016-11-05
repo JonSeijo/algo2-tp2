@@ -40,3 +40,35 @@ $cola$ : colaPrior($\alpha$) / \\
 }%
 
 \end{Representacion}
+
+\begin{Representacion}
+ \subsection{Representacion del iterador}
+  \begin{Estructura}{itcolaEntr}[estr]
+      \begin{Tupla}[estr]%
+      \tupItem{siguiente}{puntero(nodo)}%
+      \tupItem{estructura}{puntero(colaPrioridad)}%
+    \end{Tupla}
+  \end{Estructura}
+
+  \RepFc[estr$/e$]{true $\Leftrightarrow$ Rep(*(e.estructura)) $\yluego $ (it.siguiente = NULL) $\oluego $ ($\exists$ j, k: nat)($\exists$ i, d, p: puntero(nodo))(nodo(j, k, i, d, p) = it.siguiente)}
+
+\tadOperacion{nodo}{nat$/j$, nat$/k$, punt(nodo)$/i$, punt(nodo)$/d$, punt(nodo)$/p$}
+{punt(nodo)}{}
+
+\tadAxioma{nodo(j, k, i, d, p)}{$<<$i, j$>$, p, i, d$>$}
+  ~
+$ $\newline
+$ $\newline
+$ $\newline
+$ $\newline
+\tadOperacion{Abs}{estr$/e$}{itcolaEntr}{Rep($e$)}
+
+\tadAxioma{Abs($e$)}
+{
+$it$ : itcolaEntr / \\
+	siguiente($it$)  $=$ $NULL$ $\oluego$ \\
+	siguiente($it$) $\igobs$ *($e$.siguiente) \\
+	
+}%
+
+\end{Representacion}

@@ -13,11 +13,11 @@ Algoritmos 2 - TP2
 
 [X] Hay un error cuando busco el siguiente ultimo. Lo arreglo despues
 
-[ ] Iterador
+[X] Iterador
 
 [ ] Borrar de iterador
 
-[ ] Siguiente de iterador
+[X] Siguiente de iterador
 
 [ ] Revisar rep de juego
 
@@ -108,7 +108,7 @@ jonathan: lo revise y me parece que es un error del corrector. Estoy bastante se
 
 #### SI HAY TIEMPO:
 
-[ ]	Modulo "Matriz" renombre de vector(vector(a)) jeje
+[ ]	Modulo "Matriz" renombre de vector(vector(a)) jeje <- JAJAJAJJAJA
 
 #### Otros
 ----

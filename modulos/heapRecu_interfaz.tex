@@ -68,3 +68,20 @@ $ $\newline
 \end{tad}
 
 \end{Interfaz}
+
+\begin{Interfaz}
+\subsection{Interfaz de itColaEntr}
+\Title{Operaciones b\'asicas de itColaEntr}
+
+\InterfazFuncion{Siguiente}{\In{it}{itColaEntr($\alpha$)}}{$\alpha$}%
+[Siguiente($it$) $\not=$ NULL]   % Pre
+{$res$ $\igobs$ Siguiente($it$)} %Post
+[$O(1)$]   % Complejidad
+[Devuelve el elemento apuntado por el iterador]  % Comentarios
+
+\InterfazFuncion{Borrar}{\In{it}{itColaEntr($\alpha$)}, \Inout{c}{colaPrioridad($\alpha$)}}{}
+[siguiente($it$) $\in$ elementos($c$)]
+{siguiente($it$) $\not\in$ elementos($c$)}
+[$O(log(EC))$]
+[Borra el elemento de la Cola y la reacomoda. El iterador quedar\'a inv\'alido.]
+\end{Interfaz}

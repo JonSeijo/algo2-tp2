@@ -701,7 +701,7 @@ $ $\newline
     \State $j$.cantPokemonTotales $\gets$ $j$.cantPokemonTotales - $j$.jugadores[$e$].cantCapt \Comment $O(1)$
     
     \If{HayPokemonCerca($j$.jugadores[$e$].pos)}   \Comment $O(1)$
-      \State Borrar($j$.jugadores[$e$].iterAEntrenadores) \Comment $O(log(EC))$
+      \State Borrar($j$.jugadores[$e$].iterAEntrenadores, ($j$.pokenodos[latPok][lonPok] $\rightarrow$ entrenadores)) \Comment $O(log(EC))$
     \EndIf
     
     \State Avanzar($pokesJug$) \Comment $O(1)$
