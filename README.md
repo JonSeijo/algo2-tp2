@@ -43,7 +43,7 @@ Revisar del Heap:
 	[X] Esto hay que cambiarlo porque no cubre todos los casos, ponele un heap de altura 4, donde los tres primeros niveles están completos (yendo de arriba para abajo deberían tener 1, 2 y 4 nodos) y en el último hay 4 nodos exactamente. Cuando hay que agregar un nuevo nodo, para encontrar el último hay que subir hasta que algún nodo "n" sea hijo izquierdo, pasar al hijo derecho del padre de n y bajar por la izquierda hasta llegar a NULL, y ahí agregar el nuevo. Esto funciona siempre que el último sea un hijo derecho, el último nivel del heap no esté completo y hay que buscar un nuevo "ultimo".
 
 [ ] Desencolar:
-	[ ] Debería ser in/out
+	[X] Debería ser in/out
 	[ ] Línea 1: Lo mismo que en la linea 3 de Encolar, a la función auxiliar SwapNodo le estamos pasando punteros y en la aridad dice que recibe nodos (también pasa en la función swapConHijos)
 
 [ ] SwapNodos: hay que asignar el nuevo "ultimo" del heap en caso de swapear este (en linea 10 y 13 comparamos punteros a nodos con nodos)
