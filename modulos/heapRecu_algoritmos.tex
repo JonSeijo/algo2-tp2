@@ -54,12 +54,12 @@
                 \State $nodoActual$ $\gets$ ($nodoActual$ $\to$ izq)  \Comment $O(1)$
             \EndWhile
             \State nodo $nuevoNodo \gets$ $\langle$ e, $nodoActual$, NULL, NULL $\rangle$   \Comment $O(1)$
-            \State ($nodoActual$ $\to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
+            \State ($nodoActual$ $\to$ izq) $\gets$ $\& nuevoNodo$ \Comment $O(1)$
             \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
         \Else
             \If{EsHijoIzquierdo($c$.ultimo)}  \Comment $O(1)$
                 \State nodo $nuevoNodo \gets$ $\langle$ e, $c$.ultimo $\to$ padre, NULL, NULL $\rangle$   \Comment $O(1)$
-                \State ($c$.ultimo $\to$ padre $\to$ der) $\gets$ $nuevoNodo$ \Comment $O(1)$
+                \State ($c$.ultimo $\to$ padre $\to$ der) $\gets$ $\& nuevoNodo$ \Comment $O(1)$
                 \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
             \Else %esHijoDerecho
                 \State EncolarSiUltimoEsHijoDerechoNoCompleto($c$, $e$) \Comment $O(log(\#(c)))$
