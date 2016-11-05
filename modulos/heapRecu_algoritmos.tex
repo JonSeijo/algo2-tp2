@@ -28,7 +28,7 @@
 
 % proximo
 \begin{algorithm}[H]
-{\textbf{iPr\'oximo}(\In{c}{colaPrioridad($\alpha$)}) $\to$ $res$ : $\alpha$}
+{\textbf{iPr\'oximo}(\In{c}{coalPrioridad($\alpha$)}) $\to$ $res$ : $\alpha$}
 \begin{algorithmic}[1]
     \State $res$ $\gets$ ($c$.raiz $\rightarrow$ elem) \Comment $O(1)$
 
@@ -40,24 +40,27 @@
 
 % encolar
 %\begin{algorithm}[H]
-{\textbf{iEncolar}(\In{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}) $\to$ $res$ : itColaPrioridad}
+{\textbf{iEncolar}(\Inout{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}) $\to$ $res$ : itColaPrioridad}
 \begin{algorithmic}[1]
 
     \If{EsVacia?($c$)}
         \State nodo $nuevoNodo \gets$ $\langle$ e, NULL, NULL, NULL $\rangle$   \Comment $O(1)$
-        \State $c$.raiz $\gets$ $nuevoNodo$ \Comment $O(1)$
+        \State $c$.raiz $\gets$ $\& nuevoNodo$ \Comment $O(1)$
+        \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
     \Else
         \If{EstaCompleto($c$)}  \Comment $O(log(\#(c)))$
-            \State nodo $nodoActual \gets$ $c$.raiz \Comment $O(1)$
+            \State nodo $nodoActual \gets$ $*$($c$.raiz) \Comment $O(1)$
             \While{$nodoActual$ $\to$ izq $\neq$ NULL}  \Comment $O(log(\#(c)))$
                 \State $nodoActual$ $\gets$ ($nodoActual$ $\to$ izq)  \Comment $O(1)$
             \EndWhile
             \State nodo $nuevoNodo \gets$ $\langle$ e, $nodoActual$, NULL, NULL $\rangle$   \Comment $O(1)$
             \State ($nodoActual$ $\to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
+            \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
         \Else
             \If{EsHijoIzquierdo($c$.ultimo)}  \Comment $O(1)$
                 \State nodo $nuevoNodo \gets$ $\langle$ e, $c$.ultimo $\to$ padre, NULL, NULL $\rangle$   \Comment $O(1)$
-                \State ($c$.ultimo $\to$ padre $\to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
+                \State ($c$.ultimo $\to$ padre $\to$ der) $\gets$ $nuevoNodo$ \Comment $O(1)$
+                \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
             \Else %esHijoDerecho
                 \State nodo $nuevoNodo \gets$ $\langle$ e, $c$.ultimo $\to$ padre $\to$ padre $\to$ der, NULL, NULL $\rangle$   \Comment $O(1)$
                 \State ($c$.ultimo $\to$ padre $\to$ padre $\to$ der $\to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
@@ -65,7 +68,6 @@
         \EndIf
     \EndIf
     \State $ $
-    \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$
     \State SiftUp($c$.ultimo) \Comment $O(log(\#(c)))$
 
     NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO

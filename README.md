@@ -28,10 +28,13 @@ Revisar del Heap:
 
 [ ] Definir el "<" para las tuplas <jugador, cant atrapados> 
 
+[ ] En muchos lados: un nodo no es un puntero a nodo, cuando asigno a un puntero deberia usar &
+	Por ejemplo:   (nodo → izq) ← &(nuevoNodo)    o algo asi
+
 [ ] Encolar:
-	[ ] Debería ser in/out
-	[ ] Línea 3 y 6: "c.raiz <- nuevoNodo" c.raiz es un puntero a nodo, y nuevoNodo es un nodo. Estamos asignando un nodo a un puntero a nodo, ¿hay que cambiarlo o así está bien? Está en varias funciones esto.
-	[ ] Línea 15: ¿No debería ser "(c.ultimo -> padre -> DER)"?
+	[X] Debería ser in/out
+	[X] Línea 3 y 6: "c.raiz <- nuevoNodo" c.raiz es un puntero a nodo, y nuevoNodo es un nodo. Estamos asignando un nodo a un puntero a nodo, ¿hay que cambiarlo o así está bien? Está en varias funciones esto.
+	[X] Línea 15: ¿No debería ser "(c.ultimo -> padre -> DER)"?
 	[ ] Esto hay que cambiarlo porque no cubre todos los casos, ponele un heap de altura 4, donde los tres primeros niveles están completos (yendo de arriba para abajo deberían tener 1, 2 y 4 nodos) y en el último hay 4 nodos exactamente. Cuando hay que agregar un nuevo nodo, para encontrar el último hay que subir hasta que algún nodo "n" sea hijo izquierdo, pasar al hijo derecho del padre de n y bajar por la izquierda hasta llegar a NULL, y ahí agregar el nuevo. Esto funciona siempre que el último sea un hijo derecho, el último nivel del heap no esté completo y hay que buscar un nuevo "ultimo".
 
 [ ] Desencolar:
@@ -53,6 +56,7 @@ Revisar del Heap:
 [ ] SiftUP: En la guarda del while no debería haber un "^luego" en vez de un "^" ?, tampoco se le pasa el heap como parámetro y habría que tenerlo para los swaps, recibe un nodo y no un puntero, cuando se hace el llamada de la función se le pasa un puntero (esto último también pasa con siftdown)
 ----
 (Esperar a correccion de tp, es un bardo cambiar esto y si no estaba mal joya)
-[ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
+jonathan: Nos marcaron que estaba bien asi que esto no lo cambio
+[-] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
 Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
 porque de como esta implementada se encarga el mapa. Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
