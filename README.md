@@ -55,7 +55,9 @@ Tenemos que consultarlo, para mi esta bien como esta ahora si es que chequeamos 
 
 
 
-[ ] SwapNodos: hay que asignar el nuevo "ultimo" del heap en caso de swapear este (en linea 10 y 13 comparamos punteros a nodos con nodos)
+[ ] SwapNodos: hay que asignar el nuevo "ultimo" del heap en caso de swapear este 
+
+[X] en linea 10 y 13 comparamos punteros a nodos con nodos
 
 [ ] SwapConmHijoIzqi: En la línea 4 no debería ser "(a -> der -> padre) <- a"
 		      En la linea 7 no debería ser "(b -> der -> padre) <- b"
