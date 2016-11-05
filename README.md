@@ -90,7 +90,8 @@ Correcciones marcadas:
 
 [X] Rep de mapa
 
-[ ] PosExistente de mapa
+[ ] PosExistente de mapa.     
+jonathan: lo revisa y me parece que es un error del corrector. Estoy bastante seguro que nuestra funcion esta bien: consultar
 
 [ ] Referencias en punteros (Definir) de diccString
 
