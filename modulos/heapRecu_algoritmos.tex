@@ -104,6 +104,7 @@ $ $\newline
 % estaCompleto
 % explicacion: si el de mas abajo a la derecha es el ultimo, entonces esta completo
 \textbf{Funcion privada: EstaCompleto}\\
+\textbf{Descripci\'on}: devuelve $true$ si el arbol esta completo, es decir, si el nivel mas profundo del arbol tiene todos los nodos posibles\\
 \textbf{Pre} $\equiv$ \{$\neg$ vac\'ia?($c$)\}\\%
 \textbf{Post} $\equiv$ \{Res es true sii el ultimo es el de mas abajo a la derecha\}%
 \begin{algorithm}[H]
@@ -127,6 +128,7 @@ $ $\newline
 
 % esHijoIzquierdo
 \textbf{Funcion privada: EsHijoIzquierdo}\\
+\textbf{Descripci\'on}: Devuelve $true$ si el nodo es el hijo izquierdo de su padre\\
 \textbf{Pre} $\equiv$ \{true\}\\%
 \textbf{Post} $\equiv$ \{Res es true sii n es hijo izquierdo\}%
 \begin{algorithm}[H]
@@ -150,6 +152,7 @@ $ $\newline
 
 % esHijoDerecho
 \textbf{Funcion privada: EsHijoDerecho}\\
+\textbf{Descripci\'on}: Devuelve $true$ si el nodo es el hijo derecho de su padre\\
 \textbf{Pre} $\equiv$ \{true\}\\%
 \textbf{Post} $\equiv$ \{Res es true sii n es hijo derecho\}%
 \begin{algorithm}[H]
@@ -172,8 +175,9 @@ $ $\newline
 
 % encolarSiUltimoEsHijoDerechoNoCompleto
 \textbf{Funcion privada: EncolarSiUltimoEsHijoDerechoNoCompleto}\\
+\textbf{Descripci\'on}: En el caso que el $c$ultimo es un hijo derecho (y el arbol no era completo), para buscar el nodo que va a ser el nuevoUltimo, es necesario hacer un recorrido del \'arbol. Esto se ve mas claramente cuando el heap tiene mas de 4 niveles, y el $c$.ultimo apunta a un hijo derecho del centro. Agrega en la posici\'on correcta un nuevo nodo con el valor $e$\\
 \textbf{Pre} $\equiv$ \{c no esta completo y c.ultimo es hijo derecho\}\\%
-\textbf{Post} $\equiv$ \{Actualiza el c.ultimo y agrega un nuevoNodo con el valor e al final del heap\}%
+\textbf{Post} $\equiv$ \{c.ultimo es actualizado y agrega un nuevoNodo con el valor $e$ al final del heap\}%
 \begin{algorithm}[H]
 {\textbf{iEncolarSiUltimoEsHijoDerechoNoCompleto}(\Inout{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$})}
 \begin{algorithmic}[1]
@@ -209,6 +213,7 @@ $ $\newline
 % hayUnicoNodoEnUltimoNivel
 % explicacion: si el de mas abajo a la izquierda es el ultimo, entonces el ultimo nivel tiene un unico nodo
 \textbf{Funcion privada: HayUnicoNodoEnUltimoNivel}\\
+\textbf{Descripci\'on}: Devuelve $true$ si el nivel mas profundo del arbol tiene un \'unico nodo\\
 \textbf{Pre} $\equiv$ \{$\neg$ vac\'ia?($c$)\}\\%
 \textbf{Post} $\equiv$ \{Res es true sii el ultimo es el de mas abajo a la izquierda\}%
 \begin{algorithm}[H]
@@ -234,7 +239,8 @@ $ $\newline
 % swapNodos
 % explicacion: swap de los nodos
 \textbf{Funcion privada: SwapNodos}\\
-\textbf{Pre} $\equiv$ \{$a$ $\igobs$ $a_0$ $\land$ $b$ $\igobs$ $b_0$ $\land$ $a$ $\neq$ NULL $\land$ $b$ $\neq$ NULL \}\\%
+\textbf{Descripci\'on}: Dados dos nodos cualesquiera que esten en el heap, los swappea (encargandose de reacomodar lo)\\
+\textbf{Pre} $\equiv$ \{$a$ $\igobs$ $a_0$ $\land$ $b$ $\igobs$ $b_0$ $\land$ $a$ $\neq$ NULL $\land$ $b$ $\neq$ NULL $\land$ $a \in c$ $\land$ $b \in c$ \}\\%
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
 {\textbf{iSwapNodos}(\Inout{a}{nodo}, \Inout{b}{nodo}, \Inout{c}{colaPrioridad})}
@@ -283,6 +289,7 @@ $ $\newline
 % swapConHijo
 % explicacion: swap de los nodos
 \textbf{Funcion privada: SwapConHijo}\\
+\textbf{Descripci\'on}: Realiza un swap entre los nodos $a$ y $b$ reencadenando punteros, en el caso que $a$ es padre de $b$\\ 
 \textbf{Pre} $\equiv$ \{a es padre de b\}\\%
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
@@ -311,6 +318,7 @@ $ $\newline
 % swapConHijoIzquierdo
 % explicacion: swap de los nodos
 \textbf{Funcion privada: SwapConHijoIzquierdo}\\
+\textbf{Descripci\'on}: Realiza un swap entre los nodos $a$ y $b$ reencadenando punteros, en el caso de que $b$ es el hijo izquierdo de $a$\\ 
 \textbf{Pre} $\equiv$ \{b es hijo izquierdo de a\}\\%
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
@@ -364,6 +372,7 @@ $ $\newline
 % swapConHijoDerecho
 % explicacion: swap de los nodos
 \textbf{Funcion privada: SwapConHijoDerecho}\\
+\textbf{Descripci\'on}: Realiza un swap entre los nodos $a$ y $b$ reencadenando punteros, en el caso de que $b$ es el hijo derecho de $a$\\ 
 \textbf{Pre} $\equiv$ \{b es hijo derecho de a\}\\%
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
@@ -417,6 +426,7 @@ $ $\newline
 % explicacion: swap de los nodos
 \begin{algorithm}[H]
 \textbf{Funcion privada: SwapDisjunto}\\
+\textbf{Descripci\'on}: Realiza un swap entre $a$ y $b$, reencadenando punteros, en el caso en el que $a$ no es hijo de $b$ ni $b$ es hijo de $a$\\
 \textbf{Pre} $\equiv$ \{a distinto de b. a no es hijo de b. b no es hijo de a.\}\\
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}\\
 {\textbf{iSwapDisjunto}(\Inout{a}{nodo}, \Inout{b}{nodo})}
@@ -483,6 +493,7 @@ $ $\newline
 %eliminarUltimo
 %explicacion: elimina el ultimo nodo y actualiza c.ultimo
 \textbf{Funcion privada: EliminarUltimo}\\
+\textbf{Descripci\'on}: Elimina el ultimo nodo del heap, actualizando $c$.ultimo\\
 \textbf{Pre} $\equiv$ \{ $\#$c > 0 \}\\%
 \textbf{Post} $\equiv$ \{El nodo c.ultimo se elimina, y es actualizado\}%
 \begin{algorithm}[H]
@@ -543,6 +554,7 @@ $ $\newline
 %esMenorNodos
 %explicacion: dado dos nodos a y b, devuelve true si a tiene elemento y es menor a b
 \textbf{Funcion privada: EsMenorNodos}\\
+\textbf{Descripci\'on}: Devuelve $true$ si el nodo $a$ tiene un elemento que es menor o igual al elemento de $b$\\
 \textbf{Pre} $\equiv$ \{true\}\\%
 \textbf{Post} $\equiv$ \{devuelve true si a tiene un elemento y es menor o igual al de b. Si ambos son null res es false\}%
 \begin{algorithm}[H]
@@ -584,6 +596,7 @@ $ $\newline
 %siftUp
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
 \textbf{Funcion privada: SiftUp}\\
+\textbf{Descripci\'on}: Hace siftUp con el nodo pasado por parametros\\
 \textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
 \textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con su padre mientras era menor\}%
 \begin{algorithm}[H]
@@ -608,6 +621,7 @@ $ $\newline
 %siftDown
 %explicacion: dado un nodo, lleva el elemento hacia abajo hasta que este en la pos correcta
 \textbf{Funcion privada: SiftDown}\\
+\textbf{Descripci\'on}: Hace siftDown con el nodo pasado por parametros\\
 \textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
 \textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con sus hijos mientras era menor\}%
 \begin{algorithm}[H]
@@ -617,7 +631,7 @@ $ $\newline
     \State bool $sigueBajando \gets$ true \Comment $O(1)$
 
     \While{$sigueBajando$}  \Comment $O(log(\#c))$
-        \If{EsMenorNodos($n \to$ izq, $n \to$ der)} \Comment $O(1)$ 
+        \If{EsMenorNodos(*($n \to$ izq), *($n \to$ der))} \Comment $O(1)$ 
 
             \If{($n \to$ izq $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
                 \State SwapNodos($n$, $n \to$ izq, $c$) \Comment $O(1)$
@@ -626,7 +640,7 @@ $ $\newline
             \EndIf
 
         \Else
-            \If{EsMenorNodos($n \to$ der, $n \to$ izq)} \Comment $O(1)$
+            \If{EsMenorNodos(*($n \to$ der), *($n \to$ izq))} \Comment $O(1)$
             
                 \If{($n \to$ der $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
                     \State SwapNodos($n$, $n \to$ der, $c$) \Comment $O(1)$

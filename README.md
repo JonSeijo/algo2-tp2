@@ -83,6 +83,8 @@ jonathan: creo que por defecto siempre es yluego en programacion, podriamos chus
 
 [X] recibe un nodo y no un puntero, cuando se hace el llamada de la función se le pasa un puntero (esto último también pasa con siftdown)
 
+[X] EsMenorNodos: corrige uso, se le pasaban punteros en vez de nodos
+
 ----
 (Esperar a correccion de tp, es un bardo cambiar esto y si no estaba mal joya)
 jonathan: Nos marcaron que estaba bien asi que esto no lo cambio
