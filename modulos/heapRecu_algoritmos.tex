@@ -62,8 +62,7 @@
                 \State ($c$.ultimo $\to$ padre $\to$ der) $\gets$ $nuevoNodo$ \Comment $O(1)$
                 \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
             \Else %esHijoDerecho
-                \State nodo $nuevoNodo \gets$ $\langle$ e, $c$.ultimo $\to$ padre $\to$ padre $\to$ der, NULL, NULL $\rangle$   \Comment $O(1)$
-                \State ($c$.ultimo $\to$ padre $\to$ padre $\to$ der $\to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
+                \State EncolarSiUltimoEsHijoDerechoNoCompleto($c$, $e$) \Comment $O(log(\#(c)))$
             \EndIf
         \EndIf
     \EndIf
@@ -122,6 +121,43 @@ $ $\newline
     \Statex \underline{Complejidad:} $O(log(\#c))$
 \end{algorithmic}
 \end{algorithm}
+
+
+% encolarSiUltimoEsHijoDerechoNoCompleto
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{c no esta completo y c.ultimo es hijo derecho\}\\%
+\textbf{Post} $\equiv$ \{Actualiza el c.ultimo y agrega un nuevoNodo con el valor e al final del heap\}%
+\begin{algorithm}[H]
+{\textbf{iEncolarSiUltimoEsHijoDerechoNoCompleto}(\Inout{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$})}
+\begin{algorithmic}[1]
+
+    \State nodo $nuevoUltimoPadre  \gets$ *($c$.ultimo) \Comment $O(1)$
+    \While{$\neg$ EsHijoIzquierdo($nuevoUltimoPadre $)}  \Comment Peor caso recorro la altura $O(log(\#(c)))$
+        \State $nuevoUltimoPadre  \gets$ ($nuevoUltimoPadre  \to$ padre) \Comment $O(1)$
+    \EndWhile
+    
+    \State $ $
+    \State $nuevoUltimoPadre  \gets$ ($nuevoUltimoPadre  \to$ padre $\to$ der) \Comment $O(1)$
+    \State $ $
+    
+    \While{($nuevoUltimoPadre  \to$ izq) $\neq$ NULL} \Comment Peor caso recorro la altura $O(log(\#(c)))$
+        \State $nuevoUltimoPadre  \gets$ ($nuevoUltimoPadre  \to$ izq) \Comment $O(1)$
+    \EndWhile
+    \State $ $
+
+    \State nodo $nuevoNodo \gets$ $\langle$ $e$, nuevoUltimoPadre , NULL, NULL $\rangle$ \Comment $O(1)$
+    \State ($nuevoUltimoPadre  \to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
+    \State $c$.ultimo $\gets$ $\&nuevoNodo$ \Comment $O(1)$
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(log(\#(c)))$
+    \Statex \underline{Justificacion:} En el peor caso tengo que recorrer hacia arriba toda la altura del arbol (log($\#$(c))) por ser completo) y luego bajar para llegar al nuevo ultimo. El resto de las operaciones son $O(1)$. En total la complejidad es: $O(1)$ + $O(1)$ + .. + $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$
+\end{algorithmic}
+\end{algorithm}
+
+$ $\newline
+
+
 
 % hayUnicoNodoEnUltimoNivel
 % explicacion: si el de mas abajo a la izquierda es el ultimo, entonces el ultimo nivel tiene un unico nodo

@@ -11,7 +11,7 @@ Algoritmos 2 - TP2
 
 [X] Abs de heap
 
-[ ] Hay un error cuando busco el siguiente ultimo. Lo arreglo despues
+[X] Hay un error cuando busco el siguiente ultimo. Lo arreglo despues
 
 [ ] Iterador
 
@@ -34,11 +34,13 @@ Revisar del Heap:
 [ ] En muchos lados: un nodo no es un puntero a nodo, cuando asigno a un puntero deberia usar &
 	Por ejemplo:   (nodo → izq) ← &(nuevoNodo)    o algo asi
 
+[ ] Arreglar todas las funcioens privadas porque las pre y post se ven mal, seguir el modelo del trie
+
 [ ] Encolar:
 	[X] Debería ser in/out
 	[X] Línea 3 y 6: "c.raiz <- nuevoNodo" c.raiz es un puntero a nodo, y nuevoNodo es un nodo. Estamos asignando un nodo a un puntero a nodo, ¿hay que cambiarlo o así está bien? Está en varias funciones esto.
 	[X] Línea 15: ¿No debería ser "(c.ultimo -> padre -> DER)"?
-	[ ] Esto hay que cambiarlo porque no cubre todos los casos, ponele un heap de altura 4, donde los tres primeros niveles están completos (yendo de arriba para abajo deberían tener 1, 2 y 4 nodos) y en el último hay 4 nodos exactamente. Cuando hay que agregar un nuevo nodo, para encontrar el último hay que subir hasta que algún nodo "n" sea hijo izquierdo, pasar al hijo derecho del padre de n y bajar por la izquierda hasta llegar a NULL, y ahí agregar el nuevo. Esto funciona siempre que el último sea un hijo derecho, el último nivel del heap no esté completo y hay que buscar un nuevo "ultimo".
+	[X] Esto hay que cambiarlo porque no cubre todos los casos, ponele un heap de altura 4, donde los tres primeros niveles están completos (yendo de arriba para abajo deberían tener 1, 2 y 4 nodos) y en el último hay 4 nodos exactamente. Cuando hay que agregar un nuevo nodo, para encontrar el último hay que subir hasta que algún nodo "n" sea hijo izquierdo, pasar al hijo derecho del padre de n y bajar por la izquierda hasta llegar a NULL, y ahí agregar el nuevo. Esto funciona siempre que el último sea un hijo derecho, el último nivel del heap no esté completo y hay que buscar un nuevo "ultimo".
 
 [ ] Desencolar:
 	[ ] Debería ser in/out
