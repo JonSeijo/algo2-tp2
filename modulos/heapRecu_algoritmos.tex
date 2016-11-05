@@ -83,7 +83,7 @@
 {\textbf{iDesencolar}(\Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
     
-    \State SwapNodos($c$.raiz, $c$.ultimo) \Comment $O(1)$
+    \State SwapNodos(*($c$.raiz), *($c$.ultimo)) \Comment $O(1)$
     \State EliminarUltimo($c$) \Comment $O(log(\#c))$
     \State SiftDown($c$.raiz) \Comment $O(log(\#c))$
     
@@ -190,24 +190,24 @@ $ $\newline
 \textbf{Pre} $\equiv$ \{$a$ $\igobs$ $a_0$ $\land$ $b$ $\igobs$ $b_0$ $\land$ $a$ $\neq$ NULL $\land$ $b$ $\neq$ NULL \}\\%
 \textbf{Post} $\equiv$ \{Los nodos a y b son swappeados reordenando los punteros\}%
 \begin{algorithm}[H]
-{\textbf{iSwapNodos}(\In{a}{nodo}, \In{b}{nodo}, \Inout{c}{colaPrioridad})}
+{\textbf{iSwapNodos}(\Inout{a}{nodo}, \Inout{b}{nodo}, \Inout{c}{colaPrioridad})}
 \begin{algorithmic}[1]
 
-    \If{($a \to$ padre) = $b$} \Comment $O(1)$
+    \If{*($a \to$ padre) = $b$} \Comment $O(1)$
         \State SwapConHijo($a$, $b$) \Comment $O(1)$
     \Else 
-        \If{($b \to$ padre) = $a$} \Comment $O(1)$
+        \If{*($b \to$ padre) = $a$} \Comment $O(1)$
             \State SwapConHijo($b$, $a$) \Comment $O(1)$
         \Else
             \State SwapDisjunto($a$, $b$)\Comment $O(1)$
         \EndIf 
     \EndIf 
 
-    \If{$c$.raiz = $a$} \Comment $O(1)$
-        \State $c$.raiz $\gets$ $b$ \Comment $O(1)$
+    \If{*($c$.raiz) = $a$} \Comment $O(1)$
+        \State $c$.raiz $\gets$ $\&b$ \Comment $O(1)$
     \Else
-        \If{$c$.raiz = $b$} \Comment $O(1)$
-            \State $c$.raiz $\gets$ $a$ \Comment $O(1)$
+        \If{*($c$.raiz) = $b$} \Comment $O(1)$
+            \State $c$.raiz $\gets$ $\&a$ \Comment $O(1)$
         \EndIf
     \EndIf
 
@@ -231,9 +231,9 @@ $ $\newline
 {\textbf{iSwapConHijo}(\Inout{a}{nodo}, \Inout{b}{nodo})}
 \begin{algorithmic}[1]
 
-    \If{($a \to$ izq) = $b$} \Comment $O(1)$
+    \If{*($a \to$ izq) = $b$} \Comment $O(1)$
         \State SwapConHijoIzquierdo($a$, $b$) \Comment $O(1)$
-    \Else \If{($a \to$ der) = $b$} \Comment $O(1)$
+    \Else \If{*($a \to$ der) = $b$} \Comment $O(1)$
             \State SwapConHijoDerecho($a$, $b$) \Comment $O(1)$
         \EndIf 
     \EndIf 

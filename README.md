@@ -44,7 +44,16 @@ Revisar del Heap:
 
 [ ] Desencolar:
 	[X] Debería ser in/out
-	[ ] Línea 1: Lo mismo que en la linea 3 de Encolar, a la función auxiliar SwapNodo le estamos pasando punteros y en la aridad dice que recibe nodos (también pasa en la función swapConHijos)
+	[X] Línea 1: Lo mismo que en la linea 3 de Encolar, a la función auxiliar SwapNodo le estamos pasando punteros y en la aridad dice que recibe nodos (también pasa en la función swapConHijos)
+
+[ ]
+jonathan:
+En SwapNodos estaria pasando lo mismo que nos corrigieron en el trie, estamos asignando a un puntero un nodo que entra por parametros. 
+Como es privada creo que basta con que chequeemos que no lo usamos mal ni rompemos nada. Si usamos "copiar" es una mierda porque podriamos estar copiando el heap entero (el nodo que pasan por parametros puede ser la raiz por ejemplo) y eso es O(n)
+Tenemos que consultarlo, para mi esta bien como esta ahora si es que chequeamos que no lo rompemos en otro lado (porque es privada)
+
+
+
 
 [ ] SwapNodos: hay que asignar el nuevo "ultimo" del heap en caso de swapear este (en linea 10 y 13 comparamos punteros a nodos con nodos)
 
