@@ -85,6 +85,31 @@ jonathan: creo que por defecto siempre es yluego en programacion, podriamos chus
 
 [X] EsMenorNodos: corrige uso, se le pasaban punteros en vez de nodos
 
+
+Correcciones marcadas:
+
+[ ] Rep de mapa
+
+[ ] PosExistente de mapa
+
+[ ] Referencias en punteros (Definir) de diccString
+
+[ ] Error en complejidad en interfaz de Juego: AgregarPokemon
+
+[ ] Revisar CasoMov3 == en condicional
+
+[ ] Revisar CasoMov5 == en condicional
+
+[ ] EntrenadoresPosibles: Revisar algoritmo bien bien
+
+[ ] Expulsados esta repetida
+
+
+#### SI HAY TIEMPO:
+
+[ ]	Modulo "Matriz" renombre de vector(vector(a)) jeje
+
+#### Otros
 ----
 (Esperar a correccion de tp, es un bardo cambiar esto y si no estaba mal joya)
 jonathan: Nos marcaron que estaba bien asi que esto no lo cambio
