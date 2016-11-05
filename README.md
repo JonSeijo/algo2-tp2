@@ -66,7 +66,7 @@ Tenemos que consultarlo, para mi esta bien como esta ahora si es que chequeamos 
 [X] SwapConHijoDER: En la línea 4 no debería ser "(a -> izq -> padre) <- a"
 		      En la linea 8 no debería ser "(b -> izq -> padre) <- b"
 
-[ ] Hacer Eshijoizq? Eshijoder? PERO OJO, que pasa si es raíz? debería dar falso en ambos casos, dentro de estas funciones comprobar que no sea NULL antes de preguntar nada así no se indefine
+[X] Hacer Eshijoizq? Eshijoder? PERO OJO, que pasa si es raíz? debería dar falso en ambos casos, dentro de estas funciones comprobar que no sea NULL antes de preguntar nada así no se indefine
 
 
 [ ] SiftUP: En la guarda del while no debería haber un "^luego" en vez de un "^" ?, tampoco se le pasa el heap como parámetro y habría que tenerlo para los swaps, recibe un nodo y no un puntero, cuando se hace el llamada de la función se le pasa un puntero (esto último también pasa con siftdown)

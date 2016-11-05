@@ -123,6 +123,53 @@ $ $\newline
 \end{algorithm}
 
 
+$ $\newline
+
+% esHijoIzquierdo
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{true\}\\%
+\textbf{Post} $\equiv$ \{Res es true sii n es hijo izquierdo\}%
+\begin{algorithm}[H]
+{\textbf{iEsHijoIzquierdo}(\In{n}{nodo}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+    
+    \If{$n.$padre = NULL} \Comment $O(1)$
+        \State $res \gets$ false \Comment $O(1)$
+    \Else
+        \State $res \gets $ (*($n$.padre $\to$ izq) = $n)$ \Comment $O(1)$
+    \EndIf
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
+\end{algorithmic}
+\end{algorithm}
+
+
+$ $\newline
+
+% esHijoDerecho
+\textbf{Funcion privada}\\
+\textbf{Pre} $\equiv$ \{true\}\\%
+\textbf{Post} $\equiv$ \{Res es true sii n es hijo derecho\}%
+\begin{algorithm}[H]
+{\textbf{iEsHijoDerecho}(\In{n}{nodo}) $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+    
+    \If{$n.$padre = NULL} \Comment $O(1)$
+        \State $res \gets$ false \Comment $O(1)$
+    \Else
+        \State $res \gets $ (*($n$.padre $\to$ der) = $n)$ \Comment $O(1)$
+    \EndIf
+
+    \medskip
+    \Statex \underline{Complejidad:} $O(1)$
+    \Statex \underline{Justificaci\'on:} Todas las operaciones son $O(1)$
+\end{algorithmic}
+\end{algorithm}
+
+
+
 % encolarSiUltimoEsHijoDerechoNoCompleto
 \textbf{Funcion privada}\\
 \textbf{Pre} $\equiv$ \{c no esta completo y c.ultimo es hijo derecho\}\\%
