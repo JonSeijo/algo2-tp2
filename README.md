@@ -91,11 +91,11 @@ Correcciones marcadas:
 [X] Rep de mapa
 
 [ ] PosExistente de mapa.     
-jonathan: lo revisa y me parece que es un error del corrector. Estoy bastante seguro que nuestra funcion esta bien: consultar
+jonathan: lo revise y me parece que es un error del corrector. Estoy bastante seguro que nuestra funcion esta bien: consultar
 
 [ ] Referencias en punteros (Definir) de diccString
 
-[ ] Error en complejidad en interfaz de Juego: AgregarPokemon
+[X] Error en complejidad en interfaz de Juego: AgregarPokemon
 
 [ ] Revisar CasoMov3 == en condicional
 

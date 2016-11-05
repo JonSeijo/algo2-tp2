@@ -21,7 +21,7 @@
 \InterfazFuncion{agregarPok\'emon}{\In{p}{pokemon}, \In{c}{coord}, \Inout{j}{juego}}{}
 [$j_0$ $\igobs$ $j$ $\land$ posExistente($c$, mapa($j$)) $\land$ $p$ $\not \in$ pokemones($j$) $\land$ PuedoAgregarPokemon($c$, $j$)]  
 {$j \igobs agregarPokemon(p, c, j_0)  \land p \in pokemones(j)$}
-[$O(J)$]
+[$O(|P| + EC*log(EC))$ ]
 [Agrega pok\'emon \texttt{p} al juego \texttt{j} en la coordenada \texttt{c}.]
 
 
