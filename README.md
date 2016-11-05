@@ -24,6 +24,9 @@ Algoritmos 2 - TP2
 [ ] Rezar no equivocarse
 
 -----
+Página 20 Entrenadores Posibles: REVISAR el algoritmo, hay cosas raras, en un momentos hacemos un puntero que después no usamos y hay un Avanzar de un vector pero que ya está siendo recorrido por un for, no me termina de cerrar bien.
+
+-----
 Revisar del Heap:
 
 [ ] Definir el "<" para las tuplas <jugador, cant atrapados> 

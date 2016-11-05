@@ -1143,17 +1143,17 @@ $ $\newline
     % Asumo que tengo una forma de recorrer el heap
     \State vector(jugador) $jugsEnNodo \gets$ CrearIt(DameJugadoresEnPokerango($c$, $j$))     \Comment $O(EC)$
     
-    \For{nat $i \gets$ 0 to Longitud($jugsEnNodo - 1$)}
+    \For{nat $i \gets$ 0 to Longitud($jugsEnNodo - 1$)} \Comment $O(EC)$
         \If{Siguiente($itPosibles$) = $itJugsEnNodo$[$i$]}   \Comment $O(1)$
             \State Agregar($res$, Siguiente($itPosible$))    
         \EndIf
         
-        \State Avanzar($itJugsEnNodo$))
+        \State Avanzar($itJugsEnNodo$)) \Comment()
     
     %\EndWhile
     \EndFor
     
-    \State Avanzar($itPosible$)   \Comment()
+    \State Avanzar($itPosible$)   \Comment $O(1)$
 
 
 \EndWhile
@@ -1161,10 +1161,11 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:}  O(Longitud($aRevisar$) * $EC$)
-\State \underline{Justificacion:}  SOMEDAY
+\State \underline{Justificacion:}  Son todas operaciones O(1) excepto aquella en la que se crea un vector con los jugadores en rango y el for que lo recorre que son O(EC). El while principal se itera O(Longitud(aRevisar)) veces, y la operaci\'on m\'as costosa dentro de este mismo es O(EC), por lo tanto el while entero cuesta O(Longitud(aRevisar)*EC) operaciones elementales.
 
 \end{algorithmic}
 \end{algorithm}
+
 
 
 $ $\newline
