@@ -68,8 +68,13 @@ Tenemos que consultarlo, para mi esta bien como esta ahora si es que chequeamos 
 
 [X] Hacer Eshijoizq? Eshijoder? PERO OJO, que pasa si es raíz? debería dar falso en ambos casos, dentro de estas funciones comprobar que no sea NULL antes de preguntar nada así no se indefine
 
+[-] SiftUp: En la guarda del while no debería haber un "^luego" en vez de un "^" ?, 
+jonathan: creo que por defecto siempre es yluego en programacion, podriamos chusmear otros ejemplos/preguntar
 
-[ ] SiftUP: En la guarda del while no debería haber un "^luego" en vez de un "^" ?, tampoco se le pasa el heap como parámetro y habría que tenerlo para los swaps, recibe un nodo y no un puntero, cuando se hace el llamada de la función se le pasa un puntero (esto último también pasa con siftdown)
+[X] se le pasa el heap como parámetro y habría que tenerlo para los swaps, 
+
+[X] recibe un nodo y no un puntero, cuando se hace el llamada de la función se le pasa un puntero (esto último también pasa con siftdown)
+
 ----
 (Esperar a correccion de tp, es un bardo cambiar esto y si no estaba mal joya)
 jonathan: Nos marcaron que estaba bien asi que esto no lo cambio

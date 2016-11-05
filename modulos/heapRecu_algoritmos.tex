@@ -67,7 +67,7 @@
         \EndIf
     \EndIf
     \State $ $
-    \State SiftUp($c$.ultimo) \Comment $O(log(\#(c)))$
+    \State SiftUp(*($c$.ultimo), $c$) \Comment $O(log(\#(c)))$
 
     NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO
 
@@ -83,9 +83,9 @@
 {\textbf{iDesencolar}(\Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
     
-    \State SwapNodos(*($c$.raiz), *($c$.ultimo)) \Comment $O(1)$
+    \State SwapNodos(*($c$.raiz), *($c$.ultimo), $c$) \Comment $O(1)$
     \State EliminarUltimo($c$) \Comment $O(log(\#c))$
-    \State SiftDown($c$.raiz) \Comment $O(log(\#c))$
+    \State SiftDown(*($c$.raiz), $c$) \Comment $O(log(\#c))$
     
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
@@ -486,7 +486,7 @@ $ $\newline
 \textbf{Pre} $\equiv$ \{ $\#$c > 0 \}\\%
 \textbf{Post} $\equiv$ \{El nodo c.ultimo se elimina, y es actualizado\}%
 \begin{algorithm}[H]
-{\textbf{iEliminarUltimo}(\Inout{c}{ColaPrioridad})}
+{\textbf{iEliminarUltimo}(\Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
 
     \If{$c$.ultimo = $c$.raiz}
@@ -587,11 +587,11 @@ $ $\newline
 \textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
 \textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con su padre mientras era menor\}%
 \begin{algorithm}[H]
-{\textbf{iSiftUp}(\Inout{n}{nodo})}
+{\textbf{iSiftUp}(\Inout{n}{nodo}, \Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
 
     \While{($n \to$ padre $\neq$ NULL) $\land$ (($n \to$ elem) < ($n \to$ padre $\to$ elem))} \Comment $O(log(\#c))$
-        \State SwapNodos($n$, $n \to$ padre) \Comment $O(1)$
+        \State SwapNodos($n$, $n \to$ padre, $c$) \Comment $O(1)$
         \State $n$ $\gets$ ($n \to$ padre) \Comment $O(1)$
     \EndWhile
 
@@ -611,7 +611,7 @@ $ $\newline
 \textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
 \textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con sus hijos mientras era menor\}%
 \begin{algorithm}[H]
-{\textbf{iSiftDown}(\Inout{n}{nodo})}
+{\textbf{iSiftDown}(\Inout{n}{nodo}, \Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
 
     \State bool $sigueBajando \gets$ true \Comment $O(1)$
@@ -620,7 +620,7 @@ $ $\newline
         \If{EsMenorNodos($n \to$ izq, $n \to$ der)} \Comment $O(1)$ 
 
             \If{($n \to$ izq $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
-                \State SwapNodos($n$, $n \to$ izq) \Comment $O(1)$
+                \State SwapNodos($n$, $n \to$ izq, $c$) \Comment $O(1)$
             \Else
                 \State $sigueBajando \gets$ false \Comment $O(1)$
             \EndIf
@@ -629,7 +629,7 @@ $ $\newline
             \If{EsMenorNodos($n \to$ der, $n \to$ izq)} \Comment $O(1)$
             
                 \If{($n \to$ der $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
-                    \State SwapNodos($n$, $n \to$ der) \Comment $O(1)$
+                    \State SwapNodos($n$, $n \to$ der, $c$) \Comment $O(1)$
                 \Else
                     \State $sigueBajando \gets$ false \Comment $O(1)$
                 \EndIf
@@ -643,8 +643,8 @@ $ $\newline
     \EndWhile 
 
     \medskip
-    \Statex \underline{Complejidad:} O(log($\#$C))
-    \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
+    \Statex \underline{Complejidad:} O(log($\#$c))
+    \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$c))
 \end{algorithmic}
 \end{algorithm}
 
