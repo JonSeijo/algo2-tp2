@@ -37,7 +37,7 @@ Revisar del Heap:
 	Por ejemplo:   (nodo → izq) ← &(nuevoNodo)    o algo asi
 jonathan: creo que el problema solo estaba en el Encolar
 
-[ ] Arreglar todas las funcioens privadas porque las pre y post se ven mal, seguir el modelo del trie
+[X] Arreglar todas las funciones privadas porque las pre y post se ven mal
 
 [X] Encolar:
 
