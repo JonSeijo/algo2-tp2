@@ -59,11 +59,11 @@ Tenemos que consultarlo, para mi esta bien como esta ahora si es que chequeamos 
 
 [X] en linea 10 y 13 comparamos punteros a nodos con nodos
 
-[ ] SwapConmHijoIzqi: En la línea 4 no debería ser "(a -> der -> padre) <- a"
+[X] SwapConmHijoIzqi: En la línea 4 no debería ser "(a -> der -> padre) <- a"
 		      En la linea 7 no debería ser "(b -> der -> padre) <- b"
 			Marea pero hay que fijarse que antes de esas lineas a->der y b->der ya fueron asignados, entonces no son los mismos con los que arranca el heap
 
-[ ] SwapConHijoDER: En la línea 4 no debería ser "(a -> izq -> padre) <- a"
+[X] SwapConHijoDER: En la línea 4 no debería ser "(a -> izq -> padre) <- a"
 		      En la linea 8 no debería ser "(b -> izq -> padre) <- b"
 
 [ ] Hacer Eshijoizq? Eshijoder? PERO OJO, que pasa si es raíz? debería dar falso en ambos casos, dentro de estas funciones comprobar que no sea NULL antes de preguntar nada así no se indefine

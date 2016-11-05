@@ -273,12 +273,12 @@ $ $\newline
     \State puntero(nodo) $tmpderA \gets$ ($a \to$ der) \Comment $O(1)$
     \State ($a \to$ der) $\gets$ ($b \to$ der)  \Comment $O(1)$
     \If{$a \to$ der $\neq$ NULL}
-        \State ($a \to$ der $\to$ padre) $\gets$ $b$ \Comment $O(1)$
+        \State ($a \to$ der $\to$ padre) $\gets$ $a$ \Comment $O(1)$
     \EndIf
 
     \State ($b \to$ der) $\gets$ tmpderA  \Comment $O(1)$
     \If{$b \to$ der $\neq$ NULL}
-        \State ($b \to$ der $\to$ padre) $\gets$ a  \Comment $O(1)$
+        \State ($b \to$ der $\to$ padre) $\gets$ b  \Comment $O(1)$
     \EndIf
     
     \State " "
@@ -326,12 +326,12 @@ $ $\newline
     \State puntero(nodo) $tmpizqA \gets$ ($a \to$ izq) \Comment $O(1)$
     \State ($a \to$ izq) $\gets$ ($b \to$ izq)  \Comment $O(1)$
     \If{$a \to$ izq $\neq$ NULL}
-        \State ($a \to$ izq $\to$ padre) $\gets$ $b$ \Comment $O(1)$
+        \State ($a \to$ izq $\to$ padre) $\gets$ $a$ \Comment $O(1)$
     \EndIf
 
     \State ($b \to$ izq) $\gets$ tmpizqA  \Comment $O(1)$
     \If{$b \to$ izq $\neq$ NULL}
-        \State ($b \to$ izq $\to$ padre) $\gets$ a  \Comment $O(1)$
+        \State ($b \to$ izq $\to$ padre) $\gets$ b  \Comment $O(1)$
     \EndIf
     
     \State " "
