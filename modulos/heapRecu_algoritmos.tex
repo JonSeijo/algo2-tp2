@@ -211,6 +211,17 @@ $ $\newline
         \EndIf
     \EndIf
 
+    \State $ $ 
+
+    \If{*($c$.ultimo) = $a$} \Comment $O(1)$
+        \State $c$.ultimo $\gets$ $\&b$ \Comment $O(1)$
+    \Else
+        \If{*($c$.ultimo) = $b$} \Comment $O(1)$
+            \State $c$.ultimo $\gets$ $\&a$ \Comment $O(1)$
+        \EndIf
+    \EndIf
+
+
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
 

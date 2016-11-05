@@ -55,7 +55,7 @@ Tenemos que consultarlo, para mi esta bien como esta ahora si es que chequeamos 
 
 
 
-[ ] SwapNodos: hay que asignar el nuevo "ultimo" del heap en caso de swapear este 
+[X] SwapNodos: hay que asignar el nuevo "ultimo" del heap en caso de swapear este 
 
 [X] en linea 10 y 13 comparamos punteros a nodos con nodos
 
