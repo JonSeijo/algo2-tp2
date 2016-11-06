@@ -685,11 +685,12 @@ $ $\newline
 \begin{algorithm}[H]
 {\textbf{iBorrar}(\In{it}{itColaEntr($\alpha$)}, \Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
-    \State HACER
-
+    \State SwapNodos(*(it.siguiente), *(c.ultimo), c) \Comment $O(1)$
+	\State EliminarUltimo(c) \Comment $O(log(EC))$
+	\State SiftUp(*(it.siguiente), c) \Comment $O(log(EC))$
     \medskip
     \Statex \underline{Complejidad:} $O(log(EC))$
-    \Statex \underline{Justificaci\'on} HACER
+    \Statex \underline{Justificaci\'on} $O(1)$ + $O(log(EC))$ + $O(log(EC))$ = $O(log(EC))$
 \end{algorithmic}
 \end{algorithm}
 
