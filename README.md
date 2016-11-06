@@ -99,9 +99,9 @@ jonathan: lo revise y me parece que es un error del corrector. Estoy bastante se
 
 [X] Error en complejidad en interfaz de Juego: AgregarPokemon
 
-[ ] Revisar CasoMov3 == en condicional
+[X] Revisar CasoMov3 == en condicional
 
-[ ] Revisar CasoMov5 == en condicional
+[X] Revisar CasoMov5 == en condicional
 
 [X] EntrenadoresPosibles: Revisar algoritmo bien bien
 

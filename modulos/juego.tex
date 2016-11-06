@@ -893,7 +893,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
   
   % A donde me movi lo pongo en 0
-  \If{Siguiente($iterPos$) $\neq$ $pokepos$}
+  \If{Siguiente($iterPos$) = $pokepos$}
     \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
   \EndIf
   
@@ -1001,7 +1001,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
   \State nat $y \gets$ Longitud(Siguiente($iterPos$)) \Comment $O(1)$   
 
   % A donde me movi lo pongo en 0
-  \If{Siguiente($iterPos$) $\neq$ $pokepos$}
+  \If{Siguiente($iterPos$) = $pokepos$}
     \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ 0) \Comment($O(1)$)
   \EndIf
 
