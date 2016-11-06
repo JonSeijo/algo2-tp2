@@ -1440,15 +1440,15 @@ $ $\newline
 {\textbf{iExpulsados}(\In{j}{juego}) $\to$ $res$ : conj(jugador)}
 \begin{algorithmic}[1]
 
-\For{$nat i \gets$ 0 to Longitud(j.jugadores) $-$ 1}   \Comment $O(J)$
+\For{$i \gets$ 0 to Longitud($j$.jugadores) $-$ 1}   \Comment $O(J)$
     \If{j.jugadores[$i$].sanciones $\geq$ 5}   \Comment $O(1)$
-        AgregarRapido(res, j.jugadores[$i$].id)  \Comment $O(1)$        
+        \State AgregarRapido(res, $j$.jugadores[$i$].id)  \Comment $O(1)$        
     \EndIf
 \EndFor
 
 \medskip
 \State \underline{Complejidad:} $O(J)$
-\State \underline{Justificacion:} Aplico operaciones que son O(1) la cantidad de veces que ejecuto el ciclo. El ciclo se ejecuta J veces (porque j.jugadores tiene todos los jugadores que fueron agregados) Entonces es O(J), siendo J la cantidad de jugadores que fueron agregados.
+\State \underline{Justificaci\'on:} Aplico operaciones que son O(1) la cantidad de veces que ejecuto el ciclo. El ciclo se ejecuta J veces (porque j.jugadores tiene todos los jugadores que fueron agregados) Entonces es O(J), siendo J la cantidad de jugadores que fueron agregados.
 
 \end{algorithmic}
 \end{algorithm}
@@ -1484,31 +1484,6 @@ $ $\newline
 \end{algorithmic}
 \end{algorithm}  
 
-
-
-\begin{algorithm}[H]
-{\textbf{iExpulsados}(\In{j}{juego}) $\to$ $res$ : conj(jugador)}
-\begin{algorithmic}[1]
-
-\State nat $i$ $\gets$ 0 \Comment $O(1)$
-
-\State conj(jugador) $js$ $\gets$ Vac\'io() \Comment $O(1)$
-
-\While{$i$ $<$ Longitud($j$.jugadores) $-$ 1} \Comment se repite Longitud($j$.jugadores) veces $O(1)$
-  \If{$j$.jugadores[$i$].sanciones $\geq$ 5} \Comment $O(1)$
-    \State AgregarRapido($js$, $j$.jugadores[$i$].id) \Comment $O(1)$
-  \EndIf
-\EndWhile
-
-\State $res$ $\gets$ $js$ \Comment $O(1)$
-
-\medskip
-\Statex \underline{Complejidad:} $O(J)$
-\Statex \underline{Justificaion:} Siendo $J$ la cantidad total de jugadores, se los recorre todos buscando los expulsados.
-
-\end{algorithmic}
-\end{algorithm}  
-  
 
 % movValido
 

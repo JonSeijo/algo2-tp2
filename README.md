@@ -103,7 +103,7 @@ jonathan: lo revise y me parece que es un error del corrector. Estoy bastante se
 
 [X] EntrenadoresPosibles: Revisar algoritmo bien bien
 
-[ ] Expulsados esta repetida
+[X] Expulsados esta repetida
 
 
 #### SI HAY TIEMPO:
