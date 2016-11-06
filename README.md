@@ -19,14 +19,13 @@ Algoritmos 2 - TP2
 
 [X] Siguiente de iterador
 
-[ ] Revisar rep de juego
-
-[ ] Revisar aliasing
+[X] Revisar rep de juego
+(En el tp esta corregido como bien asi que esto ya estaria)
 
 [X] Rezar no equivocarse
 
 -----
-Página 20 Entrenadores Posibles: REVISAR el algoritmo, hay cosas raras, en un momentos hacemos un puntero que después no usamos y hay un Avanzar de un vector pero que ya está siendo recorrido por un for, no me termina de cerrar bien.
+[X] Página 20 Entrenadores Posibles: REVISAR el algoritmo, hay cosas raras, en un momentos hacemos un puntero que después no usamos y hay un Avanzar de un vector pero que ya está siendo recorrido por un for, no me termina de cerrar bien.
 
 -----
 Revisar del Heap:
@@ -50,8 +49,11 @@ jonathan: creo que el problema solo estaba en el Encolar
 	[X] Esto hay que cambiarlo porque no cubre todos los casos, ponele un heap de altura 4, donde los tres primeros niveles están completos (yendo de arriba para abajo deberían tener 1, 2 y 4 nodos) y en el último hay 4 nodos exactamente. Cuando hay que agregar un nuevo nodo, para encontrar el último hay que subir hasta que algún nodo "n" sea hijo izquierdo, pasar al hijo derecho del padre de n y bajar por la izquierda hasta llegar a NULL, y ahí agregar el nuevo. Esto funciona siempre que el último sea un hijo derecho, el último nivel del heap no esté completo y hay que buscar un nuevo "ultimo".
 
 [X] Desencolar:
+
 	[X] Debería ser in/out
+
 	[X] Línea 1: Lo mismo que en la linea 3 de Encolar, a la función auxiliar SwapNodo le estamos pasando punteros y en la aridad dice que recibe nodos (también pasa en la función swapConHijos)
+
 
 [ ]
 jonathan:
