@@ -30,6 +30,12 @@ Algoritmos 2 - TP2
 -----
 Revisar del Heap:
 
+[ ] CrearIterador ()
+
+[ ] Revisar en el juego que se use bien el nuevo iterador
+
+[ ] Asegurarse de devolver iterador al encolar
+
 [ ] Definir el "<" para las tuplas <jugador, cant atrapados> 
 
 [X] En muchos lados: un nodo no es un puntero a nodo, cuando asigno a un puntero deberia usar &
