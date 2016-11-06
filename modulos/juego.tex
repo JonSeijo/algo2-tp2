@@ -170,7 +170,7 @@
 \InterfazFuncion{EntrenadoresPosibles}{\In{c}{coor}, \In{es}{conj(jugador)}, \In{j}{juego}}{conj(jugador)}%
 [hayPokemonCercano(c, j) $\land$ es $\subset$ jugadoresConectados(j)] 
 {$res$ $=$ entrenadoresPosibles($c$, $es$, $j$)}  % Ver que mucho no me convence
-[$O$(Longitud($ec$) * $EC$)] 
+[$O$($cardinal(es)$ * $EC$)] 
 [De todos los jugadores de la entrada ec, devuelve un conjunto con los entrenadores que estan en condiciones de capturar el pokemon que se encuentra en el rango de c. Que esten en condiciones de capturar significa que estan en rango2 del pokemon y que existe un camino hacia el.]
 
 
@@ -1130,38 +1130,30 @@ $ $\newline
 % por precondicion estan conectados
 
 \begin{algorithm}[H]
-{\textbf{iEntrenadoresPosibles}(\In{c}{coor}, \In{aRevisar}{conj(jugador)}, \In{j}{juego}) $\to$ $res$ : conj(jugador)}
+{\textbf{iEntrenadoresPosibles}(\In{c}{coor}, \In{es}{conj(jugador)}, \In{j}{juego}) $\to$ $res$ : conj(jugador)}
 \begin{algorithmic}[1]
 
 \State coor $pokeCoor \gets$ PosPokemonCercano($c$, $j$) \Comment $O(1)$
-\State puntero(pokeStruc) $pokePuntero \gets j.pokeNodos[longitud(pokeCoor)][latitud(pokeCoor)]$ \Comment $O(1)$
 
-\State itConj(jugador) $itPosibles \gets$ CrearIt($aRevisar$) \Comment $O(1)$
+\State vector(jugador) $jugsEnNodo \gets$DameJugadoresEnPokerango($c$, $j$)     \Comment $O(EC)$
 
-\While{HaySiguiente($itPosibles$)}   \Comment O($Longitud(aRevisar) * EC$)
-    
-    % Asumo que tengo una forma de recorrer el heap
-    \State vector(jugador) $jugsEnNodo \gets$ CrearIt(DameJugadoresEnPokerango($c$, $j$))     \Comment $O(EC)$
-    
-    \For{nat $i \gets$ 0 to Longitud($jugsEnNodo - 1$)} \Comment $O(EC)$
-        \If{Siguiente($itPosibles$) = $itJugsEnNodo$[$i$]}   \Comment $O(1)$
-            \State Agregar($res$, Siguiente($itPosible$))    
+\State itConj(jugador) $itPosibles \gets$ CrearIt($es$) \Comment $O(1)$
+
+\While{HaySiguiente($itPosibles$)}   \Comment O($cardinal(es)*EC$)
+
+    \For{$i \gets$ 0 $\to$ Longitud($jugsEnNodo$) - 1} \Comment $O(EC)$
+        \If{Siguiente($itPosibles$) = $jugsEnNodo$[$i$]}   \Comment $O(1)$
+            \State AgregarRapido($res$, Siguiente($itPosible$))  \Comment $O(1)$    
         \EndIf
-        
-        \State Avanzar($itJugsEnNodo$)) \Comment()
-    
-    %\EndWhile
     \EndFor
     
     \State Avanzar($itPosible$)   \Comment $O(1)$
-
-
 \EndWhile
 
 
 \medskip
-\State \underline{Complejidad:}  O(Longitud($aRevisar$) * $EC$)
-\State \underline{Justificacion:}  Son todas operaciones O(1) excepto aquella en la que se crea un vector con los jugadores en rango y el for que lo recorre que son O(EC). El while principal se itera O(Longitud(aRevisar)) veces, y la operaci\'on m\'as costosa dentro de este mismo es O(EC), por lo tanto el while entero cuesta O(Longitud(aRevisar)*EC) operaciones elementales.
+\State \underline{Complejidad:}  O($cardinal(es)$ * $EC$)
+\State \underline{Justificacion:}  Son todas operaciones O(1) excepto aquella en la que se crea un vector con los jugadores en rango y el for que lo recorre que son O(EC). El while principal se itera O($cardinal(es)$) veces, y la operaci\'on m\'as costosa dentro de este mismo es O(EC), por lo tanto el while entero cuesta O($cardinal(es)$*EC) operaciones elementales.
 
 \end{algorithmic}
 \end{algorithm}

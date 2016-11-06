@@ -101,7 +101,7 @@ jonathan: lo revise y me parece que es un error del corrector. Estoy bastante se
 
 [ ] Revisar CasoMov5 == en condicional
 
-[ ] EntrenadoresPosibles: Revisar algoritmo bien bien
+[X] EntrenadoresPosibles: Revisar algoritmo bien bien
 
 [ ] Expulsados esta repetida
 
