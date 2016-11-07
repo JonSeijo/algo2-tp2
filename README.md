@@ -30,6 +30,8 @@ Algoritmos 2 - TP2
 -----
 Revisar del Heap:
 
+[ ] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
+
 [ ] CrearIterador ()
 
 [ ] Revisar en el juego que se use bien el nuevo iterador
