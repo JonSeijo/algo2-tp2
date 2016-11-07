@@ -169,7 +169,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \State Nat $i$ $\gets$ $0$ \Comment $O(1)$
 
-\State bool $esNueva$ $\gets$ $true$ \Comment $O(1)$
+\State bool $esNueva$ $\gets$ $false$ \Comment $O(1)$
 
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
 	
@@ -186,7 +186,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 		
 		\State (*$actual$).$siguientes$[ord($p$[$i$])] $\gets$	 $\&$ $\langle$ $NULL$, $sig$, $NULL$ $\rangle$  \Comment $O(1)$
 		
-		\State $esNueva$ $\gets$ $false$ \Comment $O(1)$	 
+		\State $esNueva$ $\gets$ $true$ \Comment $O(1)$	 
 	
 	\EndIf
 	
@@ -198,7 +198,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 \If{(*$actual$).definicion  $\neq$  $NULL$} \Comment $O(1)$
 	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria acupada por definicion $O(1)$
 \EndIf
-\State (*$actual$).$definicion$ $\gets$ $\&$ $a$ \Comment $O(1)$
+\State (*$actual$).$definicion$ $\gets$ $\&$ copiar($a$) \Comment $O(copiar(\alpha))$
 
 \If{$esNueva$} \Comment $O(1)$
 	\State itConj($string$) $it$ $\gets$  $claves$.AgregarRapido($s$) \Comment $O(1)$
@@ -207,8 +207,8 @@ $dic$ : dicc(string, $\alpha$) / \\
 \EndIf
 
 \medskip
-\State \underline{Complejidad:} $O(|P|)$
-\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$
+\State \underline{Complejidad:} $O(|P| + copiar(\alpha))$
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea $p$, $|p|$ $\leq$ $|P|$ entonces 	$O(|p|)$ $=$ $O(|P|)$ mas lo que cueste copiar a.
 
 
 \end{algorithmic}

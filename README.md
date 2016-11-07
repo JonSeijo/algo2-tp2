@@ -96,6 +96,9 @@ jonathan: creo que por defecto siempre es yluego en programacion, podriamos chus
 
 Correcciones marcadas:
 
+[ ] Revisar los que usan definir de diccString, porque cambio 
+    la complejidad y hay que justificar mejor
+
 [X] Rep de mapa
 
 [ ] PosExistente de mapa.     
