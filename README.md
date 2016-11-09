@@ -32,11 +32,17 @@ Revisar del Heap:
 
 [ ] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
 
-[ ] CrearIterador ()
+[X] CrearIterador ()
 
 [ ] Revisar en el juego que se use bien el nuevo iterador
 
-[ ] Asegurarse de devolver iterador al encolar
+[ ] Cambiar las "->" por "." para referirse a partes de un nodo de las funciones del heap
+
+[ ] Usar "&" para crear punteros
+
+[ ] La función EsMenorNodo recibe nodos pero los maneja como punteros
+
+[X] Asegurarse de devolver iterador al encolar
 
 [ ] Definir el "<" para las tuplas <jugador, cant atrapados> 
 

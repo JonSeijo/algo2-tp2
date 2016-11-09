@@ -66,14 +66,16 @@
             \EndIf
         \EndIf
     \EndIf
-    \State $ $
-    \State SiftUp(*($c$.ultimo), $c$) \Comment $O(log(\#(c)))$
+    \State nodo m $\gets$ *($c$.ultimo)
+    \State SiftUp($m$, $c$) \Comment $O(log(\#(c)))$
+    \State puntero(nodo) $p$ $\gets$ $\&m$
+    \State res $\gets$ crearItColaEntr($p$, $c$) \Comment $O(1)$
 
-    NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO
+    NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO, completar la \'ultima l\'inea
 
     \medskip
     \Statex \underline{Complejidad:} $O(log(\#(c)))$
-    \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + .. $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
+    \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + ... + $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
 \end{algorithmic}
 %\end{algorithm}
 
@@ -516,7 +518,7 @@ $ $\newline
             \State $c$.ultimo $\gets$ NULL \Comment Libero memoria $O(1)$
             \State puntero(nodo) $nodoActual \gets$ $c$.raiz \Comment $O(1)$
             \While{($nodoActual \to$ der) $\neq$ NULL} \Comment $O(log(\#c))$
-                $nodoActual \gets$ ($nodoActual \to$ der) \Comment $O(1)$
+            \State $nodoActual \gets$ ($nodoActual \to$ der) \Comment $O(1)$
             \EndWhile
             \State $c$.ultimo $\gets$ $nodoActual$ \Comment $O(1)$
         \Else
@@ -527,7 +529,7 @@ $ $\newline
             \EndWhile
             \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ padre $\to$ izq)  \Comment $O(1)$
 
-            \While{$nuevoUltimo$ $\neq$ NULL)}  \Comment En peor caso recorro toda la altura  $O(log(\#c))$
+            \While{$nuevoUltimo$ $\neq$ NULL}  \Comment En peor caso recorro toda la altura  $O(log(\#c))$
                 \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ der) \Comment $O(1)$  
             \EndWhile
 
@@ -558,7 +560,7 @@ $ $\newline
 \textbf{Pre} $\equiv$ \{true\}\\%
 \textbf{Post} $\equiv$ \{devuelve true si a tiene un elemento y es menor o igual al de b. Si ambos son null res es false\}%
 \begin{algorithm}[H]
-{\textbf{iEsMenorNodos}(\In{a}{nodo}), \In{b}{nodo}) $\to$ $res$ : bool}
+{\textbf{iEsMenorNodos}(\In{a}{nodo}, \In{b}{nodo}) $\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
     \If{$a$ $\neq$ NULL $\lor$ $b$ $\neq$ NULL} \Comment $O(1)$
@@ -596,18 +598,17 @@ $ $\newline
 %siftUp
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
 \textbf{Funcion privada: SiftUp}\\
-\textbf{Descripci\'on}: Hace siftUp con el nodo pasado por parametros\\
-\textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
-\textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con su padre mientras era menor\}%
+\textbf{Descripci\'on}: Hace siftUp con el nodo pasado por par\'ametro\\
+\textbf{Pre} $\equiv$ \{El nodo esta en la estructura de C\}\\%
+\textbf{Post} $\equiv$ \{El nodo n se fue swapeando con su padre mientras su elemento era menor\}%
 \begin{algorithm}[H]
 {\textbf{iSiftUp}(\Inout{n}{nodo}, \Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
 
-    \While{($n \to$ padre $\neq$ NULL) $\land$ (($n \to$ elem) < ($n \to$ padre $\to$ elem))} \Comment $O(log(\#c))$
-        \State SwapNodos($n$, $n \to$ padre, $c$) \Comment $O(1)$
-        \State $n$ $\gets$ ($n \to$ padre) \Comment $O(1)$
+    \While{($n$.padre $\neq$ NULL) $\yluego$ (($n$.elem) $<$ ($n$.padre $\to$ elem))} \Comment $O(log(\#c))$
+        \State SwapNodos($n$, *($n$.padre), $c$) \Comment $O(1)$
     \EndWhile
-
+%No hay que asignar n = *(n.padre) porque el swap ya reacomoda los punteros, entonces a n le queda el puntero al padre del que era su padre antes del swap.
     \medskip
     \Statex \underline{Complejidad:} O(log($\#$C))
     \Statex \underline{Justificacion:} En el peor caso se recorre toda la altura del arbol: O(log($\#$C))
