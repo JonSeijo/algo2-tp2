@@ -40,7 +40,7 @@
 
 % encolar
 %\begin{algorithm}[H]
-{\textbf{iEncolar}(\Inout{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}) $\to$ $res$ : itColaPrioridad}
+{\textbf{iEncolar}(\Inout{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}) $\to$ $res$ : itColaPrioridad($\alpha$)}
 \begin{algorithmic}[1]
 
     \If{EsVacia?($c$)}
@@ -66,12 +66,10 @@
             \EndIf
         \EndIf
     \EndIf
-    \State nodo m $\gets$ *($c$.ultimo)
+    \State nodo m $\gets$ *($c$.ultimo) \Comment $O(1)$
     \State SiftUp($m$, $c$) \Comment $O(log(\#(c)))$
-    \State puntero(nodo) $p$ $\gets$ $\&m$
+    \State puntero(nodo) $p$ $\gets$ $\&m$ \Comment $O(1)$
     \State res $\gets$ crearItColaEntr($p$, $c$) \Comment $O(1)$
-
-    NO OLVIDAR DEVOLVER ITERADOR AL ULTIMO, completar la \'ultima l\'inea
 
     \medskip
     \Statex \underline{Complejidad:} $O(log(\#(c)))$
