@@ -641,7 +641,7 @@ $ $\newline
 
 % Lo defino bien
 \If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
-  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P| + copiar(nat))$
 \EndIf
 \If{$\neg$ Def?($p$, $j$.cantPokemon)}  \Comment $O(|P|)$
   \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
@@ -1526,13 +1526,13 @@ $ $\newline
 \If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
   \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P| + copiar(Nat))$
 \Else
-  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
 \EndIf
 
 
 \medskip
 \Statex \underline{Complejidad:} $O(|P|)$
-\Statex \underline{Justificaion:} Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
+\Statex \underline{Justificaion:} Como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$ es $O(|P|)$. \ Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
 
 \end{algorithmic}
 \end{algorithm}  
