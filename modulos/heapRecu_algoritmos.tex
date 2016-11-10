@@ -111,7 +111,7 @@ $ $\newline
 {\textbf{iEstaCompleto}(\In{c}{colaPrioridad($\alpha$)}) $\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
-    \State nodo $nodoActual \gets$ $c$.raiz \Comment $O(1)$
+    \State puntero(nodo) $nodoActual \gets$ $c$.raiz \Comment $O(1)$
     \While{($nodoActual$ $\rightarrow$ der) $\neq$ NULL} \Comment En peor caso recorro la altura del arbol $O(log(\#c))$
         \State $nodoActual$ $\gets$ ($nodoActual$ $\rightarrow$ der) \Comment $O(1)$
     \EndWhile
@@ -246,10 +246,10 @@ $ $\newline
 {\textbf{iSwapNodos}(\Inout{a}{nodo}, \Inout{b}{nodo}, \Inout{c}{colaPrioridad})}
 \begin{algorithmic}[1]
 
-    \If{*($a \to$ padre) = $b$} \Comment $O(1)$
+    \If{*($a$.padre) = $b$} \Comment $O(1)$
         \State SwapConHijo($a$, $b$) \Comment $O(1)$
     \Else 
-        \If{*($b \to$ padre) = $a$} \Comment $O(1)$
+        \If{*($b$.padre) = $a$} \Comment $O(1)$
             \State SwapConHijo($b$, $a$) \Comment $O(1)$
         \Else
             \State SwapDisjunto($a$, $b$)\Comment $O(1)$
@@ -296,9 +296,9 @@ $ $\newline
 {\textbf{iSwapConHijo}(\Inout{a}{nodo}, \Inout{b}{nodo})}
 \begin{algorithmic}[1]
 
-    \If{*($a \to$ izq) = $b$} \Comment $O(1)$
+    \If{*($a$.izq) = $b$} \Comment $O(1)$
         \State SwapConHijoIzquierdo($a$, $b$) \Comment $O(1)$
-    \Else \If{*($a \to$ der) = $b$} \Comment $O(1)$
+    \Else \If{*($a$.der) = $b$} \Comment $O(1)$
             \State SwapConHijoDerecho($a$, $b$) \Comment $O(1)$
         \EndIf 
     \EndIf 
@@ -325,37 +325,37 @@ $ $\newline
 {\textbf{iSwapConHijoIzquierdo}(\Inout{a}{nodo}, \Inout{b}{nodo})}
 \begin{algorithmic}[1]
 
-    \State puntero(nodo) $tmpderA \gets$ ($a \to$ der) \Comment $O(1)$
-    \State ($a \to$ der) $\gets$ ($b \to$ der)  \Comment $O(1)$
-    \If{$a \to$ der $\neq$ NULL}
-        \State ($a \to$ der $\to$ padre) $\gets$ $a$ \Comment $O(1)$
+    \State puntero(nodo) $tmpderA \gets$ ($a$.der) \Comment $O(1)$
+    \State ($a$.der) $\gets$ ($b$.der)  \Comment $O(1)$
+    \If{$a$.der $\neq$ NULL}
+        \State ($a$.der $\to$ padre) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
 
-    \State ($b \to$ der) $\gets$ tmpderA  \Comment $O(1)$
-    \If{$b \to$ der $\neq$ NULL}
-        \State ($b \to$ der $\to$ padre) $\gets$ b  \Comment $O(1)$
+    \State ($b$.der) $\gets$ tmpderA  \Comment $O(1)$
+    \If{$b$.der $\neq$ NULL}
+        \State ($b$.der $\to$ padre) $\gets$ $\&b$  \Comment $O(1)$
     \EndIf
     
     \State " "
 
     \If{EsHijoIzquierdo($a$)}
-        \State ($a \to$ padre $\to$ izq) $\gets$ $b$ \Comment $O(1)$
+        \State ($a$.padre $\to$ izq) $\gets$ $\&b$ \Comment $O(1)$
     \Else \If{EsHijoDerecho($a$)}
-        \State ($a \to$ padre $\to$ der) $\gets$ $b$ \Comment $O(1)$
+        \State ($a$.padre $\to$ der) $\gets$ $\&b$ \Comment $O(1)$
     \EndIf
     \EndIf
     
     \State " "
 
-    \State ($b \to$ padre) $\gets$ ($a \to$ padre) \Comment $O(1)$
-    \If{$b \to$ izq $\neq$ NULL}
-        \State ($b \to$ izq $\to$ padre) $\gets$ $a$ \Comment $O(1)$
+    \State ($b$.padre) $\gets$ ($a$.padre) \Comment $O(1)$
+    \If{$b$.izq $\neq$ NULL}
+        \State ($b$.izq $\to$ padre) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
     
-    \State ($a \to$ izq) $\gets$ ($b \to$ izq) \Comment $O(1)$
+    \State ($a$.izq) $\gets$ ($b$.izq) \Comment $O(1)$
     
-    \State ($b \to$ izq) $\gets$ $a$ \Comment $O(1)$
-    \State ($a \to$ padre) $\gets$ $b$ \Comment $O(1)$
+    \State ($b$.izq) $\gets$ $\&a$ \Comment $O(1)$
+    \State ($a$.padre) $\gets$ $\&b$ \Comment $O(1)$
 
 
     \medskip
@@ -379,37 +379,37 @@ $ $\newline
 {\textbf{iSwapConHijoDerecho}(\Inout{a}{nodo}, \Inout{b}{nodo})}
 \begin{algorithmic}[1]
 
-    \State puntero(nodo) $tmpizqA \gets$ ($a \to$ izq) \Comment $O(1)$
-    \State ($a \to$ izq) $\gets$ ($b \to$ izq)  \Comment $O(1)$
-    \If{$a \to$ izq $\neq$ NULL}
-        \State ($a \to$ izq $\to$ padre) $\gets$ $a$ \Comment $O(1)$
+    \State puntero(nodo) $tmpizqA \gets$ ($a$.izq) \Comment $O(1)$
+    \State ($a$.izq) $\gets$ ($b$.izq)  \Comment $O(1)$
+    \If{$a$.izq $\neq$ NULL}
+        \State ($a$.izq $\to$ padre) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
 
-    \State ($b \to$ izq) $\gets$ tmpizqA  \Comment $O(1)$
-    \If{$b \to$ izq $\neq$ NULL}
-        \State ($b \to$ izq $\to$ padre) $\gets$ b  \Comment $O(1)$
+    \State ($b$.izq) $\gets$ tmpizqA  \Comment $O(1)$
+    \If{$b$.izq $\neq$ NULL}
+        \State ($b$.izq $\to$ padre) $\gets$ $\&b$  \Comment $O(1)$
     \EndIf
     
     \State " "
 
     \If{EsHijoIzquierdo($a$)}
-        \State ($a \to$ padre $\to$ izq) $\gets$ $b$ \Comment $O(1)$
+        \State ($a$.padre $\to$ izq) $\gets$ $\&b$ \Comment $O(1)$
     \Else \If{EsHijoDerecho($a$)}
-        \State ($a \to$ padre $\to$ der) $\gets$ $b$ \Comment $O(1)$
+        \State ($a$.padre $\to$ der) $\gets$ $\&b$ \Comment $O(1)$
     \EndIf
     \EndIf
     
     \State " "
 
-    \State ($b \to$ padre) $\gets$ ($a \to$ padre) \Comment $O(1)$
-    \If{$b \to$ der $\neq$ NULL}
-        \State ($b \to$ der $\to$ padre) $\gets$ $a$ \Comment $O(1)$
+    \State ($b$.padre) $\gets$ ($a$.padre) \Comment $O(1)$
+    \If{$b$.der $\neq$ NULL}
+        \State ($b$.der $\to$ padre) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
     
-    \State ($a \to$ der) $\gets$ ($b \to$ der) \Comment $O(1)$
+    \State ($a$.der) $\gets$ ($b$.der) \Comment $O(1)$
     
-    \State ($b \to$ der) $\gets$ $a$ \Comment $O(1)$
-    \State ($a \to$ padre) $\gets$ $b$ \Comment $O(1)$
+    \State ($b$.der) $\gets$ $\&a$ \Comment $O(1)$
+    \State ($a$.padre) $\gets$ $\&b$ \Comment $O(1)$
 
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
@@ -433,52 +433,52 @@ $ $\newline
 \begin{algorithmic}[1]
 
     \If{EsHijoIzquierdo($b$)}
-        \State ($b \to$ padre $\to$ izq) $\gets$ a \Comment $O(1)$
+        \State ($b$.padre $\to$ izq) $\gets$ $\&a$ \Comment $O(1)$
     \Else \If{EsHijoDerecho($b$)}
-        \State ($b \to$ padre $\to$ der) $\gets$ a \Comment $O(1)$
+        \State ($b$.padre $\to$ der) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
     \EndIf
 
-    \If{$b$ $\to$ der $\neq$ NULL}
-        \State ($b \to$ der $\to$ padre) $\gets$ a \Comment $O(1)$
+    \If{$b$.der $\neq$ NULL}
+        \State ($b$.der $\to$ padre) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
 
-    \If{$b$ $\to$ izq $\neq$ NULL}
-        \State ($b \to$ izq $\to$ padre) $\gets$ a \Comment $O(1)$
+    \If{$b$.izq $\neq$ NULL}
+        \State ($b$.izq $\to$ padre) $\gets$ $\&a$ \Comment $O(1)$
     \EndIf
 
     \State " "
 
     \If{EsHijoIzquierdo($a$)}
-        \State ($a \to$ padre $\to$ izq) $\gets$ b \Comment $O(1)$
+        \State ($a$.padre $\to$ izq) $\gets$ $\&b$ \Comment $O(1)$
     \Else \If{EsHijoDerecho($b$)}
-        \State ($a \to$ padre $\to$ der) $\gets$ b \Comment $O(1)$
+        \State ($a$.padre $\to$ der) $\gets$ $\&b$ \Comment $O(1)$
     \EndIf
     \EndIf
 
-    \If{$a$ $\to$ der $\neq$ NULL}
-        \State ($a \to$ der $\to$ padre) $\gets$ b \Comment $O(1)$
+    \If{$a$.der $\neq$ NULL}
+        \State ($a$.der $\to$ padre) $\gets$ $\&b$ \Comment $O(1)$
     \EndIf
 
-    \If{$a$ $\to$ izq $\neq$ NULL}
-        \State ($a \to$ izq $\to$ padre) $\gets$ b \Comment $O(1)$
+    \If{$a$.izq $\neq$ NULL}
+        \State ($a$.izq $\to$ padre) $\gets$ $\&b$ \Comment $O(1)$
     \EndIf
 
     \State " "
 
-    \State puntero(nodo) tmpPadreB $\gets$ ($b \to$ padre) \Comment $O(1)$
-    \State puntero(nodo) tmpIzqB $\gets$ ($b \to$ izq) \Comment $O(1)$
-    \State puntero(nodo) tmpDerB $\gets$ ($b \to$ der) \Comment $O(1)$
+    \State puntero(nodo) tmpPadreB $\gets$ ($b$.padre) \Comment $O(1)$
+    \State puntero(nodo) tmpIzqB $\gets$ ($b$.izq) \Comment $O(1)$
+    \State puntero(nodo) tmpDerB $\gets$ ($b$.der) \Comment $O(1)$
 
     \State " "
 
-    \State ($b \to$ padre) $\gets$ ($a \to$ padre) \Comment $O(1)$
-    \State ($b \to$ izq) $\gets$ ($a \to$ izq) \Comment $O(1)$
-    \State ($b \to$ der) $\gets$ ($a \to$ der) \Comment $O(1)$
+    \State ($b$.padre) $\gets$ ($a$.padre) \Comment $O(1)$
+    \State ($b$.izq) $\gets$ ($a$.izq) \Comment $O(1)$
+    \State ($b$.der) $\gets$ ($a$.der) \Comment $O(1)$
 
-    \State ($a \to$ padre) $\gets$ tmpPadreB \Comment $O(1)$
-    \State ($a \to$ izq) $\gets$ tmpIzqB \Comment $O(1)$
-    \State ($a \to$ der) $\gets$ tmpDerB \Comment $O(1)$
+    \State ($a$.padre) $\gets$ tmpPadreB \Comment $O(1)$
+    \State ($a$.izq) $\gets$ tmpIzqB \Comment $O(1)$
+    \State ($a$.der) $\gets$ tmpDerB \Comment $O(1)$
 
 
     \medskip
