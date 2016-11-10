@@ -42,7 +42,7 @@ jonathan: al final en el rep no mencionamos el tipo del heap, solo decimos "entr
 
 [X] CrearIterador ()
 
-[ ] Revisar en el juego que se use bien el nuevo iterador
+[X] Revisar en el juego que se use bien el nuevo iterador
 
 [X] Cambiar las "->" por "." para referirse a partes de un nodo de las funciones del heap
 
@@ -120,7 +120,7 @@ Correcciones marcadas:
 [X] PosExistente de mapa.     
 jonathan: lo revise y me parece que es un error del corrector. Estoy bastante seguro que nuestra funcion esta bien: consultar
 
-[ ] Referencias en punteros (Definir) de diccString
+[X] Referencias en punteros (Definir) de diccString
 
 [X] Error en complejidad en interfaz de Juego: AgregarPokemon
 
