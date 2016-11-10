@@ -558,7 +558,7 @@ $ $\newline
 \State diccString(nat) $pokes$ $\gets$ Vacio() \Comment $O(1)$
  
 % JONATHAN: COSA TURBIA, No tengo forma de crear un iterador a un heap si hacer encolar. Lo declaro pero no lo inicializo, no importaria porque solo lo usamos bajo ciertas precondiciones, peeeeero ... 
-\State itcolaEntrenador $itEntrenadores$  \Comment $O(1)$
+\State itcolaEntrenador(jugYCantCapt) $itEntrenadores$  \Comment $O(1)$
 
 % Creo el iterador de una lista vacia para poder crearlo
 \State lista(nat) $listaDummy$ $\gets$ Vacia() \Comment $O(1)$
@@ -652,13 +652,13 @@ $ $\newline
   \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
 \EndIf
 
-\State colaEntr $h \gets$ Vacia() \Comment $O(1)$
+\State colaEntr(jugYCantCapt) $h \gets$ Vacia() \Comment $O(1)$
 \State vector<jugador> \hspace{0.5mm} posiblesCapturadores $\gets$ DameJugadoresEnPokerango(j, c) \Comment $O(EC)$
 \State nat $i \gets$ 0 \Comment $O(1)$
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
   \State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
-  \State itcolaEntrenador it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
+  \State itcolaEntrenador(jugYCantCapt) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
   \State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAEntrenadores $\gets$ $it$ \Comment $O(1)$
   \State $i \gets i$ + 1 \Comment $O(1)$
 \EndWhile
