@@ -116,7 +116,7 @@ $ $\newline
         \State $nodoActual$ $\gets$ ($nodoActual$ $\rightarrow$ der) \Comment $O(1)$
     \EndWhile
 
-    \State $res \gets$ ($nodoActual$ = $c$.ultimo) $O(1)$
+    \State $res \gets$ ($nodoActual$ = $c$.ultimo) \Comment $O(1)$
 
     \medskip
     \Statex \underline{Complejidad:} $O(log(\#c))$
@@ -182,8 +182,8 @@ $ $\newline
 {\textbf{iEncolarSiUltimoEsHijoDerechoNoCompleto}(\Inout{c}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$})}
 \begin{algorithmic}[1]
 
-    \State nodo $nuevoUltimoPadre  \gets$ *($c$.ultimo) \Comment $O(1)$
-    \While{$\neg$ EsHijoIzquierdo($nuevoUltimoPadre $)}  \Comment Peor caso recorro la altura $O(log(\#(c)))$
+    \State puntero(nodo) $nuevoUltimoPadre  \gets$ $c$.ultimo \Comment $O(1)$
+    \While{$\neg$ EsHijoIzquierdo(*$nuevoUltimoPadre$)}  \Comment Peor caso recorro la altura $O(log(\#(c)))$
         \State $nuevoUltimoPadre  \gets$ ($nuevoUltimoPadre  \to$ padre) \Comment $O(1)$
     \EndWhile
     
@@ -197,8 +197,8 @@ $ $\newline
     \State $ $
 
     \State nodo $nuevoNodo \gets$ $\langle$ $e$, nuevoUltimoPadre , NULL, NULL $\rangle$ \Comment $O(1)$
-    \State ($nuevoUltimoPadre  \to$ izq) $\gets$ $nuevoNodo$ \Comment $O(1)$
-    \State $c$.ultimo $\gets$ $\&nuevoNodo$ \Comment $O(1)$
+    \State ($nuevoUltimoPadre  \to$ izq) $\gets$ $\&nuevoNodo$ \Comment $O(1)$
+    \State $c$.ultimo $\gets$ $nuevoNodo$ \Comment $O(1)$
 
     \medskip
     \Statex \underline{Complejidad:} $O(log(\#(c)))$
@@ -220,7 +220,7 @@ $ $\newline
 {\textbf{iHayUnicoNodoEnUltimoNivel}(\In{c}{colaPrioridad($\alpha$)}) $\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
-    \State nodo $nodoActual \gets$ $c$.raiz \Comment $O(1)$
+    \State puntero(nodo) $nodoActual \gets$ $c$.raiz \Comment $O(1)$
     \While{($nodoActual$ $\rightarrow$ izq) $\neq$ NULL} \Comment En peor caso recorro la altura del arbol $O(log(\#c))$
         \State $nodoActual$ $\gets$ ($nodoActual$ $\rightarrow$ izq) \Comment $O(1)$
     \EndWhile
@@ -522,7 +522,7 @@ $ $\newline
         \Else
             % es hijo izquierdo pero no es el unico
             \State puntero(nodo) $nuevoUltimo \gets$ $c$.ultimo \Comment $O(1)$
-            \While{$\neg$EsHijoDerecho($nuevoUltimo$)}  \Comment En peor caso recorro toda la altura $O(log(\#c))$
+            \While{$\neg$EsHijoDerecho(*$nuevoUltimo$)}  \Comment En peor caso recorro toda la altura $O(log(\#c))$
                 \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ padre) \Comment $O(1)$  
             \EndWhile
             \State $nuevoUltimo \gets$ ($nuevoUltimo \to$ padre $\to$ izq)  \Comment $O(1)$
@@ -554,11 +554,11 @@ $ $\newline
 %esMenorNodos
 %explicacion: dado dos nodos a y b, devuelve true si a tiene elemento y es menor a b
 \textbf{Funcion privada: EsMenorNodos}\\
-\textbf{Descripci\'on}: Devuelve $true$ si el nodo $a$ tiene un elemento que es menor o igual al elemento de $b$\\
+\textbf{Descripci\'on}: Devuelve $true$ si el nodo apuntado por $a$ tiene un elemento que es menor o igual al elemento apuntado por $b$\\
 \textbf{Pre} $\equiv$ \{true\}\\%
-\textbf{Post} $\equiv$ \{devuelve true si a tiene un elemento y es menor o igual al de b. Si ambos son null res es false\}%
+\textbf{Post} $\equiv$ \{devuelve true si el nodo apuntado por a tiene un elemento y es menor o igual al elemento del nodo apuntado por b. Si ambos son null res es false\}%
 \begin{algorithm}[H]
-{\textbf{iEsMenorNodos}(\In{a}{nodo}, \In{b}{nodo}) $\to$ $res$ : bool}
+{\textbf{iEsMenorNodos}(\In{a}{puntero(nodo)}, \In{b}{puntero(nodo)}) $\to$ $res$ : bool}
 \begin{algorithmic}[1]
 
     \If{$a$ $\neq$ NULL $\lor$ $b$ $\neq$ NULL} \Comment $O(1)$
@@ -572,7 +572,7 @@ $ $\newline
                 
             \Else
 
-                \If{(($a$ $\to$ elem) < ($b$ $\to$ elem)) $\lor$ ($a$ $\to$ elem) = ($b$ $\to$ elem)}  \Comment $O(1)$
+                \If{(($a$ $\to$ elem) $<$ ($b$ $\to$ elem)) $\lor$ ($a$ $\to$ elem) = ($b$ $\to$ elem)}  \Comment $O(1)$
                     \State $res \gets$ true  \Comment $O(1)$
                 \EndIf
             \EndIf
@@ -597,7 +597,7 @@ $ $\newline
 %explicacion: dado un nodo, lleva el elemento hacia arriba hast que este en la pos correcta
 \textbf{Funcion privada: SiftUp}\\
 \textbf{Descripci\'on}: Hace siftUp con el nodo pasado por par\'ametro\\
-\textbf{Pre} $\equiv$ \{El nodo esta en la estructura de C\}\\%
+\textbf{Pre} $\equiv$ \{El nodo est\'a en la estructura de C\}\\%
 \textbf{Post} $\equiv$ \{El nodo n se fue swapeando con su padre mientras su elemento era menor\}%
 \begin{algorithm}[H]
 {\textbf{iSiftUp}(\Inout{n}{nodo}, \Inout{c}{colaPrioridad($\alpha$)})}
@@ -621,8 +621,8 @@ $ $\newline
 %explicacion: dado un nodo, lleva el elemento hacia abajo hasta que este en la pos correcta
 \textbf{Funcion privada: SiftDown}\\
 \textbf{Descripci\'on}: Hace siftDown con el nodo pasado por parametros\\
-\textbf{Pre} $\equiv$ \{$n$ $\neq$ NULL $\land$ el nodo esta en la estructura de C\}\\%
-\textbf{Post} $\equiv$ \{El elemento de n se fue swappeando con sus hijos mientras era menor\}%
+\textbf{Pre} $\equiv$ \{El nodo est\'a en la estructura de C\}\\%
+\textbf{Post} $\equiv$ \{El nodo n se fue swapeando con sus hijos mientras era menor\}%
 \begin{algorithm}[H]
 {\textbf{iSiftDown}(\Inout{n}{nodo}, \Inout{c}{colaPrioridad($\alpha$)})}
 \begin{algorithmic}[1]
@@ -630,19 +630,19 @@ $ $\newline
     \State bool $sigueBajando \gets$ true \Comment $O(1)$
 
     \While{$sigueBajando$}  \Comment $O(log(\#c))$
-        \If{EsMenorNodos(*($n \to$ izq), *($n \to$ der))} \Comment $O(1)$ 
+        \If{EsMenorNodos($n$.izq, $n$.der)} \Comment $O(1)$ 
 
-            \If{($n \to$ izq $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
-                \State SwapNodos($n$, $n \to$ izq, $c$) \Comment $O(1)$
+            \If{($n$.izq $\to$ elem) < ($n$.elem)} \Comment $O(1)$
+                \State SwapNodos($n$, *($n$.izq), $c$) \Comment $O(1)$
             \Else
                 \State $sigueBajando \gets$ false \Comment $O(1)$
             \EndIf
 
         \Else
-            \If{EsMenorNodos(*($n \to$ der), *($n \to$ izq))} \Comment $O(1)$
+            \If{EsMenorNodos($n$.der, $n$.izq)} \Comment $O(1)$
             
-                \If{($n \to$ der $\to$ elem) < ($n \to$ elem)} \Comment $O(1)$
-                    \State SwapNodos($n$, $n \to$ der, $c$) \Comment $O(1)$
+                \If{($n$.der $\to$ elem) < ($n$.elem)} \Comment $O(1)$
+                    \State SwapNodos($n$, *($n$.der), $c$) \Comment $O(1)$
                 \Else
                     \State $sigueBajando \gets$ false \Comment $O(1)$
                 \EndIf
@@ -672,7 +672,7 @@ $ $\newline
 \begin{algorithm}[H]
 {\textbf{iSiguiente}(\Inout{it}{itColaEntr($\alpha$)}) $\to$ $res$ : $\alpha$}
 \begin{algorithmic}[1]
-    \State res $\gets$ it.siguiente $\rightarrow$ elem \Comment $O(1)$
+    \State res $\gets$ (it.siguiente $\rightarrow$ elem) \Comment $O(1)$
 
     \medskip
     \Statex \underline{Complejidad:} $O(1)$
