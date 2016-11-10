@@ -1,5 +1,5 @@
 
-\begin{tad}{\tadNombre{Iterador Cola de Entrenadores($\alpha$)}}
+\begin{tad}{\tadNombre{Iterador Cola de Prioridad($\alpha$)}}
 \tadGeneros{itcola($\alpha$)}
 
 
@@ -9,11 +9,11 @@
 \tadUsa{\tadNombre{Conjunto($\alpha$)}, \tadNombre{Cola De Prioridad($\alpha$)}}
 
 
-\tadAlinearFunciones{elementos}{itcola($\alpha$) $it$, colaPrior($\alpha$) cp}{colaPrior($\alpha$)}{}
+\tadAlinearFunciones{elementos}{itCola($\alpha$) $it$, colaPrior($\alpha$) cp}{colaPrior($\alpha$)}{}
 
 \tadObservadores
 
-\tadOperacion{siguiente}{itcola}{$\alpha$}{}
+\tadOperacion{siguiente}{itCola}{$\alpha$}{}
 
 
 
@@ -23,7 +23,7 @@
 
 \tadOtrasOperaciones
 
-\tadOperacion{borrar}{itcola($\alpha$) $it$, colaPrior($\alpha$) cp}{colaPrior($\alpha$)}{siguiente(it) $\in$ elementos(cp)}
+\tadOperacion{borrar}{itCola($\alpha$) $it$, colaPrior($\alpha$) cp}{colaPrior($\alpha$)}{siguiente(it) $\in$ elementos(cp)}
 
 \tadOperacion{elementos}{colaPrior($\alpha$)}{conj($\alpha$)}{}
 

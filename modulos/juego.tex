@@ -255,7 +255,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
       \tupItem{\\ conectado}{bool}
       \tupItem{\\ pos}{coor}
       \tupItem{\\ pokemons}{diccString(nat)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
-      \tupItem{\\ iteradorAEntrenadores}{itcolaEntrenador(jugYCantCapt)} % Iterador al heap
+      \tupItem{\\ iteradorAEntrenadores}{itCola(jugYCantCapt)} % Iterador al heap
       \tupItem{\\ iteradorAPos}{itLista(nat)}   
       \tupItem{\\ iteradorAJuego}{itConj(jugador)}   
       \tupItem{\\ cantCapt}{nat}
@@ -558,7 +558,7 @@ $ $\newline
 \State diccString(nat) $pokes$ $\gets$ Vacio() \Comment $O(1)$
  
 % JONATHAN: COSA TURBIA, No tengo forma de crear un iterador a un heap si hacer encolar. Lo declaro pero no lo inicializo, no importaria porque solo lo usamos bajo ciertas precondiciones, peeeeero ... 
-\State itcolaEntrenador(jugYCantCapt) $itEntrenadores$  \Comment $O(1)$
+\State itCola(jugYCantCapt) $itEntrenadores$  \Comment $O(1)$
 
 % Creo el iterador de una lista vacia para poder crearlo
 \State lista(nat) $listaDummy$ $\gets$ Vacia() \Comment $O(1)$
@@ -629,7 +629,7 @@ $ $\newline
 \EndIf
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificai\'on:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itcolaEntrenadores Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
+\State \underline{Justificai\'on:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itCola Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
 
 
 \end{algorithmic}
@@ -658,7 +658,7 @@ $ $\newline
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
   \State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
-  \State itcolaEntrenador(jugYCantCapt) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
+  \State itCola(jugYCantCapt) it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
   \State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAEntrenadores $\gets$ $it$ \Comment $O(1)$
   \State $i \gets i$ + 1 \Comment $O(1)$
 \EndWhile

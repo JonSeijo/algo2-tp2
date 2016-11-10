@@ -29,7 +29,7 @@
 [$O(1)$]
 [Devuelve verdadero si la cola est\'a vac\'ia]
 
-\InterfazFuncion{Pr\'oximo}{\In{c}{colaPrioridad}}{itColaPrioridad)}
+\InterfazFuncion{Pr\'oximo}{\In{c}{colaPrioridad}}{$\alpha$}
 [$\neg$ vacia?($c$)]  
 {$res$ $\igobs$ proximo($c$)}  % VER TEMA DE ALIASING 
 [$O(1)$]
@@ -71,16 +71,16 @@ $ $\newline
 \end{Interfaz}
 
 \begin{Interfaz}
-\subsection{Interfaz de itColaEntr}
-\Title{Operaciones b\'asicas de itColaEntr}
+\subsection{Interfaz de itCola}
+\Title{Operaciones b\'asicas de itCola}
 
-\InterfazFuncion{Siguiente}{\In{it}{itColaEntr($\alpha$)}}{$\alpha$}%
+\InterfazFuncion{Siguiente}{\In{it}{itCola($\alpha$)}}{$\alpha$}%
 [Siguiente($it$) $\not=$ NULL]   % Pre
 {$res$ $\igobs$ Siguiente($it$)} %Post
 [$O(1)$]   % Complejidad
 [Devuelve el elemento apuntado por el iterador]  % Comentarios
 
-\InterfazFuncion{Borrar}{\In{it}{itColaEntr($\alpha$)}, \Inout{c}{colaPrioridad($\alpha$)}}{}
+\InterfazFuncion{Borrar}{\In{it}{itCola($\alpha$)}, \Inout{c}{colaPrioridad($\alpha$)}}{}
 [siguiente($it$) $\in$ elementos($c$)]
 {siguiente($it$) $\not\in$ elementos($c$)}
 [$O(log(EC))$]
