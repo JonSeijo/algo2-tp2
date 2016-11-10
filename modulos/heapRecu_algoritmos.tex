@@ -44,7 +44,7 @@
 \begin{algorithmic}[1]
 
     \If{EsVacia?($c$)}
-        \State nodo $nuevoNodo \gets$ $\langle$ e, NULL, NULL, NULL $\rangle$   \Comment $O(1)$
+        \State nodo $nuevoNodo \gets$ $\langle$ e, NULL, NULL, NULL $\rangle$   \Comment $O(copiar(e))$
         \State $c$.raiz $\gets$ $\& nuevoNodo$ \Comment $O(1)$
         \State $c$.ultimo $\gets$ $\& nuevoNodo$ \Comment $O(1)$
     \Else
@@ -72,8 +72,8 @@
     \State res $\gets$ crearItColaEntr($p$, $c$) \Comment $O(1)$
 
     \medskip
-    \Statex \underline{Complejidad:} $O(log(\#(c)))$
-    \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + ... + $O(1)$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)))$ por \'algebra de \'ordenes.
+    \Statex \underline{Complejidad:} $O(log(\#(c)) + copar(e))$
+    \Statex \underline{Justificaci\'on:} El While es O(log($\#$c)) porque como el nodo forma parte de \'arbol, yendo siempre hacia abajo a la izquierda recorro como m\'aximo la altura del \'arbol: log($\#$c). La complejidad del algoritmo en peor caso es la suma de las complejidades: $O(1)$ + $O(1)$ + ... + $O(1)$ + $O(copiar(e))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ + $O(log(\#(c)))$ = $O(log(\#(c)) + copiar(e))$ por \'algebra de \'ordenes.
 \end{algorithmic}
 %\end{algorithm}
 

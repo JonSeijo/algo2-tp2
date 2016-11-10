@@ -38,8 +38,9 @@
 \InterfazFuncion{Encolar}{\Inout{cola}{colaPrioridad($\alpha$)}, \In{e}{$\alpha$}}{}%
 [true]   % Pre
 {$res$ $\igobs$ encolar($e$, $cola$)} %Post
-[O(log($\#$($cola$)))]   % Complejidad
-[Encola el elemento en la cola de prioridad]  % Comentarios
+[O(log($\#$($cola$))$+$ $copiar(e)$)]   % Complejidad
+[Encola el elemento en la cola de prioridad] % Comentarios
+[El elemento se encola por copia]
 
 \InterfazFuncion{Desencolar}{\Inout{c}{colaPrioridad}}{}
 [$c$ $\igobs$ $c_0$ $\land$ $\neg$ vacia($c$) ]  

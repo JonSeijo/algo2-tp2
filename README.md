@@ -30,7 +30,7 @@ Algoritmos 2 - TP2
 -----
 Revisar del Heap:
 
-[ ] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
+[X] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
 
 [X] CrearIterador ()
 
