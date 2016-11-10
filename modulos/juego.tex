@@ -102,7 +102,7 @@
 %VER
 \InterfazFuncion{Pokemons}{\In{j}{juego}, \In{e}{jugador}}{iterDiccString(nat)}%
 [$e$ $\in$ jugadores($j$)]
-{$res$ $\igobs$ crearIt($j$.jugadores[$e$].pokemons)}%
+{$res$ $\igobs$ crearIt(pokemons($e$, $j$))}%
 [$O(1)$] % por enunciado. 
 [Devuelve un iterador a los pokemons capturados por el jugador.]
 [El iterador se invalida si el conjunto de claves del DiccString (que contiene a los pokemons del jugador) cambia.]
