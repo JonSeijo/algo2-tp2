@@ -31,6 +31,10 @@ Algoritmos 2 - TP2
 
 [ ] Revisar que en Definir de DiccString, linea 21 este correcto 
 
+[ ] Corregir errores de tipeo
+
+[ ] Revisar ochenta veces. Leer con cariño el heap porque eso no fue corregido en la primer entrega
+
 Revisar del Heap:
 
 [X] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
