@@ -591,7 +591,7 @@ $ $\newline
       \State nat $lonPok$ $\gets$ longitud(PosPokemonCercano($c$, $j$)) \Comment $O(1)$
       \State ($j$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ contador) $\gets$ 0 \Comment $O(1)$
       \State tupla <nat, nat> $t \gets$ <$e$, $j$.jugadores[$e$].cantCap> 
-      \State $j$.jugadores[$e$].iteradorAEntrenadores $\gets$ Encolar(($j$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ entrenadores) , t) \Comment $O(log(EC))$
+      \State $j$.jugadores[$e$].iteradorAEntrenadores $\gets$ Encolar(($j$.pokenodos[$latPok$][$lonPok$] $\rightarrow$ entrenadores) , t) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
 
   \EndIf
 
@@ -599,7 +599,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1). La funci\'on de Cola de entrenadores Encolar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos, el costo final el algoritmo es $O(log(EC))$, donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, (la cantidad m\'axima de elementos de la cola).
+\State \underline{Justificai\'on:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on AgregarAtras de lista enlazada es O(1). La funci\'on de Cola de entrenadores Encolar es $O(log(EC) + copiar(tupla <nat, nat>))$ en el peor caso, y como $copiar(tupla <nat, nat>)$ es $O(1)$ y 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos, el costo final el algoritmo es $O(log(EC))$, donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, (la cantidad m\'axima de elementos de la cola).
 
 
 \end{algorithmic}
@@ -629,7 +629,7 @@ $ $\newline
 \EndIf
 \medskip
 \State \underline{Complejidad:} $O(log(EC))$ 
-\State \underline{Justificaion:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itcolaEntrenadores Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
+\State \underline{Justificai\'on:} Todas las operaciones de asignaci\'on, acceso a posiciones de vectores y desreferenciaci\'on de punteros son O(1). Las funciones ``HayPokemonCercano'', ``HayCamino'', ``PosPokemonCercano'', ``Mapa''\hspace{0.5mm}son O(1). La funci\'on EliminarSiguiente del iterador de lista es $O(1)$. La funci\'on de itcolaEntrenadores Borrar es $O(log(EC))$ en el peor caso, y como 1 $\leq$ $log(EC)$, por \'algebra de \'ordenes, sumando todos los costos da que el algoritmo es $O(log(EC))$. Donde EC es la cantidad m\'axima de jugadores esperando a capturar un pokemon, y por lo tanto, la cantidad m\'axima de elementos de la cola.
 
 
 \end{algorithmic}
@@ -658,7 +658,7 @@ $ $\newline
 
 \While{$i$ <\hspace{0.5mm} Longitud($posiblesCapturadores$)} \Comment $O(EC*log(EC))$
   \State $aInsertar$ $\gets$ <posiblesCapturadores[$i$], $j$.jugadores[posiblesCapturadores[$i$]].cantCapt> \Comment $O(1)$
-  \State itcolaEntrenador it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC))$
+  \State itcolaEntrenador it $\gets$ Encolar($h$, $aInsertar$) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
   \State $j$.jugadores[posiblesCapturadores[$i$]].iteradorAEntrenadores $\gets$ $it$ \Comment $O(1)$
   \State $i \gets i$ + 1 \Comment $O(1)$
 \EndWhile
@@ -669,7 +669,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(EC*log(EC) + |P|)$ 
-\State \underline{Justificacion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P| + copiar(Nat))$ donde |P| es la longitud del pokemon m\'as largo como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$  es $O(|P|)$. La operaci\'on Encolar de la cola de entrenadores es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos de la cola. DameJugadoresEnPokerango es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
+\State \underline{Justificaci\'on:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P| + copiar(Nat))$ donde |P| es la longitud del pokemon m\'as largo como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$  es $O(|P|)$. La operaci\'on Encolar de la cola de entrenadores es $O(log(EC) + copiar(tupla <nat, nat>))$, o sea $O(log(EC))$ (ya que $copiar(tupla <nat, nat>)$ es $O(1)$) donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos de la cola. DameJugadoresEnPokerango es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
 
 \end{algorithmic}
 \end{algorithm}
@@ -890,7 +890,7 @@ $ $\newline
 
 \State $j$.jugadores[$e$].iterAEntrenadores $\gets$ Encolar(\\
 $   $\hspace*{2cm}  $j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
-$   $\hspace*{1cm}) \Comment $O(log(EC))$
+$   $\hspace*{1cm}) \Comment $O(log(EC) + copiar(tupla <nat, nat>)$
 
 \While{HaySiguente($iterPos$)} \Comment $O(PS * |P|)$
 
@@ -914,7 +914,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
 \medskip
 \Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
-\Statex \underline{Justificaci\'on:} Modifico la cola de entrenadores del pokestruc al cual el jugador se mueve agregando el jugador a la cola: $O(log(EC))$. Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
+\Statex \underline{Justificaci\'on:} Modifico la cola de entrenadores del pokestruc al cual el jugador se mueve agregando el jugador a la cola: $O(log(EC) + copiar(tupla <nat, nat>))$, donde $copiar(tupla <nat, nat>)$ es $O(1)$. Recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
 \end{algorithmic}
 %\end{algorithm}
 
@@ -995,7 +995,7 @@ $ $\newline
 
 \State $j$.jugadores[$e$].iterAEntrenadores $\gets$ Encolar(\\
 $   $\hspace*{2cm}  $j$.pokenodos[Latitud($pokePos$)][Longitud($pokePos$)], <$e$, $j$.jugadores[$e$].cantCapt>\\
-$   $\hspace*{1cm}) \Comment $O(log(EC))$
+$   $\hspace*{1cm}) \Comment $O(log(EC) + copiar(tupla <nat, nat>))$
 
 
 \State itConj $iterPos \gets$ CrearIter($j$.posPokemons) \Comment $O(1)$ 
@@ -1028,7 +1028,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
 
 \medskip
 \Statex \underline{Complejidad:} $O((PS *|P|) + log(EC))$ 
-\Statex \underline{Justificaci\'on:} Se elimina al jugador de la cola de entrenadores del pokestruc en el que se encontraba: $O(log(EC))$. Inserto el jugador en la ola de entrenadores del nuevo pokenodo: $O(log(EC))$. En total hasta ahora cuesta $2*O(log(EC)) = O(log(EC))$. Luego recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo, teniendo en cuenta la complejidad acumulada antes de ciclo, es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
+\Statex \underline{Justificaci\'on:} Se elimina al jugador de la cola de entrenadores del pokestruc en el que se encontraba: $O(log(EC))$. Inserto el jugador en la ola de entrenadores del nuevo pokenodo: $O(log(EC) + copiar(tupla <nat, nat>))$ donde $copiar(tupla <nat, nat>)$ es $O(1)$. En total hasta ahora cuesta $2*O(log(EC)) = O(log(EC))$. Luego recorro todos los pokemons salvajes: $O(PC)$, y por cada pokemon en peor caso el contador es mayor o igual a 10, por lo que hay que agregar el pokemon al diccionario del jugador: $O(|P|)$. Este ciclo en total cuesta $O(PC*|P|)$. El resto de las operaciones son $O(1)$ y no agregan complejidad. La complejidad en peor caso del algoritmo, teniendo en cuenta la complejidad acumulada antes de ciclo, es $O((PS *|P|) + log(EC))$ por algebra de ordenes.
 \end{algorithmic}
 %\end{algorithm}
 
@@ -1062,7 +1062,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
-\State \underline{Justificacion:} j.cantPokemon es un dicciString. La complejidad de buscar (y obtener el significado) en peor caso es la longitud de la string mas larga entre sus claves, eso es O($|P|$). j.cantPokemonsTotales es un dato guardado en la estructura del juego, y se accede en O(1). El resto son una resta, multiplicacion y division, que tambien son O(1). O($|P|$) $+$ O(1) $=$ O($|P|$)
+\State \underline{Justificaci\'on:} j.cantPokemon es un dicciString. La complejidad de buscar (y obtener el significado) en peor caso es la longitud de la string mas larga entre sus claves, eso es O($|P|$). j.cantPokemonsTotales es un dato guardado en la estructura del juego, y se accede en O(1). El resto son una resta, multiplicacion y division, que tambien son O(1). O($|P|$) $+$ O(1) $=$ O($|P|$)
 
 \end{algorithmic}
 \end{algorithm}
@@ -1158,7 +1158,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:}  O($cardinal(es)$ * $EC$)
-\State \underline{Justificacion:}  Son todas operaciones O(1) excepto aquella en la que se crea un vector con los jugadores en rango y el for que lo recorre que son O(EC). El while principal se itera O($cardinal(es)$) veces, y la operaci\'on m\'as costosa dentro de este mismo es O(EC), por lo tanto el while entero cuesta O($cardinal(es)$*EC) operaciones elementales.
+\State \underline{Justificaci\'on:}  Son todas operaciones O(1) excepto aquella en la que se crea un vector con los jugadores en rango y el for que lo recorre que son O(EC). El while principal se itera O($cardinal(es)$) veces, y la operaci\'on m\'as costosa dentro de este mismo es O(EC), por lo tanto el while entero cuesta O($cardinal(es)$*EC) operaciones elementales.
 
 \end{algorithmic}
 \end{algorithm}
@@ -1274,7 +1274,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(1)$ % por enunciado
-\State \underline{Justificacion:} Reviso 13 posiciones O(1)
+\State \underline{Justificaci\'on:} Reviso 13 posiciones O(1)
 
 \end{algorithmic}
 %\end{algorithm}
@@ -1391,7 +1391,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(1)$ % por enunciado
-\State \underline{Justificacion:} Reviso 13 posiciones O(1)
+\State \underline{Justificaci\'on:} Reviso 13 posiciones O(1)
 
 \end{algorithmic}
 %\end{algorithm}
@@ -1416,7 +1416,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
-\State \underline{Justificacion:} Todas las operaciones son O(1)
+\State \underline{Justificaci\'on:} Todas las operaciones son O(1)
 
 \end{algorithmic}
 \end{algorithm}
@@ -1433,7 +1433,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(1)$
-\State \underline{Justificacion:} Todas las operaciones son O(1)
+\State \underline{Justificaci\'on:} Todas las operaciones son O(1)
 
 \end{algorithmic}
 \end{algorithm}
@@ -1484,7 +1484,7 @@ $ $\newline
 
 \medskip
 \Statex \underline{Complejidad:} $O(|p|)$
-\Statex \underline{Justificaion:} La unica operacion es $O(|p|)$
+\Statex \underline{Justificaion:} La \'unica operacion es $O(|p|)$
 
 \end{algorithmic}
 \end{algorithm}  
@@ -1497,7 +1497,7 @@ $ $\newline
 \begin{algorithmic}[1]
 
 \Statex \underline{MovValido} : Funci\'on privada 
-\Statex \underline{Descripci\'on} : Dice si el movimiento entre la posicion del jugador y la nueva coordenada c, es valido 
+\Statex \underline{Descripci\'on} : Dice si el movimiento entre la posici\'on del jugador y la nueva coordenada c, es v\'alido 
 \Statex \underline{Pre}: $e \in$ jugadoresConctados($j$) $\land$ posExistente($c$, $j$.mapa) 
 \Statex \underline{Post}: $res$ = hayCamino($c$, $j$.jugadores[$e$].pos, $j$.mapa) $\land$ 
 \Statex $ $\hspace*{2cm} DistEuclidea($c$, $j$.jugadores[$e$].pos) $\leq$ 100
