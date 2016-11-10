@@ -194,7 +194,7 @@
 
 \InterfazFuncion{cantMismaEspecie}{\In{p}{pokemon}, \In{j}{juego}}{nat}
 [$p$ $\in$ todosLosPokemons($j$)] 
-{$res$ $\igobs$ cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs $cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
 [$O(|p|)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
 % Podemos guardar el dato como un valor de la estructura del juego
 [Devuelve la cantidad de pokemons totales del juego.]
@@ -245,7 +245,7 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
     \begin{Tupla}[pokeStruc]
       \tupItem{poke}{pokemon}
       \tupItem{\\ contador}{nat}%
-      \tupItem{\\ entrenadores}{colaEntr} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
+      \tupItem{\\ entrenadores}{colaEntr(jugYCantCapt)} % Deberia ser como sea que se llame el modulo, cola_de_prioridadJug o pokeHeap, nose, pero en el fondo seria un heap
     \end{Tupla}
     
     
@@ -255,10 +255,15 @@ La situaci\'on no es tan feliz si un jugador cualquiera se va del radio, puesto 
       \tupItem{\\ conectado}{bool}
       \tupItem{\\ pos}{coor}
       \tupItem{\\ pokemons}{diccString(nat)} % Hay que ver como nos conviene mantener a los pokemones que capturo el jugador para que no nos arruine la complejidad    
-      \tupItem{\\ iteradorAEntrenadores}{itcolaEntrenador} % Iterador al heap
+      \tupItem{\\ iteradorAEntrenadores}{itcolaEntrenador(jugYCantCapt)} % Iterador al heap
       \tupItem{\\ iteradorAPos}{itLista(nat)}   
       \tupItem{\\ iteradorAJuego}{itConj(jugador)}   
       \tupItem{\\ cantCapt}{nat}
+    \end{Tupla}
+
+    \begin{Tupla}[jugYCantCapt]
+      \tupItem{id}{nat}
+      \tupItem{\\ cant}{nat}
     \end{Tupla}
 
 
@@ -1695,7 +1700,25 @@ $ $\newline
 
 \medskip
 \Statex \underline{Complejidad:} $O(EC)$
-\Statex \underline{Justificaion:} En el peor caso todos los jugadores que estan en la posici\'on dada son todos los que tienen que esperar la captura. Como longitud($jugsEnPos$) $\leq$ EC, O(longitud($jugsEnPos$)) = O(EC)
+\Statex \underline{Justificaci\'on:} En el peor caso todos los jugadores que estan en la posici\'on dada son todos los que tienen que esperar la captura. Como longitud($jugsEnPos$) $\leq$ EC, O(longitud($jugsEnPos$)) = O(EC)
+
+\end{algorithmic}
+\end{algorithm}  
+
+
+% < de la tupla
+\begin{algorithm}[H]
+{\textbf{<}(\In{jc1}{jugYCantCapt}, \In{jc2}{jugYCantCapt})  $\to$ $res$ : bool}
+\begin{algorithmic}[1]
+
+\If{$jc1$.cant = $jc2$.cant}    \Comment $O(1)$
+    \State $res \gets$ ($jc1$.id $<$  $jc2$.id)    \Comment $O(1)$
+\Else
+    \State $res \gets$ ($jc1$.cant $<$  $jc2$.cant)  \Comment $O(1)$
+\EndIf
+
+\medskip
+\Statex \underline{Complejidad:} $O(1)$
 
 \end{algorithmic}
 \end{algorithm}  

@@ -48,7 +48,7 @@ Revisar del Heap:
 
 [X] Asegurarse de devolver iterador al encolar
 
-[ ] Definir el "<" para las tuplas <jugador, cant atrapados> 
+[X] Definir el "<" para las tuplas <jugador, cant atrapados> 
 
 [X] En muchos lados: un nodo no es un puntero a nodo, cuando asigno a un puntero deberia usar &
 	Por ejemplo:   (nodo → izq) ← &(nuevoNodo)    o algo asi
