@@ -74,7 +74,7 @@
 %estaConectado : jugador e × juego j −→ bool  {e ∈ jugadores(j)}
 \InterfazFuncion{EstaConectado}{\In{j}{juego}, \In{e}{jugador}}{bool}%
 [$e$ $\in$ jugadores($j$)]
-{$res$ $=$ estaConectado($e$, $j$)}%
+{$res$ $\igobs$ estaConectado($e$, $j$)}%
 [$O(1)$] % por enunciado. "Ver que siguiente no tiene por que ser O(1)"
 [Devuelve true si el jugador esta conectado.]
 
@@ -83,7 +83,7 @@
 %sanciones : jugador e × juego j −→ nat {e ∈ jugadores(j)}
 \InterfazFuncion{Sanciones}{\In{e}{jugador}, \In{j}{juego}}{nat}%
 [$e$ $\in$ jugadores($j$)]
-{$res$ $=$ sanciones($e$, $j$)}%
+{$res$ $\igobs$ sanciones($e$, $j$)}%
 [$O(1)$] % por enunciado. 
 [Devuelve la cantidad de sanciones de un jugador.]
 
@@ -92,7 +92,7 @@
 %posicion : jugador e × juego j −→ coor  {e ∈ jugadores(j) ∧ L estaConectado(e, j)}
 \InterfazFuncion{Posicion}{\In{j}{juego}, \In{e}{jugador}}{coor}%
 [$e$ $\in$ jugadores($j$)  $\yluego$ estaConectado($e$, $j$)]
-{$res$ $=$ posicion($e$, $j$)}%
+{$res$ $\igobs$ posicion($e$, $j$)}%
 [$O(1)$] % por enunciado. 
 [Devuelve la posicion actual de un jugador.]
 
@@ -102,7 +102,7 @@
 %VER
 \InterfazFuncion{Pokemons}{\In{j}{juego}, \In{e}{jugador}}{iterDiccString(nat)}%
 [$e$ $\in$ jugadores($j$)]
-{$res$ $\igobs$ crearIt($j$.jugadores[$e$].pokemons)}%
+{$res$ $\igobs$ crearIt(pokemons($e$, $j$))}%
 [$O(1)$] % por enunciado. 
 [Devuelve un iterador a los pokemons capturados por el jugador.]
 [El iterador se invalida si el conjunto de claves del DiccString (que contiene a los pokemons del jugador) cambia.]
@@ -111,7 +111,7 @@
 
 %expulsados : juego −→ conj(jugador)
 \InterfazFuncion{Expulsados}{\In{j}{juego}}{conj(jugador)}%
-{$res$ $=$ expulsados($j$)}%
+{$res$ $\igobs$ expulsados($j$)}%
 [$O(J)$]  
 [Devuelve un conjunto con los jugadores expulsados.]
 
@@ -127,7 +127,7 @@
 %pokémonEnPos : coor c × juego j −→ pokémon {c ∈ posConPokémons(j)}
 \InterfazFuncion{PokemonEnPos}{\In{j}{juego}, \In{c}{coor}}{pokemon}%
 [$c$ $\in$ posConPokemons($j$)]
-{$res = pokemonEnPos(c, j)$}%
+{$res $\igobs$ pokemonEnPos(c, j)$}%
 [$O(1)$] % Ibamos a guardar el pokemon en la tupla del pokenodo
 [Devuelve el pokemon que se encuentra en la posicion c.]
 
@@ -135,7 +135,7 @@
 %cantMovimientosParaCaptura : coor c × juego j −→ nat {c ∈ posConPokémons(j)}
 \InterfazFuncion{CantMovimientosParaCaptura}{\In{c}{coor}, \In{j}{juego}}{nat}%
 [$c$ $\in$ posConPokemons($j$)] %requiere que c sea pos de pokenodo
-{$res$ $=$ cantMovimientosParaCaptura($c$, $j$)}%
+{$res$ $\igobs$ cantMovimientosParaCaptura($c$, $j$)}%
 [$O(1)$] % Ibamos a guardar el contador en la tupla del pokenodo
 [Devuelve el numero de movimientos que indican cuando se captura un pokemon.]
 
@@ -144,14 +144,14 @@
 
 % puedoAgregarPokémon : coor c × juego j −→ bool
 \InterfazFuncion{PuedoAgregarPokemon}{\In{c}{coor}, \In{j}{juego}}{bool}%
-{$res$ $=$ puedoAgregarPokemon($c$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs$ puedoAgregarPokemon($c$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] 
 [Devuelve verdadero si la coordenada es valida y no hay ningun pokemon en el territorio.]
 
 
 % hayPokémonCercano : coor c × juego j −→ bool
 \InterfazFuncion{HayPokemonCercano}{\In{c}{coor}, \In{j}{juego}}{bool}%
-{$res$ $=$ hayPokemonCercano($c$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs$ hayPokemonCercano($c$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] 
 [Devuelve verdadero si hay algun pokemon en el territorio.]
 
@@ -159,7 +159,7 @@
 % posPókemonCercano : coor c × juego j −→ coor {hayPokémonCercano(c,j)}
 \InterfazFuncion{PosPokemonCercano}{\In{c}{coor}, \In{j}{juego}}{coor}%
 [hayPokemonCercano(c, j)] 
-{$res$ $=$ posPokemonCercano($c$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs$ posPokemonCercano($c$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] 
 [Devuelve la posicion del pokemon que esta en territorio.]
 
@@ -169,7 +169,7 @@
 
 \InterfazFuncion{EntrenadoresPosibles}{\In{c}{coor}, \In{es}{conj(jugador)}, \In{j}{juego}}{conj(jugador)}%
 [hayPokemonCercano(c, j) $\land$ es $\subset$ jugadoresConectados(j)] 
-{$res$ $=$ entrenadoresPosibles($c$, $es$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs$ entrenadoresPosibles($c$, $es$, $j$)}  % Ver que mucho no me convence
 [$O$($cardinal(es)$ * $EC$)] 
 [De todos los jugadores de la entrada ec, devuelve un conjunto con los entrenadores que estan en condiciones de capturar el pokemon que se encuentra en el rango de c. Que esten en condiciones de capturar significa que estan en rango2 del pokemon y que existe un camino hacia el.]
 
@@ -177,14 +177,14 @@
 % indiceRareza : pokémon p × juego j −→ nat  {p ∈ todosLosPokémons(j)}
 \InterfazFuncion{IndiceRareza}{\In{p}{pokemon}, \In{j}{juego}}{nat}%
 [$p$ $\in$ todosLosPokemons($j$)] 
-{$res = indiceRareza(p, j)$}  % Ver que mucho no me convence
+{$res$ $\igobs$ indiceRareza($p$, $j$)}  % Ver que mucho no me convence
 [$O(|P|)$] % es una cuenta, obtener los numeros de p nos cuesta recorrer el trie
 [Devuelve el indice de rareza del pokemon dado.]
 
 
 % cantPokémonsTotales : juego −→ nat
 \InterfazFuncion{cantPokemonsTotales}{\In{j}{juego}}{nat}%
-{$res$ $=$ cantPokemonsTotales($p$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs$ cantPokemonsTotales($p$, $j$)}  % Ver que mucho no me convence
 [$O(1)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
 % Podemos guardar el dato como un valor de la estructura del juego
 [Devuelve la cantidad de pokemons totales del juego.]
@@ -194,7 +194,7 @@
 
 \InterfazFuncion{cantMismaEspecie}{\In{p}{pokemon}, \In{j}{juego}}{nat}
 [$p$ $\in$ todosLosPokemons($j$)] 
-{$res$ = cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
+{$res$ $\igobs$ cantMismaEspecie($p$, $j$)}  % Ver que mucho no me convence
 [$O(|p|)$] % tiene que ser O(1) para que el indice de rareza lo calculemos rapido, 
 % Podemos guardar el dato como un valor de la estructura del juego
 [Devuelve la cantidad de pokemons totales del juego.]
