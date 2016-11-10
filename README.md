@@ -32,9 +32,10 @@ Revisar del Heap:
 
 [X] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
 
-[ ] El heap y su iter deberian idicar su tipo (A DEFINIR)
+[X] El heap y su iter deberian idicar su tipo (A DEFINIR)
 
-[ ] Arreglar nombre del nuevo heap donde corresponda (ver rep de juego)
+[X] Arreglar nombre del nuevo heap donde corresponda (ver rep de juego) 
+jonathan: al final en el rep no mencionamos el tipo del heap, solo decimos "entrenadores", aguante el encapsulamiento.
 
 [X] CrearIterador ()
 
