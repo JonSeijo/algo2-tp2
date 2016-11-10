@@ -641,10 +641,10 @@ $ $\newline
 
 % Lo defino bien
 \If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
-  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P| + copiar(nat))$
 \EndIf
 \If{$\neg$ Def?($p$, $j$.cantPokemon)}  \Comment $O(|P|)$
-  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
+  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
 \EndIf
 
 \State colaEntr $h \gets$ Vacia() \Comment $O(1)$
@@ -664,7 +664,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(EC*log(EC) + |P|)$ 
-\State \underline{Justificacion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P|)$ donde |P| es la longitud del pokemon m\'as largo. La operaci\'on Encolar de la cola de entrenadores es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos de la cola. DameJugadoresEnPokerango es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
+\State \underline{Justificacion:} Las operaciones de asignaci\'on, acceso a posiciones y desreferenciaci\'on de punteros son $O(1)$. La funci\'ones Def, Definir y Obtener son $O(|P| + copiar(Nat))$ donde |P| es la longitud del pokemon m\'as largo como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$  es $O(|P|)$. La operaci\'on Encolar de la cola de entrenadores es $O(log(EC))$ donde EC es la cantidad m\'axima de jugadores en un pokenodo, y por ende, la cantidad m\'axima de elementos de la cola. DameJugadoresEnPokerango es $O(EC)$ y devuelve un vector de EC elementos como m\'aximo. En el while se realiza una iteaci\'on por cada elemento de dicho vector, por lo tanto en el peor caso se realizan EC iteraciones, y como dentro del ciclo hay 3 funciones $O(1)$ y una $O(log(EC))$, la cantidad de operaciones que realiza el while hasta terminar, en el peor caso es $O(EC*log(EC))$. Sumando los costos de las operaciones independientes, por \'algebra de \'ordenes queda que el costo del algoritmo es de $O(1)$ + $O(|P|)$ + $O(1)$ + $O(EC)$ + $O(1)$ + $O(EC*log(EC))$ + $O(1)$ + $O(1)$ + $O(1)$ = $O(|P|)$ + $O(EC)$ + $O(EC*log(EC))$ = $O(|P|)$ + $O(EC*log(EC))$ (ya que EC $\leq$ EC*log(EC)) = $O(|P| + EC*log(EC))$
 
 \end{algorithmic}
 \end{algorithm}
@@ -695,7 +695,7 @@ $ $\newline
       \State pokemon $pokeActual \gets$ Siguiente($pokesJug$).poke  \Comment $O(1)$
       \State nat $cantActual \gets$ Obtener($j$.jugadores[$e$].pokemons, $pokeActual$) \Comment $O(|P|)$
       
-      \State Definir($j$.cantPokemon, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cantActual$) \Comment $O(|P|)$
+      \State Definir($j$.cantPokemon, $pokeActual$, Obtener($pokeActual$, $j$.cantPokemon)$-cantActual$) \Comment $O(|P| + copiar(Nat))$
     \EndWhile
     
     \State $j$.cantPokemonTotales $\gets$ $j$.cantPokemonTotales - $j$.jugadores[$e$].cantCapt \Comment $O(1)$
@@ -755,7 +755,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O((PS + PC)*|P| + log(EC))$ 
-\State \underline{Justificaci\'on:} Si el movimiento no fue valido, en el peor caso hay que eliminar al jugador. Esto cuesta $O((PC *|P|) + log(EC))$ pues se ejecuta el ciclo. La segunda parte del algoritmo no se ejecuta si el jugador fue eliminado (pues no entra en el if de sanciones menores a 5), sin embargo, en caso que no fue eliminado el peor caso cuesta $O((PS *|P|) + log(EC))$ si tomo la rama con mayor complejidad. Esto nos da que la complejidad total del algoritmo en peor caso, es la ``rama'' que mayor complejidad tenga, osea $O(max((PC *|P|) + log(EC), (PS *|P|) + log(EC)))$. Por \'algebra de \'ordenes, usando que el m\'aximo es la suma, esa complejidad es igual a $O((PC *|P|) + log(EC) + (PS *|P|) + log(EC))$ = $O((PC *|P|) + (PS *|P|) + log(EC))$ = $O((PC + PS) *|P|) + log(EC))$
+\State \underline{Justificaci\'on:} Como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$ es $O(|P|)$ \ Si el movimiento no fue valido, en el peor caso hay que eliminar al jugador. Esto cuesta $O((PC *|P|) + log(EC))$ pues se ejecuta el ciclo. La segunda parte del algoritmo no se ejecuta si el jugador fue eliminado (pues no entra en el if de sanciones menores a 5), sin embargo, en caso que no fue eliminado el peor caso cuesta $O((PS *|P|) + log(EC))$ si tomo la rama con mayor complejidad. Esto nos da que la complejidad total del algoritmo en peor caso, es la ``rama'' que mayor complejidad tenga, osea $O(max((PC *|P|) + log(EC), (PS *|P|) + log(EC)))$. Por \'algebra de \'ordenes, usando que el m\'aximo es la suma, esa complejidad es igual a $O((PC *|P|) + log(EC) + (PS *|P|) + log(EC))$ = $O((PC *|P|) + (PS *|P|) + log(EC))$ = $O((PC + PS) *|P|) + log(EC))$
 
 \end{algorithmic}
 %\end{algorithm}
@@ -794,7 +794,7 @@ $ $\newline
   \EndIf
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -843,7 +843,7 @@ $ $\newline
   \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -898,7 +898,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
   \EndIf
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -945,7 +945,7 @@ $ $\newline
   \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -1010,7 +1010,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
   \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -1513,7 +1513,7 @@ $ $\newline
 % sumarUnoEnJug
 
 \begin{algorithm}[H]
-{\textbf{iSumarUnoEnJug}(\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego})}
+{\textbf{iSumarUnoEnJug}(\In{p}{pokemon}, \In{e}{jugador},  \Inout{j}{juego})}
 \begin{algorithmic}[1]
 
 \Statex \underline{SumarUnoEnJug} : Funci\'on privada 
@@ -1523,16 +1523,16 @@ $ $\newline
 \Statex \underline{Complejidad}: $O(|P|)$ 
 
 % Lo defino bien
-\If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
-  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P|)$
+\If{Def?($p$, $j$.jugadores[$e$].pokemons)} \Comment $O(|P|)$
+  \State Definir($j$.jugadores[$e$].pokemons, $p$, Obtener($p$, $j$.jugadores[$e$].pokemons) + 1) \Comment $O(|P| + copiar(Nat))$
 \Else
-  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P|)$
+  \State Definir($j$.jugadores[$e$].pokemons, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
 \EndIf
 
 
 \medskip
 \Statex \underline{Complejidad:} $O(|P|)$
-\Statex \underline{Justificaion:} Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
+\Statex \underline{Justificaion:} Como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$ es $O(|P|)$. \ Se ejecuta la guarda en $O(|P|)$ y en cualquier rama hay una operacion $O(|P|)$. $O(|P|)$ + $O(|P|)$ = $O(|P|)$
 
 \end{algorithmic}
 \end{algorithm}  
@@ -1657,7 +1657,7 @@ $ $\newline
 
 \medskip
 \State \underline{Complejidad:} $O(EC)$ % por enunciado
-\State \underline{Justificacion:} En peor caso agrego jugadores de 13 posiciones, donde ese agregar me cuesta O(EC) cada vez. $O(EC)$ + $O(EC)$ + ... + $O(EC)$ = $O(EC)$ 
+\State \underline{Justificacion:} Como copiar(Nat) es $O(1)$ entonces $O(|P| + copiar(Nat))$ es $O(|P|)$. \ En peor caso agrego jugadores de 13 posiciones, donde ese agregar me cuesta O(EC) cada vez. $O(EC)$ + $O(EC)$ + ... + $O(EC)$ = $O(EC)$ 
 
 \end{algorithmic}
 %\end{algorithm}
@@ -1728,10 +1728,10 @@ De Cola \\
  - Encolar(colaEntr, entrenador) debe ser O(log(EC)) \\
 
 De Diccstring \\
-iVacio() debe ser O(1)
+ - iVacio() debe ser O(1)
  - Borrar( string, diccString($\alpha$)) debe ser O(|P|) \\
  - Def?(string,  diccString($\alpha$)) debe ser O(|P|) \\
- - Definir(diccString($\alpha$), string, $\alpha$ $\alpha$) debe ser O(|P|) \\
+ - Definir(diccString($\alpha$), string, $\alpha$ $\alpha$) debe ser O(|P| + copiar($\alpha$)) \\
  - Obtener(string, diccString($\alpha$)) debe ser $\alpha$ O(|P|) \\
 
 De Conjunto Lineal \\

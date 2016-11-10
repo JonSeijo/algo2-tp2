@@ -36,11 +36,11 @@ Revisar del Heap:
 
 [ ] Revisar en el juego que se use bien el nuevo iterador
 
-[ ] Cambiar las "->" por "." para referirse a partes de un nodo de las funciones del heap
+[X] Cambiar las "->" por "." para referirse a partes de un nodo de las funciones del heap
 
-[ ] Usar "&" para crear punteros
+[X] Usar "&" para crear punteros
 
-[ ] La función EsMenorNodo recibe nodos pero los maneja como punteros
+[X] La función EsMenorNodo recibe nodos pero los maneja como punteros
 
 [X] Asegurarse de devolver iterador al encolar
 
