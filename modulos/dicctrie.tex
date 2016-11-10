@@ -201,9 +201,9 @@ $dic$ : dicc(string, $\alpha$) / \\
 \State (*$actual$).$definicion$ $\gets$ $\&$ copiar($a$) \Comment $O(copiar(\alpha))$
 
 \If{$esNueva$} \Comment $O(1)$
-	\State itConj($string$) $it$ $\gets$  $claves$.AgregarRapido($s$) \Comment $O(1)$
-	
-	\State (*$actual$).$itClave$ $\gets$ $\&$ $it$ \Comment $O(1)$
+	% \State itConj($string$) $it$ $\gets$  $claves$.AgregarRapido($s$) \Comment $O(1)$
+	% \State (*$actual$).$itClave$ $\gets$ $\&$ $it$ \Comment $O(1)$
+	\State (*$actual$).$itClave$ $\gets$ $claves$.AgregarRapido($s$) \Comment $O(1)$
 \EndIf
 
 \medskip

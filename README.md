@@ -28,6 +28,9 @@ Algoritmos 2 - TP2
 [X] Página 20 Entrenadores Posibles: REVISAR el algoritmo, hay cosas raras, en un momentos hacemos un puntero que después no usamos y hay un Avanzar de un vector pero que ya está siendo recorrido por un for, no me termina de cerrar bien.
 
 -----
+
+[ ] Revisar que en Definir de DiccString, linea 21 este correcto 
+
 Revisar del Heap:
 
 [X] Encolar el elemento deberia ser por copia para no tener el mismo error que con trie. Actualizar complejidades y justificaciones despues de hacer esto
@@ -74,7 +77,7 @@ jonathan: creo que el problema solo estaba en el Encolar
 	[X] Línea 1: Lo mismo que en la linea 3 de Encolar, a la función auxiliar SwapNodo le estamos pasando punteros y en la aridad dice que recibe nodos (también pasa en la función swapConHijos)
 
 
-[ ]
+[X]
 jonathan:
 En SwapNodos estaria pasando lo mismo que nos corrigieron en el trie, estamos asignando a un puntero un nodo que entra por parametros. 
 Como es privada creo que basta con que chequeemos que no lo usamos mal ni rompemos nada. Si usamos "copiar" es una mierda porque podriamos estar copiando el heap entero (el nodo que pasan por parametros puede ser la raiz por ejemplo) y eso es O(n)
@@ -109,12 +112,12 @@ jonathan: creo que por defecto siempre es yluego en programacion, podriamos chus
 
 Correcciones marcadas:
 
-[ ] Revisar los que usan definir de diccString, porque cambio 
+[X] Revisar los que usan definir de diccString, porque cambio 
     la complejidad y hay que justificar mejor
 
 [X] Rep de mapa
 
-[ ] PosExistente de mapa.     
+[X] PosExistente de mapa.     
 jonathan: lo revise y me parece que es un error del corrector. Estoy bastante seguro que nuestra funcion esta bien: consultar
 
 [ ] Referencias en punteros (Definir) de diccString
