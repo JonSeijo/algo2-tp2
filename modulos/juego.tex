@@ -794,7 +794,7 @@ $ $\newline
   \EndIf
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -843,7 +843,7 @@ $ $\newline
   \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -898,7 +898,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
   \EndIf
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -945,7 +945,7 @@ $ $\newline
   \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -1010,7 +1010,7 @@ $   $\hspace*{1cm}) \Comment $O(log(EC))$
   \State ($j$.pokenodos[$x$][$y$])$\rightarrow$ contador $\gets$ (($j$.pokenodos[$x$][$y$])$\rightarrow$ contador) $+ 1$) \Comment($O(1)$)
   
   \If{$j$.pokenodos[$x$][$y$])$\rightarrow$ contador $= 10$}
-    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$])$\rightarrow$ entrenadores)) \Comment $O(|P|)$
+    \State SumarUnoEnJug($j$.pokenodos[$x$][$y$])$\rightarrow$ poke, Proximo($j$.pokenodos[$x$][$y$], $j$)$\rightarrow$ entrenadores)) \Comment $O(|P|)$
     \State EliminarSiguiente($iterPos$) \Comment $O(1)$
     \State $j$.pokenodos[$x$][$y$] $\gets$ NULL \Comment Libero la memoria $O(1)$
   \Else 
@@ -1513,7 +1513,7 @@ $ $\newline
 % sumarUnoEnJug
 
 \begin{algorithm}[H]
-{\textbf{iSumarUnoEnJug}(\In{e}{jugador}, \In{c}{coor}, \Inout{j}{juego})}
+{\textbf{iSumarUnoEnJug}(\In{p}{pokemon}, \In{e}{jugador},  \Inout{j}{juego})}
 \begin{algorithmic}[1]
 
 \Statex \underline{SumarUnoEnJug} : Funci\'on privada 
@@ -1523,10 +1523,10 @@ $ $\newline
 \Statex \underline{Complejidad}: $O(|P|)$ 
 
 % Lo defino bien
-\If{Def?($p$, $j$.cantPokemon)} \Comment $O(|P|)$
-  \State Definir($j$.cantPokemon, $p$, Obtener($p$, $j$.cantPokemon) + 1) \Comment $O(|P| + copiar(Nat))$
+\If{Def?($p$, $j$.jugadores[$e$].pokemons)} \Comment $O(|P|)$
+  \State Definir($j$.jugadores[$e$].pokemons, $p$, Obtener($p$, $j$.jugadores[$e$].pokemons) + 1) \Comment $O(|P| + copiar(Nat))$
 \Else
-  \State Definir($j$.cantPokemon, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
+  \State Definir($j$.jugadores[$e$].pokemons, $p$, 1)  \Comment $O(|P| + copiar(Nat))$
 \EndIf
 
 
