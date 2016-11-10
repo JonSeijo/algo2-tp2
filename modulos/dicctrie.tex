@@ -4,8 +4,8 @@
 
   \textbf{par\'ametros formales}\hangindent=2\parindent\\
   \parbox{1.7cm}{\textbf{g\'eneros}} $\alpha$
- 
- 
+
+
   \textbf{se explica con}: \tadNombre{dicc(string, $\alpha$)}, \tadNombre{conj(string)}.
 
   \textbf{g\'eneros}: \TipoVariable{diccString($\alpha$)}.
@@ -56,11 +56,11 @@
 \begin{Representacion}
 \subsection{Representacion}
 
-  \Title{Representaci\'on del diccString}  
-  
+  \Title{Representaci\'on del diccString}
+
 	En este m\'odulo usamos un trie para definir un diccionario cuyas claves son string.
-$ $\newline La idea es que la complejidad de definir y obtener no dependa de la cantidad de claves, si no de la longitud de la clave. Bajando asi la complejidad en peor caso.  
-  
+$ $\newline La idea es que la complejidad de definir y obtener no dependa de la cantidad de claves, si no de la longitud de la clave. Bajando asi la complejidad en peor caso.
+
   \begin{Estructura}{diccString($\alpha$)}[estr]
     \begin{Tupla}[estr]
       \tupItem{raiz}{puntero(nodo)}%
@@ -69,8 +69,8 @@ $ $\newline La idea es que la complejidad de definir y obtener no dependa de la 
 
     \begin{Tupla}[nodo]
       \tupItem{definicion}{puntero($\alpha$)}%
-      \tupItem{siguientes}{arreglo(puntero(nodo))}%
-      \tupItem{itClave}{puntero(itConj(string))}%
+      \tupItem{\\ siguientes}{arreglo(puntero(nodo))}%
+      \tupItem{\\ itClave}{puntero(itConj(string))}%
     \end{Tupla}
   \end{Estructura}
 
@@ -80,31 +80,31 @@ $ $\newline La idea es que la complejidad de definir y obtener no dependa de la 
 - Si raiz es $NULL$ entonces el conjunto de claves es vac\'io. \\
 - Si la raiz no es $NULL$ entonces el conjunto de claves es no vac\'io. \\
 - Todos los elementos del conjunto de claves estan definidos en el diccString. \\
-- Ningun nodo tiene entre sus siguientes a un nodo que esta ``antes'' que \'el \\ 
+- Ningun nodo tiene entre sus siguientes a un nodo que esta ``antes'' que \'el \\
 
 \tadOperacion{Abs}{estr$/d$}{dicc(string, $\alpha$)}{Rep($d$)}%
 \tadAxioma{Abs($d$)}
 {
 $dic$ : dicc(string, $\alpha$) / \\
 	claves($dic$) $\igobs$ $d$.claves $\land$ \\
-	
-	($\forall s$: string) 
+
+	($\forall s$: string)
 		((def?($s$, $dic$) $\igobs$ $s \in d$.claves)  $\yluego$ \\
-		(def?($s$, $dic$) $\impluego$ obtener($s$, $dic$) $\igobs$ significado de s en la estructura))   
+		(def?($s$, $dic$) $\impluego$ obtener($s$, $dic$) $\igobs$ significado de s en la estructura))
 }%
 
 \end{Representacion}
 
 \begin{Algoritmos}
-\subsection{Algoritmos}  
-  
+\subsection{Algoritmos}
+
 %crear diccTrie
 \begin{algorithm}[H]
 {\textbf{iVacio}() $\to$ $res$ : diccString($\alpha$)}
 \begin{algorithmic}[1]
 
 \State puntero(nodo) $iRaiz$ $\gets $ $NULL$  \Comment $O(1)$
- 
+
 \State conj($string$) $iClaves$ $\gets$ Vacio() \Comment $O(1)$
 
 \State $res$ $\gets$  $\langle$ $iRaiz$, $iClaves$ $\rangle$ \Comment $O(1)$
@@ -114,7 +114,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 \State \underline{Justificaion:} $O(1)$ $+$ $O(1)$ $+$ $O(1)$
 
 \end{algorithmic}
-\end{algorithm}  
+\end{algorithm}
 
 %CLAVES
 \begin{algorithm}[H]
@@ -128,9 +128,9 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \end{algorithmic}
 \end{algorithm}
-  
-  
-  
+
+
+
 %OBTENER
 \begin{algorithm}[H]
 {\textbf{iObtener}(\In{p}{string}, \In{d}{diccString($\alpha$)}}) $\to$ $res$ : $\alpha$
@@ -142,15 +142,15 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
-		
+
 
 	\State $actual$ $\gets$ (*$actual$).$siguientes$[ord($p$[$i$])] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$ \Comment $O(1)$
-\EndWhile 
+\EndWhile
 
 
-\State $res$ $\gets$ (*$actual$).$definicion$ \Comment $O(1)$ 
+\State $res$ $\gets$ (*$actual$).$definicion$ \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
@@ -158,7 +158,7 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \end{algorithmic}
 \end{algorithm}
-  
+
 
 %DEFINIR
 \begin{algorithm}[H]
@@ -172,28 +172,28 @@ $dic$ : dicc(string, $\alpha$) / \\
 \State bool $esNueva$ $\gets$ $false$ \Comment $O(1)$
 
 \While{$i$ $<$ Longitud($p$)}   \Comment Se repite $|p|$ $O(1)$
-	
-	
+
+
 	\If{(*$actual$).$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
-	
+
 		\State arreglo(puntero(Nodo)) $sig$ $\gets$ CrearArreglo(256) \Comment $O(1)$
-		
+
 		\For{$i$ $=$ 0 to 256} \Comment se repite siempre 256 veces $O(1)$
-		
+
 			\State $sig$[i] $\gets$ $NULL$ \Comment $O(1)$
-		
+
 		\EndFor
-		
+
 		\State (*$actual$).$siguientes$[ord($p$[$i$])] $\gets$	 $\&$ $\langle$ $NULL$, $sig$, $NULL$ $\rangle$  \Comment $O(1)$
-		
-		\State $esNueva$ $\gets$ $true$ \Comment $O(1)$	 
-	
+
+		\State $esNueva$ $\gets$ $true$ \Comment $O(1)$
+
 	\EndIf
-	
+
 	\State $actual$ $\gets$ (*$actual$).$siguientes$[ord($p$[$i$])] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i + 1$
-\EndWhile 
+\EndWhile
 
 \If{(*$actual$).definicion  $\neq$  $NULL$} \Comment $O(1)$
 	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria acupada por definicion $O(1)$
@@ -212,9 +212,9 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 
 \end{algorithmic}
-\end{algorithm}  
-  
-  
+\end{algorithm}
+
+
 %DEFINIDO
 \begin{algorithm}[H]
 {\textbf{iDef?}(\In{p}{string}) $\to$ $res$ : $bool$}
@@ -224,27 +224,27 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \State bool $pertenece$ $\gets$ $true$ \Comment $O(1)$
 
-\State puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$ 
+\State puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$
 
 \While{$i$ $<$ Longitud($p$) $\land$  $pertenece$}   \Comment Se repite $|p|$ $O(1)$
-		
-	
+
+
 	\If{(*$actual$).$siguientes$[ord($p$[$i$])] $=$ $NULL$} \Comment $O(1)$
 
-		\State $pertenece$ $\gets$ $false$ \Comment $O(1)$	 
-	
+		\State $pertenece$ $\gets$ $false$ \Comment $O(1)$
+
 	\EndIf
-	
+
 	\State $actual$ $\gets$ (*$actual$).siguientes[$ord(p[i])$] \Comment $O(1)$
 
 	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
-\EndWhile 
+\EndWhile
 
-\If {(*$actual$).$significado$ $=$ $NULL$} \Comment $O(1)$ 
+\If {(*$actual$).$significado$ $=$ $NULL$} \Comment $O(1)$
 	\State $pertenece$ $\gets$ $false$ \Comment $O(1)$
 \EndIf
 
-\State $res$ $\gets$ $pertenece$ \Comment $O(1)$ 
+\State $res$ $\gets$ $pertenece$ \Comment $O(1)$
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
@@ -262,16 +262,16 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \State bool $borrarRaiz$ $\gets$ $d$.Claves() $=$ 1 \Comment $O(1)$
 
-\State puntero(nodo) $reserva$ $\gets$ $raiz$ \Comment $O(1)$ 
+\State puntero(nodo) $reserva$ $\gets$ $raiz$ \Comment $O(1)$
 \State nat $rindex$ $\gets$ 0 \Comment $O(1)$
 
-\State puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$ 
+\State puntero(nodo) $actual$ $\gets$ $raiz$ \Comment $O(1)$
 
 \State nat $i$ $\gets$ 0 \Comment $O(1)$
 \While{$i$ $<$ Longitud($p$) }   \Comment Se repite $|p|$ $O(1)$
-		
-	
-	
+
+
+
 	\State $actual$ $\gets$ (*$actual$).siguientes[$ord(p[i])$] \Comment $O(1)$
 
 	\State bool $definido$ $\gets$ $i$ $\neq$ $|p|$ $-$ 1 $\land$ (*$actual$).definicion $\neq$ $NULL$ \Comment $O(1)$
@@ -280,11 +280,11 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 	\State $reserva$ $\gets$ $actual$ \Comment $O(1)$
 	\State $rindex$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
-	
+
 	\EndIf
 
 	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
-\EndWhile 
+\EndWhile
 
 
 \State EliminarSiguiente((*$actual$).(*$itClave$)) \Comment $O(1)$
@@ -295,16 +295,16 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 	\State (*$actual$).definicion $\gets$ $NULL$ \Comment se libera la memoria ocupada por la definicion $O(1)$
 
-\EndIf 
+\EndIf
 
 \If{CuentaHijos($actual$) $=$ 0} \Comment $O(1)$
 	\State BorrarDesde($reserva$, $rindex$) \Comment $O(|P|)$
-\EndIf 
+\EndIf
 
 
 \If{borrarRaiz} \Comment $O(1)$
 	\State $d$.raiz $\gets$ $NULL$ \Comment se libera la memoria ocupada por raiz $O(1)$
-\EndIf 
+\EndIf
 
 
 \medskip
@@ -313,13 +313,13 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \end{algorithmic}
 \end{algorithm}
-  
+
 \pagebreak
-  
+
 \textbf{Pre} $\equiv$ \{$desde$ y $desde$.siguientes[$a$] no nulos\}\\%
 \textbf{Post} $\equiv$ \{Borra la rama a partir de $desde$.siguientes[$a$]\}%
 
- 
+
 \begin{algorithm}[H]
 {\textbf{iBorrarDesde}(\Inout{desde}{puntero(nodo)}}, \In{a}{nat})
 \begin{algorithmic}[1]
@@ -340,10 +340,10 @@ $dic$ : dicc(string, $\alpha$) / \\
 	\While{$i$ $<$ 256} \Comment se repite siempre 256 veces $O(1)$
 
 		\If{(*$desde$).siguientes[$i$] $\neq$ $NULL$} \Comment $O(1)$
-			\State $desde$ $\gets$ (*$desde$).siguientes[$i$] \Comment $O(1)$		
-		
-			\State $sigue$ $\gets$ true \Comment $O(1)$		
-		
+			\State $desde$ $\gets$ (*$desde$).siguientes[$i$] \Comment $O(1)$
+
+			\State $sigue$ $\gets$ true \Comment $O(1)$
+
 		\EndIf
 		\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
 
@@ -361,12 +361,12 @@ $dic$ : dicc(string, $\alpha$) / \\
 
 \medskip
 \State \underline{Complejidad:} $O(|P|)$
-\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea la rama que estamos borrando, es mas corta que la rama representada por la clave mas larga. Llamo $p$ a la clave de la rama que estamos borrando y como $|p|$ $\leq$ $|P|$ entonces $O(|p|)$ = $O(|P|)$ 
+\State \underline{Justificaion:} Siendo $|P|$ el largo de la clave mas larga, sea cual sea la rama que estamos borrando, es mas corta que la rama representada por la clave mas larga. Llamo $p$ a la clave de la rama que estamos borrando y como $|p|$ $\leq$ $|P|$ entonces $O(|p|)$ = $O(|P|)$
 
 \end{algorithmic}
 \end{algorithm}
-  
- 
+
+
 
 \textbf{Pre} $\equiv$ \{$desde$ no nulo\}\\%
 \textbf{Post} $\equiv$ \{deveulve la cantidad de punteros no nulos en $desde$.siguientes\}%
@@ -379,8 +379,8 @@ $dic$ : dicc(string, $\alpha$) / \\
 \State nat $hijos$ $\gets$ 0 \Comment $O(1)$
 
 \While{$i$ $<$ 256} \Comment se repite siempre 256 veces $O(1)$
-	\If{(*$actutal$).siguiente[$i$] $\neq$ $NULL$} \State $O(1)$ 
-	
+	\If{(*$actutal$).siguiente[$i$] $\neq$ $NULL$} \State $O(1)$
+
 	\State $suma$ $\gets$ $suma$ $+$ 1 \Comment $O(1)$
 	\State $i$ $\gets$ $i$ $+$ 1 \Comment $O(1)$
 	\EndIf
@@ -395,20 +395,20 @@ $dic$ : dicc(string, $\alpha$) / \\
 \end{algorithmic}
 \end{algorithm}
 
-  
+
 \end{Algoritmos}
 
 
-\subsection{Servicios usados} 
+\subsection{Servicios usados}
 
 De Conjunto Lineal \\
- - Vacio() debe ser O(1) \\ 
+ - Vacio() debe ser O(1) \\
  - AgregarRapido( conj($\alpha$), $\alpha$ $\alpha$) debe ser O(copy(a)) \\
  - EliminarSiguiente(itConj($\alpha$)) debe ser O(1) \\
 
 De String \\
  - Longitud(string) debe ser O(1) \\
- 
+
 De Char \\
  - ord(char) debe ser O(1) \\
- 
+
