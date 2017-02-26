@@ -29,11 +29,11 @@ Algoritmos 2 - TP2
 
 -----
 
-[ ] Revisar que en Definir de DiccString, linea 21 este correcto 
+[X] Revisar que en Definir de DiccString, linea 21 este correcto 
 
-[ ] Corregir errores de tipeo
+[X] Corregir errores de tipeo
 
-[ ] Revisar ochenta veces. Leer con cariño el heap porque eso no fue corregido en la primer entrega
+[X] Revisar ochenta veces. Leer con cariño el heap porque eso no fue corregido en la primer entrega
 
 Revisar del Heap:
 
@@ -137,14 +137,12 @@ jonathan: lo revise y me parece que es un error del corrector. Estoy bastante se
 [X] Expulsados esta repetida
 
 
-#### SI HAY TIEMPO:
-
-[ ]	Modulo "Matriz" renombre de vector(vector(a)) jeje <- JAJAJAJJAJA
-
 #### Otros
 ----
 (Esperar a correccion de tp, es un bardo cambiar esto y si no estaba mal joya)
 jonathan: Nos marcaron que estaba bien asi que esto no lo cambio
-[-] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
+
+[ ] Revisar PosPokemonCercano y HayPokemonCercano, porque creo que esta mal eso de revisar coordenadas sumando y restando 1.
 Se supone que no me importa como estan hechas las coordenadas, en teoria no tengo forma de saber que la de la derecha es +1,
-porque de como esta implementada se encarga el mapa. Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
+porque de como esta implementada se encarga el mapa. 
+Deberia usar las funciones "coordenadaALaDerecha" o esas de mapa.
