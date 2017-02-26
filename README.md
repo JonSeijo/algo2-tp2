@@ -1,6 +1,17 @@
 # algo2-tp2
 Algoritmos 2 - TP2
 
+# NOTA POST CUATRI
+
+Puede verse la version final ya compilada en tp2-APROBADA-entregaFinal.pdf
+
+No creo que te sirva el contenido, pero probablemente puedas usarlo como template, o tomar expresiones de latex, o ver la forma de organizar las cosas. Sé libre, que este tp costó sudor y lagrimas.
+
+Espero te sirva para algo (budum tss)
+
+----------------------------------
+
+
 ## Lista de cosas para el recu
 
 [X] Estructura de nuevoHeap
